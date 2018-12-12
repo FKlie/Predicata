@@ -1,0 +1,49 @@
+This is BibTeX, Version 0.99d (TeX Live 2016/Debian)
+Capacity: max_strings=100000, hash_size=100000, hash_prime=85009
+The top-level auxiliary file: predicata.aux
+The style file: alpha.bst
+Database file #1: manualbib.xml.bib
+Warning--there's a number but no volume in Buechi:1960
+Warning--empty publisher in Presburger:1929
+You've used 10 entries,
+            2543 wiz_defined-function locations,
+            633 strings with 6595 characters,
+and the built_in function-call counts, 4123 in all, are:
+= -- 433
+> -- 147
+< -- 9
++ -- 47
+- -- 47
+* -- 230
+:= -- 621
+add.period$ -- 34
+call.type$ -- 10
+change.case$ -- 60
+chr.to.int$ -- 10
+cite$ -- 12
+duplicate$ -- 215
+empty$ -- 302
+format.name$ -- 61
+if$ -- 910
+int.to.chr$ -- 1
+int.to.str$ -- 0
+missing$ -- 9
+newline$ -- 56
+num.names$ -- 29
+pop$ -- 71
+preamble$ -- 1
+purify$ -- 69
+quote$ -- 0
+skip$ -- 200
+stack$ -- 0
+substring$ -- 191
+swap$ -- 81
+text.length$ -- 9
+text.prefix$ -- 7
+top$ -- 0
+type$ -- 68
+warning$ -- 2
+while$ -- 25
+width$ -- 15
+write$ -- 141
+(There were 2 warnings)

@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Chapter Label="Introduction"><Heading>Introduction</Heading>
+
+The possibilities of the package &Predicata;, a combination of the words predicate and automata, can be best described with the following example.
+<P/>
+For which natural numbers <Math>n</Math> does the formula, describing the McNuggets numbers,
+  <Display>\exists x: \exists y: \exists z: 6 \cdot x+9 \cdot y+20 \cdot z=n</Display>
+hold? Furthermore, denoting the previous formula as <Math>P[n]</Math>, for which natural number <Math>n</Math> does
+  <Display>(\forall m: m > n \Rightarrow P[m]) \wedge \neg P[n]</Display>
+hold?
+<P/>
+The idea is to create a deterministic finite automaton which corresponds to a first-order formula such that upon interpretation of every accepted word of the automaton the first-order formula is satisfied (Automata theory: <Cite Key="Hopcroft:2001"/>, <Cite Key="Pippenger:1997"/>, <Cite Key="Kozen:1997"/>).
+<P/>
+The main object type <C>Predicaton</C> consists of an automaton and a list and represents a first-order formula containing the nullary operations <M>0</M> and <M>1</M> and the binary operation <M>+</M>.
+A first-order formula with <M>n</M> different free variables, where each free variable is assigned to pairwise distinct natural numbers, is represented by an automaton over the alphabet <M>\{0,1\}^n</M>. 
+The variables are stored internally as a list of these <M>n</M> natural numbers, where the list coincides with the letters. 
+The <M>i</M>-th position in a letter, i.e. in the <M>n</M>-tuple, corresponds to the variable at the <M>i</M>-th position in the list, i.e. to the variable which is assigned to the natural number at the <M>i</M>-th position.
+Leaving this technical details aside, the object type <Ref Meth="Predicaton" Label="PredicataFormula"/> can also be called with a mathematically more intuitive first-order formula, which internally creates the deterministic finite automaton and takes care of the variables.
+<P/>
+The special case are the first-order formulas with no free variable which can be seen as deterministic finite automaton with one state. This deterministic finite automatons can be either interpreted as <K>True</K> if the only state is a final state or as <K>False</K> otherwise. Thus this procedure, going back to J. R. Büchi (<Cite Key="Buechi:1960"/>), decides the Presburger arithmetic (by Mojżesz Presburger, 1929, <Cite Key="Presburger:1929"/>), the first-order theory of the natural numbers with the operation <M>+</M>.
+<P/>
+For first-time users it is recommended to start with chapter <Ref Chap="Final"/>, especially to start with the examples in section <Ref Sect="Examples"/>. 
+The structure of the manual follows the structure of the package, thus the chapter <Ref Chap="Functions"/> and <Ref Chap="Parser"/> gives insight on how in the background a first-order formula is transferred into deterministic finite automaton. However this is quite lengthy and definitely not recommended to begin with.
+<P/>
+<Alt Only="LaTeX">\newpage</Alt>
+Hence it's more interesting to start with the example from above: 
+<List>
+  <Item>We start with <C>A:=Predicaton("(E x:(E y:(E z:6*x+9*y+20*z=n)))");</C>, consisting of a deterministic finite automaton with 17 states. The deterministic finite automaton displays the alphabet on the left, the states on the top, the transitions as entries in the table and the initial and final states at the bottom.</Item>
+  <Item>Furthermore we can also display the <C>Predicaton</C> anytime with: <C>Display(A);</C>. Additionally, we can draw it with <C>DrawPredicaton(A);</C>, using the external program <C>graphviz</C> (for requirements refer to the manual of the package &Automata;).</Item>
+  <Item>We can also test for accepted natural numbers with <C>AcceptedByPredicaton(A, 20);</C> where the optional second parameter gives an upper bound. <C>DisplayAcceptedByPredicaton(A, 99);</C> prints the accepted words converted into natural numbers in a nice format.</Item>
+  <Item>To conclude with the example, we ask for the greatest natural number which cannot be purchased with the function <C>B:=GreatestNonAcceptedNumber(A);</C> and test for <C>AcceptedWordsByPredicaton(B, 50);</C> or sum up the regular expression <C>PredicatonToRatExp(B)</C> (note: here the binary representation is read form behind.)</Item>
+</List>
+
+<Alt Only="LaTeX">
+\begin{figure}[ht]
+	\centering
+  \includegraphics[width=0.4\textwidth]{img/aut1.jpg}
+	\caption{A minimal DFA recognizing the numbers which can be purchased by the formula of <C>A</C>.}
+	\label{aut1}
+\end{figure}
+</Alt>
+<Alt Only="HTML">
+&#60;center&#62;
+  &#60;figure&#62; 
+    &#60;img src="img/aut1.jpg" alt="Automaton 1" height="1000" &#62;
+    &#60;figcaption&#62;A minimal DFA recognizing the numbers which can be purchased by the formula of <C>A</C>.
+    &#60;/figcaption&#62; 
+  &#60;/figure&#62;
+&#60;/center&#62;
+</Alt>
+
+</Chapter>

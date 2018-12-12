@@ -1,0 +1,67 @@
+\newcommand{\etalchar}[1]{$^{#1}$}
+\begin{thebibliography}{DEG{\etalchar{+}}02}
+
+\bibitem[AEC16]{SummerSchool2016}
+3rd {Algorithmic} and {Enumerative} {Combinatorics} {Summer} {School} 2016.
+\newblock \href {https://www.risc.jku.at/conferences/aec2016/}
+  {https://www.risc.jku.at/conferences/aec2016/}, 2016.
+\newblock Accessed: 2018-07-01.
+
+\bibitem[B{\"u}c60]{Buechi:1960}
+J.~R. B{\"u}chi.
+\newblock {Weak} {Second-Order} {Arithmetic} and {Finite} {Automata}.
+\newblock {\em Zeitschrift f{\"u}r mathematische Logik und Grundlagen der
+  Mathematik 6}, (6):66{\textendash}92, 1960.
+
+\bibitem[DEG{\etalchar{+}}02]{KoutsofiosNorth:2002}
+D.~Dobkin, J.~Ellson, E.~Gansner, E.~Koutsofios, S.~North, and G.~Woodhull.
+\newblock {Graphviz} {\textendash} {Graph} {Drawing} {Programs}.
+\newblock Technical report, AT\&T Research and Lucent Bell Labs, 2002.
+
+\bibitem[DLM11]{Automata}
+M.~Delgado, S.~Linton, and J.~Morais.
+\newblock {Automata}, a package on automata, {Version} 1.13.
+\newblock \href {http://www.fc.up.pt/cmup/mdelgado/automata/}
+  {http://www.fc.up.pt/cmup/mdelgado/automata/}, 2011.
+\newblock Refereed GAP package.
+
+\bibitem[HMU01]{Hopcroft:2001}
+J.~E. Hopcroft, R.~Motwani, and J.~D. Ullman.
+\newblock {\em {Introduction} to {Automata} {Theory}, {Languages}, and
+  {Computation}}.
+\newblock Cengage Learning, Boston, MA, USA, 2nd edition, 2001.
+
+\bibitem[Koz97]{Kozen:1997}
+D.~C. Kozen.
+\newblock {\em {Automata} and {Computability}}.
+\newblock Springer-Verlag, Berlin, Heidelberg, 1st edition, 1997.
+
+\bibitem[Pip97]{Pippenger:1997}
+N.~Pippenger.
+\newblock {\em {Theories} of {Computability}}.
+\newblock Cambridge University Press, New York, NY, USA, 1st edition, 1997.
+
+\bibitem[Pre29]{Presburger:1929}
+M.~Presburger.
+\newblock {\"U}ber die {Vollst{\"a}ndigkeit} eines gewissen {Systems} der
+  {Arithmetik} ganzer {Zahlen}, in welchem die {Addition} als einzige
+  {Operation} hervortritt.
+\newblock In {\em Comptes Rendus du I congr{\a`e}s de Math{\a'e}maticiens des
+  Pays Slaves}, page 92{\textendash}101. Warszawa, 1929.
+
+\bibitem[Sha13]{Shallit:2013}
+J.~Shallit.
+\newblock {Decidability and Enumeration for Automatic Sequences: A Survey}.
+\newblock In A.~A. Bulatov and A.~M. Shur, editors, {\em {Computer} {Science}
+  {\textendash} {Theory} and {Applications}}, page 49{\textendash}63, Berlin,
+  Heidelberg, 2013. Springer-Verlag.
+
+\bibitem[Sta84]{Stansifer:1884}
+R.~Stansifer.
+\newblock {Presburger's} {Article} on {Integer} {Airthmetic}: {Remarks} and
+  {Translation}.
+\newblock Technical Report TR84-639, Cornell University, Computer Science
+  Department, September 1984.
+\newblock Accessed: 2018-07-01.
+
+\end{thebibliography}

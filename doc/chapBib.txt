@@ -1,0 +1,47 @@
+  
+  
+  [1XReferences[101X
+  
+  [[20XAEC16[120X]  [17X3rd  Algorithmic  and  Enumerative Combinatorics Summer School 2016[117X
+  (2016),                       ((Accessed:                      2018-07-01)),
+  https://www.risc.jku.at/conferences/aec2016/.
+  
+  [[20XBüc60[120X]  [16XBüchi,  J.  R.[116X,  [17XWeak  Second-Order Arithmetic and Finite Automata[117X,
+  [18XZeitschrift  für  mathematische  Logik  und  Grundlagen  der Mathematik 6[118X, 6
+  (1960), 66–92.
+  
+  [[20XDEG+02[120X]  [16XDobkin, D., Ellson, J., Gansner, E., Koutsofios, E., North, S. and
+  Woodhull,  G.[116X,  [17XGraphviz  – Graph Drawing Programs[117X, AT&T Research and Lucent
+  Bell Labs (2002), https://www.graphviz.org/.
+  
+  [[20XDLM11[120X]  [16XDelgado,  M.,  Linton,  S.  and  Morais, J.[116X, [17XAutomata, A package on
+  automata,     Version     1.13[117X    (2011),    ((Refereed    GAP    package)),
+  http://www.fc.up.pt/cmup/mdelgado/automata/.
+  
+  [[20XHMU01[120X]  [16XHopcroft,  J.  E.,  Motwani,  R. and Ullman, J. D.[116X, [17XIntroduction to
+  Automata  Theory, Languages, and Computation[117X, Cengage Learning, 2nd edition,
+  Boston, MA, USA (2001).
+  
+  [[20XKoz97[120X]  [16XKozen,  D.  C.[116X,  [17XAutomata  and  Computability[117X, Springer-Verlag, 1st
+  edition, Berlin, Heidelberg (1997).
+  
+  [[20XPip97[120X]  [16XPippenger,  N.[116X,  [17XTheories  of  Computability[117X,  Cambridge University
+  Press, 1st edition, New York, NY, USA (1997).
+  
+  [[20XPre29[120X]  [16XPresburger, M.[116X, [17XÜber die Vollständigkeit eines gewissen Systems der
+  Arithmetik  ganzer  Zahlen,  in  welchem  die Addition als einzige Operation
+  hervortritt[117X,  in  Comptes  Rendus  du  I  congrès de Mathématiciens des Pays
+  Slaves, , Warszawa (1929), 92–101.
+  
+  [[20XSha13[120X] [16XShallit, J.[116X ([1m[31mBulatov, A. A. and Shur, A. M.[15X, Eds.), [17XDecidability and
+  Enumeration  for Automatic Sequences: A Survey[117X, in Computer Science – Theory
+  and Applications, Springer-Verlag, Berlin, Heidelberg (2013), 49–63.
+  
+  [[20XSta84[120X]  [16XStansifer,  R.[116X, [17XPresburger's Article on Integer Airthmetic: Remarks
+  and  Translation[117X,  Cornell University, Computer Science Department, TR84-639
+  (1984),                       ((Accessed:                      2018-07-01)),
+  https://cs.fit.edu/~ryan/papers/presburger.pdf.
+  
+  
+  
+  [32X

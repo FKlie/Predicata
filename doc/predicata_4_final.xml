@@ -1,0 +1,1770 @@
+<?xml version = "1.0" encoding = "UTF-8"?>
+<Chapter Label="Final"><Heading>Using Predicata</Heading>
+
+The Presburger arithmetic, named after M. Presburger <Cite Key="Presburger:1929"/> (translation: <Cite Key="Stansifer:1884"/>), is the first-order theory of natural numbers with a binary operation called addition. 
+In 1929, M. Presburger proved the completeness and due to the constructive proof also the decidability with quantifier elimination. In this package the concepts of automata theory are used to decide Presburger arithmetic <Cite Key="Buechi:1960"/>.
+
+<Section><Heading>Creating Predicata from first-order formulas</Heading>
+
+<ManSection>
+<Func Name = "PredicataGrammar" Arg = ""/>
+<Description>
+The function <C>PredicataGrammar</C> returns the accepted grammar which is allowed as an input for <Ref Func = "PredicataFormula"/>. 
+<Example><![CDATA[
+gap> PredicataGrammar();
+The accepted grammar is defined as follows:
+
+  <formula>   ::= ( <formula> )
+                | ( <quantifier> <var> : <formula> )
+                | <formula> <logicconnective> <formula>
+                | not <formula>
+                | <term> = <term>
+                | <var> <compare> <var>
+                | <var> <compare> <int>
+                | <int> <compare> <var>
+                | <predicate> [ <varlist> ]
+                | <predicate>
+                | <boolean>
+
+  <term>      ::= ( <term> )
+                | <term> + <term>
+                | <int> * <var>
+                | ( - <int> ) * <var>
+                | <var>
+                | <int>
+
+  <varlist>   ::= <var> , <varlist> | <var>
+
+  <quantifier>::= A | E
+
+  <logicconnective>::= and | or | implies | equiv 
+
+  <compare>   ::= < | <= | => | > | less | leq | geq | gr
+
+  <var>       ::= a | b | c | ... | x | y | z | a1 | ... | z1 | ... 
+
+  <int>       ::= 0 | 1 | 2 | 3 | 4 | ... 
+
+  <boolean>   ::= true | false 
+
+  <predicate> ::= P | Predicate1 | ... ; any name that isn't used above
+]]></Example>
+</Description>
+</ManSection>
+
+<ManSection>
+<Func Name = "PredicataPredefinedPredicates" Arg = ""/>
+<Description>
+The function <C>PredicataPredefinedPredicates()</C> returns the predefined predicates which are allowed as an input for <Ref Func = "PredicataFormula"/>. 
+<Example><![CDATA[
+gap> PredicataPredefinedPredicates();
+Predefined predicates:
+  * Buechi[x,y]: V_2(x)=y, where the function V_2(x) returns 
+		           the highest power of 2 dividing x.
+  * Power[x]   : V_2(x)=x
+]]></Example>
+</Description>
+</ManSection>
+
+<ManSection>
+<Meth Name = "Predicaton" Arg = "f" Label="PredicataFormula"/>
+<Description>
+The method <C>Predicaton</C> with a <C>PredicataFormula</C> <A>f</A> as an argument calls <Ref Func = "PredicataFormulaToPredicaton"/> and returns a minimal <C>Predicaton</C>. 
+<Example><![CDATA[
+gap> f:=PredicataFormula("2*x = y");
+< PredicataFormula: 2 * x = y >
+gap> Predicaton(f);
+Predicaton: deterministic finite automaton on 4 letters with 3 states, 
+the variable position list [ 1, 2 ] and the following transitions:
+            |  1  2  3  
+------------------------
+  [ 0, 0 ]  |  1  3  3  
+  [ 1, 0 ]  |  2  3  3  
+  [ 0, 1 ]  |  3  1  3  
+  [ 1, 1 ]  |  3  2  3  
+ Initial states: [ 1 ]
+ Final states:   [ 1 ]
+
+ The alphabet corresponds to the following variable list: [ "x", "y" ].
+
+ Regular expression of the automaton:
+   ([ 1, 0 ][ 1, 1 ]*[ 0, 1 ]U[ 0, 0 ])*
+
+ Output:
+< Predicaton: deterministic finite automaton on 4 letters with 3 states 
+and the variable position list [ 1, 2 ]. >
+]]></Example>
+</Description>
+</ManSection>
+
+<ManSection>
+<Meth Name = "Predicaton" Arg = "f, V" Label="PredicataFormula with variable list"/>
+<Description>
+The method <C>Predicaton</C> with a <C>PredicataFormula</C> <A>f</A> and a variable list <A>V</A> as arguments calls <Ref Func = "PredicataFormulaToPredicaton"/> and returns a minimal <C>Predicaton</C>.  
+<Example><![CDATA[
+gap> f:=PredicataFormula("2*x = y");
+< PredicataFormula: 2 * x = y >
+gap> Predicaton(f, [ "y", "x" ]);
+Predicaton: deterministic finite automaton on 4 letters with 3 states, 
+the variable position list [ 1, 2 ] and the following transitions:
+            |  1  2  3  
+------------------------
+  [ 0, 0 ]  |  1  3  3  
+  [ 1, 0 ]  |  3  1  3  
+  [ 0, 1 ]  |  2  3  3  
+  [ 1, 1 ]  |  3  2  3  
+ Initial states: [ 1 ]
+ Final states:   [ 1 ]
+
+ The alphabet corresponds to the following variable list: [ "y", "x" ].
+
+ Regular expression of the automaton:
+   ([ 0, 1 ][ 1, 1 ]*[ 1, 0 ]U[ 0, 0 ])*
+
+ Output:
+< Predicaton: deterministic finite automaton on 4 letters with 3 states 
+and the variable position list [ 1, 2 ]. >
+]]></Example>
+</Description>
+</ManSection>
+
+<ManSection>
+<Meth Name = "Predicaton" Arg = "S" Label="String"/>
+<Description>
+The method <C>Predicaton</C> with a <C>String</C> <A>S</A> as an argument calls <Ref Func = "StringToPredicaton"/> and returns a minimal <C>Predicaton</C>. 
+<Example><![CDATA[
+gap> Predicaton("(E y: x+y = z and x = y)");
+Predicaton: deterministic finite automaton on 4 letters with 3 states, 
+the variable position list [ 1, 2 ] and the following transitions:
+            |  1  2  3  
+------------------------
+  [ 0, 0 ]  |  1  3  3  
+  [ 1, 0 ]  |  2  3  3  
+  [ 0, 1 ]  |  3  1  3  
+  [ 1, 1 ]  |  3  2  3  
+ Initial states: [ 1 ]
+ Final states:   [ 1 ]
+
+ The alphabet corresponds to the following variable list: [ "x", "z" ].
+
+ Regular expression of the automaton:
+   ([ 1, 0 ][ 1, 1 ]*[ 0, 1 ]U[ 0, 0 ])*
+
+ Output:
+< Predicaton: deterministic finite automaton on 4 letters with 3 states 
+and the variable position list [ 1, 2 ]. >
+]]></Example>
+</Description>
+</ManSection>
+
+<ManSection>
+<Meth Name = "Predicaton" Arg = "S, V" Label="String with variable list"/>
+<Description>
+The method <C>Predicaton</C> with a <C>String</C> <A>S</A> and a variable list <A>V</A> as arguments calls <Ref Func = "StringToPredicaton"/>  and returns a minimal <C>Predicaton</C>.  
+<Example><![CDATA[
+gap> Predicaton("(E y: x+y = z and x = y)", [ "z", "x" ]);
+Predicaton: deterministic finite automaton on 4 letters with 3 states,
+the variable position list [ 1, 2 ] and the following transitions:
+            |  1  2  3  
+------------------------
+  [ 0, 0 ]  |  1  3  3  
+  [ 1, 0 ]  |  3  1  3  
+  [ 0, 1 ]  |  2  3  3  
+  [ 1, 1 ]  |  3  2  3  
+ Initial states: [ 1 ]
+ Final states:   [ 1 ]
+
+ The alphabet corresponds to the following variable list: [ "z", "x" ].
+
+ Regular expression of the automaton:
+   ([ 0, 1 ][ 1, 1 ]*[ 1, 0 ]U[ 0, 0 ])*
+
+ Output:
+< Predicaton: deterministic finite automaton on 4 letters with 3 states 
+and the variable position list [ 1, 2 ]. >
+]]></Example>
+</Description>
+</ManSection>
+
+<ManSection>
+<Func Name = "VariableListOfPredicaton" Arg = "P"/>
+<Description>
+The function <C>VariableListOfPredicaton</C> returns the variable list of a <C>Predicaton</C> <A>P</A> containing variable strings (see <Ref Func = "PredicataIsStringType"/>). Note that only the functions mentioned in this section preserve the variable list, since for the resizeable <C>Predicata</C> there are no reasons to implement it. There the variable position list may be increased but there's no information on how to increase the variable list, which usually will be eliminated again.
+<Example><![CDATA[
+gap> P:=Predicaton("u3+2 = z5");
+Predicaton: deterministic finite automaton on 4 letters with 4 states, 
+the variable position list [ 1, 2 ] and the following transitions:
+            |  1  2  3  4  
+---------------------------
+  [ 0, 0 ]  |  3  2  2  4  
+  [ 1, 0 ]  |  2  2  3  2  
+  [ 0, 1 ]  |  2  2  4  2  
+  [ 1, 1 ]  |  3  2  2  4  
+ Initial states: [ 1 ]
+ Final states:   [ 4 ]
+
+ The alphabet corresponds to the following variable list: [ "u3", "z5" ].
+
+ Regular expression of the automaton:
+   ([ 0, 0 ]U[ 1, 1 ])[ 1, 0 ]*[ 0, 1 ]([ 0, 0 ]U[ 1, 1 ])*
+
+ Output:
+< Predicaton: deterministic finite automaton on 4 letters with 4 states 
+and the variable position list [ 1, 2 ]. >
+gap> VariableListOfPredicaton(P);
+[ "u3", "z5" ]
+]]></Example>
+</Description>
+</ManSection>
+
+<ManSection>
+<Func Name = "SetVariableListOfPredicaton" Arg = "P"/>
+<Description>
+The function <C>SetVariableListOfPredicaton</C> substitutes the variables of a <C>Predicaton</C> <A>P</A> with a new unique variables <A>V</A>. Here only the variable names are changed, compare with <Ref Func = "VariableAdjustedPredicaton"/> where the position of the variables, i.e. the variable position list is permuted.
+<Example><![CDATA[
+gap> P:=Predicaton("x+y = z");
+Predicaton: deterministic finite automaton on 8 letters with 3 states, 
+the variable position list [ 1, 2, 3 ] and the following transitions:
+               |  1  2  3  
+---------------------------
+  [ 0, 0, 0 ]  |  1  3  3  
+  [ 1, 0, 0 ]  |  3  2  3  
+  [ 0, 1, 0 ]  |  3  2  3  
+  [ 1, 1, 0 ]  |  2  3  3  
+  [ 0, 0, 1 ]  |  3  1  3  
+  [ 1, 0, 1 ]  |  1  3  3  
+  [ 0, 1, 1 ]  |  1  3  3  
+  [ 1, 1, 1 ]  |  3  2  3  
+ Initial states: [ 1 ]
+ Final states:   [ 1 ]
+
+ The alphabet corresponds to the following variable list: [ "x", "y", "z" ].
+
+ Regular expression of the automaton:
+   ([ 1, 1, 0 ]([ 1, 0, 0 ]U[ 0, 1, 0 ]U[ 1, 1, 1 ])*
+    [ 0, 0, 1 ]U[ 0, 0, 0 ]U[ 1, 0, 1 ]U[ 0, 1, 1 ])*
+
+ Output:
+< Predicaton: deterministic finite automaton on 8 letters with 3 states 
+and the variable position list [ 1, 2, 3 ]. >
+gap> SetVariableListOfPredicaton(P, [ "z", "y", "x" ]);
+gap> Display(P);
+Predicaton: deterministic finite automaton on 8 letters with 3 states, 
+the variable position list [ 1, 2, 3 ] and the following transitions:
+               |  1  2  3  
+---------------------------
+  [ 0, 0, 0 ]  |  1  3  3  
+  [ 1, 0, 0 ]  |  3  2  3  
+  [ 0, 1, 0 ]  |  3  2  3  
+  [ 1, 1, 0 ]  |  2  3  3  
+  [ 0, 0, 1 ]  |  3  1  3  
+  [ 1, 0, 1 ]  |  1  3  3  
+  [ 0, 1, 1 ]  |  1  3  3  
+  [ 1, 1, 1 ]  |  3  2  3  
+ Initial states: [ 1 ]
+ Final states:   [ 1 ]
+
+ The alphabet corresponds to the following variable list: [ "z", "y", "x" ].
+]]></Example>
+</Description>
+</ManSection>
+
+<ManSection>
+<Func Name = "VariableAdjustedPredicaton" Arg = "P, V"/>
+<Description>
+The function <C>VariableAdjustedPredicaton</C> takes a <C>Predicaton</C> <A>P</A> and a permuted variable list <A>V</A> and returns the alphabet-permuted <C>Predicaton</C> corresponding to the old and the new variable list, each variable position of each variable may be changed. For <M>x+y = z</M> with <C>[ "x", "y", "z" ]</C> the function <Ref Func = "SetVariableListOfPredicaton"/> with <C>[ "z", "y", "x" ]</C> will change this to <M>z+y = x</M> but keep the automaton the same. Instead this function called with <C>[ "z", "y", "x" ]</C> won't change the formula <M>x+y = z</M> (with <C>[ "x", "y", "z" ]</C>) but instead changes the alphabet and the variable position list such that the variable <C>"x"</C> is set to the third position, <C>"y"</C> remains at the second position and <C>"z"</C> is set to the first position. Compare with <Ref Func = "PermutedAlphabetPredicaton"/> and <Ref Func = "SetVariablePositionListOfPredicaton"/>. 
+<Example><![CDATA[
+gap> P:=Predicaton("x+y = z");
+Predicaton: deterministic finite automaton on 8 letters with 3 states, 
+the variable position list [ 1, 2, 3 ] and the following transitions:
+               |  1  2  3  
+---------------------------
+  [ 0, 0, 0 ]  |  1  3  3  
+  [ 1, 0, 0 ]  |  3  2  3  
+  [ 0, 1, 0 ]  |  3  2  3  
+  [ 1, 1, 0 ]  |  2  3  3  
+  [ 0, 0, 1 ]  |  3  1  3  
+  [ 1, 0, 1 ]  |  1  3  3  
+  [ 0, 1, 1 ]  |  1  3  3  
+  [ 1, 1, 1 ]  |  3  2  3  
+ Initial states: [ 1 ]
+ Final states:   [ 1 ]
+
+ The alphabet corresponds to the following variable list: [ "x", "y", "z" ].
+
+ Regular expression of the automaton:
+   ([ 1, 1, 0 ]([ 1, 0, 0 ]U[ 0, 1, 0 ]U[ 1, 1, 1 ])*
+    [ 0, 0, 1 ]U[ 0, 0, 0 ]U[ 1, 0, 1 ]U[ 0, 1, 1 ])*
+
+ Output:
+< Predicaton: deterministic finite automaton on 8 letters with 3 states 
+and the variable position list [ 1, 2, 3 ]. >
+gap> Q:=VariableAdjustedPredicaton(P, [ "z", "y", "x" ]);;
+gap> Display(Q);
+Predicaton: deterministic finite automaton on 8 letters with 3 states, 
+the variable position list [ 1, 2, 3 ] and the following transitions:
+               |  1  2  3  
+---------------------------
+  [ 0, 0, 0 ]  |  1  3  3  
+  [ 1, 0, 0 ]  |  3  1  3  
+  [ 0, 1, 0 ]  |  3  2  3  
+  [ 1, 1, 0 ]  |  1  3  3  
+  [ 0, 0, 1 ]  |  3  2  3  
+  [ 1, 0, 1 ]  |  1  3  3  
+  [ 0, 1, 1 ]  |  2  3  3  
+  [ 1, 1, 1 ]  |  3  2  3  
+ Initial states: [ 1 ]
+ Final states:   [ 1 ]
+
+ The alphabet corresponds to the following variable list: [ "z", "y", "x" ].
+]]></Example>
+</Description>
+</ManSection>
+
+<ManSection>
+<Func Name = "VariableAdjustedPredicata" Arg = "P1, P2, V"/>
+<Description>
+The function <C>VariableAdjustedPredicata</C> does the same as <Ref Func = "VariableAdjustedPredicaton"/> just for two <C>Predicata</C> <A>P1</A> and <A>P2</A> and a variable list <A>V</A> at the same time. Required for the next functions.
+<Example><![CDATA[
+gap> P1:=Predicaton("x+y = z");;
+gap> P2:=Predicaton("y = 4");;
+gap> L:=VariableAdjustedPredicata(P1,P2, [ "x", "z", "y"]);
+[ < Predicaton: deterministic finite automaton on 8 letters 
+  with 3 states and the variable position list [ 1, 2, 3 ]. >, 
+  < Predicaton: deterministic finite automaton on 8 letters 
+  with 5 states and the variable position list [ 1, 2, 3 ]. >
+  , [ 1, 2, 3 ] ]
+gap> VariableListOfPredicaton(L[1]);
+[ "x", "z", "y" ]
+gap> VariableListOfPredicaton(L[2]);
+[ "x", "z", "y" ]
+]]></Example>
+</Description>
+</ManSection>
+
+<ManSection>
+<Func Name = "AndPredicata" Arg = "P1, P2,[ V]"/>
+<Description>
+The function <C>AndPredicata</C> returns the intersection of the two <C>Predicata</C> <A>P1</A> and <A>P2</A> where the variable list (optional, by default <A>V</A> is the union of the variables of <A>P1</A> and <A>P2</A>) defines the intersection and not the variable position. This function can be used to connect the <C>Predicata</C> of two formulas instead of calling <C>Predicaton</C> on the two with <C>and</C> connected formulas .
+In the example <M>x+y = z</M> and <M>y = 4</M>, even if the variable <C>"y"</C> doesn't have the same variable position (in the first formula position <C>2</C> and in the second position <C>1</C>), will be intersected regarding the variable names.
+<Example><![CDATA[
+gap> P1:=Predicaton("x+y = z");
+Predicaton: deterministic finite automaton on 8 letters with 3 states, 
+the variable position list [ 1, 2, 3 ] and the following transitions:
+               |  1  2  3  
+---------------------------
+  [ 0, 0, 0 ]  |  1  3  3  
+  [ 1, 0, 0 ]  |  3  2  3  
+  [ 0, 1, 0 ]  |  3  2  3  
+  [ 1, 1, 0 ]  |  2  3  3  
+  [ 0, 0, 1 ]  |  3  1  3  
+  [ 1, 0, 1 ]  |  1  3  3  
+  [ 0, 1, 1 ]  |  1  3  3  
+  [ 1, 1, 1 ]  |  3  2  3  
+ Initial states: [ 1 ]
+ Final states:   [ 1 ]
+
+ The alphabet corresponds to the following variable list: [ "x", "y", "z" ].
+
+ Regular expression of the automaton:
+   ([ 1, 1, 0 ]([ 1, 0, 0 ]U[ 0, 1, 0 ]U[ 1, 1, 1 ])*
+    [ 0, 0, 1 ]U[ 0, 0, 0 ]U[ 1, 0, 1 ]U[ 0, 1, 1 ])*
+
+ Output:
+< Predicaton: deterministic finite automaton on 8 letters with 3 states 
+and the variable position list [ 1, 2, 3 ]. >
+gap> P2:=Predicaton("y = 4");
+Predicaton: deterministic finite automaton on 2 letters with 5 states, 
+the variable position list [ 1 ] and the following transitions:
+         |  1  2  3  4  5  
+---------------------------
+  [ 0 ]  |  4  2  2  3  5  
+  [ 1 ]  |  2  2  5  2  2  
+ Initial states: [ 1 ]
+ Final states:   [ 5 ]
+
+ The alphabet corresponds to the following variable list: [ "y" ].
+
+ Regular expression of the automaton:
+   [ 0 ][ 0 ][ 1 ][ 0 ]*
+
+ Output:
+< Predicaton: deterministic finite automaton on 2 letters with 5 states 
+and the variable position list [ 1 ]. >
+gap> P:=AndPredicata(P1, P2, [ "x", "y", "z"]);;
+gap> Display(P);
+Predicaton: deterministic finite automaton on 8 letters with 6 states, 
+the variable position list [ 1, 2, 3 ] and the following transitions:
+               |  1  2  3  4  5  6  
+------------------------------------
+  [ 0, 0, 0 ]  |  1  2  2  2  4  5  
+  [ 1, 0, 0 ]  |  2  2  3  2  2  2  
+  [ 0, 1, 0 ]  |  2  2  2  2  2  2  
+  [ 1, 1, 0 ]  |  2  2  2  3  2  2  
+  [ 0, 0, 1 ]  |  2  2  1  2  2  2  
+  [ 1, 0, 1 ]  |  1  2  2  2  4  5  
+  [ 0, 1, 1 ]  |  2  2  2  1  2  2  
+  [ 1, 1, 1 ]  |  2  2  2  2  2  2  
+ Initial states: [ 6 ]
+ Final states:   [ 1 ]
+
+ The alphabet corresponds to the following variable list: [ "x", "y", "z" ].
+gap> Q:=Predicaton("x+y = z and y = 4", [ "x", "y", "z"]);
+Predicaton: deterministic finite automaton on 8 letters with 6 states, 
+the variable position list [ 1, 2, 3 ] and the following transitions:
+               |  1  2  3  4  5  6  
+------------------------------------
+  [ 0, 0, 0 ]  |  5  2  2  2  4  6  
+  [ 1, 0, 0 ]  |  2  2  3  2  2  2  
+  [ 0, 1, 0 ]  |  2  2  2  2  2  2  
+  [ 1, 1, 0 ]  |  2  2  2  3  2  2  
+  [ 0, 0, 1 ]  |  2  2  6  2  2  2  
+  [ 1, 0, 1 ]  |  5  2  2  2  4  6  
+  [ 0, 1, 1 ]  |  2  2  2  6  2  2  
+  [ 1, 1, 1 ]  |  2  2  2  2  2  2  
+ Initial states: [ 1 ]
+ Final states:   [ 6 ]
+
+ The alphabet corresponds to the following variable list: [ "x", "y", "z" ].
+
+ Regular expression of the automaton:
+   ([ 0, 0, 0 ]U[ 1, 0, 1 ])([ 0, 0, 0 ]U[ 1, 0, 1 ])
+   ([ 1, 1, 0 ][ 1, 0, 0 ]*[ 0, 0, 1 ]U[ 0, 1, 1 ])([ 0, 0, 0 ]U[ 1, 0, 1 ])*
+
+ Output:
+< Predicaton: deterministic finite automaton on 8 letters with 6 states 
+and the variable position list [ 1, 2, 3 ]. >
+]]></Example>
+</Description>
+</ManSection>
+
+
+<ManSection>
+<Func Name = "OrPredicata" Arg = "P1, P2,[ V]"/>
+<Description>
+The function <C>OrPredicata</C> returns the union of the two <C>Predicata</C> <A>P1</A> and <A>P2</A> with the variable list (optional, by default <A>V</A> is the union of the variables of <A>P1</A> and <A>P2</A>). This function can be used to connect the <C>Predicata</C> of two formulas instead of calling <C>Predicaton</C> on the two with <C>or</C> connected formulas.
+<Example><![CDATA[
+gap> P1:=Predicaton("u = 4");
+Predicaton: deterministic finite automaton on 2 letters with 5 states, 
+the variable position list [ 1 ] and the following transitions:
+         |  1  2  3  4  5  
+---------------------------
+  [ 0 ]  |  4  2  2  3  5  
+  [ 1 ]  |  2  2  5  2  2  
+ Initial states: [ 1 ]
+ Final states:   [ 5 ]
+
+ The alphabet corresponds to the following variable list: [ "u" ].
+
+ Regular expression of the automaton:
+   [ 0 ][ 0 ][ 1 ][ 0 ]*
+
+ Output:
+< Predicaton: deterministic finite automaton on 2 letters with 5 states 
+and the variable position list [ 1 ]. >
+gap> P2:=Predicaton("u = 2");
+Predicaton: deterministic finite automaton on 2 letters with 4 states, 
+the variable position list [ 1 ] and the following transitions:
+         |  1  2  3  4  
+------------------------
+  [ 0 ]  |  3  2  2  4  
+  [ 1 ]  |  2  2  4  2  
+ Initial states: [ 1 ]
+ Final states:   [ 4 ]
+
+ The alphabet corresponds to the following variable list: [ "u" ].
+
+ Regular expression of the automaton:
+   [ 0 ][ 1 ][ 0 ]*
+
+ Output:
+< Predicaton: deterministic finite automaton on 2 letters with 4 states 
+and the variable position list [ 1 ]. >
+gap> P:=OrPredicata(P1, P2);;
+gap> Display(P);
+Predicaton: deterministic finite automaton on 2 letters with 5 states, 
+the variable position list [ 1 ] and the following transitions:
+         |  1  2  3  4  5  
+---------------------------
+  [ 0 ]  |  1  2  2  5  3  
+  [ 1 ]  |  2  2  1  2  1  
+ Initial states: [ 4 ]
+ Final states:   [ 1 ]
+
+ The alphabet corresponds to the following variable list: [ "u" ].
+]]></Example>
+</Description>
+</ManSection>
+
+<ManSection>
+<Func Name = "NotPredicaton" Arg = "P,[ V]"/>
+<Description>
+The function <C>NotPredicaton</C> returns the negation of the <C>Predicaton</C> <A>P</A>. This function can be used to negate the <C>Predicaton</C> instead of calling <C>Predicaton</C> on the formula with prefix <C>not</C>. The optional parameter <A>V</A> allows to adjust the variable list (with <Ref Func="VariableAdjustedPredicaton"/>).
+<Example><![CDATA[
+gap> P:=Predicaton("x < 4");
+Predicaton: deterministic finite automaton on 2 letters with 4 states, 
+the variable position list [ 1 ] and the following transitions:
+         |  1  2  3  4  
+------------------------
+  [ 0 ]  |  3  2  4  4  
+  [ 1 ]  |  3  2  4  2  
+ Initial states: [ 1 ]
+ Final states:   [ 1, 3, 4 ]
+
+ The alphabet corresponds to the following variable list: [ "x" ].
+
+ Regular expression of the automaton:
+   ([ 0 ]U[ 1 ])(([ 0 ]U[ 1 ])[ 0 ]*U@)U@
+
+ Output:
+< Predicaton: deterministic finite automaton on 2 letters with 4 states 
+and the variable position list [ 1 ]. >
+gap> NotPredicaton(P);;
+gap> Display(P);
+Predicaton: deterministic finite automaton on 2 letters with 4 states, 
+the variable position list [ 1 ] and the following transitions:
+         |  1  2  3  4  
+------------------------
+  [ 0 ]  |  3  2  4  4  
+  [ 1 ]  |  3  2  4  2  
+ Initial states: [ 1 ]
+ Final states:   [ 2 ]
+
+ The alphabet corresponds to the following variable list: [ "x" ].
+]]></Example>
+</Description>
+</ManSection>
+
+<ManSection>
+<Func Name = "ImpliesPredicata" Arg = "P1, P2,[ V]"/>
+<Description>
+The function <C>ImpliesPredicata</C> returns the implication of the <C>Predicata</C> <A>P1</A> and <A>P2</A> with variable list (optional, by default <A>V</A> is the union of the variables of <A>P1</A> and <A>P2</A>). This function can be used to connect the <C>Predicata</C> of two formulas instead of calling <C>Predicaton</C> on the two with <C>implies</C> connected formulas.
+<Example><![CDATA[
+gap> P1:=Predicaton("(E m: x = 4*m)");
+Predicaton: deterministic finite automaton on 2 letters with 4 states, 
+the variable position list [ 1 ] and the following transitions:
+         |  1  2  3  4  
+------------------------
+  [ 0 ]  |  4  2  3  3  
+  [ 1 ]  |  2  2  3  2  
+ Initial states: [ 1 ]
+ Final states:   [ 1, 3, 4 ]
+
+ The alphabet corresponds to the following variable list: [ "x" ].
+
+ Regular expression of the automaton:
+   [ 0 ]([ 0 ]([ 0 ]U[ 1 ])*U@)U@
+
+ Output:
+< Predicaton: deterministic finite automaton on 2 letters with 4 states 
+and the variable position list [ 1 ]. >
+gap> P2:=Predicaton("(E n: x = 2*n)");
+Predicaton: deterministic finite automaton on 2 letters with 3 states, 
+the variable position list [ 1 ] and the following transitions:
+         |  1  2  3  
+---------------------
+  [ 0 ]  |  3  2  3  
+  [ 1 ]  |  2  2  3  
+ Initial states: [ 1 ]
+ Final states:   [ 1, 3 ]
+
+ The alphabet corresponds to the following variable list: [ "x" ].
+
+ Regular expression of the automaton:
+   [ 0 ]([ 0 ]U[ 1 ])*U@
+
+ Output:
+< Predicaton: deterministic finite automaton on 2 letters with 3 states 
+and the variable position list [ 1 ]. >
+gap> P:=ImpliesPredicata(P1, P2, [ "x" ]);;
+gap> Display(P);
+Predicaton: deterministic finite automaton on 2 letters with 1 state, 
+the variable position list [ 1 ] and the following transitions:
+         |  1  
+---------------
+  [ 0 ]  |  1  
+  [ 1 ]  |  1  
+ Initial states: [ 1 ]
+ Final states:   [ 1 ]
+
+ The alphabet corresponds to the following variable list: [ "x" ].
+]]></Example>
+</Description>
+</ManSection>
+
+<ManSection>
+<Func Name = "EquivalentPredicata" Arg = "P1, P2,[ V]"/>
+<Func Name = "EquivPredicata" Arg = "P1, P2,[ V]"/>
+<Description>
+The function <C>EquivalentPredicata</C> returns the equivalence of the <C>Predicata</C> <A>P1</A> and <A>P2</A> with the variable list (optional, by default <A>V</A> is the union of the variables of <A>P1</A> and <A>P2</A>). This function can be used to connect the <C>Predicata</C> of two formulas instead of calling <C>Predicaton</C> on the two with <C>equiv</C> connected formulas.
+<Example><![CDATA[
+gap> P1:=Predicaton("(E y: 2*x = 7+3*y)");
+Predicaton: deterministic finite automaton on 2 letters with 6 states, 
+the variable position list [ 1 ] and the following transitions:
+         |  1  2  3  4  5  6  
+------------------------------
+  [ 0 ]  |  5  2  4  3  4  6  
+  [ 1 ]  |  4  3  6  4  2  3  
+ Initial states: [ 1 ]
+ Final states:   [ 6 ]
+
+ The alphabet corresponds to the following variable list: [ "x" ].
+
+ Regular expression of the automaton:
+   (([ 0 ][ 0 ]U[ 1 ])[ 1 ]*[ 0 ]U[ 0 ][ 1 ][ 0 ]*[ 1 ])
+    ([ 1 ][ 0 ]*[ 1 ]U[ 0 ][ 1 ]*[ 0 ])*[ 1 ][ 0 ]*
+
+ Output:
+< Predicaton: deterministic finite automaton on 2 letters with 6 states 
+and the variable position list [ 1 ]. >
+gap> P2:=Predicaton("(E k: x = 5+3*k)");
+Predicaton: deterministic finite automaton on 2 letters with 6 states, 
+the variable position list [ 1 ] and the following transitions:
+         |  1  2  3  4  5  6  
+------------------------------
+  [ 0 ]  |  5  2  4  3  4  6  
+  [ 1 ]  |  4  3  6  4  2  3  
+ Initial states: [ 1 ]
+ Final states:   [ 6 ]
+
+ The alphabet corresponds to the following variable list: [ "x" ].
+
+ Regular expression of the automaton:
+   (([ 0 ][ 0 ]U[ 1 ])[ 1 ]*[ 0 ]U[ 0 ][ 1 ][ 0 ]*[ 1 ])
+    ([ 1 ][ 0 ]*[ 1 ]U[ 0 ][ 1 ]*[ 0 ])*[ 1 ][ 0 ]*
+
+ Output:
+< Predicaton: deterministic finite automaton on 2 letters with 6 states 
+and the variable position list [ 1 ]. >
+gap> P:=EquivalentPredicata(P1, P2);;
+gap> Display(P);
+Predicaton: deterministic finite automaton on 2 letters with 1 state, 
+the variable position list [ 1 ] and the following transitions:
+         |  1  
+---------------
+  [ 0 ]  |  1  
+  [ 1 ]  |  1  
+ Initial states: [ 1 ]
+ Final states:   [ 1 ]
+
+ The alphabet corresponds to the following variable list: [ "x" ].
+]]></Example>
+</Description>
+</ManSection>
+
+<ManSection>
+<Func Name = "ExistsPredicaton" Arg = "P, v,[ V]"/>
+<Description>
+The function <C>ExistsPredicaton</C> returns the existence quantifier with the variable <A>v</A> applied on the <C>Predicaton</C> <A>P</A>. This function can be used to quantify the <C>Predicaton</C> instead of calling <C>(E v: ...)</C> on the formula. The optional parameter <A>V</A> allows to adjust the variable list (with <Ref Func="VariableAdjustedPredicaton"/>).
+<Example><![CDATA[
+gap> P:=Predicaton("5*x+6*y = n");
+Predicaton: deterministic finite automaton on 8 letters with 12 states, 
+the variable position list [ 1, 2, 3 ] and the following transitions:
+               |  1  2  3  4  5  6  7  8  9  10 11 12 
+------------------------------------------------------
+  [ 0, 0, 0 ]  |  1  2  2  3  4  5  2  7  2  2  12 2  
+  [ 1, 0, 0 ]  |  2  2  1  2  2  2  3  2  7  5  2  4  
+  [ 0, 1, 0 ]  |  2  2  7  2  2  2  5  2  8  9  2  12 
+  [ 1, 1, 0 ]  |  4  2  2  7  5  8  2  12 2  2  9  2  
+  [ 0, 0, 1 ]  |  7  2  2  5  12 9  2  8  2  2  6  2  
+  [ 1, 0, 1 ]  |  2  2  7  2  2  2  5  2  8  9  2  12 
+  [ 0, 1, 1 ]  |  2  2  8  2  2  2  9  2  10 11 2  6  
+  [ 1, 1, 1 ]  |  12 2  2  8  9  10 2  6  2  2  11 2  
+ Initial states: [ 1 ]
+ Final states:   [ 1 ]
+
+ The alphabet corresponds to the following variable list: [ "n", "x", "y" ].
+
+ Output:
+< Predicaton: deterministic finite automaton on 8 letters with 12 states 
+and the variable position list [ 1, 2, 3 ]. >
+gap> P:=ExistsPredicaton(P, "x");;
+gap> P:=ExistsPredicaton(P, "y");;
+gap> Display(P);
+Predicaton: deterministic finite automaton on 2 letters with 12 states, 
+the variable position list [ 1 ] and the following transitions:
+         |  1  2  3  4  5  6  7  8  9  10 11 12 
+------------------------------------------------
+  [ 0 ]  |  9  2  3  2  4  5  3  7  8  2  4  11 
+  [ 1 ]  |  12 3  3  2  3  2  2  2  10 7  7  6  
+ Initial states: [ 1 ]
+ Final states:   [ 1, 3, 7, 8, 9 ]
+
+ The alphabet corresponds to the following variable list: [ "n" ].
+]]></Example>
+</Description>
+</ManSection>
+
+<ManSection>
+<Func Name = "ForallPredicaton" Arg = "P, v,[ V]"/>
+<Description>
+The function <C>ForallPredicaton</C> returns the for all quantifier with the variable <A>v</A> applied on the <C>Predicaton</C> <A>P</A>. This function can be used to quantify the <C>Predicaton</C> instead of calling <C>(A v: ...)</C> on the formula. The optional parameter <A>V</A> allows to adjust the variable list (with <Ref Func="VariableAdjustedPredicaton"/>).
+<Example><![CDATA[
+gap> P1:=Predicaton("(E x: (E y: 5*x+6*y = n))");
+Predicaton: deterministic finite automaton on 2 letters with 12 states,
+the variable position list [ 1 ] and the following transitions:
+         |  1  2  3  4  5  6  7  8  9  10 11 12 
+------------------------------------------------
+  [ 0 ]  |  12 2  4  5  2  2  5  7  9  9  10 11 
+  [ 1 ]  |  8  9  2  9  2  10 10 3  9  2  2  6  
+ Initial states: [ 1 ]
+ Final states:   [ 1, 9, 10, 11, 12 ]
+
+ The alphabet corresponds to the following variable list: [ "n" ].
+
+ Output:
+< Predicaton: deterministic finite automaton on 2 letters with 12 states 
+and the variable position list [ 1 ]. >
+gap> P2:=Predicaton("n > 19");
+Predicaton: deterministic finite automaton on 2 letters with 7 states, 
+the variable position list [ 1 ] and the following transitions:
+         |  1  2  3  4  5  6  7  
+---------------------------------
+  [ 0 ]  |  6  2  2  3  4  5  7  
+  [ 1 ]  |  6  7  2  2  3  5  7  
+ Initial states: [ 1 ]
+ Final states:   [ 7 ]
+
+ The alphabet corresponds to the following variable list: [ "n" ].
+
+ Output:
+< Predicaton: deterministic finite automaton on 2 letters with 7 states 
+and the variable position list [ 1 ]. >
+gap> P3:=ImpliesPredicata(P2, P1);;
+gap> P:=ForallPredicaton(P3, "n");;
+gap> Display(P);
+Predicaton: deterministic finite automaton on 1 letter with 1 state, 
+the variable position list [ ] and the following transitions:
+       |  1  
+-------------
+  [ ]  |  1  
+ Initial states: [ 1 ]
+ Final states:   [ 1 ]
+]]></Example>
+</Description>
+</ManSection>
+
+<ManSection>
+<Func Name = "LeastAcceptedNumber" Arg = "P,[ b]"/>
+<Description>
+The function <C>LeastAcceptedNumber</C> returns the <C>Predicaton</C> recognizing the least number which is accepted by the given <C>Predicaton</C> <A>P</A>. If the argument <A>b</A> is <K>true</K> (by default), then the <C>Predicaton</C> recognizing the least number greater <M>0</M> is returned (if there is one), otherwise <M>0</M> is included. 
+<Example><![CDATA[
+gap> P:=Predicaton("x >= 4");
+Predicaton: deterministic finite automaton on 2 letters with 4 states, 
+the variable position list [ 1 ] and the following transitions:
+         |  1  2  3  4  
+------------------------
+  [ 0 ]  |  3  2  2  4  
+  [ 1 ]  |  3  4  2  4  
+ Initial states: [ 1 ]
+ Final states:   [ 4 ]
+
+ The alphabet corresponds to the following variable list: [ "x" ].
+
+ Regular expression of the automaton:
+   ([ 0 ]U[ 1 ])([ 0 ]U[ 1 ])[ 0 ]*[ 1 ]([ 0 ]U[ 1 ])*
+
+ Output:
+< Predicaton: deterministic finite automaton on 2 letters with 4 states 
+and the variable position list [ 1 ]. >
+gap> L:=LeastAcceptedNumber(P);
+Predicaton: deterministic finite automaton on 2 letters with 5 states, 
+the variable position list [ 1 ] and the following transitions:
+         |  1  2  3  4  5  
+---------------------------
+  [ 0 ]  |  4  2  2  3  5  
+  [ 1 ]  |  2  2  5  2  2  
+ Initial states: [ 1 ]
+ Final states:   [ 5 ]
+
+ The alphabet corresponds to the following variable list: [ "x" ].
+
+ Regular expression of the automaton:
+   [ 0 ][ 0 ][ 1 ][ 0 ]*
+
+ Output:
+< Predicaton: deterministic finite automaton on 2 letters with 5 states 
+and the variable position list [ 1 ]. >
+]]></Example>
+</Description>
+</ManSection>
+
+<ManSection>
+<Func Name = "GreatestAcceptedNumber" Arg = "P"/>
+<Description>
+The function <C>GreatestAcceptedNumber</C> returns the <C>Predicaton</C> recognizing the greatest number which is accepted by the given <C>Predicaton</C> <A>P</A>.
+<Example><![CDATA[
+gap> P:=Predicaton("(E x: 2*x = y and x < 9)");
+Predicaton: deterministic finite automaton on 2 letters with 8 states, 
+the variable position list [ 1 ] and the following transitions:
+         |  1  2  3  4  5  6  7  8  
+------------------------------------
+  [ 0 ]  |  3  2  7  4  4  5  6  5  
+  [ 1 ]  |  2  2  8  2  4  4  5  5  
+ Initial states: [ 1 ]
+ Final states:   [ 1, 3, 4, 5, 6, 7, 8 ]
+
+ The alphabet corresponds to the following variable list: [ "y" ].
+
+ Regular expression of the automaton:
+   [ 0 ](([ 1 ]([ 0 ]U[ 1 ])U[ 0 ]([ 0 ][ 0 ]U[ 1 ]))
+   (([ 0 ]U[ 1 ])[ 0 ]*U@)U[ 1 ]U[ 0 ]([ 0 ]([ 1 ][ 0 ]*U@)U@)U@)U@
+
+ Output:
+< Predicaton: deterministic finite automaton on 2 letters with 8 states 
+and the variable position list [ 1 ]. >
+gap> G:=GreatestAcceptedNumber(P);
+Predicaton: deterministic finite automaton on 2 letters with 7 states, 
+the variable position list [ 1 ] and the following transitions:
+         |  1  2  3  4  5  6  7  
+---------------------------------
+  [ 0 ]  |  6  2  2  3  4  5  7  
+  [ 1 ]  |  2  2  7  2  2  2  2  
+ Initial states: [ 1 ]
+ Final states:   [ 7 ]
+
+ The alphabet corresponds to the following variable list: [ "y" ].
+
+ Regular expression of the automaton:
+   [ 0 ][ 0 ][ 0 ][ 0 ][ 1 ][ 0 ]*
+
+ Output:
+< Predicaton: deterministic finite automaton on 2 letters with 7 states 
+and the variable position list [ 1 ]. >
+]]></Example>
+</Description>
+</ManSection>
+
+<ManSection>
+<Func Name = "LeastNonAcceptedNumber" Arg = "P"/>
+<Description>
+The function <C>LeastNonAcceptedNumber</C> returns the <C>Predicaton</C> recognizing the Least number which is not recognized by the given <C>Predicaton</C> <A>P</A>.
+<Example><![CDATA[
+gap> P:=Predicaton("x < 4 or x > 8");
+Predicaton: deterministic finite automaton on 2 letters with 7 states, 
+the variable position list [ 1 ] and the following transitions:
+         |  1  2  3  4  5  6  7  
+---------------------------------
+  [ 0 ]  |  7  2  3  3  4  4  6  
+  [ 1 ]  |  5  3  3  2  4  2  4  
+ Initial states: [ 1 ]
+ Final states:   [ 1, 3, 4, 5, 6, 7 ]
+
+ The alphabet corresponds to the following variable list: [ "x" ].
+
+ Regular expression of the automaton:
+   ([ 0 ]([ 0 ][ 0 ]U[ 1 ])U[ 1 ]([ 0 ]U[ 1 ]))(([ 1 ][ 0 ]*[ 1 ]U[ 0 ])
+   ([ 0 ]U[ 1 ])*U@)U[ 0 ]([ 0 ]([ 1 ][ 0 ]*[ 1 ]([ 0 ]U[ 1 ])*U@)U@)U[ 1 ]U@
+
+ Output:
+< Predicaton: deterministic finite automaton on 2 letters with 7 states and 
+the variable position list [ 1 ]. >
+gap> L:=LeastNonAcceptedNumber(P);
+Predicaton: deterministic finite automaton on 2 letters with 5 states, 
+the variable position list [ 1 ] and the following transitions:
+         |  1  2  3  4  5  
+---------------------------
+  [ 0 ]  |  4  2  2  3  5  
+  [ 1 ]  |  2  2  5  2  2  
+ Initial states: [ 1 ]
+ Final states:   [ 5 ]
+
+ The alphabet corresponds to the following variable list: [ "x" ].
+
+ Regular expression of the automaton:
+   [ 0 ][ 0 ][ 1 ][ 0 ]*
+
+ Output:
+< Predicaton: deterministic finite automaton on 2 letters with 5 states 
+and the variable position list [ 1 ]. >
+
+]]></Example>
+</Description>
+</ManSection>
+
+<ManSection>
+<Func Name = "GreatestNonAcceptedNumber" Arg = "P"/>
+<Description>
+The function <C>GreatestNonAcceptedNumber</C> returns the <C>Predicaton</C> recognizing the greatest number which is not recognized by the given <C>Predicaton</C> <A>P</A>.
+<Example><![CDATA[
+gap> P:=Predicaton("(E x: (E y: 3*x + 4*y = n))");
+Predicaton: deterministic finite automaton on 2 letters with 6 states, 
+the variable position list [ 1 ] and the following transitions:
+         |  1  2  3  4  5  6  
+------------------------------
+  [ 0 ]  |  6  2  2  3  5  5  
+  [ 1 ]  |  4  5  2  5  5  2  
+ Initial states: [ 1 ]
+ Final states:   [ 1, 5, 6 ]
+
+ The alphabet corresponds to the following variable list: [ "n" ].
+
+ Regular expression of the automaton:
+   ([ 0 ]([ 1 ][ 0 ]*[ 1 ]U[ 0 ])U[ 1 ][ 0 ]([ 0 ]U[ 1 ])
+    [ 0 ]*[ 1 ]U[ 1 ][ 1 ])([ 0 ]U[ 1 ])*U[ 0 ]U@
+
+ Output:
+< Predicaton: deterministic finite automaton on 2 letters with 6 states
+and the variable position list [ 1 ]. >
+gap> G:=GreatestNonAcceptedNumber(P);
+Predicaton: deterministic finite automaton on 2 letters with 5 states, 
+the variable position list [ 1 ] and the following transitions:
+         |  1  2  3  4  5  
+---------------------------
+  [ 0 ]  |  2  2  2  3  5  
+  [ 1 ]  |  4  2  5  2  2  
+ Initial states: [ 1 ]
+ Final states:   [ 5 ]
+
+ The alphabet corresponds to the following variable list: [ "n" ].
+
+ Regular expression of the automaton:
+   [ 1 ][ 0 ][ 1 ][ 0 ]*
+
+ Output:
+< Predicaton: deterministic finite automaton on 2 letters with 5 states 
+and the variable position list [ 1 ]. >
+gap> AcceptedByPredicaton(G);
+[ [ 5 ] ]
+]]></Example>
+</Description>
+</ManSection>
+
+<ManSection>
+<Func Name = "InterpretedPredicaton" Arg = "P"/>
+<Description>
+The function <C>InterpretedPredicaton</C> returns <C>true</C> if the <C>Predicaton</C> <A>P</A> has exactly one state which is also a final state, thus the <C>Predicaton</C> is interpreted as true (if free variable occurs it is true for all natural numbers). Otherwise, <C>false</C> is returned.
+<Example><![CDATA[
+gap> P:=Predicaton("(A x: (E y: x = y))");
+Predicaton: deterministic finite automaton on 1 letter with 1 state, 
+the variable position list [ ] and the following transitions:
+       |  1  
+-------------
+  [ ]  |  1  
+ Initial states: [ 1 ]
+ Final states:   [ 1 ]
+
+ Regular expression of the automaton:
+   [ ]*
+
+ Due to the automaton the formula is true.
+   true
+
+ Output:
+< Predicaton: deterministic finite automaton on 1 letter with 1 state 
+and the variable position list [  ]. >
+gap> InterpretedPredicaton(P);
+The Predicaton is interpreted as True.
+true
+]]></Example>
+</Description>
+</ManSection>
+
+<ManSection>
+<Func Name = "AreEquivalentPredicata" Arg = "P1, P2,[ b]"/>
+<Description>
+The function <C>AreEquivalentPredicata</C> returns either <K>true</K> if the <C>Predicatas</C> <A>P1</A> and <A>P2</A> are equivalent or <K>false</K> otherwise. If the optional parameter <A>b</A> is <C>true</C> (by default) then the equivalence is computed w.r.t. the variable names, if <C>false</C> it is computed w.r.t. to the variable position list.
+<Example><![CDATA[
+gap> P1:=Predicaton("x=4", ["x", "y"]);
+Predicaton: deterministic finite automaton on 4 letters with 5 states,
+the variable position list [ 1, 2 ] and the following transitions:
+            |  1  2  3  4  5  
+------------------------------
+  [ 0, 0 ]  |  4  2  2  3  5  
+  [ 1, 0 ]  |  2  2  5  2  2  
+  [ 0, 1 ]  |  4  2  2  3  5  
+  [ 1, 1 ]  |  2  2  5  2  2  
+ Initial states: [ 1 ]
+ Final states:   [ 5 ]
+
+ The alphabet corresponds to the following variable list: [ "x", "y" ].
+
+ Output:
+< Predicaton: deterministic finite automaton on 4 letters with 5 states 
+and the variable position list [ 1, 2 ]. >
+gap> P2:=Predicaton("u=4", ["u", "v", "w"]);
+Predicaton: deterministic finite automaton on 8 letters with 5 states, 
+the variable position list [ 1, 2, 3 ] and the following transitions:
+               |  1  2  3  4  5  
+---------------------------------
+  [ 0, 0, 0 ]  |  4  2  2  3  5  
+  [ 1, 0, 0 ]  |  2  2  5  2  2  
+  [ 0, 1, 0 ]  |  4  2  2  3  5  
+  [ 1, 1, 0 ]  |  2  2  5  2  2  
+  [ 0, 0, 1 ]  |  4  2  2  3  5  
+  [ 1, 0, 1 ]  |  2  2  5  2  2  
+  [ 0, 1, 1 ]  |  4  2  2  3  5  
+  [ 1, 1, 1 ]  |  2  2  5  2  2  
+ Initial states: [ 1 ]
+ Final states:   [ 5 ]
+
+ The alphabet corresponds to the following variable list: [ "u", "v", "w" ].
+
+ Output:
+< Predicaton: deterministic finite automaton on 8 letters with 5 states 
+and the variable position list [ 1, 2, 3 ]. >
+gap> AreEquivalentPredicata(P1, P2);
+The Predicaton doesn't hold for all natural numbers and is interpreted as False.
+false
+gap> AreEquivalentPredicata(P1, P2, false);
+The Predicaton holds for all natural numbers and is interpreted as True.
+true
+]]></Example>
+</Description>
+</ManSection>
+
+<ManSection>
+<Func Name = "LinearSolveOverN" Arg = "A, b,[ V]"/>
+<Description>
+The function <C>LinearSolveOverN</C> returns the <C>Predicaton</C> which language recognizes the solutions <M>x</M> of the linear equation <M>A \cdot x = b</M>. The argument <A>A</A> is a matrix (list of lists), the argument <A>b</A> a vector (list) and the optional argument <A>V</A> allows to specify an order (here the variables are named <C>"x1", "x2", ...</C>). Note that <A>A</A> and <A>b</A> may contain also negative integers, whereas the solution is over the natural numbers.
+<Example><![CDATA[
+gap> A:=LinearSolveOverN([ [ 1, -2, 3 ], [ 3, 4, -7 ] ], [ 2, 0 ]);
+Predicaton: deterministic finite automaton on 8 letters with 17 states, 
+the variable position list [ 1, 2, 3 ] and the following transitions:
+               |  1  2  3  4  5  6  7  8  9  10 11 12 13 14 15 16 17 
+---------------------------------------------------------------------
+  [ 0, 0, 0 ]  |  2  2  2  2  4  2  2  2  8  2  10 2  2  2  2  2  17 
+  [ 1, 0, 0 ]  |  2  2  2  14 2  9  2  2  2  8  2  2  12 2  2  2  2  
+  [ 0, 1, 0 ]  |  11 2  17 2  2  2  2  7  2  2  2  8  2  2  2  2  2  
+  [ 1, 1, 0 ]  |  2  2  2  2  2  2  6  2  2  2  2  2  2  9  14 8  2  
+  [ 0, 0, 1 ]  |  2  2  2  3  2  4  2  2  2  16 2  2  15 2  2  2  2  
+  [ 1, 0, 1 ]  |  2  2  2  2  13 2  2  2  12 2  4  2  2  2  2  2  5  
+  [ 0, 1, 1 ]  |  2  2  2  2  2  2  17 2  2  2  2  2  2  4  3  16 2  
+  [ 1, 1, 1 ]  |  17 2  5  2  2  2  2  14 2  2  2  12 2  2  2  2  2  
+ Initial states: [ 1 ]
+ Final states:   [ 17 ]
+
+ The alphabet corresponds to the following variable list: [ "x1", "x2", "x3" ].
+
+ Output:
+< Predicaton: deterministic finite automaton on 8 letters with 17 states and 
+the variable position list [ 1, 2, 3 ]. >
+gap> AcceptedByPredicaton(A, 10);
+[ [ 1, 1, 1 ], [ 2, 9, 6 ] ]
+]]></Example>
+</Description>
+</ManSection>
+
+<ManSection>
+<Func Name = "NullSpaceOverN" Arg = "A,[ V]"/>
+<Description>
+The function <C>NullSpaceOverN</C> returns the <C>Predicaton</C> which language recognizes the solutions <M>x</M> of the linear equation <M>A \cdot x = 0</M>. The argument <A>A</A> is a matrix (list of lists) and the optional argument <A>V</A> allows to specify an order (here the variables are named <C>"x1", "x2", ...</C>). Note that <A>A</A> may contain also negative integers, whereas the solution is over the natural numbers.
+<Example><![CDATA[
+gap> N:=NullSpaceOverN([[1, -2, 3],[3, 4, -7]]);
+Predicaton: deterministic finite automaton on 8 letters with 13 states, 
+the variable position list [ 1, 2, 3 ] and the following transitions:
+               |  1  2  3  4  5  6  7  8  9  10 11 12 13 
+---------------------------------------------------------
+  [ 0, 0, 0 ]  |  1  2  2  2  4  2  2  2  8  2  2  2  2  
+  [ 1, 0, 0 ]  |  2  2  2  12 2  9  2  2  2  2  10 2  2  
+  [ 0, 1, 0 ]  |  2  2  1  2  2  2  2  7  2  8  2  2  2  
+  [ 1, 1, 0 ]  |  2  2  2  2  2  2  6  2  2  2  2  9  12 
+  [ 0, 0, 1 ]  |  2  2  2  3  2  4  2  2  2  2  13 2  2  
+  [ 1, 0, 1 ]  |  5  2  2  2  11 2  2  2  10 2  2  2  2  
+  [ 0, 1, 1 ]  |  2  2  2  2  2  2  1  2  2  2  2  4  3  
+  [ 1, 1, 1 ]  |  2  2  5  2  2  2  2  12 2  10 2  2  2  
+ Initial states: [ 1 ]
+ Final states:   [ 1 ]
+
+ The alphabet corresponds to the following variable list: [ "x1", "x2", "x3" ].
+
+ Output:
+< Predicaton: deterministic finite automaton on 8 letters with 13 states and 
+the variable position list [ 1, 2, 3 ]. >
+gap> AcceptedByPredicaton(N);
+[ [ 0, 0, 0 ], [ 1, 8, 5 ] ]
+]]></Example>
+</Description>
+</ManSection>
+
+</Section>
+
+<Section Label="Examples"><Heading>Examples</Heading>
+
+<Subsection><Heading>Example 1: Getting familiar</Heading>
+The following example introduces the two ways of getting a <C>Predicaton</C>, either created from a first-order formula (see <Ref Func="PredicataGrammar"/>), the mathematically more intuitive way, or from an <C>Automaton</C>, which at first sight may not completely obvious.
+<Example><![CDATA[
+gap> # We want a Predicaton accepting the binary representation of the number 4:
+gap> DecToBin(4);
+[ 0, 0, 1 ]
+gap> A:=Predicaton("x = 4");
+Predicaton: deterministic finite automaton on 2 letters with 5 states, 
+the variable position list [ 1 ] and the following transitions:
+         |  1  2  3  4  5  
+---------------------------
+  [ 0 ]  |  4  2  2  3  5  
+  [ 1 ]  |  2  2  5  2  2  
+ Initial states: [ 1 ]
+ Final states:   [ 5 ]
+
+ The alphabet corresponds to the following variable list: [ "x" ].
+
+ Regular expression of the automaton:
+   [ 0 ][ 0 ][ 1 ][ 0 ]*
+
+ Output:
+< Predicaton: deterministic finite automaton on 2 letters with 5 states 
+and the variable position list [ 1 ]. >
+gap> # Accepted natural numbers?
+gap> IsAcceptedByPredicaton(A, [ 4 ]);
+true
+gap> # Accepted binary representation, also with leading zero?
+gap> IsAcceptedByPredicaton(A, [ [ 0, 0, 1 ] ]);
+true
+gap> IsAcceptedByPredicaton(A, [ [ 0, 0, 1, 0 ] ]);
+true
+gap> # Indeed any leading zeros can be added or cancelled:
+gap> PredicatonToRatExp(A);
+[ 0 ][ 0 ][ 1 ][ 0 ]*
+gap> # Now we create the Predicaton recognizing "y = 1" by hand:
+gap> # Parameters:  type, states, alphabet, 
+gap> Aut:=Automaton("det", 3,     [ [ 0 ], [ 1 ] ],
+> # transitions from letter (row) and state (column) to state (row, column)
+> [ [ 3, 2, 3 ], [ 2, 3, 3 ] ],
+> # initial state, final states
+> [ 1 ],          [ 2 ]);
+< deterministic automaton on 2 letters with 3 states >
+gap> # We create the Predicaton from the automaton and the variable position list.
+gap> # Here we choose "y" to be at position 2.
+gap> B:=Predicaton(Aut, [ 2 ]); 
+< Predicaton: deterministic finite automaton on 2 letters with 3 states 
+and the variable position list [ 2 ]. >
+gap> # We want the Predicaton "x = 4 and y = 1", so we have to set a variable to B.
+gap> SetVariableListOfPredicaton(B, [ "y" ]); 
+gap> # Then we use AndPredicata to apply "and" according to the variable names.
+gap> # Hence the Predicaton is over the alphabet [[0, 0], [1, 0], [0, 1], [1, 1]],
+gap> # where the first coordinate belong to "x" and the second to "y". Note that 
+gap> # [ "x", "y" ] is optional, by default it's sorted alphabetically.
+gap> C:=AndPredicata(A, B, [ "x", "y" ]);;
+gap> Display(C);
+Predicaton: deterministic finite automaton on 4 letters with 5 states, 
+the variable position list [ 1, 2 ] and the following transitions:
+            |  1  2  3  4  5  
+------------------------------
+  [ 0, 0 ]  |  2  2  2  3  5  
+  [ 1, 0 ]  |  2  2  5  2  2  
+  [ 0, 1 ]  |  4  2  2  2  2  
+  [ 1, 1 ]  |  2  2  2  2  2  
+ Initial states: [ 1 ]
+ Final states:   [ 5 ]
+
+ The alphabet corresponds to the following variable list: [ "x", "y" ].
+gap> # So C accepts in the first component of the letter the variable x 
+gap> # and in the second component the variable y.
+gap> IsAcceptedByPredicaton(C, [ 4, 1 ]);
+true
+gap> IsAcceptedByPredicaton(C, [ [ 0, 0, 1 ], [ 1 ] ]);
+true
+gap> # Alternatively, we could have created this Predicaton simply with
+gap> D:=Predicaton("x = 4 and y = 1");
+Predicaton: deterministic finite automaton on 4 letters with 5 states, 
+the variable position list [ 1, 2 ] and the following transitions:
+            |  1  2  3  4  5  
+------------------------------
+  [ 0, 0 ]  |  2  2  2  3  5  
+  [ 1, 0 ]  |  2  2  5  2  2  
+  [ 0, 1 ]  |  4  2  2  2  2  
+  [ 1, 1 ]  |  2  2  2  2  2  
+ Initial states: [ 1 ]
+ Final states:   [ 5 ]
+
+ The alphabet corresponds to the following variable list: [ "x", "y" ].
+
+ Regular expression of the automaton:
+   [ 0, 1 ][ 0, 0 ][ 1, 0 ][ 0, 0 ]*
+
+ Output:
+< Predicaton: deterministic finite automaton on 4 letters with 5 states 
+and the variable position list [ 1, 2 ]. >
+gap> DrawPredicaton(D);
+gap> # Furthermore, we can use the following function to see the allowed grammar:
+gap> PredicataGrammar();
+]]></Example>
+
+<Alt Only="LaTeX">
+\begin{figure}[ht]
+	\centering
+  \includegraphics[width=0.8\textwidth]{img/ex1.jpg}
+	\caption{A minimal DFA recognizing <M>x=4</M> (<M>x</M> corresponding to the first component of each letter) and <M>y=1</M> (<M>y</M> corresponding to the second component).}
+	\label{ex1}
+\end{figure}
+</Alt>
+<Alt Only="HTML">
+&#60;center&#62;
+  &#60;figure&#62; 
+    &#60;img src="img/ex1.jpg" alt="Example 1" height="500" &#62;
+    &#60;figcaption&#62;A minimal DFA recognizing <M>x=4</M> (<M>x</M> corresponding to the first component of each letter) and <M>y=1</M> (<M>y</M> corresponding to the second component).
+    &#60;/figcaption&#62; 
+  &#60;/figure&#62;
+&#60;/center&#62;
+</Alt>
+
+</Subsection>
+
+<Subsection><Heading>Example 2: Recalling the motivation</Heading>
+We recall the example from the section <Ref Chap="Introduction"/>. There we wanted to get the <C>Predicaton</C> recognizing all natural numbers which can be purchased by 6, 9 and 20.
+<Example><![CDATA[
+gap> # We create the Predicaton of the following formula
+gap> A:=Predicaton("(E x:(E y:(E z:6*x+9*y+20*z=n)))");
+Predicaton: deterministic finite automaton on 2 letters with 17 states,
+ the variable position list [ 1 ] and the following transitions:
+         |  1  2  3  4  5  6  7  8  9  10 11 12 13 14 15 16 17 
+---------------------------------------------------------------
+  [ 0 ]  |  17 12 6  3  5  5  6  4  7  6  5  10 13 13 14 15 16 
+  [ 1 ]  |  2  9  13 5  13 5  3  15 10 14 14 4  13 5  5  11 8  
+ Initial states: [ 1 ]
+ Final states:   [ 1, 13, 14, 15, 16, 17 ]
+
+ The alphabet corresponds to the following variable list: [ "n" ].
+
+ Output:
+< Predicaton: deterministic finite automaton on 2 letters with 17 states
+and the variable position list [ 1 ]. >
+gap> Display(A);
+Predicaton: deterministic finite automaton on 2 letters with 17 states,
+ the variable position list [ 1 ] and the following transitions:
+         |  1  2  3  4  5  6  7  8  9  10 11 12 13 14 15 16 17 
+---------------------------------------------------------------
+  [ 0 ]  |  17 12 6  3  5  5  6  4  7  6  5  10 13 13 14 15 16 
+  [ 1 ]  |  2  9  13 5  13 5  3  15 10 14 14 4  13 5  5  11 8  
+ Initial states: [ 1 ]
+ Final states:   [ 1, 13, 14, 15, 16, 17 ]
+
+ The alphabet corresponds to the following variable list: [ "n" ].
+gap> # We ask for the accepted natural numbers.
+gap> AcceptedByPredicaton(A, 20);
+[ [ 0 ], [ 6 ], [ 9 ], [ 12 ], [ 15 ], [ 18 ], [ 20 ] ]
+gap> DisplayAcceptedByPredicaton(A, 99, true);
+ If the following words are accepted by the given automaton, then: Y,
+ otherwise if not accepted: n.
+   0: Y   1: n   2: n   3: n   4: n   5: n   6: Y   7: n   8: n   9: Y
+  10: n  11: n  12: Y  13: n  14: n  15: Y  16: n  17: n  18: Y  19: n
+  20: Y  21: Y  22: n  23: n  24: Y  25: n  26: Y  27: Y  28: n  29: Y
+  30: Y  31: n  32: Y  33: Y  34: n  35: Y  36: Y  37: n  38: Y  39: Y
+  40: Y  41: Y  42: Y  43: n  44: Y  45: Y  46: Y  47: Y  48: Y  49: Y
+  50: Y  51: Y  52: Y  53: Y  54: Y  55: Y  56: Y  57: Y  58: Y  59: Y
+  60: Y  61: Y  62: Y  63: Y  64: Y  65: Y  66: Y  67: Y  68: Y  69: Y
+  70: Y  71: Y  72: Y  73: Y  74: Y  75: Y  76: Y  77: Y  78: Y  79: Y
+  80: Y  81: Y  82: Y  83: Y  84: Y  85: Y  86: Y  87: Y  88: Y  89: Y
+  90: Y  91: Y  92: Y  93: Y  94: Y  95: Y  96: Y  97: Y  98: Y  99: Y
+ 
+gap> # We create the Predicaton accepting the greatest non-accepted number.
+gap> # First we create a PredicatonRepresentation, containing a name,
+gap> # an arity and an automaton (the input may also be a Predicaton).
+gap> p:=PredicatonRepresentation("P", 1, A);
+< Predicaton represented with the name "P", the arity 1 and 
+the deterministic automaton on 2 letters and 17 states. >
+gap> AddToPredicataList(p);
+gap> PredicataList;
+< PredicataRepresentation containing the following predicates: [ "P" ]. >
+gap> B:=Predicaton("(A m: m > n implies P[m]) and not P[n]");
+Predicaton: deterministic finite automaton on 2 letters with 8 states, 
+the variable position list [ 1 ] and the following transitions:
+         |  1  2  3  4  5  6  7  8  
+------------------------------------
+  [ 0 ]  |  2  2  2  3  2  5  2  8  
+  [ 1 ]  |  7  2  8  2  4  2  6  2  
+ Initial states: [ 1 ]
+ Final states:   [ 8 ]
+
+ The alphabet corresponds to the following variable list: [ "n" ].
+
+ Regular expression of the automaton:
+   [ 1 ][ 1 ][ 0 ][ 1 ][ 0 ][ 1 ][ 0 ]*
+
+ Output:
+< Predicaton: deterministic finite automaton on 2 letters with 8 states 
+and the variable position list [ 1 ]. >
+gap> AcceptedByPredicaton(B, 50);
+[ [ 43 ] ]
+gap> # We look at the regular expression and compute the natural number
+gap> PredicatonToRatExp(B);
+[ 1 ][ 1 ][ 0 ][ 1 ][ 0 ][ 1 ][ 0 ]*
+gap> BinToDec([ 1, 1, 0, 1, 0, 1 ]);
+43
+gap> # Alternatively, we can also use the inbuilt function:
+gap> C:=GreatestNonAcceptedNumber(A);
+Predicaton: deterministic finite automaton on 2 letters with 8 states, 
+the variable position list [ 1 ] and the following transitions:
+         |  1  2  3  4  5  6  7  8  
+------------------------------------
+  [ 0 ]  |  2  2  2  3  2  5  2  8  
+  [ 1 ]  |  7  2  8  2  4  2  6  2  
+ Initial states: [ 1 ]
+ Final states:   [ 8 ]
+
+ The alphabet corresponds to the following variable list: [ "n" ].
+
+ Regular expression of the automaton:
+   [ 1 ][ 1 ][ 0 ][ 1 ][ 0 ][ 1 ][ 0 ]*
+
+ Output:
+< Predicaton: deterministic finite automaton on 2 letters with 8 states 
+and the variable position list [ 1 ]. >
+]]></Example>
+
+<Alt Only="LaTeX">
+\begin{figure}[ht]
+	\centering
+  \includegraphics[width=0.5\textwidth]{img/aut1.jpg}
+	\caption{A minimal DFA recognizing the numbers which can be purchased by the formula of <C>A</C>.}
+	\label{ex5}
+\end{figure}
+\newpage
+</Alt>
+<Alt Only="HTML">
+&#60;center&#62;
+  &#60;figure&#62; 
+    &#60;img src="img/aut1.jpg" alt="Automaton 1" height="1000" &#62;
+    &#60;figcaption&#62;A minimal DFA recognizing the numbers which can be purchased by the formula of <C>A</C>.
+    &#60;/figcaption&#62; 
+  &#60;/figure&#62;
+&#60;/center&#62;
+</Alt>
+
+</Subsection>
+
+<Subsection><Heading>Example 3: Divisible by three</Heading>
+A very common example from an automata theory lecture is finding the natural numbers which are divisible by three. 
+Sometimes this example is solve with clear rules, sometimes with a lot of handwaving.<P/>
+However, the following way is a solid approach in the first-order language with <M>+</M> using the shortcut <C>3*x:=x+x+x</C>.
+<P/>
+Here, first the <C>Predicaton</C> for <C>3*y=x</C> is created with the transition rule with the <C>k</C>-th state having carry <C>(k-1)</C>: <C>3*a[1]=a[2]+(i-1)+2*((j-1)-(i-1))</C>. For the existence quantifier we ignore the second component of each letter, which yields a nondeterministic finite automaton. We apply the leading zero completion (see <Ref Func="NormalizedLeadingZeroPredicaton"/>), i.e. any leading zero may be cancelled or added to the accepted words. Then we apply the subset construction and return the minimal automaton.
+<Example><![CDATA[
+gap> # We ask if there exists "y" s.t. 3*y=x.
+gap> A:=Predicaton("(E y: 3*y = x)");
+Predicaton: deterministic finite automaton on 2 letters with 3 states, 
+the variable position list [ 1 ] and the following transitions:
+         |  1  2  3  
+---------------------
+  [ 0 ]  |  1  3  2  
+  [ 1 ]  |  2  1  3  
+ Initial states: [ 1 ]
+ Final states:   [ 1 ]
+
+ The alphabet corresponds to the following variable list: [ "x" ].
+
+ Regular expression of the automaton:
+   ([ 1 ]([ 0 ][ 1 ]*[ 0 ])*[ 1 ]U[ 0 ])*
+
+ Output:
+< Predicaton: deterministic finite automaton on 2 letters with 3 states 
+and the variable position list [ 1 ]. >
+gap> # Compare with:
+gap> B:=Predicaton("3*y = x");
+Predicaton: deterministic finite automaton on 4 letters with 4 states, 
+the variable position list [ 1, 2 ] and the following transitions:
+            |  1  2  3  4  
+---------------------------
+  [ 0, 0 ]  |  1  2  2  3  
+  [ 1, 0 ]  |  2  2  1  2  
+  [ 0, 1 ]  |  2  2  4  2  
+  [ 1, 1 ]  |  3  2  2  4  
+ Initial states: [ 1 ]
+ Final states:   [ 1 ]
+
+ The alphabet corresponds to the following variable list: [ "x", "y" ].
+
+ Regular expression of the automaton:
+   ([ 1, 1 ]([ 0, 1 ][ 1, 1 ]*[ 0, 0 ])*[ 1, 0 ]U[ 0, 0 ])*
+
+ Output:
+< Predicaton: deterministic finite automaton on 4 letters with 4 states 
+and the variable position list [ 1, 2 ]. >
+gap> Display(B);
+Predicaton: deterministic finite automaton on 4 letters with 4 states, 
+the variable position list [ 1, 2 ] and the following transitions:
+            |  1  2  3  4  
+---------------------------
+  [ 0, 0 ]  |  1  2  2  3  
+  [ 1, 0 ]  |  2  2  1  2  
+  [ 0, 1 ]  |  2  2  4  2  
+  [ 1, 1 ]  |  3  2  2  4  
+ Initial states: [ 1 ]
+ Final states:   [ 1 ]
+
+ The alphabet corresponds to the following variable list: [ "x", "y" ].
+gap> C:=ExistsPredicaton(B, "y");;
+gap> Display(C);
+Predicaton: deterministic finite automaton on 2 letters with 3 states, 
+the variable position list [ 1 ] and the following transitions:
+         |  1  2  3  
+---------------------
+  [ 0 ]  |  1  3  2  
+  [ 1 ]  |  2  1  3  
+ Initial states: [ 1 ]
+ Final states:   [ 1 ]
+
+ The alphabet corresponds to the following variable list: [ "x" ].
+gap> DrawPredicaton(A);
+]]></Example>
+
+<Alt Only="LaTeX">
+\begin{figure}[ht]
+	\centering
+  \includegraphics[width=0.2\textwidth]{img/ex3.jpg}
+	\caption{A minimal DFA recognizing the numbers divisible by 3.}
+	\label{ex3}
+\end{figure}
+</Alt>
+<Alt Only="HTML">
+&#60;center&#62;
+  &#60;figure&#62; 
+    &#60;img src="img/ex3.jpg" alt="Example 3" height="300" &#62;
+    &#60;figcaption&#62;A minimal DFA recognizing the numbers divisible by 3.
+    &#60;/figcaption&#62; 
+  &#60;/figure&#62;
+&#60;/center&#62;
+</Alt>
+
+</Subsection>
+
+<Subsection><Heading>Example 4: Linear congruences</Heading>
+We can solve the linear congruences <M>4\cdot x=7</M> modulo 5 in the natural numbers.
+<Example><![CDATA[
+gap> A:=Predicaton("(E y: 4*x = 7+5*y)");
+Predicaton: deterministic finite automaton on 2 letters with 5 states, 
+the variable position list [ 1 ] and the following transitions:
+         |  1  2  3  4  5  
+---------------------------
+  [ 0 ]  |  4  1  2  3  5  
+  [ 1 ]  |  2  5  1  4  3  
+ Initial states: [ 1 ]
+ Final states:   [ 5 ]
+
+ The alphabet corresponds to the following variable list: [ "x" ].
+
+ Output:
+< Predicaton: deterministic finite automaton on 2 letters with 5 states
+and the variable position list [ 1 ]. >
+gap> AcceptedByPredicaton(A, 20);
+[ [ 3 ], [ 8 ], [ 13 ], [ 18 ] ]
+gap> # We asked for some accepted words and suggest as a solution x = 3+5*k.
+gap> B:=Predicaton("(E k: x = 3+5*k)");
+Predicaton: deterministic finite automaton on 2 letters with 5 states, 
+the variable position list [ 1 ] and the following transitions:
+         |  1  2  3  4  5  
+---------------------------
+  [ 0 ]  |  4  1  2  3  5  
+  [ 1 ]  |  2  5  1  4  3  
+ Initial states: [ 1 ]
+ Final states:   [ 5 ]
+
+ The alphabet corresponds to the following variable list: [ "x" ].
+
+ Output:
+< Predicaton: deterministic finite automaton on 2 letters with 5 states 
+and the variable position list [ 1 ]. >
+gap> # Indeed:
+gap> AreEquivalentPredicata(A, B);
+The Predicaton holds for all natural numbers and is interpreted as True.
+true
+gap> DrawPredicaton(A);
+gap> # Furthermore, we look at a system of linear congruences.
+gap> C:=Predicaton("(E y1: x = 1 + 2*y1) and (E y2: x = 2 + 3*y2)");
+Predicaton: deterministic finite automaton on 2 letters with 5 states, 
+the variable position list [ 1 ] and the following transitions:
+         |  1  2  3  4  5  
+---------------------------
+  [ 0 ]  |  2  2  4  3  5  
+  [ 1 ]  |  4  2  5  4  3  
+ Initial states: [ 1 ]
+ Final states:   [ 5 ]
+
+ The alphabet corresponds to the following variable list: [ "x" ].
+
+ Regular expression of the automaton:
+   [ 1 ][ 1 ]*[ 0 ]([ 1 ][ 0 ]*[ 1 ]U[ 0 ][ 1 ]*[ 0 ])*[ 1 ][ 0 ]*
+
+ Output:
+< Predicaton: deterministic finite automaton on 2 letters with 5 states 
+and the variable position list [ 1 ]. >
+gap> AcceptedByPredicaton(C, 20);
+[ [ 5 ], [ 11 ], [ 17 ] ]
+gap> # We suggest:
+gap> D:=Predicaton("(E k: x = 5 + 6 * k)");
+Predicaton: deterministic finite automaton on 2 letters with 5 states, 
+the variable position list [ 1 ] and the following transitions:
+         |  1  2  3  4  5  
+---------------------------
+  [ 0 ]  |  2  2  4  3  5  
+  [ 1 ]  |  4  2  5  4  3  
+ Initial states: [ 1 ]
+ Final states:   [ 5 ]
+
+ The alphabet corresponds to the following variable list: [ "x" ].
+
+ Regular expression of the automaton:
+   [ 1 ][ 1 ]*[ 0 ]([ 1 ][ 0 ]*[ 1 ]U[ 0 ][ 1 ]*[ 0 ])*[ 1 ][ 0 ]*
+
+ Output:
+< Predicaton: deterministic finite automaton on 2 letters with 5 states 
+and the variable position list [ 1 ]. >
+gap> AreEquivalentPredicata(C, D);
+The Predicaton holds for all natural numbers and is interpreted as True.
+true
+]]></Example>
+
+<Alt Only="LaTeX">
+\begin{figure}[ht]
+	\centering
+  \includegraphics[width=0.25\textwidth]{img/ex4.jpg}
+	\caption{A minimal DFA recognizing the solutions of the linear congruence <C>A</C>.}
+	\label{ex4}
+\end{figure}
+</Alt>
+<Alt Only="HTML">
+&#60;center&#62;
+  &#60;figure&#62; 
+    &#60;img src="img/ex4.jpg" alt="Example 4" height="500" &#62;
+    &#60;figcaption&#62;A minimal DFA recognizing the solutions of the linear congruence <C>A</C>.
+    &#60;/figcaption&#62; 
+  &#60;/figure&#62;
+&#60;/center&#62;
+</Alt>
+
+</Subsection>
+
+<Subsection><Heading>Example 5: GCD and LCM</Heading>
+We can also compute the GCD and LCM of two natural numbers, however at the first sight it's not completely obvious how to obtain the GCD.
+<Example><![CDATA[
+gap> # All multiples of the GCD of 6 and 15. If there exists z such that
+gap> # it is a multiple of the GCD(6, 15) after some number y, then also
+gap> # z+x is a multiple of the GCD.
+gap> A:=Predicaton("(E y: (A z: z>=y implies ((Ea : (Eb: z= 6*a+15*b))\
+> implies (Ec: (Ed: z+x= 6*c+15*d)))))");
+
+Predicaton: deterministic finite automaton on 2 letters with 3 states, 
+the variable position list [ 1 ] and the following transitions:
+         |  1  2  3  
+---------------------
+  [ 0 ]  |  1  3  2  
+  [ 1 ]  |  2  1  3  
+ Initial states: [ 1 ]
+ Final states:   [ 1 ]
+
+ The alphabet corresponds to the following variable list: [ "x" ].
+
+ Regular expression of the automaton:
+   ([ 1 ]([ 0 ][ 1 ]*[ 0 ])*[ 1 ]U[ 0 ])*
+
+ Output:
+< Predicaton: deterministic finite automaton on 2 letters with 3 states 
+and the variable position list [ 1 ]. >
+gap> # This Predicaton is already known from Example 2 and we test for the least
+gap> # accepted natural number greater 0 (>= 0 with optional parameter false):
+gap> B:=LeastAcceptedNumber(A);
+Predicaton: deterministic finite automaton on 2 letters with 4 states, 
+the variable position list [ 1 ] and the following transitions:
+         |  1  2  3  4  
+------------------------
+  [ 0 ]  |  2  2  2  4  
+  [ 1 ]  |  3  2  4  2  
+ Initial states: [ 1 ]
+ Final states:   [ 4 ]
+
+ The alphabet corresponds to the following variable list: [ "x" ].
+
+ Regular expression of the automaton:
+   [ 1 ][ 1 ][ 0 ]*
+
+ Output:
+< Predicaton: deterministic finite automaton on 2 letters with 4 states 
+and the variable position list [ 1 ]. >
+gap> AcceptedByPredicaton(B);
+[ [ 3 ] ]
+gap> # We get the multiples of the LCM(6, 15) straightforwardly.
+gap> C:=Predicaton("(E a: 6*a = x) and (E b: 15*b = x)");
+Predicaton: deterministic finite automaton on 2 letters with 17 states, 
+the variable position list [ 1 ] and the following transitions:
+         |  1  2  3  4  5  6  7  8  9  10 11 12 13 14 15 16 17 
+---------------------------------------------------------------
+  [ 0 ]  |  17 2  6  3  4  5  10 7  8  9  12 11 16 13 14 15 17 
+  [ 1 ]  |  2  2  17 6  7  13 5  3  11 16 10 4  12 8  15 9  14 
+ Initial states: [ 1 ]
+ Final states:   [ 1, 17 ]
+
+ The alphabet corresponds to the following variable list: [ "x" ].
+
+ Output:
+< Predicaton: deterministic finite automaton on 2 letters with 17 states 
+and the variable position list [ 1 ]. >
+gap> D:=LeastAcceptedNumber(C);
+Predicaton: deterministic finite automaton on 2 letters with 7 states, 
+the variable position list [ 1 ] and the following transitions:
+         |  1  2  3  4  5  6  7  
+---------------------------------
+  [ 0 ]  |  6  2  2  2  2  2  7  
+  [ 1 ]  |  2  2  7  3  4  5  2  
+ Initial states: [ 1 ]
+ Final states:   [ 7 ]
+
+ The alphabet corresponds to the following variable list: [ "x" ].
+
+ Regular expression of the automaton:
+   [ 0 ][ 1 ][ 1 ][ 1 ][ 1 ][ 0 ]*
+
+ Output:
+< Predicaton: deterministic finite automaton on 2 letters with 7 states 
+and the variable position list [ 1 ]. >
+gap> AcceptedByPredicaton(D, 100);
+[ [ 30 ] ]
+]]></Example>
+</Subsection>
+
+<Subsection><Heading>Example 6: Theorems</Heading>
+
+<Example><![CDATA[
+gap> # Which of the followings sentences are true?
+gap> A1:=Predicaton("(E x:(A y: x = y))");
+Predicaton: deterministic finite automaton on 1 letter with 1 state, 
+the variable position list [ ] and the following transitions:
+       |  1  
+-------------
+  [ ]  |  1  
+ Initial states: [ 1 ]
+ Final states:   [ ]
+
+ Regular expression of the automaton:
+   empty_set
+
+ Due to the automaton the formula is false.
+   false
+
+ Output:
+< Predicaton: deterministic finite automaton on 1 letter with 1 state 
+and the variable position list [ ]. >
+gap> A2:=Predicaton("(A x:(E y: x = y))");
+Predicaton: deterministic finite automaton on 1 letter with 1 state, 
+the variable position list [ ] and the following transitions:
+       |  1  
+-------------
+  [ ]  |  1  
+ Initial states: [ 1 ]
+ Final states:   [ 1 ]
+
+ Regular expression of the automaton:
+   [ ]*
+
+ Due to the automaton the formula is true.
+   true
+
+ Output:
+< Predicaton: deterministic finite automaton on 1 letter with 1 state 
+and the variable position list [ ]. >
+gap> A3:=Predicaton("(A x:(E y: x = y+1))");
+Predicaton: deterministic finite automaton on 1 letter with 1 state, 
+the variable position list [ ] and the following transitions:
+       |  1  
+-------------
+  [ ]  |  1  
+ Initial states: [ 1 ]
+ Final states:   [ ]
+
+ Regular expression of the automaton:
+   empty_set
+
+ Due to the automaton the formula is false.
+   false
+
+ Output:
+< Predicaton: deterministic finite automaton on 1 letter with 1 state 
+and the variable position list [ ]. >
+gap> A4:=Predicaton("(A x:(E y: x = 2*y) or (E y: x=2*y+1))");
+Predicaton: deterministic finite automaton on 1 letter with 1 state, 
+the variable position list [ ] and the following transitions:
+       |  1  
+-------------
+  [ ]  |  1  
+ Initial states: [ 1 ]
+ Final states:   [ 1 ]
+
+ Regular expression of the automaton:
+   [ ]*
+
+ Due to the automaton the formula is true.
+   true
+
+ Output:
+< Predicaton: deterministic finite automaton on 1 letter with 1 state 
+and the variable position list [ ]. >
+gap> A5:=Predicaton("(A n:(E n0: n > n0 implies (E x: (E y: 5*x+6*y=n))))");
+Predicaton: deterministic finite automaton on 1 letter with 1 state, 
+the variable position list [ ] and the following transitions:
+       |  1  
+-------------
+  [ ]  |  1  
+ Initial states: [ 1 ]
+ Final states:   [ 1 ]
+
+ Regular expression of the automaton:
+   [ ]*
+
+ Due to the automaton the formula is true.
+   true
+
+ Output:
+< Predicaton: deterministic finite automaton on 1 letter with 1 state 
+and the variable position list [ ]. >
+gap> # Furthermore, we can use "true" and "false" as predicates;
+gap> A6:=Predicaton("true and (false implies true) implies true");
+Predicaton: deterministic finite automaton on 1 letter with 1 state, 
+the variable position list [ ] and the following transitions:
+       |  1  
+-------------
+  [ ]  |  1  
+ Initial states: [ 1 ]
+ Final states:   [ 1 ]
+
+ Regular expression of the automaton:
+   [ ]*
+
+ Due to the automaton the formula is true.
+   true
+
+ Output:
+< Predicaton: deterministic finite automaton on 1 letter with 1 state 
+and the variable position list [ ]. >
+]]></Example>
+
+<Alt Only="LaTeX">
+\begin{figure}[ht]
+	\centering
+  \includegraphics[width=0.2\textwidth]{img/ex6a.jpg}
+	\caption{The minimal DFA which is interpreted as true.}
+	\label{ex6a}
+\end{figure}
+</Alt>
+<Alt Only="HTML">
+&#60;center&#62;
+  &#60;figure&#62; 
+    &#60;img src="img/ex6a.jpg" alt="Example 6a" height="300" &#62;
+    &#60;figcaption&#62;The minimal DFA which is interpreted as true.
+    &#60;/figcaption&#62; 
+  &#60;/figure&#62;
+&#60;/center&#62;
+</Alt>
+
+<Alt Only="LaTeX">
+\begin{figure}[ht]
+	\centering
+  \includegraphics[width=0.2\textwidth]{img/ex6b.jpg}
+	\caption{The minimal DFA which is interpreted as false.}
+	\label{ex6b}
+\end{figure}
+</Alt>
+<Alt Only="HTML">
+&#60;center&#62;
+  &#60;figure&#62; 
+    &#60;img src="img/ex6b.jpg" alt="Example 6b" height="300" &#62;
+    &#60;figcaption&#62;The minimal DFA which is interpreted as false.
+    &#60;/figcaption&#62; 
+  &#60;/figure&#62;
+&#60;/center&#62;
+</Alt>
+
+</Subsection>
+
+</Section>
+
+</Chapter>

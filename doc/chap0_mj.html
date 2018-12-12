@@ -1,0 +1,314 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+<script type="text/javascript"
+  src="http://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+<title>GAP (Predicata) - Contents</title>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+<meta name="generator" content="GAPDoc2HTML" />
+<link rel="stylesheet" type="text/css" href="manual.css" />
+<script src="manual.js" type="text/javascript"></script>
+<script type="text/javascript">overwriteStyle();</script>
+</head>
+<body class="chap0"  onload="jscontent()">
+
+
+<div class="chlinktop"><span class="chlink1">Goto Chapter: </span><a href="chap0_mj.html">Top</a>  <a href="chap1_mj.html">1</a>  <a href="chap2_mj.html">2</a>  <a href="chap3_mj.html">3</a>  <a href="chap4_mj.html">4</a>  <a href="chapBib_mj.html">Bib</a>  <a href="chapInd_mj.html">Ind</a>  </div>
+
+<div class="chlinkprevnexttop">&nbsp;<a href="chap0_mj.html">[Top of Book]</a>&nbsp;  <a href="chap0_mj.html#contents">[Contents]</a>&nbsp;  &nbsp;<a href="chap1_mj.html">[Next Chapter]</a>&nbsp;  </div>
+
+<p id="mathjaxlink" class="pcenter"><a href="chap0.html">[MathJax off]</a></p>
+<p><a id="X7D2C85EC87DD46E5" name="X7D2C85EC87DD46E5"></a></p>
+<div class="pcenter">
+
+<h1>Predicata</h1>
+
+
+<h2>Deciding Presburger Arithmetic Using Automata Theory</h2>
+
+<p>Version 1.0</p>
+
+<p>October 1, 2018</p>
+
+</div>
+<p><b>Fritz Kliemann </b>
+<br />Email: <span class="URL"><a href="mailto:fritz.kliemann@gmx.at">fritz.kliemann@gmx.at</a></span>
+</p>
+
+<p><b>Address:</b><br />
+Linz, Austria</p>
+<p><a id="X7AA6C5737B711C89" name="X7AA6C5737B711C89"></a></p>
+<h3>Abstract</h3>
+<p>J. Shallit has successfully used automata theory to find properties of automatic sequences <a href="chapBib_mj.html#biBShallit:2013">[Sha13]</a>. In a summer school course at RISC, JKU Linz <a href="chapBib_mj.html#biBSummerSchool2016">[AEC16]</a>, he explained also how to use finite automata to decide Presburger arithmetic <a href="chapBib_mj.html#biBPresburger:1929">[Pre29]</a>.</p>
+
+<p>This package, written as a Master thesis, implements the decision procedure which goes back to J. R. Büchi <a href="chapBib_mj.html#biBBuechi:1960">[Büc60]</a>. Furthermore, it allows to construct a deterministic finite automaton from any first-order formula with the addition as the only operation.</p>
+
+<p>The package <strong class="pkg">Automata</strong> <a href="chapBib_mj.html#biBAutomata">[DLM11]</a> is used for the data structure of finite automata.</p>
+
+<p><a id="X81488B807F2A1CF1" name="X81488B807F2A1CF1"></a></p>
+<h3>Copyright</h3>
+<p>© 2018 by Fritz Kliemann</p>
+
+<p>This package may be redistribute and/or modify under the terms of the <span class="URL"><a href="https://www.gnu.org/licenses/gpl.html">GNU General Public License</a></span> as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version.</p>
+
+<p><a id="X82A988D47DFAFCFA" name="X82A988D47DFAFCFA"></a></p>
+<h3>Acknowledgements</h3>
+<p>I would like to thank my supervisor Erhard Aichinger for the opportunity to write this package and my parents for their support and patience.</p>
+
+<p>The work was partially supported by the Austrian Science Fund (FWF), P29931.</p>
+
+<p><a id="X8537FEB07AF2BEC8" name="X8537FEB07AF2BEC8"></a></p>
+
+<div class="contents">
+<h3>Contents<a id="contents" name="contents"></a></h3>
+
+<div class="ContChap"><a href="chap1_mj.html#X7DFB63A97E67C0A1">1 <span class="Heading">Introduction</span></a>
+</div>
+<div class="ContChap"><a href="chap2_mj.html#X7A3C47A378964F1F">2 <span class="Heading">Creating Predicata</span></a>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap2_mj.html#X7D04FF187F27BB76">2.1 <span class="Heading">Predicaton – an extended finite automaton</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2_mj.html#X7FD70C2980210882">2.1-1 Predicaton</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2_mj.html#X85732CF382B64BB8">2.1-2 BuildPredicaton</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2_mj.html#X825D25A87C0D02DA">2.1-3 IsPredicaton</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2_mj.html#X818ADFEE7EC52BAF">2.1-4 Display</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2_mj.html#X854CA0237F4B8E5D">2.1-5 View</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2_mj.html#X7C64F1F682B596FF">2.1-6 Print</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2_mj.html#X82BDA2E785ECEAB8">2.1-7 GetAlphabet</a></span>
+</div></div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap2_mj.html#X87ACF62385B06FFF">2.2 <span class="Heading">Basic functions on Automata and Predicata</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2_mj.html#X8720D1F186935FED">2.2-1 DisplayAut</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2_mj.html#X81C510B7859139D9">2.2-2 DrawPredicaton</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2_mj.html#X837962738642AA13">2.2-3 IsDeterministicAut</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2_mj.html#X82BB21D07836FC43">2.2-4 IsNonDeterministicAut</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2_mj.html#X8291B3E379A6DE70">2.2-5 TypeOfAut</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2_mj.html#X79387C217C9E0645">2.2-6 AlphabetOfAut</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2_mj.html#X7BB104337B972500">2.2-7 AlphabetOfAutAsList</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2_mj.html#X7A1F901B7C19CB01">2.2-8 NumberStatesOfAut</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2_mj.html#X7C0D702D869F7E62">2.2-9 SortedStatesAut</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2_mj.html#X8150E8F278688F79">2.2-10 TransitionMatrixOfAut</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2_mj.html#X785309187BAFF773">2.2-11 InitialStatesOfAut</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2_mj.html#X812E72137E8ED4E1">2.2-12 SetInitialStatesOfAut</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2_mj.html#X867925CC844D77D5">2.2-13 FinalStatesOfAut</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2_mj.html#X80EF044086173940">2.2-14 SetFinalStatesOfAut</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2_mj.html#X84FC26AF7F7F8393">2.2-15 SinkStatesOfAut</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2_mj.html#X82B09FBE86E7D43A">2.2-16 PermutedStatesAut</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2_mj.html#X84BCD89583863028">2.2-17 CopyAut</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2_mj.html#X8377BBD382180F49">2.2-18 MinimalAut</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2_mj.html#X802357D181BD700C">2.2-19 NegatedAut</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2_mj.html#X7C09B02679BDA33D">2.2-20 IntersectionAut</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2_mj.html#X82617D80836C976A">2.2-21 UnionAut</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2_mj.html#X7FB4776D86776512">2.2-22 IsRecognizedByAut</a></span>
+</div></div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap2_mj.html#X7B1626EA7E96CDB3">2.3 <span class="Heading">Basic functions on Predicata</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2_mj.html#X7834545A7C3F35A9">2.3-1 DecToBin</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2_mj.html#X7E89D7A880401BF4">2.3-2 BinToDec</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2_mj.html#X85118B7386A66FDF">2.3-3 IsAcceptedWordByPredicaton</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2_mj.html#X87CE47357E2AC5A9">2.3-4 AcceptedWordsByPredicaton</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2_mj.html#X7EF0AB6485AC152E">2.3-5 DisplayAcceptedWordsByPredicaton</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2_mj.html#X846C53368294CB6D">2.3-6 DisplayAcceptedWordsByPredicatonInNxN</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2_mj.html#X82371B787CCA829E">2.3-7 AutomatonOfPredicaton</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2_mj.html#X7E7B5E2A7F06E2E3">2.3-8 VariablePositionListOfPredicaton</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2_mj.html#X807F1C9280B4D301">2.3-9 SetVariablePositionListOfPredicaton</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2_mj.html#X7B90E3A88557996C">2.3-10 ProductLZeroPredicaton</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2_mj.html#X7DCADD1379EDC7E5">2.3-11 RightQuotientLZeroPredicaton</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2_mj.html#X84F6862E86B1F524">2.3-12 NormalizedLeadingZeroPredicaton</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2_mj.html#X822C7C547B98A757">2.3-13 SortedAlphabetPredicaton</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2_mj.html#X8231A0D579C2B8FC">2.3-14 FormattedPredicaton</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2_mj.html#X827129EC7BB4C53B">2.3-15 IsValidInput</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2_mj.html#X8209B57C805CBDFA">2.3-16 ExpandedPredicaton</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2_mj.html#X801999F67F5E9CAF">2.3-17 ProjectedPredicaton</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2_mj.html#X8034E12D7E2EE143">2.3-18 NegatedProjectedNegatedPredicaton</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2_mj.html#X80379AA57C3C7145">2.3-19 IntersectionPredicata</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2_mj.html#X863B344079D411DF">2.3-20 UnionPredicata</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2_mj.html#X7E9F80777F2819AB">2.3-21 PermutedAlphabetPredicaton</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2_mj.html#X7CEAFC23817A07F3">2.3-22 PredicatonFromAut</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2_mj.html#X85F659CF86F44C8C">2.3-23 FinitelyManyWordsAccepted</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2_mj.html#X87A60C328455D108">2.3-24 PredicatonToRatExp</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2_mj.html#X7BCC385F80B24BF8">2.3-25 WordsOfRatExp</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2_mj.html#X7F4EB504809AF2D0">2.3-26 WordsOfRatExpInterpreted</a></span>
+</div></div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap2_mj.html#X8148D1EC7B7792E1">2.4 <span class="Heading">Special functions on Predicata</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2_mj.html#X861D1891826AC634">2.4-1 IsValidInputList</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2_mj.html#X87C84CD3859A6982">2.4-2 BooleanPredicaton</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2_mj.html#X7E3F74E07B33E8A5">2.4-3 PredicataEqualAut</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2_mj.html#X7DF4EB0B8064A222">2.4-4 EqualPredicaton</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2_mj.html#X7B9D56F083877897">2.4-5 PredicataAdditionAut</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2_mj.html#X7AFD4F9179934BAD">2.4-6 AdditionPredicaton</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2_mj.html#X7C9BE5EB794C6765">2.4-7 AdditionPredicatonNSummands</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2_mj.html#X7862B8187D278F8A">2.4-8 TimesNPredicaton</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2_mj.html#X870AF29E808AA2BD">2.4-9 SumOfProductsPredicaton</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2_mj.html#X7CF1412E820DD09C">2.4-10 TermEqualTermPredicaton</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2_mj.html#X809814E082C02E7B">2.4-11 GreaterEqualNPredicaton</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2_mj.html#X878216317D972D59">2.4-12 GreaterNPredicaton</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2_mj.html#X7C3891F485E71911">2.4-13 SmallerEqualNPredicaton</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2_mj.html#X7F12D5E77AB01A33">2.4-14 SmallerNPredicaton</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2_mj.html#X86861D8579E34ED5">2.4-15 GreaterEqualPredicaton</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2_mj.html#X879C942184F32572">2.4-16 GreaterPredicaton</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2_mj.html#X7DAF215A7EC479BF">2.4-17 SmallerEqualPredicaton</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2_mj.html#X7A6DFC5883D41218">2.4-18 SmallerPredicaton</a></span>
+</div></div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap2_mj.html#X83AE98BC7EEF3304">2.5 <span class="Heading">Detailed look at the special functions on Predicata</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2_mj.html#X84AA3F897FDA7314">2.5-1 AdditionPredicaton3Summands</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2_mj.html#X852F7B358376A545">2.5-2 AdditionPredicatonNSummandsExplicit</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2_mj.html#X85D14FB87F3B212C">2.5-3 AdditionPredicatonNSummandsIterative</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2_mj.html#X807D2C6F7F73D3C7">2.5-4 AdditionPredicatonNSummandsRecursive</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2_mj.html#X80833C9D7D71C842">2.5-5 TimesNPredicatonExplicit</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2_mj.html#X87DE25827F946F58">2.5-6 TimesNPredicatonRecursive</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2_mj.html#X7F48FCE67A934302">2.5-7 Times2Predicaton</a></span>
+</div></div>
+</div>
+<div class="ContChap"><a href="chap3_mj.html#X7BDBC16987C34974">3 <span class="Heading">Parsing first-order formulas</span></a>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap3_mj.html#X8671A97A8764FD5A">3.1 <span class="Heading">PredicataFormula – strings representing first-order formulas</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3_mj.html#X7F9DEB698376E698">3.1-1 PredicataFormulaSymbols</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3_mj.html#X7C0C19A081BF9543">3.1-2 PredicataIsStringType</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3_mj.html#X7C333EE379814718">3.1-3 PredicataGrammarVerification</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3_mj.html#X7D80431E7E5B77CD">3.1-4 PredicataFormula</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3_mj.html#X86C02E677E8F7EE7">3.1-5 IsPredicataFormula</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3_mj.html#X8782A64D816AA150">3.1-6 Display</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3_mj.html#X84F63BEC83F68354">3.1-7 View</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3_mj.html#X7954A3F57DB9D2C6">3.1-8 Print</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3_mj.html#X860388E5839010A5">3.1-9 FreeVariablesOfPredicataFormula</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3_mj.html#X78F3031F87F16007">3.1-10 BoundedVariablesOfPredicataFormula</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3_mj.html#X820B18BA84CD1AA7">3.1-11 PredicataFormulaFormatted</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3_mj.html#X7F5383597AED890D">3.1-12 IsPredicataFormulaFormatted</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3_mj.html#X7E6C29C780E4EC7F">3.1-13 Display</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3_mj.html#X86629CAE7FDBF6B7">3.1-14 View</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3_mj.html#X7DAAD4E97FD86CB9">3.1-15 Print</a></span>
+</div></div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap3_mj.html#X798481CD8323FB2D">3.2 <span class="Heading">PredicataTree – converting first-order formulas into trees</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3_mj.html#X822AD83C7914DA30">3.2-1 PredicataTree</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3_mj.html#X839491C47B77A1AD">3.2-2 IsPredicataTree</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3_mj.html#X879097C482682777">3.2-3 Display</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3_mj.html#X79645EA180BDAE2E">3.2-4 View</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3_mj.html#X79412306794766CE">3.2-5 Print</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3_mj.html#X7F96EF6A7AE45D82">3.2-6 IsEmptyPredicataTree</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3_mj.html#X7ABE31328700CE57">3.2-7 RootOfPredicataTree</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3_mj.html#X81EA40BA7F3E167C">3.2-8 SetRootOfPredicataTree</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3_mj.html#X81B47A7C78CA9DE0">3.2-9 InsertChildToPredicataTree</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3_mj.html#X8143787C83BE74B9">3.2-10 ChildOfPredicataTree</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3_mj.html#X7C3735A6841104C4">3.2-11 NumberOfChildrenOfPredicataTree</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3_mj.html#X837D585B850A3464">3.2-12 ParentOfPredicataTree</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3_mj.html#X78C52D9F7B0A7244">3.2-13 ReturnedChildOfPredicataTree</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3_mj.html#X7B35153985BFC26A">3.2-14 PredicataFormulaFormattedToTree</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3_mj.html#X85A933AA7C3F7C7E">3.2-15 FreeVariablesOfPredicataTree</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3_mj.html#X7C66827879F133B3">3.2-16 BoundedVariablesOfPredicataTree</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3_mj.html#X79243E967EB18D8A">3.2-17 PredicataTreeToPredicaton</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3_mj.html#X7AC06FB57AF19BFB">3.2-18 PredicataTreeToPredicatonRecursive</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3_mj.html#X7CD43BB3801CAD09">3.2-19 PredicataRepresentationOfPredicataTree</a></span>
+</div></div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap3_mj.html#X8523AB0F7E543AB6">3.3 <span class="Heading">PredicataRepresentation – Predicata assigned with names and arities</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3_mj.html#X79A1AF2F83560136">3.3-1 PredicatonRepresentation</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3_mj.html#X873E523D7C824DD9">3.3-2 IsPredicatonRepresentation</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3_mj.html#X7E5D495C7F7C6ACF">3.3-3 Display</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3_mj.html#X86BE5CE587874151">3.3-4 View</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3_mj.html#X789E2A8E82763B83">3.3-5 Print</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3_mj.html#X7C1E145E7A2BAA4F">3.3-6 NameOfPredicatonRepresentation</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3_mj.html#X82DAD534797A5838">3.3-7 ArityOfPredicatonRepresentation</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3_mj.html#X81019B628422AD65">3.3-8 AutOfPredicatonRepresentation</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3_mj.html#X872FB0FB7DAACE20">3.3-9 CopyPredicatonRepresentation</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3_mj.html#X7FB8487D80168246">3.3-10 PredicataRepresentation</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3_mj.html#X867F090D826C3EB1">3.3-11 IsPredicataRepresentation</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3_mj.html#X85FEE0697E49FA28">3.3-12 Display</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3_mj.html#X7D05A6A082FF182E">3.3-13 View</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3_mj.html#X86F46CFC804ED5A1">3.3-14 Print</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3_mj.html#X829A17A47F67F791">3.3-15 NamesOfPredicataRepresentation</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3_mj.html#X7ABCC3947D5E3FF5">3.3-16 AritiesOfPredicatonRepresentation</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3_mj.html#X7F859898859A01CA">3.3-17 AutsOfPredicataRepresentation</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3_mj.html#X7AD11EE781842EE9">3.3-18 ElementOfPredicataRepresentation</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3_mj.html#X7B55C4D48189B7D8">3.3-19 Add</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3_mj.html#X83914F8682F3BD37">3.3-20 Add</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3_mj.html#X806193DA7C485DA9">3.3-21 Remove</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3_mj.html#X7A2ADFA98378E307">3.3-22 CopyPredicataRepresentation</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3_mj.html#X7D15B2507A25716D">3.3-23 PredicataList</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3_mj.html#X810B80157B2F0914">3.3-24 AddToPredicataList</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3_mj.html#X7FBB9D9286A52E4C">3.3-25 ClearPredicataList</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3_mj.html#X797267DC8167B590">3.3-26 RemoveFromPredicataList</a></span>
+</div></div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap3_mj.html#X7A6AF0F97B008C5E">3.4 <span class="Heading">Converting PredicataFormulas via PredicataTrees into Predicata</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3_mj.html#X7DB009DC7E692A15">3.4-1 PredicataFormulaToPredicaton</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3_mj.html#X7D4237CF781CD20F">3.4-2 StringToPredicaton</a></span>
+</div></div>
+</div>
+<div class="ContChap"><a href="chap4_mj.html#X83DE20567C610824">4 <span class="Heading">Using Predicata</span></a>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap4_mj.html#X834A800881545FCE">4.1 <span class="Heading">Creating Predicata from first-order formulas</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4_mj.html#X7C55E0B18729B7B1">4.1-1 PredicataGrammar</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4_mj.html#X85D6A7797DF927C8">4.1-2 PredicataPredefinedPredicates</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4_mj.html#X7EADB1F8866BA4DB">4.1-3 Predicaton</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4_mj.html#X7FE9C2FD81C420C8">4.1-4 Predicaton</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4_mj.html#X81EF96B77E6AE6A4">4.1-5 Predicaton</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4_mj.html#X7A45425F86138839">4.1-6 Predicaton</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4_mj.html#X7F2E31AB7A55B6DA">4.1-7 VariableListOfPredicaton</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4_mj.html#X807AF3D5875AA01E">4.1-8 SetVariableListOfPredicaton</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4_mj.html#X83B36F1078804922">4.1-9 VariableAdjustedPredicaton</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4_mj.html#X7BF69EA47C41F6FD">4.1-10 VariableAdjustedPredicata</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4_mj.html#X7E945EB4879F8514">4.1-11 AndPredicata</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4_mj.html#X85D47AFA84F76672">4.1-12 OrPredicata</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4_mj.html#X7CEFBAD9828644A8">4.1-13 NotPredicaton</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4_mj.html#X81A6288481F4F14F">4.1-14 ImpliesPredicata</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4_mj.html#X7FAEFD5D7CB5AC0D">4.1-15 EquivalentPredicata</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4_mj.html#X82F49FC779402968">4.1-16 ExistsPredicaton</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4_mj.html#X8132967C840FBFC2">4.1-17 ForallPredicaton</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4_mj.html#X781FB8FA7BD68BFE">4.1-18 LeastAcceptedNumber</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4_mj.html#X7E39A17B83A67E16">4.1-19 GreatestAcceptedNumber</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4_mj.html#X7BF5BC5F872EDA02">4.1-20 LeastNonAcceptedNumber</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4_mj.html#X82ACE1A37F491355">4.1-21 GreatestNonAcceptedNumber</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4_mj.html#X793E0D1B7AA72935">4.1-22 InterpretedPredicaton</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4_mj.html#X86FAD4A47A9FA9CF">4.1-23 AreEquivalentPredicata</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4_mj.html#X7EF734F08717D4ED">4.1-24 LinearSolveOverN</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4_mj.html#X7B935D12792F6F2B">4.1-25 NullSpaceOverN</a></span>
+</div></div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap4_mj.html#X7A489A5D79DA9E5C">4.2 <span class="Heading">Examples</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4_mj.html#X7A2146A2837B1B2D">4.2-1 <span class="Heading">Example 1: Getting familiar</span></a>
+</span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4_mj.html#X83EF257286DFEB48">4.2-2 <span class="Heading">Example 2: Recalling the motivation</span></a>
+</span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4_mj.html#X7AB61BD37A356EC4">4.2-3 <span class="Heading">Example 3: Divisible by three</span></a>
+</span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4_mj.html#X818A9B737F7D6F27">4.2-4 <span class="Heading">Example 4: Linear congruences</span></a>
+</span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4_mj.html#X860922F3860BAE43">4.2-5 <span class="Heading">Example 5: GCD and LCM</span></a>
+</span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4_mj.html#X85C3C1597E55C80C">4.2-6 <span class="Heading">Example 6: Theorems</span></a>
+</span>
+</div></div>
+</div>
+<div class="ContChap"><a href="chapBib_mj.html"><span class="Heading">References</span></a></div>
+<div class="ContChap"><a href="chapInd_mj.html"><span class="Heading">Index</span></a></div>
+<br />
+</div>
+
+<div class="chlinkprevnextbot">&nbsp;<a href="chap0_mj.html">[Top of Book]</a>&nbsp;  <a href="chap0_mj.html#contents">[Contents]</a>&nbsp;  &nbsp;<a href="chap1_mj.html">[Next Chapter]</a>&nbsp;  </div>
+
+
+<div class="chlinkbot"><span class="chlink1">Goto Chapter: </span><a href="chap0_mj.html">Top</a>  <a href="chap1_mj.html">1</a>  <a href="chap2_mj.html">2</a>  <a href="chap3_mj.html">3</a>  <a href="chap4_mj.html">4</a>  <a href="chapBib_mj.html">Bib</a>  <a href="chapInd_mj.html">Ind</a>  </div>
+
+<hr />
+<p class="foot">generated by <a href="http://www.math.rwth-aachen.de/~Frank.Luebeck/GAPDoc">GAPDoc2HTML</a></p>
+</body>
+</html>

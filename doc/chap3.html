@@ -1,0 +1,1315 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+<title>GAP (Predicata) - Chapter 3: Parsing first-order formulas</title>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+<meta name="generator" content="GAPDoc2HTML" />
+<link rel="stylesheet" type="text/css" href="manual.css" />
+<script src="manual.js" type="text/javascript"></script>
+<script type="text/javascript">overwriteStyle();</script>
+</head>
+<body class="chap3"  onload="jscontent()">
+
+
+<div class="chlinktop"><span class="chlink1">Goto Chapter: </span><a href="chap0.html">Top</a>  <a href="chap1.html">1</a>  <a href="chap2.html">2</a>  <a href="chap3.html">3</a>  <a href="chap4.html">4</a>  <a href="chapBib.html">Bib</a>  <a href="chapInd.html">Ind</a>  </div>
+
+<div class="chlinkprevnexttop">&nbsp;<a href="chap0.html">[Top of Book]</a>&nbsp;  <a href="chap0.html#contents">[Contents]</a>&nbsp;  &nbsp;<a href="chap2.html">[Previous Chapter]</a>&nbsp;  &nbsp;<a href="chap4.html">[Next Chapter]</a>&nbsp;  </div>
+
+<p id="mathjaxlink" class="pcenter"><a href="chap3_mj.html">[MathJax on]</a></p>
+<p><a id="X7BDBC16987C34974" name="X7BDBC16987C34974"></a></p>
+<div class="ChapSects"><a href="chap3.html#X7BDBC16987C34974">3 <span class="Heading">Parsing first-order formulas</span></a>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap3.html#X8671A97A8764FD5A">3.1 <span class="Heading">PredicataFormula – strings representing first-order formulas</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X7F9DEB698376E698">3.1-1 PredicataFormulaSymbols</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X7C0C19A081BF9543">3.1-2 PredicataIsStringType</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X7C333EE379814718">3.1-3 PredicataGrammarVerification</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X7D80431E7E5B77CD">3.1-4 PredicataFormula</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X86C02E677E8F7EE7">3.1-5 IsPredicataFormula</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X8782A64D816AA150">3.1-6 Display</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X84F63BEC83F68354">3.1-7 View</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X7954A3F57DB9D2C6">3.1-8 Print</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X860388E5839010A5">3.1-9 FreeVariablesOfPredicataFormula</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X78F3031F87F16007">3.1-10 BoundedVariablesOfPredicataFormula</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X820B18BA84CD1AA7">3.1-11 PredicataFormulaFormatted</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X7F5383597AED890D">3.1-12 IsPredicataFormulaFormatted</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X7E6C29C780E4EC7F">3.1-13 Display</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X86629CAE7FDBF6B7">3.1-14 View</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X7DAAD4E97FD86CB9">3.1-15 Print</a></span>
+</div></div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap3.html#X798481CD8323FB2D">3.2 <span class="Heading">PredicataTree – converting first-order formulas into trees</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X822AD83C7914DA30">3.2-1 PredicataTree</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X839491C47B77A1AD">3.2-2 IsPredicataTree</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X879097C482682777">3.2-3 Display</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X79645EA180BDAE2E">3.2-4 View</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X79412306794766CE">3.2-5 Print</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X7F96EF6A7AE45D82">3.2-6 IsEmptyPredicataTree</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X7ABE31328700CE57">3.2-7 RootOfPredicataTree</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X81EA40BA7F3E167C">3.2-8 SetRootOfPredicataTree</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X81B47A7C78CA9DE0">3.2-9 InsertChildToPredicataTree</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X8143787C83BE74B9">3.2-10 ChildOfPredicataTree</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X7C3735A6841104C4">3.2-11 NumberOfChildrenOfPredicataTree</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X837D585B850A3464">3.2-12 ParentOfPredicataTree</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X78C52D9F7B0A7244">3.2-13 ReturnedChildOfPredicataTree</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X7B35153985BFC26A">3.2-14 PredicataFormulaFormattedToTree</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X85A933AA7C3F7C7E">3.2-15 FreeVariablesOfPredicataTree</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X7C66827879F133B3">3.2-16 BoundedVariablesOfPredicataTree</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X79243E967EB18D8A">3.2-17 PredicataTreeToPredicaton</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X7AC06FB57AF19BFB">3.2-18 PredicataTreeToPredicatonRecursive</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X7CD43BB3801CAD09">3.2-19 PredicataRepresentationOfPredicataTree</a></span>
+</div></div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap3.html#X8523AB0F7E543AB6">3.3 <span class="Heading">PredicataRepresentation – Predicata assigned with names and arities</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X79A1AF2F83560136">3.3-1 PredicatonRepresentation</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X873E523D7C824DD9">3.3-2 IsPredicatonRepresentation</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X7E5D495C7F7C6ACF">3.3-3 Display</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X86BE5CE587874151">3.3-4 View</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X789E2A8E82763B83">3.3-5 Print</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X7C1E145E7A2BAA4F">3.3-6 NameOfPredicatonRepresentation</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X82DAD534797A5838">3.3-7 ArityOfPredicatonRepresentation</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X81019B628422AD65">3.3-8 AutOfPredicatonRepresentation</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X872FB0FB7DAACE20">3.3-9 CopyPredicatonRepresentation</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X7FB8487D80168246">3.3-10 PredicataRepresentation</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X867F090D826C3EB1">3.3-11 IsPredicataRepresentation</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X85FEE0697E49FA28">3.3-12 Display</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X7D05A6A082FF182E">3.3-13 View</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X86F46CFC804ED5A1">3.3-14 Print</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X829A17A47F67F791">3.3-15 NamesOfPredicataRepresentation</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X7ABCC3947D5E3FF5">3.3-16 AritiesOfPredicatonRepresentation</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X7F859898859A01CA">3.3-17 AutsOfPredicataRepresentation</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X7AD11EE781842EE9">3.3-18 ElementOfPredicataRepresentation</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X7B55C4D48189B7D8">3.3-19 Add</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X83914F8682F3BD37">3.3-20 Add</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X806193DA7C485DA9">3.3-21 Remove</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X7A2ADFA98378E307">3.3-22 CopyPredicataRepresentation</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X7D15B2507A25716D">3.3-23 PredicataList</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X810B80157B2F0914">3.3-24 AddToPredicataList</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X7FBB9D9286A52E4C">3.3-25 ClearPredicataList</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X797267DC8167B590">3.3-26 RemoveFromPredicataList</a></span>
+</div></div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap3.html#X7A6AF0F97B008C5E">3.4 <span class="Heading">Converting PredicataFormulas via PredicataTrees into Predicata</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X7DB009DC7E692A15">3.4-1 PredicataFormulaToPredicaton</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X7D4237CF781CD20F">3.4-2 StringToPredicaton</a></span>
+</div></div>
+</div>
+
+<h3>3 <span class="Heading">Parsing first-order formulas</span></h3>
+
+<p><a id="X8671A97A8764FD5A" name="X8671A97A8764FD5A"></a></p>
+
+<h4>3.1 <span class="Heading">PredicataFormula – strings representing first-order formulas</span></h4>
+
+<p><a id="X7F9DEB698376E698" name="X7F9DEB698376E698"></a></p>
+
+<h5>3.1-1 PredicataFormulaSymbols</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; PredicataFormulaSymbols</code></td><td class="tdright">(&nbsp;global variable&nbsp;)</td></tr></table></div>
+<p>The variable <code class="code">PredicataFormulaSymbols</code> stores all inbuilt function symbols.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">PredicataFormulaSymbols;</span>
+[ "*", "+", "-", "=", "gr", "geq", "less", "leq", "and", "or", "equiv", 
+"equivalent", "implies", "not", "(", ")", "[", "]", ",", ":", "A", "E" ]
+</pre></div>
+
+<p><a id="X7C0C19A081BF9543" name="X7C0C19A081BF9543"></a></p>
+
+<h5>3.1-2 PredicataIsStringType</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; PredicataIsStringType</code>( <var class="Arg">S</var>, <var class="Arg">T</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>The function <code class="code">PredicataIsStringType</code> checks if the string <var class="Arg">S</var> represents one types <var class="Arg">T</var><code class="code">="variable", "integer" (greater equal 0), "negativeinteger", "boolean", "predicate", "internalpredicate", "quantifier", "symbol", "binarysymbol", "unarysymbol"</code>. <code class="func">PredicataFormulaSymbols</code> (<a href="chap3.html#X7F9DEB698376E698"><span class="RefLink">3.1-1</span></a>).</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">PredicataIsStringType("x1", "variable");</span>
+true
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">PredicataIsStringType("1", "integer");</span>
+true
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">PredicataIsStringType("-1", "negativeinteger");</span>
+true
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">PredicataIsStringType("true", "boolean");</span>
+true
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">PredicataIsStringType("A", "quantifier");</span>
+true
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">PredicataIsStringType("+", "symbol");</span>
+true
+</pre></div>
+
+<p><a id="X7C333EE379814718" name="X7C333EE379814718"></a></p>
+
+<h5>3.1-3 PredicataGrammarVerification</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; PredicataGrammarVerification</code>( <var class="Arg">S</var>[, <var class="Arg">P</var>] )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>The function <code class="code">PredicataGrammarVerification</code> checks if the string <var class="Arg">S</var>, with the optional argument <code class="func">PredicataRepresentation</code> (<a href="chap3.html#X7FB8487D80168246"><span class="RefLink">3.3-10</span></a>) <var class="Arg">P</var>, is a well-formed formula in the Presburger arithmetic. First a lexical analysis is performed, checking if all symbols are correct. Then it is checked if the formula can be produced from the predefined grammar (see <code class="func">PredicataGrammar</code> (<a href="chap4.html#X7C55E0B18729B7B1"><span class="RefLink">4.1-1</span></a>)). Finally, the range of the quantified variables is checked, as well as if all bounded variables doesn't also occur as free ones. Additionally, if the amount of opening and closing parenthesis differs, a corresponding message is returned.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">PredicataGrammarVerification("4+x=2*y");</span>
+true
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">PredicataGrammarVerification("(E x:3+x=2*y)");</span>
+true
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">PredicataGrammarVerification("= , 2 + &lt;= x 4");</span>
+false
+</pre></div>
+
+<p><a id="X7D80431E7E5B77CD" name="X7D80431E7E5B77CD"></a></p>
+
+<h5>3.1-4 PredicataFormula</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; PredicataFormula</code>( <var class="Arg">S</var>[, <var class="Arg">P</var>] )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>The function <code class="code">PredicataFormula</code> takes a string <var class="Arg">S</var>, checks if it's a formula in the language of Presburger arithmetic (using with <code class="func">PredicataGrammarVerification</code> (<a href="chap3.html#X7C333EE379814718"><span class="RefLink">3.1-3</span></a>)) and returns a <code class="code">PredicataFormula</code> (use <code class="func">PredicataGrammar</code> (<a href="chap4.html#X7C55E0B18729B7B1"><span class="RefLink">4.1-1</span></a>) for an overview of the rules). The optional input <var class="Arg">P</var> is explained at <code class="func">PredicataRepresentation</code> (<a href="chap3.html#X7FB8487D80168246"><span class="RefLink">3.3-10</span></a>), however on default the predefined variable <code class="func">PredicataList</code> (<a href="chap3.html#X7D15B2507A25716D"><span class="RefLink">3.3-23</span></a>) is used.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">PredicataFormula("(E y: x + y = z)");</span>
+&lt; PredicataFormula: ( E y : x + y = z ) &gt;
+</pre></div>
+
+<p><a id="X86C02E677E8F7EE7" name="X86C02E677E8F7EE7"></a></p>
+
+<h5>3.1-5 IsPredicataFormula</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsPredicataFormula</code>( <var class="Arg">f</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>The function <code class="code">IsPredicataFormula</code> checks if <var class="Arg">f</var> is a <code class="code">PredicataFormula</code>.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">f:=PredicataFormula("(E y: x + y = z)");</span>
+&lt; PredicataFormula: ( E y : x + y = z ) &gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">IsPredicataFormula(f);</span>
+true
+</pre></div>
+
+<p><a id="X8782A64D816AA150" name="X8782A64D816AA150"></a></p>
+
+<h5>3.1-6 Display</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; Display</code>( <var class="Arg">f</var> )</td><td class="tdright">(&nbsp;method&nbsp;)</td></tr></table></div>
+<p>The method <code class="code">Display</code> displays the <code class="code">PredicataFormula</code> <var class="Arg">f</var>.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">f:=PredicataFormula("(A x: (E y: x = y))");</span>
+&lt; PredicataFormula: ( A x : ( E y : x = y ) ) &gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Display(f);</span>
+PredicataFormula: ( A x : ( E y : x = y ) ).
+</pre></div>
+
+<p><a id="X84F63BEC83F68354" name="X84F63BEC83F68354"></a></p>
+
+<h5>3.1-7 View</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; View</code>( <var class="Arg">f</var> )</td><td class="tdright">(&nbsp;method&nbsp;)</td></tr></table></div>
+<p>The method <code class="code">View</code> applied on a <code class="code">PredicataFormula</code> <var class="Arg">f</var> returns the object text.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">f:=PredicataFormula("x + y = z");;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">View(f);</span>
+&lt; PredicataFormula: x + y = z &gt;
+</pre></div>
+
+<p><a id="X7954A3F57DB9D2C6" name="X7954A3F57DB9D2C6"></a></p>
+
+<h5>3.1-8 Print</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; Print</code>( <var class="Arg">f</var> )</td><td class="tdright">(&nbsp;method&nbsp;)</td></tr></table></div>
+<p>The method <code class="code">Print</code> prints the <code class="code">PredicataFormula</code> <var class="Arg">f</var> as a string.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">f:=PredicataFormula("x = 4 and not x = 5");</span>
+&lt; PredicataFormula: x = 4 and not x = 5 &gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Print(f);</span>
+PredicataFormula("x = 4 and not x = 5");
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">String(f);</span>
+"PredicataFormula(\"x = 4 and not x = 5\");"
+</pre></div>
+
+<p><a id="X860388E5839010A5" name="X860388E5839010A5"></a></p>
+
+<h5>3.1-9 FreeVariablesOfPredicataFormula</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; FreeVariablesOfPredicataFormula</code>( <var class="Arg">f</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>The function <code class="code">FreeVariablesOfPredicataFormula</code> returns the free variables of the <code class="code">PredicataFormula</code> <var class="Arg">f</var> as a list of strings.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">f:=PredicataFormula("(E n: 3*n = x) or (E m: 4*m = x)");</span>
+&lt; PredicataFormula: ( E n : 3 * n = x ) or ( E m : 4 * m = x ) &gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">FreeVariablesOfPredicataFormula(f);</span>
+[ "x" ]
+</pre></div>
+
+<p><a id="X78F3031F87F16007" name="X78F3031F87F16007"></a></p>
+
+<h5>3.1-10 BoundedVariablesOfPredicataFormula</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; BoundedVariablesOfPredicataFormula</code>( <var class="Arg">f</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>The function <code class="code">BoundedVariablesOfPredicataFormula</code> returns the bounded variables of the <code class="code">PredicataFormula</code> <var class="Arg">f</var> as a list of strings.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">f:=PredicataFormula("(E n: 3*n = x) or (E m: 4*m = x)");</span>
+&lt; PredicataFormula: ( E n : 3 * n = x ) or ( E m : 4 * m = x ) &gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">BoundedVariablesOfPredicataFormula(f);</span>
+[ "n", "m" ]
+</pre></div>
+
+<p><a id="X820B18BA84CD1AA7" name="X820B18BA84CD1AA7"></a></p>
+
+<h5>3.1-11 PredicataFormulaFormatted</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; PredicataFormulaFormatted</code>( <var class="Arg">f</var>[, <var class="Arg">P</var>] )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>The function <code class="code">PredicataFormulaFormatted</code> adds missing parenthesis to the <code class="code">PredicataFormula</code> <var class="Arg">f</var> for unambiguous parsing in <code class="func">PredicataFormulaFormattedToTree</code> (<a href="chap3.html#X7B35153985BFC26A"><span class="RefLink">3.2-14</span></a>).</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">f:=PredicataFormula("(E y: x + y = z)");</span>
+&lt; PredicataFormula: ( E y : x + y = z ) &gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">F:=PredicataFormulaFormatted(f);</span>
+&lt; PredicataFormulaFormatted: ( E y : ( ( x + y ) = z ) ) &gt;
+</pre></div>
+
+<p><a id="X7F5383597AED890D" name="X7F5383597AED890D"></a></p>
+
+<h5>3.1-12 IsPredicataFormulaFormatted</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsPredicataFormulaFormatted</code>( <var class="Arg">f</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>The function <code class="code">IsPredicataFormulaFormatted</code> checks if <var class="Arg">f</var> is a <code class="code">PredicataFormula</code>.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">f:=PredicataFormula("(E y: x + y = z)");</span>
+&lt; PredicataFormula: ( E y : x + y = z ) &gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">F:=PredicataFormulaFormatted(f);</span>
+&lt; PredicataFormulaFormatted: ( E y : ( ( x + y ) = z ) ) &gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">IsPredicataFormulaFormatted(F);</span>
+true
+</pre></div>
+
+<p><a id="X7E6C29C780E4EC7F" name="X7E6C29C780E4EC7F"></a></p>
+
+<h5>3.1-13 Display</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; Display</code>( <var class="Arg">F</var> )</td><td class="tdright">(&nbsp;method&nbsp;)</td></tr></table></div>
+<p>The method <code class="code">Display</code> displays the <code class="code">PredicataFormulaFormatted</code> <var class="Arg">F</var>.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">F:=PredicataFormulaFormatted(PredicataFormula("(E y: x + y = z)"));</span>
+&lt; PredicataFormulaFormatted: ( E y : ( ( x + y ) = z ) ) &gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Display(F);</span>
+PredicataFormulaFormatted: [ "(", "E", "y", ":", "(", "(", "x", "+", "y", ")", 
+"=", "z", ")", ")" ].
+Concatenation: (Ey:((x+y)=z)).
+</pre></div>
+
+<p><a id="X86629CAE7FDBF6B7" name="X86629CAE7FDBF6B7"></a></p>
+
+<h5>3.1-14 View</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; View</code>( <var class="Arg">f</var> )</td><td class="tdright">(&nbsp;method&nbsp;)</td></tr></table></div>
+<p>The method <code class="code">View</code> applied on a <code class="code">PredicataFormulaFormatted</code> <var class="Arg">F</var> returns the object text.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">f:=PredicataFormula("x + y = z");;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">F:=PredicataFormulaFormatted(f);;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">View(F);</span>
+&lt; PredicataFormulaFormatted: ( ( x + y ) = z ) &gt;
+</pre></div>
+
+<p><a id="X7DAAD4E97FD86CB9" name="X7DAAD4E97FD86CB9"></a></p>
+
+<h5>3.1-15 Print</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; Print</code>( <var class="Arg">F</var> )</td><td class="tdright">(&nbsp;method&nbsp;)</td></tr></table></div>
+<p>The method <code class="code">Print</code> prints the <code class="code">PredicataFormulaFormatted</code> <var class="Arg">F</var> as a string.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">F:=PredicataFormulaFormatted(PredicataFormula("x = 4 and not x = 5"));</span>
+&lt; PredicataFormulaFormatted: ( ( x = 4 ) and ( not ( x = 5 ) ) ) &gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Print(F);</span>
+PredicataFormulaFormatted(PredicataFormula(s"((x=4)and(not(x=5)))"));
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">String(F);</span>
+"PredicataFormulaFormatted(PredicataFormula(\"((x=4)and(not(x=5)))\"));"
+</pre></div>
+
+<p><a id="X798481CD8323FB2D" name="X798481CD8323FB2D"></a></p>
+
+<h4>3.2 <span class="Heading">PredicataTree – converting first-order formulas into trees</span></h4>
+
+<p><a id="X822AD83C7914DA30" name="X822AD83C7914DA30"></a></p>
+
+<h5>3.2-1 PredicataTree</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; PredicataTree</code>( [<var class="Arg">r</var>] )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>The function <code class="code">PredicataTree</code> creates the a tree with root <var class="Arg">r</var>, which may be empty.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">PredicataTree("root");</span>
+&lt; PredicataTree: [ "root" ] &gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">PredicataTree();</span>
+&lt; PredicataTree: [ "" ] &gt;
+</pre></div>
+
+<p><a id="X839491C47B77A1AD" name="X839491C47B77A1AD"></a></p>
+
+<h5>3.2-2 IsPredicataTree</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsPredicataTree</code>( <var class="Arg">t</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>The function <code class="code">IsPredicataTree</code> checks if <var class="Arg">t</var> is a <code class="code">PredicataTree</code>.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">f:=PredicataFormula("(E y: x + y = z)");</span>
+&lt; PredicataFormula: ( E y : x + y = z ) &gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">IsPredicataFormula(f);</span>
+true
+</pre></div>
+
+<p><a id="X879097C482682777" name="X879097C482682777"></a></p>
+
+<h5>3.2-3 Display</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; Display</code>( <var class="Arg">t</var> )</td><td class="tdright">(&nbsp;method&nbsp;)</td></tr></table></div>
+<p>The method <code class="code">Display</code> prints the <code class="code">PredicataTree</code> <var class="Arg">t</var> as a nested list, i.e. it's internal structure.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">t:=PredicataTree("only one element");</span>
+&lt; PredicataTree: [ "only one element" ] &gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Display(t);</span>
+PredicataTree: [ "only one element" ].
+</pre></div>
+
+<p><a id="X79645EA180BDAE2E" name="X79645EA180BDAE2E"></a></p>
+
+<h5>3.2-4 View</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; View</code>( <var class="Arg">t</var> )</td><td class="tdright">(&nbsp;method&nbsp;)</td></tr></table></div>
+<p>The method <code class="code">View</code> applied on a <code class="code">PredicataTree</code> <var class="Arg">t</var> returns the object text.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">t:=PredicataTree("root");;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">View(t);</span>
+&lt; PredicataTree: [ "root" ] &gt;
+</pre></div>
+
+<p><a id="X79412306794766CE" name="X79412306794766CE"></a></p>
+
+<h5>3.2-5 Print</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; Print</code>( <var class="Arg">t</var> )</td><td class="tdright">(&nbsp;method&nbsp;)</td></tr></table></div>
+<p>The method <code class="code">Print</code> prints the <code class="code">PredicataTree</code> <var class="Arg">t</var> as a string.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">t:=PredicataTree("root");;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Print(t);</span>
+PredicataTree: [ "root" ]
+</pre></div>
+
+<p><a id="X7F96EF6A7AE45D82" name="X7F96EF6A7AE45D82"></a></p>
+
+<h5>3.2-6 IsEmptyPredicataTree</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsEmptyPredicataTree</code>( <var class="Arg">t</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>The function <code class="code">IsEmptyPredicataTree</code> checks if a given <code class="code">PredicataTree</code> <var class="Arg">t</var> is empty.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">t:=PredicataTree("root");</span>
+&lt; PredicataTree: [ "root" ] &gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">IsEmptyPredicataTree(t);</span>
+false
+</pre></div>
+
+<p><a id="X7ABE31328700CE57" name="X7ABE31328700CE57"></a></p>
+
+<h5>3.2-7 RootOfPredicataTree</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; RootOfPredicataTree</code>( <var class="Arg">t</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>The function <code class="code">RootOfPredicataTree</code> returns the current root of the <code class="code">PredicataTree</code> <var class="Arg">t</var>.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">t:=PredicataTree("current root");</span>
+&lt; PredicataTree: [ "current root" ] &gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">RootOfPredicataTree(t);</span>
+"current root"
+</pre></div>
+
+<p><a id="X81EA40BA7F3E167C" name="X81EA40BA7F3E167C"></a></p>
+
+<h5>3.2-8 SetRootOfPredicataTree</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; SetRootOfPredicataTree</code>( <var class="Arg">t</var>, <var class="Arg">n</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>The function <code class="code">SetRootOfPredicataTree</code> changes the current root of the <code class="code">PredicataTree</code> <var class="Arg">t</var> to the input <var class="Arg">n</var>.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">SetRootOfPredicataTree(t, "element #2");</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">t:=PredicataTree("element #1");</span>
+&lt; PredicataTree: [ "element #1" ] &gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">SetRootOfPredicataTree(t, "element #2");</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Display(t);</span>
+PredicataTree: [ "element #2" ].
+</pre></div>
+
+<p><a id="X81B47A7C78CA9DE0" name="X81B47A7C78CA9DE0"></a></p>
+
+<h5>3.2-9 InsertChildToPredicataTree</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; InsertChildToPredicataTree</code>( <var class="Arg">t</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>The function <code class="code">InsertChildToPredicataTree</code> inserts a child to the current <code class="code">PredicataTree</code> <var class="Arg">t</var>.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">t:=PredicataTree("root");</span>
+&lt; PredicataTree: [ "root" ] &gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">InsertChildToPredicataTree(t);</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Display(t);</span>
+PredicataTree: [ "root", [ ] ].
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">InsertChildToPredicataTree(t);</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Display(t);</span>
+PredicataTree: [ "root", [ ], [ ] ].
+</pre></div>
+
+<p><a id="X8143787C83BE74B9" name="X8143787C83BE74B9"></a></p>
+
+<h5>3.2-10 ChildOfPredicataTree</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; ChildOfPredicataTree</code>( <var class="Arg">t</var>, <var class="Arg">i</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>The function <code class="code">ChildOfPredicataTree"</code> enters the <var class="Arg">i</var>-th child of the current <code class="code">PredicataTree</code> <var class="Arg">t</var>.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">t:=PredicataTree("root");</span>
+&lt; PredicataTree: [ "root" ] &gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">InsertChildToPredicataTree(t);</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">ChildOfPredicataTree(t, 1);</span>
+&lt; PredicataTree: [ "root", [ ] ] &gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">SetRootOfPredicataTree(t, "child 1");</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Display(t);</span>
+PredicataTree: [ "root", [ "child 1" ] ].
+</pre></div>
+
+<p><a id="X7C3735A6841104C4" name="X7C3735A6841104C4"></a></p>
+
+<h5>3.2-11 NumberOfChildrenOfPredicataTree</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; NumberOfChildrenOfPredicataTree</code>( <var class="Arg">t</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>The function <code class="code">NumberOfChildrenOfPredicataTree</code> returns the number of children of the current <code class="code">PredicataTree</code> <var class="Arg">t</var>.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">t:=PredicataTree("root");</span>
+&lt; PredicataTree: [ "root" ] &gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">NumberOfChildrenOfPredicataTree(t);</span>
+0
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">InsertChildToPredicataTree(t);</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">InsertChildToPredicataTree(t);</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">NumberOfChildrenOfPredicataTree(t);</span>
+2
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">ChildOfPredicataTree(t, 1);</span>
+&lt; PredicataTree: [ "root", [ ], [ ] ] &gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">SetRootOfPredicataTree(t, "child 1");</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Display(t);</span>
+PredicataTree: [ "root", [ "child 1" ], [ ] ].
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">NumberOfChildrenOfPredicataTree(t);</span>
+0
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">InsertChildToPredicataTree(t);</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">InsertChildToPredicataTree(t);</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">NumberOfChildrenOfPredicataTree(t);</span>
+2
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Display(t);</span>
+PredicataTree: [ "root", [ "child 1", [ ], [ ] ], [ ] ].
+</pre></div>
+
+<p><a id="X837D585B850A3464" name="X837D585B850A3464"></a></p>
+
+<h5>3.2-12 ParentOfPredicataTree</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; ParentOfPredicataTree</code>( <var class="Arg">t</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>The function <code class="code">ParentOfPredicataTree</code> goes back to the parent of the current <code class="code">PredicataTree</code> <var class="Arg">t</var>.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">t:=PredicataTree("root");</span>
+&lt; PredicataTree: [ "root" ] &gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">InsertChildToPredicataTree(t);</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">InsertChildToPredicataTree(t);</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Display(t);</span>
+PredicataTree: [ "root", [ ], [ ] ].
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">ChildOfPredicataTree(t, 1);</span>
+&lt; PredicataTree: [ "root", [ ], [ ] ] &gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">SetRootOfPredicataTree(t, "child 1");     </span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">ParentOfPredicataTree(t);</span>
+&lt; PredicataTree: [ "root", [ "child 1" ], [ ] ] &gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">ChildOfPredicataTree(t, 2);</span>
+&lt; PredicataTree: [ "root", [ "child 1" ], [ ] ] &gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">SetRootOfPredicataTree(t, "child 2");</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Display(t);</span>
+PredicataTree: [ "root", [ "child 1" ], [ "child 2" ] ].
+</pre></div>
+
+<p><a id="X78C52D9F7B0A7244" name="X78C52D9F7B0A7244"></a></p>
+
+<h5>3.2-13 ReturnedChildOfPredicataTree</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; ReturnedChildOfPredicataTree</code>( <var class="Arg">t</var>, <var class="Arg">i</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>The function <code class="code">ReturnedChildOfPredicataTree</code> returns the <var class="Arg">i</var>-th child of the current <code class="code">PredicataTree</code> <var class="Arg">t</var> as a new tree.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">t:=PredicataTree("root");</span>
+&lt; PredicataTree: [ "root" ] &gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">InsertChildToPredicataTree(t);</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">ChildOfPredicataTree(t, 1);</span>
+&lt; PredicataTree: [ "root", [ ], [ ] ] &gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">SetRootOfPredicataTree(t, "child 1");     </span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">ParentOfPredicataTree(t);</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">r:=ReturnedChildOfPredicataTree(t, 1);</span>
+&lt; PredicataTree: [ "child 1" ] &gt;
+</pre></div>
+
+<p><a id="X7B35153985BFC26A" name="X7B35153985BFC26A"></a></p>
+
+<h5>3.2-14 PredicataFormulaFormattedToTree</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; PredicataFormulaFormattedToTree</code>( <var class="Arg">F</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>The function <code class="code"></code> converts a <code class="func">PredicataFormulaFormatted</code> (<a href="chap3.html#X820B18BA84CD1AA7"><span class="RefLink">3.1-11</span></a>) <var class="Arg">F</var> to a <code class="code">PredicataTree</code>.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">f:=PredicataFormula("(E y: x+y=z and y = x)");</span>
+&lt; PredicataFormula: ( E y : x + y = z and y = x ) &gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">F:=PredicataFormulaFormatted(f);</span>
+&lt; PredicataFormulaFormatted: ( E y : ( ( ( x + y ) = z ) and ( y = x ) ) ) &gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">t:=PredicataFormulaFormattedToTree(F);</span>
+&lt; PredicataTree: [ "E", [ "y" ], [ "and", 
+[ "=", [ "+", [ "x" ], [ "y" ] ], [ "z" ] ], [ "=", [ "y" ], [ "x" ] ] ] ] &gt;
+
+</pre></div>
+
+<p><a id="X85A933AA7C3F7C7E" name="X85A933AA7C3F7C7E"></a></p>
+
+<h5>3.2-15 FreeVariablesOfPredicataTree</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; FreeVariablesOfPredicataTree</code>( <var class="Arg">t</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>The function <code class="code">FreeVariablesOfPredicataTree</code> returns the free variables of the <code class="code">PredicataTree</code> <var class="Arg">t</var>, which have been carried over from the <code class="func">PredicataFormula</code> (<a href="chap3.html#X7D80431E7E5B77CD"><span class="RefLink">3.1-4</span></a>) and the <code class="func">PredicataFormulaFormatted</code> (<a href="chap3.html#X820B18BA84CD1AA7"><span class="RefLink">3.1-11</span></a>).</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">f:=PredicataFormula("(E y: x+y=z and y = x)");</span>
+&lt; PredicataFormula: ( E y : x + y = z and y = x ) &gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">F:=PredicataFormulaFormatted(f);</span>
+&lt; PredicataFormulaFormatted: ( E y : ( ( ( x + y ) = z ) and ( y = x ) ) ) &gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">t:=PredicataFormulaFormattedToTree(F);</span>
+&lt; PredicataTree: [ "E", [ "y" ], [ "and", [ "=", [ "+", [ "x" ], [ "y" ] ],
+[ "z" ] ], [ "=", [ "y" ], [ "x" ] ] ] ] &gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">FreeVariablesOfPredicataTree(t);</span>
+[ "x", "z" ]
+</pre></div>
+
+<p><a id="X7C66827879F133B3" name="X7C66827879F133B3"></a></p>
+
+<h5>3.2-16 BoundedVariablesOfPredicataTree</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; BoundedVariablesOfPredicataTree</code>( <var class="Arg">t</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>The function <code class="code">BoundedVariablesOfPredicataTree</code> returns the bounded variables of the <code class="code">PredicataTree</code> <var class="Arg">t</var>, which have been carried over from the <code class="func">PredicataFormula</code> (<a href="chap3.html#X7D80431E7E5B77CD"><span class="RefLink">3.1-4</span></a>) and the <code class="func">PredicataFormulaFormatted</code> (<a href="chap3.html#X820B18BA84CD1AA7"><span class="RefLink">3.1-11</span></a>).</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">f:=PredicataFormula("(E y: x+y=z and y = x)"); </span>
+&lt; PredicataFormula: ( E y : x + y = z and y = x ) &gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">F:=PredicataFormulaFormatted(f);</span>
+&lt; PredicataFormulaFormatted: ( E y : ( ( ( x + y ) = z ) and ( y = x ) ) ) &gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">t:=PredicataFormulaFormattedToTree(F);</span>
+&lt; PredicataTree: [ "E", [ "y" ], [ "and", [ "=", [ "+", [ "x" ], [ "y" ] ], 
+[ "z" ] ], [ "=", [ "y" ], [ "x" ] ] ] ] &gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">BoundedVariablesOfPredicataTree(t);</span>
+[ "y" ]
+</pre></div>
+
+<p><a id="X79243E967EB18D8A" name="X79243E967EB18D8A"></a></p>
+
+<h5>3.2-17 PredicataTreeToPredicaton</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; PredicataTreeToPredicaton</code>( <var class="Arg">t</var>[, <var class="Arg">V</var>] )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>The function <code class="code">PredicataTreeToPredicaton</code> calls <code class="func">PredicataTreeToPredicatonRecursive</code> (<a href="chap3.html#X7AC06FB57AF19BFB"><span class="RefLink">3.2-18</span></a>) to turn a <code class="func">PredicataTree</code> (<a href="chap3.html#X822AD83C7914DA30"><span class="RefLink">3.2-1</span></a>) <var class="Arg">t</var> into a <code class="func">Predicaton</code> (<a href="chap2.html#X7FD70C2980210882"><span class="RefLink">2.1-1</span></a>). The optional argument <var class="Arg">V</var> allows to specify an order for the free variables in the tree.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">f:=PredicataFormula("(E y: x+y=z and y = x)");   </span>
+&lt; PredicataFormula: ( E y : x + y = z and y = x ) &gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">F:=PredicataFormulaFormatted(f);</span>
+&lt; PredicataFormulaFormatted: ( E y : ( ( ( x + y ) = z ) and ( y = x ) ) ) &gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">t:=PredicataFormulaFormattedToTree(F);</span>
+&lt; PredicataTree: [ "E", [ "y" ], [ "and", [ "=", [ "+", [ "x" ], [ "y" ] ], 
+[ "z" ] ], [ "=", [ "y" ], [ "x" ] ] ] ] &gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">P:=PredicataTreeToPredicaton(t);</span>
+[ "Pred", &lt; Predicata: deterministic finite automaton on 4 letters with 3 states 
+and the variable position list [ 1, 2 ]. &gt; ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Display(P[2]);</span>
+Predicata: deterministic finite automaton on 4 letters with 3 states, 
+the variable position list [ 1, 2 ] and the following transitions:
+            |  1  2  3  
+------------------------
+  [ 0, 0 ]  |  3  2  3  
+  [ 1, 0 ]  |  3  1  3  
+  [ 0, 1 ]  |  2  3  3  
+  [ 1, 1 ]  |  1  3  3  
+ Initial states: [ 2 ]
+ Final states:   [ 2 ]
+
+ The alphabet corresponds to the following variable list: [ "x", "z" ].
+</pre></div>
+
+<p><a id="X7AC06FB57AF19BFB" name="X7AC06FB57AF19BFB"></a></p>
+
+<h5>3.2-18 PredicataTreeToPredicatonRecursive</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; PredicataTreeToPredicatonRecursive</code>( <var class="Arg">t</var>, <var class="Arg">V</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>The function <code class="code">PredicataTreeToPredicatonRecursive</code> is called by <code class="func">PredicataTreeToPredicaton</code> (<a href="chap3.html#X79243E967EB18D8A"><span class="RefLink">3.2-17</span></a>) in order to convert a <code class="code">PredicataTree</code> <var class="Arg">t</var> into a <code class="code">Predicata</code>. The list <var class="Arg">V</var> contains as first entry a list of free variables (not necessarily occurring) and as second entry a list containing the previous variables together with all bounded variables. This function goes down into the tree recursively until it reaches its leaves. Upon going up it creates the automaton of the <code class="code">Predicaton</code> with relation to the variable position list.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">F:=PredicataFormulaFormatted(PredicataFormula("(E y: x+y=z and y = x)"));;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">t:=PredicataFormulaFormattedToTree(F);;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">P:=PredicataTreeToPredicatonRecursive(t, [[ "x", "z" ], [ "x", "y", "z" ]]);;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Display(P[2]);</span>
+Predicata: deterministic finite automaton on 4 letters with 3 states, 
+the variable position list [ 1, 3 ] and the following transitions:
+            |  1  2  3  
+------------------------
+  [ 0, 0 ]  |  3  2  3  
+  [ 1, 0 ]  |  3  1  3  
+  [ 0, 1 ]  |  2  3  3  
+  [ 1, 1 ]  |  1  3  3  
+ Initial states: [ 2 ]
+ Final states:   [ 2 ]
+</pre></div>
+
+<p><a id="X7CD43BB3801CAD09" name="X7CD43BB3801CAD09"></a></p>
+
+<h5>3.2-19 PredicataRepresentationOfPredicataTree</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; PredicataRepresentationOfPredicataTree</code>( <var class="Arg">t</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>The function <code class="code">PredicataRepresentationOfPredicataTree</code> returns the <code class="code">PredicataRepresentation</code> of a <code class="code">PredicataTree</code> <var class="Arg">t</var>. For more details see <code class="func">PredicataRepresentation</code> (<a href="chap3.html#X7FB8487D80168246"><span class="RefLink">3.3-10</span></a>).</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">t:=PredicataTree("root");;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">PredicataRepresentationOfPredicataTree(t);</span>
+&lt; PredicataRepresentation containing the following predicates: [ ]. &gt;
+</pre></div>
+
+<p><a id="X8523AB0F7E543AB6" name="X8523AB0F7E543AB6"></a></p>
+
+<h4>3.3 <span class="Heading">PredicataRepresentation – Predicata assigned with names and arities</span></h4>
+
+<p>This section explains how to assign a name and an arity to a <code class="code">Predicata</code> such that it can be reused in a <code class="func">PredicataFormula</code> (<a href="chap3.html#X7D80431E7E5B77CD"><span class="RefLink">3.1-4</span></a>). The idea is to create elements containing the name, arity and the <code class="code">Predicata</code> and combining them in a <code class="func">PredicataRepresentation</code> (<a href="chap3.html#X7FB8487D80168246"><span class="RefLink">3.3-10</span></a>). Additionally, there is a predefined variable <code class="func">PredicataList</code> (<a href="chap3.html#X7D15B2507A25716D"><span class="RefLink">3.3-23</span></a>), which is called by the <code class="code">PredicataFormula</code> on default, trying to simplify these quite lengthy construction.</p>
+
+<p><a id="X79A1AF2F83560136" name="X79A1AF2F83560136"></a></p>
+
+<h5>3.3-1 PredicatonRepresentation</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; PredicatonRepresentation</code>( <var class="Arg">name</var>, <var class="Arg">arity</var>, <var class="Arg">automaton</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>The function <code class="code">PredicatonRepresentation</code> creates the representation of a Predicaton, assigned with a <var class="Arg">name</var>, an <var class="Arg">arity</var> and an <var class="Arg">automaton</var> (input may also be a <code class="code">Predicaton</code>), allowing it to be called in a <code class="func">PredicataFormula</code> (<a href="chap3.html#X7D80431E7E5B77CD"><span class="RefLink">3.1-4</span></a>) with <code class="code">Name[x1,...xN]</code> (where <code class="code">N</code> is the arity).</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">A:=Predicaton(Automaton("det", 3, [ [ 0, 0, 0 ], [ 1, 0, 0 ], [ 0, 1, 0 ], </span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">[ 1, 1, 0 ], [ 0, 0, 1 ], [ 1, 0, 1 ], [ 0, 1, 1 ], [ 1, 1, 1 ] ], </span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">[ [ 1, 3, 3 ], [ 3, 2, 3 ], [ 3, 2, 3 ], [ 2, 3, 3 ], [ 3, 1, 3 ], </span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">[ 1, 3, 3 ], [ 1, 3, 3 ], [ 3, 2, 3 ] ], [ 1 ], [ 1 ]), [ 1, 2, 3 ]);;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">p:=PredicatonRepresentation("MyAdd", 3, A);</span>
+&lt; Predicaton represented with the name: "MyAdd", the arity: 3 
+and the deterministic automaton on 8 letters and 3 states. &gt;
+</pre></div>
+
+<p><a id="X873E523D7C824DD9" name="X873E523D7C824DD9"></a></p>
+
+<h5>3.3-2 IsPredicatonRepresentation</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsPredicatonRepresentation</code>( <var class="Arg">p</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>The function <code class="code">IsPredicatonRepresentation</code> checks if the argument <var class="Arg">p</var> is a <code class="code">PredicatonRepresentation</code>.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">A:=Predicaton(Automaton("det", 2, [ [ 0 ], [ 1 ] ], [ [ 1, 2 ], [ 2, 2 ] ],</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">[ 1 ], [ 1 ]), [ 1 ]);;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">p:=PredicatonRepresentation("EqualZero", 1, A);</span>
+&lt; Predicaton represented with the name "EqualZero", the arity 1 and 
+the deterministic automaton on 2 letters and 2 states. &gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">IsPredicatonRepresentation(p);</span>
+true
+</pre></div>
+
+<p><a id="X7E5D495C7F7C6ACF" name="X7E5D495C7F7C6ACF"></a></p>
+
+<h5>3.3-3 Display</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; Display</code>( <var class="Arg">p</var> )</td><td class="tdright">(&nbsp;method&nbsp;)</td></tr></table></div>
+<p>The method <code class="code">Display</code> prints the <code class="code">PredicatonRepresentation</code> <var class="Arg">p</var>.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">A:=Predicaton(Automaton("det", 2, [ [ 0 ], [ 1 ] ], [ [ 1, 2 ], [ 2, 2 ] ], </span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">[ 1 ], [ 1 ]), [ 1 ]);;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">p:=PredicatonRepresentation("EqualZero", 1, A);;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Display(p);</span>
+Predicata represented with the name: EqualZero, the arity: 1 and 
+the following automaton: 
+deterministic finite automaton on 2 letters with 2 states and 
+the following transitions:
+         |  1  2  
+------------------
+  [ 0 ]  |  1  2  
+  [ 1 ]  |  2  2  
+ Initial states: [ 1 ]
+ Final states:   [ 1 ]
+</pre></div>
+
+<p><a id="X86BE5CE587874151" name="X86BE5CE587874151"></a></p>
+
+<h5>3.3-4 View</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; View</code>( <var class="Arg">p</var> )</td><td class="tdright">(&nbsp;method&nbsp;)</td></tr></table></div>
+<p>The method <code class="code">View</code> applied on a <code class="code">PredicatonRepresentation</code> <var class="Arg">p</var> returns the object text.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">A:=Automaton("det", 4, [ [ 0, 0 ], [ 1, 0 ], [ 0, 1 ], [ 1, 1 ] ],</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">[ [ 1, 2, 2, 3 ], [ 2, 2, 4, 2 ], [ 2, 2, 1, 2 ], [ 3, 2, 2, 4 ] ],</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">[ 1 ], [ 1 ]);;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">p:=PredicatonRepresentation("MultipleOfThree", 2, A);;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">View(p);</span>
+&lt; Predicaton represented with the name "MultipleOfThree", the arity 2 and 
+the deterministic automaton on 4 letters and 4 states. &gt;
+</pre></div>
+
+<p><a id="X789E2A8E82763B83" name="X789E2A8E82763B83"></a></p>
+
+<h5>3.3-5 Print</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; Print</code>( <var class="Arg">p</var> )</td><td class="tdright">(&nbsp;method&nbsp;)</td></tr></table></div>
+<p>The method <code class="code">Print</code> prints the <code class="code">PredicatonRepresentation</code> <var class="Arg">p</var> as a string.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">A:=Predicaton(Automaton("det", 2, [ [ 0 ], [ 1 ] ], [ [ 1, 2 ], [ 2, 2 ] ],</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">[ 1 ], [ 2 ]), [ 1 ]);;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">p:=PredicatonRepresentation("GreaterZero", 1, A);;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Print(p);</span>
+PredicatonRepresentation("GreaterZero", 1, Automaton("det", 2,\
+[ [ 0 ], [ 1 ] ], [ [ 1, 2 ], [ 2, 2 ] ], [ 1 ], [ 2 ]))
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">String(p);</span>
+"PredicatonRepresentation(\"GreaterZero\", 1, Automaton(\"det\", 2,\
+[ [ 0 ], [ 1 ] ], [ [ 1, 2 ], [ 2, 2 ] ], [ 1 ], [ 2 ]))"
+</pre></div>
+
+<p><a id="X7C1E145E7A2BAA4F" name="X7C1E145E7A2BAA4F"></a></p>
+
+<h5>3.3-6 NameOfPredicatonRepresentation</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; NameOfPredicatonRepresentation</code>( <var class="Arg">p</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>The function <code class="code">NameOfPredicatonRepresentation</code> returns the <code class="code">name</code> of <var class="Arg">p</var>.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">A:=Predicaton(Automaton("det", 4, [ [ 0 ], [ 1 ] ], [ [ 4, 2, 3, 3 ],</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">[ 3, 3, 3, 2 ] ], [ 1 ], [ 3, 4, 1 ]), [ 1 ]);;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">p:=PredicatonRepresentation("NotTwo", 1, A);;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">NameOfPredicatonRepresentation(p);</span>
+"NotTwo"
+</pre></div>
+
+<p><a id="X82DAD534797A5838" name="X82DAD534797A5838"></a></p>
+
+<h5>3.3-7 ArityOfPredicatonRepresentation</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; ArityOfPredicatonRepresentation</code>( <var class="Arg">p</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>The function <code class="code">ArityOfPredicatonRepresentation</code> returns the <code class="code">arity</code> of <var class="Arg">p</var>.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">A:=Predicaton(Automaton("det", 4, [ [ 0 ], [ 1 ] ], [ [ 4, 2, 3, 3 ],</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">[ 3, 3, 3, 2 ] ], [ 1 ], [ 3, 4, 1 ]), [ 1 ]);;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">p:=PredicatonRepresentation("NotTwo", 1, A);;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">ArityOfPredicatonRepresentation(p);</span>
+1
+</pre></div>
+
+<p><a id="X81019B628422AD65" name="X81019B628422AD65"></a></p>
+
+<h5>3.3-8 AutOfPredicatonRepresentation</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; AutOfPredicatonRepresentation</code>( <var class="Arg">p</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>The function <code class="code">AutOfPredicatonRepresentation</code> returns the <code class="code">automaton</code> of <var class="Arg">p</var>.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">A:=Predicaton(Automaton("det", 4, [ [ 0 ], [ 1 ] ], [ [ 4, 2, 3, 3 ],</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">[ 3, 3, 3, 2 ] ], [ 1 ], [ 3, 4, 1 ]), [ 1 ]);;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">p:=PredicatonRepresentation("NotTwo", 1, A);;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">AutOfPredicatonRepresentation(p);</span>
+&lt; deterministic automaton on 2 letters with 4 states &gt;
+</pre></div>
+
+<p><a id="X872FB0FB7DAACE20" name="X872FB0FB7DAACE20"></a></p>
+
+<h5>3.3-9 CopyPredicatonRepresentation</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; CopyPredicatonRepresentation</code>( <var class="Arg">p</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>The function <code class="code">CopyPredicatonRepresentation</code> copies <var class="Arg">p</var>.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">A:=Automaton("det", 3, [ [ 0, 0 ], [ 1, 0 ], [ 0, 1 ], [ 1, 1 ] ],</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">[ [ 1, 3, 3 ], [ 2, 3, 3 ], [ 3, 1, 3 ], [ 3, 2, 3 ] ], [ 1 ], [ 1 ]);;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">p:=PredicatonRepresentation("CopyPred", 2, A);;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">q:=CopyPredicatonRepresentation(p);</span>
+&lt; Predicaton represented with the name "CopyPred", the arity 2 and 
+the deterministic automaton on 4 letters and 3 states. &gt;
+</pre></div>
+
+<p><a id="X7FB8487D80168246" name="X7FB8487D80168246"></a></p>
+
+<h5>3.3-10 PredicataRepresentation</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; PredicataRepresentation</code>( [<var class="Arg">l</var>] )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>The function <code class="code">PredicataRepresentation</code> creates a collection of elements (<code class="func">PredicatonRepresentation</code> (<a href="chap3.html#X79A1AF2F83560136"><span class="RefLink">3.3-1</span></a>)), where the list <var class="Arg">l</var> may contain arbitrary many of them. The <code class="code">PredicataRepresentation</code> is an optional input for the function <code class="func">PredicataFormula</code> (<a href="chap3.html#X7D80431E7E5B77CD"><span class="RefLink">3.1-4</span></a>) (On default it uses the predefined variable <code class="func">PredicataList</code> (<a href="chap3.html#X7D15B2507A25716D"><span class="RefLink">3.3-23</span></a>)). Note that the variables must be unique within one predicate call.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">A1:=Predicaton(Automaton("det", 3, [ [ 0, 0, 0 ], [ 1, 0, 0 ], [ 0, 1, 0 ], </span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">[ 1, 1, 0 ], [ 0, 0, 1 ], [ 1, 0, 1 ], [ 0, 1, 1 ], [ 1, 1, 1 ] ], </span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">[ [ 1, 3, 3 ], [ 3, 2, 3 ], [ 3, 2, 3 ], [ 2, 3, 3 ], [ 3, 1, 3 ], </span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">[ 1, 3, 3 ], [ 1, 3, 3 ], [ 3, 2, 3 ] ], [ 1 ], [ 1 ]), [ 1, 2, 3 ]);;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">p1:=PredicatonRepresentation("MyAdd", 3, A1);</span>
+&lt; Predicaton represented with the name "MyAdd", the arity 3 and 
+the deterministic automaton on 8 letters and 3 states. &gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">A2:=Predicaton(Automaton("det", 2, [ [ 0, 0 ], [ 1, 0 ], [ 0, 1 ], [ 1, 1 ] ],</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">[ [ 1, 2 ], [ 2, 2 ], [ 2, 2 ], [ 1, 2 ] ], [ 1 ], [ 1 ]), [ 1, 2 ]);;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">p2:=PredicatonRepresentation("MyEqual", 2, A2);;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">P:=PredicataRepresentation(p1, p2);</span>
+&lt; PredicataRepresentation containing the following predicates: 
+[ "MyEqual", "MyAdd"]. &gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">f:=PredicataFormula("MyAdd[x,y,z] and MyEqual[x,y]", P);</span>
+&lt; PredicataFormula: MyAdd [ x , y , z ] and MyEqual [ x , y ] &gt;
+</pre></div>
+
+<p><a id="X867F090D826C3EB1" name="X867F090D826C3EB1"></a></p>
+
+<h5>3.3-11 IsPredicataRepresentation</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsPredicataRepresentation</code>( <var class="Arg">P</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>The function <code class="code">IsPredicataRepresentation</code> checks if the argument <var class="Arg">P</var> is a <code class="code">PredicataRepresentation</code>.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput"># Continued example: PredicataRepresentation</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">IsPredicataRepresentation(P);</span>
+true
+</pre></div>
+
+<p><a id="X85FEE0697E49FA28" name="X85FEE0697E49FA28"></a></p>
+
+<h5>3.3-12 Display</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; Display</code>( <var class="Arg">p</var> )</td><td class="tdright">(&nbsp;method&nbsp;)</td></tr></table></div>
+<p>The method <code class="code">Display</code> prints the <code class="code">PredicataRepresentation</code> <var class="Arg">P</var>.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput"># Continued example: PredicataRepresentation</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Display(P);</span>
+Predicata representation containing the following PredicatonRepresentations:
+Predicata represented with the name: MyEqual, the arity: 2 and 
+the following automaton:
+deterministic finite automaton on 4 letters with 2 states and 
+the following transitions:
+            |  1  2  
+---------------------
+  [ 0, 0 ]  |  1  2  
+  [ 1, 0 ]  |  2  2  
+  [ 0, 1 ]  |  2  2  
+  [ 1, 1 ]  |  1  2  
+ Initial states: [ 1 ]
+ Final states:   [ 1 ]
+Predicata represented with the name: MyAdd, the arity: 3 and 
+the following automaton:
+deterministic finite automaton on 8 letters with 3 states and 
+the following transitions:
+               |  1  2  3  
+---------------------------
+  [ 0, 0, 0 ]  |  1  3  3  
+  [ 1, 0, 0 ]  |  3  2  3  
+  [ 0, 1, 0 ]  |  3  2  3  
+  [ 1, 1, 0 ]  |  2  3  3  
+  [ 0, 0, 1 ]  |  3  1  3  
+  [ 1, 0, 1 ]  |  1  3  3  
+  [ 0, 1, 1 ]  |  1  3  3  
+  [ 1, 1, 1 ]  |  3  2  3  
+ Initial states: [ 1 ]
+ Final states:   [ 1 ]
+</pre></div>
+
+<p><a id="X7D05A6A082FF182E" name="X7D05A6A082FF182E"></a></p>
+
+<h5>3.3-13 View</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; View</code>( <var class="Arg">P</var> )</td><td class="tdright">(&nbsp;method&nbsp;)</td></tr></table></div>
+<p>The method <code class="code">View</code> applied on a <code class="code">PredicataRepresentation</code> <var class="Arg">P</var> returns the object text.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">P:=PredicataRepresentation();;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">View(P);</span>
+&lt; PredicataRepresentation containing the following predicates: [ ]. &gt;
+</pre></div>
+
+<p><a id="X86F46CFC804ED5A1" name="X86F46CFC804ED5A1"></a></p>
+
+<h5>3.3-14 Print</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; Print</code>( <var class="Arg">P</var> )</td><td class="tdright">(&nbsp;method&nbsp;)</td></tr></table></div>
+<p>The method <code class="code">Print</code> prints the <code class="code">PredicataRepresentation</code> <var class="Arg">P</var> as a string.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput"># Continued example: PredicataRepresentation</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Print(P);</span>
+PredicataRepresentation(PredicatonRepresentation("MyEqual", 2, Automaton\
+("det", 2, [ [ 0, 0 ], [ 1, 0 ], [ 0, 1 ], [ 1, 1 ] ], [ [ 1, 2 ], [ 2, 2 ], [\
+ 2, 2 ], [ 1, 2 ] ], [ 1 ], [ 1 ])), PredicatonRepresentation("MyAdd", 3\
+, Automaton("det", 3, [ [ 0, 0, 0 ], [ 1, 0, 0 ], [ 0, 1, 0 ], [ 1, 1, 0 ], [ \
+0, 0, 1 ], [ 1, 0, 1 ], [ 0, 1, 1 ], [ 1, 1, 1 ] ], [ [ 1, 3, 3 ], [ 3, 2, 3 ]\
+, [ 3, 2, 3 ], [ 2, 3, 3 ], [ 3, 1, 3 ], [ 1, 3, 3 ], [ 1, 3, 3 ], [ 3, 2, 3 ]\
+ ], [ 1 ], [ 1 ])))
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">String(P);</span>
+"PredicataRepresentation(PredicatonRepresentation(\"MyEqual\", 2, Automa\
+ton(\"det\", 2, [ [ 0, 0 ], [ 1, 0 ], [ 0, 1 ], [ 1, 1 ] ], [ [ 1, 2 ], [ 2, 2\
+ ], [ 2, 2 ], [ 1, 2 ] ], [ 1 ], [ 1 ])), PredicatonRepresentation(\"MyA\
+dd\", 3, Automaton(\"det\", 3, [ [ 0, 0, 0 ], [ 1, 0, 0 ], [ 0, 1, 0 ], [ 1, 1\
+, 0 ], [ 0, 0, 1 ], [ 1, 0, 1 ], [ 0, 1, 1 ], [ 1, 1, 1 ] ], [ [ 1, 3, 3 ], [ \
+3, 2, 3 ], [ 3, 2, 3 ], [ 2, 3, 3 ], [ 3, 1, 3 ], [ 1, 3, 3 ], [ 1, 3, 3 ], [ \
+3, 2, 3 ] ], [ 1 ], [ 1 ])), PredicatonRepresentation(\"GreaterZero\", 1\
+, Automaton(\"det\", 2, [ [ 0 ], [ 1 ] ], [ [ 1, 2 ], [ 2, 2 ] ], [ 1 ], [ 2 ]\
+)))"
+</pre></div>
+
+<p><a id="X829A17A47F67F791" name="X829A17A47F67F791"></a></p>
+
+<h5>3.3-15 NamesOfPredicataRepresentation</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; NamesOfPredicataRepresentation</code>( <var class="Arg">P</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>The function <code class="code">NamesOfPredicataRepresentation</code> returns the names of <var class="Arg">P</var>.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput"># Continued example: PredicataRepresentation</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">NamesOfPredicataRepresentation(P);</span>
+[ "MyEqual", "MyAdd" ]
+</pre></div>
+
+<p><a id="X7ABCC3947D5E3FF5" name="X7ABCC3947D5E3FF5"></a></p>
+
+<h5>3.3-16 AritiesOfPredicatonRepresentation</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; AritiesOfPredicatonRepresentation</code>( <var class="Arg">P</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>The function <code class="code">AritiesOfPredicatonRepresentation</code> returns the arities of <var class="Arg">P</var>.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput"># Continued example: PredicataRepresentation</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">AritiesOfPredicataRepresentation(P);</span>
+[ 2, 3 ]
+</pre></div>
+
+<p><a id="X7F859898859A01CA" name="X7F859898859A01CA"></a></p>
+
+<h5>3.3-17 AutsOfPredicataRepresentation</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; AutsOfPredicataRepresentation</code>( <var class="Arg">P</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>The function <code class="code">AutOfPredicataRepresentation</code> returns the automaton of <var class="Arg">P</var>.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput"># Continued example: PredicataRepresentation</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">AutsOfPredicataRepresentation(P);</span>
+[ &lt; deterministic automaton on 4 letters with 2 states &gt;, 
+  &lt; deterministic automaton on 8 letters with 3 states &gt; ]
+</pre></div>
+
+<p><a id="X7AD11EE781842EE9" name="X7AD11EE781842EE9"></a></p>
+
+<h5>3.3-18 ElementOfPredicataRepresentation</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; ElementOfPredicataRepresentation</code>( <var class="Arg">P</var>, <var class="Arg">i</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>The function <code class="code">ElementOfPredicataRepresentation</code> returns the <var class="Arg">i</var>-th element as a <code class="func">PredicatonRepresentation</code> (<a href="chap3.html#X79A1AF2F83560136"><span class="RefLink">3.3-1</span></a>).</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput"># Continued example: PredicataRepresentation</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">ElementOfPredicataRepresentation(P, 1);</span>
+&lt; Predicaton represented with the name "MyEqual", the arity 2 and 
+the deterministic automaton on 4 letters and 2 states. &gt;
+</pre></div>
+
+<p><a id="X7B55C4D48189B7D8" name="X7B55C4D48189B7D8"></a></p>
+
+<h5>3.3-19 Add</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; Add</code>( <var class="Arg">P</var>, <var class="Arg">p</var> )</td><td class="tdright">(&nbsp;method&nbsp;)</td></tr></table></div>
+<p>The method <code class="code">Add</code> adds the <code class="code">PredicatonRepresentation</code> <var class="Arg">p</var> to <var class="Arg">P</var>.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput"># Continued example: PredicataRepresentation</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">A3:=Predicaton(Automaton("det", 2, [ [ 0 ], [ 1 ] ], [ [ 1, 2 ], [ 2, 2 ] ], </span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">[ 1 ], [ 2 ]), [ 1 ]);;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">p3:=PredicatonRepresentation("GreaterZero", 1, A3);;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Add(P, p3);</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">P;</span>
+&lt; PredicataRepresentation containing the following predicates: 
+[ "MyEqual", "MyAdd", "GreaterZero" ]. &gt;
+</pre></div>
+
+<p><a id="X83914F8682F3BD37" name="X83914F8682F3BD37"></a></p>
+
+<h5>3.3-20 Add</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; Add</code>( <var class="Arg">P</var>, <var class="Arg">name</var>, <var class="Arg">arity</var>, <var class="Arg">automaton</var> )</td><td class="tdright">(&nbsp;method&nbsp;)</td></tr></table></div>
+<p>The method <code class="code">Add</code> adds the <code class="code">PredicatonRepresentation</code> created from <var class="Arg">name</var>, <var class="Arg">arity</var> and <var class="Arg">automaton</var> to <var class="Arg">P</var>.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput"># Continued example: PredicataRepresentation</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">A4:=Predicaton(Automaton("det", 2, [ [ 0 ], [ 1 ] ], [ [ 1, 2 ], [ 2, 2 ] ], </span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">[ 1 ], [ 1 ]), [ 1 ]);;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Add(P, "EqualZero", 1, A4);</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">P;</span>
+&lt; PredicataRepresentation containing the following predicates: 
+[ "MyEqual", "MyAdd", "GreaterZero", "EqualZero" ]. &gt;
+</pre></div>
+
+<p><a id="X806193DA7C485DA9" name="X806193DA7C485DA9"></a></p>
+
+<h5>3.3-21 Remove</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; Remove</code>( <var class="Arg">P</var>, <var class="Arg">i</var> )</td><td class="tdright">(&nbsp;method&nbsp;)</td></tr></table></div>
+<p>The method <code class="code">Remove</code> removes the <var class="Arg">i</var>-th element of <var class="Arg">P</var>.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">A5:=Predicaton(Automaton("det", 4, [ [ 0 ], [ 1 ] ], [ [ 4, 2, 3, 3 ],</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">[ 3, 3, 3, 2 ] ], [ 1 ], [ 3, 4, 1 ]), [ 1 ]);;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">p5:=PredicatonRepresentation("NotTwo", 1, A5);;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Add(P, p5);</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">P;</span>
+&lt; PredicataRepresentation containing the following predicates: 
+[ "NotTwo", "MyEqual", "MyAdd", "GreaterZero", "EqualZero" ]. &gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Remove(P, 1);</span>
+&lt; Predicaton represented with the name "NotTwo", the arity 1 and 
+the deterministic automaton on 2 letters and 4 states. &gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">P;</span>
+&lt; PredicataRepresentation containing the following predicates: 
+[ "MyEqual", "MyAdd", "GreaterZero", "EqualZero" ]. &gt;
+</pre></div>
+
+<p><a id="X7A2ADFA98378E307" name="X7A2ADFA98378E307"></a></p>
+
+<h5>3.3-22 CopyPredicataRepresentation</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; CopyPredicataRepresentation</code>( <var class="Arg">P</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>The function <code class="code">CopyPredicataRepresentation</code> copies the <code class="code">PredicataRepresentation</code> <var class="Arg">P</var>.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">A:=Automaton("det", 3, [ [ 0, 0 ], [ 1, 0 ], [ 0, 1 ], [ 1, 1 ] ],</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">[ [ 1, 3, 3 ], [ 2, 3, 3 ], [ 3, 1, 3 ], [ 3, 2, 3 ] ], [ 1 ], [ 1 ]);;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">p:=PredicatonRepresentation("CopyPred", 2, A);;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">P:=PredicataRepresentation(p);</span>
+&lt; PredicataRepresentation containing the following predicates: [ "CopyPred" ]. &gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Q:=CopyPredicataRepresentation(P);</span>
+&lt; PredicataRepresentation containing the following predicates: [ "CopyPred" ]. &gt;
+</pre></div>
+
+<p><a id="X7D15B2507A25716D" name="X7D15B2507A25716D"></a></p>
+
+<h5>3.3-23 PredicataList</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; PredicataList</code></td><td class="tdright">(&nbsp;global variable&nbsp;)</td></tr></table></div>
+<p>The variable <code class="code">PredicataList</code> is a <code class="func">PredicataRepresentation</code> (<a href="chap3.html#X7FB8487D80168246"><span class="RefLink">3.3-10</span></a>) which is called on default by the <code class="func">PredicataFormula</code> (<a href="chap3.html#X7D80431E7E5B77CD"><span class="RefLink">3.1-4</span></a>). Together with the functions <code class="func">AddToPredicataList</code> (<a href="chap3.html#X810B80157B2F0914"><span class="RefLink">3.3-24</span></a>) and <code class="func">RemoveFromPredicataList</code> (<a href="chap3.html#X797267DC8167B590"><span class="RefLink">3.3-26</span></a>) the intention is to be able to use own predicates without specifying to much.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">PredicataList;</span>
+&lt; PredicataRepresentation containing the following predicates: [  ]. &gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">A1:=Predicaton(Automaton("det", 3, [ [ 0, 0, 0 ], [ 1, 0, 0 ], [ 0, 1, 0 ], </span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">[ 1, 1, 0 ], [ 0, 0, 1 ], [ 1, 0, 1 ], [ 0, 1, 1 ], [ 1, 1, 1 ] ], </span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">[ [ 1, 3, 3 ], [ 3, 2, 3 ], [ 3, 2, 3 ], [ 2, 3, 3 ], [ 3, 1, 3 ], </span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">[ 1, 3, 3 ], [ 1, 3, 3 ], [ 3, 2, 3 ] ], [ 1 ], [ 1 ]), [ 1, 2, 3 ]);;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">p1:=PredicatonRepresentation("MyAdd", 3, A1);;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Add(PredicataList, p1);</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">PredicataList;</span>
+&lt; PredicataRepresentation containing the following predicates: [ "MyAdd" ]. &gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">f:=PredicataFormula("MyAdd[x,y,z]");</span>
+&lt; PredicataFormula: MyAdd [ x , y , z ] &gt;
+</pre></div>
+
+<p><a id="X810B80157B2F0914" name="X810B80157B2F0914"></a></p>
+
+<h5>3.3-24 AddToPredicataList</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; AddToPredicataList</code>( <var class="Arg">p</var>[, <var class="Arg">arity</var>, <var class="Arg">automaton</var>] )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>The function <code class="code">AddToPredicataList</code> adds either a <code class="code">PredicatonRepresentation</code> <var class="Arg">p</var> or the created one with <var class="Arg">p</var> being a string (<code class="code">name</code>) as well as the <var class="Arg">arity</var> and the <var class="Arg">automaton</var> to <code class="code">PredicataList</code>.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput"># Continued example: PredicataList</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">A2:=Predicaton(Automaton("det", 2, [ [ 0, 0 ], [ 1, 0 ], [ 0, 1 ], [ 1, 1 ] ],</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">[ [ 1, 2 ], [ 2, 2 ], [ 2, 2 ], [ 1, 2 ] ], [ 1 ], [ 1 ]), [ 1, 2 ]);;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">p2:=PredicatonRepresentation("MyEqual", 2, A2);;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">AddToPredicataList(p2);</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">A3:=Predicaton(Automaton("det", 2, [ [ 0 ], [ 1 ] ], [ [ 1, 2 ], [ 2, 2 ] ], </span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">[ 1 ], [ 2 ]), [ 1 ]);;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">AddToPredicataList("GreaterZero", 1, A3);</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">PredicataList;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">f:=PredicataFormula("MyAdd[x,y,z] and MyEqual[x,y]");</span>
+&lt; PredicataFormula: MyAdd [ x , y , z ] and MyEqual [ x , y ] &gt;
+</pre></div>
+
+<p><a id="X7FBB9D9286A52E4C" name="X7FBB9D9286A52E4C"></a></p>
+
+<h5>3.3-25 ClearPredicataList</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; ClearPredicataList</code>(  )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>The function <code class="code">ClearPredicataList</code> clears the <code class="code">PredicataList</code>.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput"># Continued example: PredicataList</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">ClearPredicataList();</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">PredicataList;</span>
+&lt; PredicataRepresentation containing the following predicates: [ ]. &gt;
+</pre></div>
+
+<p><a id="X797267DC8167B590" name="X797267DC8167B590"></a></p>
+
+<h5>3.3-26 RemoveFromPredicataList</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; RemoveFromPredicataList</code>( <var class="Arg">i</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>The function <code class="code">RemoveFromPredicataList</code> removes the <var class="Arg">i</var>-th element of the <code class="code">PredicataList</code>.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">A:=Predicaton(Automaton("det", 4, [ [ 0 ], [ 1 ] ], [ [ 4, 2, 3, 3 ],</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">[ 3, 3, 3, 2 ] ], [ 1 ], [ 3, 4, 1 ]), [ 1 ]);;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">AddToPredicataList("NotTwo", 1, A);</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">PredicataList;</span>
+&lt; PredicataRepresentation containing the following predicates: [ "NotTwo" ]. &gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">RemoveFromPredicataList(1);</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">PredicataList;</span>
+&lt; PredicataRepresentation containing the following predicates: [ ]. &gt;
+</pre></div>
+
+<p><a id="X7A6AF0F97B008C5E" name="X7A6AF0F97B008C5E"></a></p>
+
+<h4>3.4 <span class="Heading">Converting PredicataFormulas via PredicataTrees into Predicata</span></h4>
+
+<p><a id="X7DB009DC7E692A15" name="X7DB009DC7E692A15"></a></p>
+
+<h5>3.4-1 PredicataFormulaToPredicaton</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; PredicataFormulaToPredicaton</code>( <var class="Arg">f</var>[, <var class="Arg">V</var>] )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>The function <code class="code">PredicataFormulaToPredicaton</code> takes a <code class="func">PredicataFormula</code> (<a href="chap3.html#X7D80431E7E5B77CD"><span class="RefLink">3.1-4</span></a>) <var class="Arg">f</var> and returns a <code class="code">Predicata</code> which language recognizes the solutions of formula <var class="Arg">f</var>. The input <var class="Arg">f</var> must be a first-order formula containing the operations addition<span class="SimpleMath">+</span> and the constant multiplication <span class="SimpleMath">*</span> (as a shortcut), see <code class="func">PredicataGrammar</code> (<a href="chap4.html#X7C55E0B18729B7B1"><span class="RefLink">4.1-1</span></a>). The optional parameter <var class="Arg">V</var> (list containing strings) allows to set an order of the free variables occurring in <var class="Arg">f</var>. Note that the variables must not necessarily occur in the formula (for example <code class="code">x = 4</code> and <code class="code">V:=["x","y"]</code>).</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">f:=PredicataFormula("x = 4");</span>
+&lt; PredicataFormula: x = 4 &gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">A:=PredicataFormulaToPredicaton(f);</span>
+Predicata: deterministic finite automaton on 2 letters with 5 states, 
+the variable position list [ 1 ] and the following transitions:
+         |  1  2  3  4  5  
+---------------------------
+  [ 0 ]  |  4  2  2  3  5  
+  [ 1 ]  |  2  2  5  2  2  
+ Initial states: [ 1 ]
+ Final states:   [ 5 ]
+
+ The alphabet corresponds to the following variable list: [ "x" ].
+
+ Regular expression of the automaton:
+   [ 0 ][ 0 ][ 1 ][ 0 ]*
+
+ Output:
+&lt; Predicata: deterministic finite automaton on 2 letters with 5 states 
+and the variable position list [ 1 ]. &gt;
+</pre></div>
+
+<p><a id="X7D4237CF781CD20F" name="X7D4237CF781CD20F"></a></p>
+
+<h5>3.4-2 StringToPredicaton</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; StringToPredicaton</code>( <var class="Arg">f</var>[, <var class="Arg">V</var>] )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>The function <code class="code">StringToPredicaton</code> is the simpler version of <code class="func">PredicataFormulaToPredicaton</code> (<a href="chap3.html#X7DB009DC7E692A15"><span class="RefLink">3.4-1</span></a>), it takes an <code class="code">String</code> <var class="Arg">f</var>, converts it to a <code class="code">PredicataFormula</code> and returns a <code class="code">Predicata</code>. The optional parameter <var class="Arg">V</var> allows to set an order for the variables.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">A:=StringToPredicaton("x+y = z");</span>
+Predicata: deterministic finite automaton on 8 letters with 3 states, 
+the variable position list [ 1, 2, 3 ] and the following transitions:
+               |  1  2  3  
+---------------------------
+  [ 0, 0, 0 ]  |  1  3  3  
+  [ 1, 0, 0 ]  |  3  2  3  
+  [ 0, 1, 0 ]  |  3  2  3  
+  [ 1, 1, 0 ]  |  2  3  3  
+  [ 0, 0, 1 ]  |  3  1  3  
+  [ 1, 0, 1 ]  |  1  3  3  
+  [ 0, 1, 1 ]  |  1  3  3  
+  [ 1, 1, 1 ]  |  3  2  3  
+ Initial states: [ 1 ]
+ Final states:   [ 1 ]
+
+ The alphabet corresponds to the following variable list: [ "x", "y", "z" ].
+
+ Regular expression of the automaton:
+   ([ 1, 1, 0 ]([ 1, 0, 0 ]U[ 0, 1, 0 ]U[ 1, 1, 1 ])*
+   [ 0, 0, 1 ]U[ 0, 0, 0 ]U[ 1, 0, 1 ]U[ 0, 1, 1 ])*
+
+ Output:
+&lt; Predicata: deterministic finite automaton on 8 letters with 3 states 
+and the variable position list [ 1, 2, 3 ]. &gt;
+</pre></div>
+
+
+<div class="chlinkprevnextbot">&nbsp;<a href="chap0.html">[Top of Book]</a>&nbsp;  <a href="chap0.html#contents">[Contents]</a>&nbsp;  &nbsp;<a href="chap2.html">[Previous Chapter]</a>&nbsp;  &nbsp;<a href="chap4.html">[Next Chapter]</a>&nbsp;  </div>
+
+
+<div class="chlinkbot"><span class="chlink1">Goto Chapter: </span><a href="chap0.html">Top</a>  <a href="chap1.html">1</a>  <a href="chap2.html">2</a>  <a href="chap3.html">3</a>  <a href="chap4.html">4</a>  <a href="chapBib.html">Bib</a>  <a href="chapInd.html">Ind</a>  </div>
+
+<hr />
+<p class="foot">generated by <a href="http://www.math.rwth-aachen.de/~Frank.Luebeck/GAPDoc">GAPDoc2HTML</a></p>
+</body>
+</html>

@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE file SYSTEM "bibxmlext.dtd">
+<file>
+<entry id="Buechi:1960"><article>
+  <author>
+    <name><first>J. Richard</first><last>Büchi</last></name>
+  </author>  
+  <title><C>Weak</C> <C>Second-Order</C> <C>Arithmetic</C> and <C>Finite</C>
+      <C>Automata</C></title>
+  <journal>Zeitschrift für mathematische Logik und Grundlagen der
+      Mathematik 6</journal>
+  <number>6</number>
+  <year>1960</year>
+  <pages>66&ndash;92</pages>
+</article></entry>
+<entry id="Sipser:1996"><book>
+  <author>
+    <name><first>Michael</first><last>Sipser</last></name>
+  </author>  
+  <title><C>Introduction</C> to the <C>Theory</C> of
+      <C>Computation</C></title>
+  <publisher>International Thomson Publishing</publisher>
+  <year>2013</year>
+  <address>Boston, MA, USA</address>
+  <edition>3rd</edition>
+  <isbn>113318779X</isbn>
+</book></entry>
+<entry id="Hopcroft:2001"><book>
+  <author>
+    <name><first>John E.</first><last>Hopcroft</last></name>
+    <name><first>Rajeev</first><last>Motwani</last></name>
+    <name><first>Jeffrey D.</first><last>Ullman</last></name>
+  </author>  
+  <title><C>Introduction</C> to <C>Automata</C> <C>Theory</C>,
+      <C>Languages</C>, and <C>Computation</C></title>
+  <publisher>Cengage Learning</publisher>
+  <year>2001</year>
+  <address>Boston, MA, USA</address>
+  <edition>2nd</edition>
+  <isbn>0201441241</isbn>
+</book></entry>
+<entry id="Kozen:1997"><book>
+  <author>
+    <name><first>Dexter C.</first><last>Kozen</last></name>
+  </author>  
+  <title><C>Automata</C> and <C>Computability</C></title>
+  <publisher>Springer-Verlag</publisher>
+  <year>1997</year>
+  <address>Berlin, Heidelberg</address>
+  <edition>1st</edition>
+  <isbn>0387949070</isbn>
+</book></entry>
+<entry id="Pippenger:1997"><book>
+  <author>
+    <name><first>Nicholas</first><last>Pippenger</last></name>
+  </author>  
+  <title><C>Theories</C> of <C>Computability</C></title>
+  <publisher>Cambridge University Press</publisher>
+  <year>1997</year>
+  <address>New York, NY, USA</address>
+  <edition>1st</edition>
+  <isbn>0521553806</isbn>
+</book></entry>
+<entry id="Shallit:2013"><inproceedings>
+  <author>
+    <name><first>Jeffrey</first><last>Shallit</last></name>
+  </author>  
+  <title><C>Decidability and Enumeration for Automatic Sequences: A
+      Survey</C></title>
+  <booktitle><C>Computer</C> <C>Science</C> &ndash; <C>Theory</C> and
+      <C>Applications</C></booktitle>
+  <year>2013</year>
+  <editor>
+    <name><first>Andrei A.</first><last>Bulatov</last></name>
+    <name><first>Arseny M.</first><last>Shur</last></name>
+  </editor>  
+  <pages>49&ndash;63</pages>
+  <address>Berlin, Heidelberg</address>
+  <publisher>Springer-Verlag</publisher>
+  <isbn>978-3-642-38536-0</isbn>
+</inproceedings></entry>
+<entry id="Presburger:1929"><incollection>
+  <author>
+    <name><first>Mojżesz</first><last>Presburger</last></name>
+  </author>  
+  <title>Über die <C>Vollständigkeit</C> eines gewissen
+      <C>Systems</C> der <C>Arithmetik</C> ganzer <C>Zahlen</C>, in welchem die
+      <C>Addition</C> als einzige <C>Operation</C> hervortritt</title>
+  <booktitle>Comptes Rendus du I congrès de Mathématiciens
+      des Pays Slaves</booktitle>
+  <publisher></publisher>
+  <year>1929</year>
+  <pages>92&ndash;101</pages>
+  <address>Warszawa</address>
+</incollection></entry>
+<entry id="GAP4"><manual>
+  <title><C>GAP &ndash; Groups, Algorithms, and Programming, Version
+      4.9.1</C></title>
+  <organization>The GAP~Group</organization>
+  <year>2018</year>
+  <key>GAP</key>
+  <url>\verb+(https://www.gap-system.org)+</url>
+</manual></entry>
+<entry id="Automata"><misc>
+  <author>
+    <name><first>M.</first><last>Delgado</last></name>
+    <name><first>S.</first><last>Linton</last></name>
+    <name><first>J.</first><last>Morais</last></name>
+  </author>  
+  <title><C>Automata</C>, A package on automata, <C>Version</C> 1.13</title>
+  <howpublished><URL Text="http://www.fc.up.pt/cmup/mdelgado/automata/">http://www.fc.up.pt/cmup/mdelgado/automata/</URL></howpublished>
+  <year>2011</year>
+  <note>Refereed GAP package</note>
+  <keywords>Automata; Rational Expressions</keywords>
+  <other type="printedkey">DLM11</other>
+</misc></entry>
+<entry id="SummerSchool2016"><misc>
+  <title>3rd <C>Algorithmic</C> and <C>Enumerative</C> <C>Combinatorics</C>
+      <C>Summer</C> <C>School</C> 2016</title>
+  <howpublished><URL Text="https://www.risc.jku.at/conferences/aec2016/">https://www.risc.jku.at/conferences/aec2016/</URL></howpublished>
+  <year>2016</year>
+  <note>Accessed: 2018-07-01</note>
+  <key>AEC16</key>
+</misc></entry>
+<entry id="KoutsofiosNorth:2002"><techreport>
+  <author>
+    <name><first>D.</first><last>Dobkin</last></name>
+    <name><first>J.</first><last>Ellson</last></name>
+    <name><first>E.</first><last>Gansner</last></name>
+    <name><first>E.</first><last>Koutsofios</last></name>
+    <name><first>S.</first><last>North</last></name>
+    <name><first>G.</first><last>Woodhull</last></name>
+  </author>  
+  <title><C>Graphviz</C> &ndash; <C>Graph</C> <C>Drawing</C>
+      <C>Programs</C></title>
+  <institution>AT&amp;T Research and Lucent Bell Labs</institution>
+  <year>2002</year>
+  <howpublished><URL Text="https://www.graphviz.org/">https://www.graphviz.org/</URL></howpublished>
+</techreport></entry>
+<entry id="Stansifer:1884"><techreport>
+  <author>
+    <name><first>Ryan</first><last>Stansifer</last></name>
+  </author>  
+  <title><C>Presburger's</C> <C>Article</C> on <C>Integer</C>
+      <C>Airthmetic</C>: <C>Remarks</C> and <C>Translation</C></title>
+  <institution>Cornell University, Computer Science Department</institution>
+  <year>1984</year>
+  <number>TR84-639</number>
+  <month>September</month>
+  <howpublished><URL Text="https://cs.fit.edu/~ryan/papers/presburger.pdf">https://cs.fit.edu/~ryan/papers/presburger.pdf</URL></howpublished>
+  <note>Accessed: 2018-07-01</note>
+</techreport></entry>
+</file>

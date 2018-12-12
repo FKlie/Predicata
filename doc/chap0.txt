@@ -1,0 +1,255 @@
+  
+  
+                                   [1XPredicata[101X
+  
+  
+              [1XDeciding Presburger Arithmetic Using Automata Theory[101X
+  
+  
+                                  Version 1.0
+  
+  
+                                October 1, 2018
+  
+  
+                                 Fritz Kliemann
+  
+  
+  
+  Fritz Kliemann
+      Email:    [7Xmailto:fritz.kliemann@gmx.at[107X
+  
+  
+  Address: [33X[0;9YLinz, Austria[133X
+  
+  
+  -------------------------------------------------------
+  [1XAbstract[101X
+  [33X[0;0YJ.  Shallit  has  successfully  used  automata  theory to find properties of
+  automatic  sequences  [Sha13].  In  a summer school course at RISC, JKU Linz
+  [AEC16],  he  explained also how to use finite automata to decide Presburger
+  arithmetic [Pre29].[133X
+  
+  [33X[0;0YThis  package, written as a Master thesis, implements the decision procedure
+  which  goes back to J. R. Büchi [Büc60]. Furthermore, it allows to construct
+  a  deterministic  finite  automaton  from  any  first-order formula with the
+  addition as the only operation.[133X
+  
+  [33X[0;0YThe  package  [5XAutomata[105X  [DLM11]  is  used  for  the data structure of finite
+  automata.[133X
+  
+  
+  -------------------------------------------------------
+  [1XCopyright[101X
+  [33X[0;0Y© 2018 by Fritz Kliemann[133X
+  
+  [33X[0;0YThis  package  may  be redistribute and/or modify under the terms of the GNU
+  General  Public License ([7Xhttps://www.gnu.org/licenses/gpl.html[107X) as published
+  by  the  Free  Software  Foundation, either version 3 of the License, or (at
+  your option) any later version.[133X
+  
+  
+  -------------------------------------------------------
+  [1XAcknowledgements[101X
+  [33X[0;0YI  would like to thank my supervisor Erhard Aichinger for the opportunity to
+  write this package and my parents for their support and patience.[133X
+  
+  [33X[0;0YThe work was partially supported by the Austrian Science Fund (FWF), P29931.[133X
+  
+  
+  -------------------------------------------------------
+  
+  
+  [1XContents (Predicata)[101X
+  
+  1 [33X[0;0YIntroduction[133X
+  2 [33X[0;0YCreating Predicata[133X
+    2.1 [33X[0;0YPredicaton – an extended finite automaton[133X
+      2.1-1 Predicaton
+      2.1-2 BuildPredicaton
+      2.1-3 IsPredicaton
+      2.1-4 Display
+      2.1-5 View
+      2.1-6 Print
+      2.1-7 GetAlphabet
+    2.2 [33X[0;0YBasic functions on Automata and Predicata[133X
+      2.2-1 DisplayAut
+      2.2-2 DrawPredicaton
+      2.2-3 IsDeterministicAut
+      2.2-4 IsNonDeterministicAut
+      2.2-5 TypeOfAut
+      2.2-6 AlphabetOfAut
+      2.2-7 AlphabetOfAutAsList
+      2.2-8 NumberStatesOfAut
+      2.2-9 SortedStatesAut
+      2.2-10 TransitionMatrixOfAut
+      2.2-11 InitialStatesOfAut
+      2.2-12 SetInitialStatesOfAut
+      2.2-13 FinalStatesOfAut
+      2.2-14 SetFinalStatesOfAut
+      2.2-15 SinkStatesOfAut
+      2.2-16 PermutedStatesAut
+      2.2-17 CopyAut
+      2.2-18 MinimalAut
+      2.2-19 NegatedAut
+      2.2-20 IntersectionAut
+      2.2-21 UnionAut
+      2.2-22 IsRecognizedByAut
+    2.3 [33X[0;0YBasic functions on Predicata[133X
+      2.3-1 DecToBin
+      2.3-2 BinToDec
+      2.3-3 IsAcceptedWordByPredicaton
+      2.3-4 AcceptedWordsByPredicaton
+      2.3-5 DisplayAcceptedWordsByPredicaton
+      2.3-6 DisplayAcceptedWordsByPredicatonInNxN
+      2.3-7 AutomatonOfPredicaton
+      2.3-8 VariablePositionListOfPredicaton
+      2.3-9 SetVariablePositionListOfPredicaton
+      2.3-10 ProductLZeroPredicaton
+      2.3-11 RightQuotientLZeroPredicaton
+      2.3-12 NormalizedLeadingZeroPredicaton
+      2.3-13 SortedAlphabetPredicaton
+      2.3-14 FormattedPredicaton
+      2.3-15 IsValidInput
+      2.3-16 ExpandedPredicaton
+      2.3-17 ProjectedPredicaton
+      2.3-18 NegatedProjectedNegatedPredicaton
+      2.3-19 IntersectionPredicata
+      2.3-20 UnionPredicata
+      2.3-21 PermutedAlphabetPredicaton
+      2.3-22 PredicatonFromAut
+      2.3-23 FinitelyManyWordsAccepted
+      2.3-24 PredicatonToRatExp
+      2.3-25 WordsOfRatExp
+      2.3-26 WordsOfRatExpInterpreted
+    2.4 [33X[0;0YSpecial functions on Predicata[133X
+      2.4-1 IsValidInputList
+      2.4-2 BooleanPredicaton
+      2.4-3 PredicataEqualAut
+      2.4-4 EqualPredicaton
+      2.4-5 PredicataAdditionAut
+      2.4-6 AdditionPredicaton
+      2.4-7 AdditionPredicatonNSummands
+      2.4-8 TimesNPredicaton
+      2.4-9 SumOfProductsPredicaton
+      2.4-10 TermEqualTermPredicaton
+      2.4-11 GreaterEqualNPredicaton
+      2.4-12 GreaterNPredicaton
+      2.4-13 SmallerEqualNPredicaton
+      2.4-14 SmallerNPredicaton
+      2.4-15 GreaterEqualPredicaton
+      2.4-16 GreaterPredicaton
+      2.4-17 SmallerEqualPredicaton
+      2.4-18 SmallerPredicaton
+    2.5 [33X[0;0YDetailed look at the special functions on Predicata[133X
+      2.5-1 AdditionPredicaton3Summands
+      2.5-2 AdditionPredicatonNSummandsExplicit
+      2.5-3 AdditionPredicatonNSummandsIterative
+      2.5-4 AdditionPredicatonNSummandsRecursive
+      2.5-5 TimesNPredicatonExplicit
+      2.5-6 TimesNPredicatonRecursive
+      2.5-7 Times2Predicaton
+  3 [33X[0;0YParsing first-order formulas[133X
+    3.1 [33X[0;0YPredicataFormula – strings representing first-order formulas[133X
+      3.1-1 PredicataFormulaSymbols
+      3.1-2 PredicataIsStringType
+      3.1-3 PredicataGrammarVerification
+      3.1-4 PredicataFormula
+      3.1-5 IsPredicataFormula
+      3.1-6 Display
+      3.1-7 View
+      3.1-8 Print
+      3.1-9 FreeVariablesOfPredicataFormula
+      3.1-10 BoundedVariablesOfPredicataFormula
+      3.1-11 PredicataFormulaFormatted
+      3.1-12 IsPredicataFormulaFormatted
+      3.1-13 Display
+      3.1-14 View
+      3.1-15 Print
+    3.2 [33X[0;0YPredicataTree – converting first-order formulas into trees[133X
+      3.2-1 PredicataTree
+      3.2-2 IsPredicataTree
+      3.2-3 Display
+      3.2-4 View
+      3.2-5 Print
+      3.2-6 IsEmptyPredicataTree
+      3.2-7 RootOfPredicataTree
+      3.2-8 SetRootOfPredicataTree
+      3.2-9 InsertChildToPredicataTree
+      3.2-10 ChildOfPredicataTree
+      3.2-11 NumberOfChildrenOfPredicataTree
+      3.2-12 ParentOfPredicataTree
+      3.2-13 ReturnedChildOfPredicataTree
+      3.2-14 PredicataFormulaFormattedToTree
+      3.2-15 FreeVariablesOfPredicataTree
+      3.2-16 BoundedVariablesOfPredicataTree
+      3.2-17 PredicataTreeToPredicaton
+      3.2-18 PredicataTreeToPredicatonRecursive
+      3.2-19 PredicataRepresentationOfPredicataTree
+    3.3 [33X[0;0YPredicataRepresentation – Predicata assigned with names and arities[133X
+      3.3-1 PredicatonRepresentation
+      3.3-2 IsPredicatonRepresentation
+      3.3-3 Display
+      3.3-4 View
+      3.3-5 Print
+      3.3-6 NameOfPredicatonRepresentation
+      3.3-7 ArityOfPredicatonRepresentation
+      3.3-8 AutOfPredicatonRepresentation
+      3.3-9 CopyPredicatonRepresentation
+      3.3-10 PredicataRepresentation
+      3.3-11 IsPredicataRepresentation
+      3.3-12 Display
+      3.3-13 View
+      3.3-14 Print
+      3.3-15 NamesOfPredicataRepresentation
+      3.3-16 AritiesOfPredicatonRepresentation
+      3.3-17 AutsOfPredicataRepresentation
+      3.3-18 ElementOfPredicataRepresentation
+      3.3-19 Add
+      3.3-20 Add
+      3.3-21 Remove
+      3.3-22 CopyPredicataRepresentation
+      3.3-23 PredicataList
+      3.3-24 AddToPredicataList
+      3.3-25 ClearPredicataList
+      3.3-26 RemoveFromPredicataList
+    3.4 [33X[0;0YConverting PredicataFormulas via PredicataTrees into Predicata[133X
+      3.4-1 PredicataFormulaToPredicaton
+      3.4-2 StringToPredicaton
+  4 [33X[0;0YUsing Predicata[133X
+    4.1 [33X[0;0YCreating Predicata from first-order formulas[133X
+      4.1-1 PredicataGrammar
+      4.1-2 PredicataPredefinedPredicates
+      4.1-3 Predicaton
+      4.1-4 Predicaton
+      4.1-5 Predicaton
+      4.1-6 Predicaton
+      4.1-7 VariableListOfPredicaton
+      4.1-8 SetVariableListOfPredicaton
+      4.1-9 VariableAdjustedPredicaton
+      4.1-10 VariableAdjustedPredicata
+      4.1-11 AndPredicata
+      4.1-12 OrPredicata
+      4.1-13 NotPredicaton
+      4.1-14 ImpliesPredicata
+      4.1-15 EquivalentPredicata
+      4.1-16 ExistsPredicaton
+      4.1-17 ForallPredicaton
+      4.1-18 LeastAcceptedNumber
+      4.1-19 GreatestAcceptedNumber
+      4.1-20 LeastNonAcceptedNumber
+      4.1-21 GreatestNonAcceptedNumber
+      4.1-22 InterpretedPredicaton
+      4.1-23 AreEquivalentPredicata
+      4.1-24 LinearSolveOverN
+      4.1-25 NullSpaceOverN
+    4.2 [33X[0;0YExamples[133X
+      4.2-1 [33X[0;0YExample 1: Getting familiar[133X
+      4.2-2 [33X[0;0YExample 2: Recalling the motivation[133X
+      4.2-3 [33X[0;0YExample 3: Divisible by three[133X
+      4.2-4 [33X[0;0YExample 4: Linear congruences[133X
+      4.2-5 [33X[0;0YExample 5: GCD and LCM[133X
+      4.2-6 [33X[0;0YExample 6: Theorems[133X
+  
+  
+  [32X

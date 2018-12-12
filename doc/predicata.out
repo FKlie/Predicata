@@ -1,0 +1,17 @@
+\BOOKMARK [0][-]{chapter.1}{Introduction}{}% 1
+\BOOKMARK [0][-]{chapter.2}{Creating Predicata}{}% 2
+\BOOKMARK [1][-]{section.2.1}{Predicaton \205 an extended finite automaton}{chapter.2}% 3
+\BOOKMARK [1][-]{section.2.2}{Basic functions on Automata and Predicata}{chapter.2}% 4
+\BOOKMARK [1][-]{section.2.3}{Basic functions on Predicata}{chapter.2}% 5
+\BOOKMARK [1][-]{section.2.4}{Special functions on Predicata}{chapter.2}% 6
+\BOOKMARK [1][-]{section.2.5}{Detailed look at the special functions on Predicata}{chapter.2}% 7
+\BOOKMARK [0][-]{chapter.3}{Parsing first-order formulas}{}% 8
+\BOOKMARK [1][-]{section.3.1}{PredicataFormula \205 strings representing first-order formulas}{chapter.3}% 9
+\BOOKMARK [1][-]{section.3.2}{PredicataTree \205 converting first-order formulas into trees}{chapter.3}% 10
+\BOOKMARK [1][-]{section.3.3}{PredicataRepresentation \205 Predicata assigned with names and arities}{chapter.3}% 11
+\BOOKMARK [1][-]{section.3.4}{Converting PredicataFormulas via PredicataTrees into Predicata}{chapter.3}% 12
+\BOOKMARK [0][-]{chapter.4}{Using Predicata}{}% 13
+\BOOKMARK [1][-]{section.4.1}{Creating Predicata from first-order formulas}{chapter.4}% 14
+\BOOKMARK [1][-]{section.4.2}{Examples}{chapter.4}% 15
+\BOOKMARK [0][-]{chapter*.5}{References}{}% 16
+\BOOKMARK [0][-]{section*.6}{Index}{}% 17

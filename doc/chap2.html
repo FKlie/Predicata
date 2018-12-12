@@ -1,0 +1,2697 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+<title>GAP (Predicata) - Chapter 2: Creating Predicata</title>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+<meta name="generator" content="GAPDoc2HTML" />
+<link rel="stylesheet" type="text/css" href="manual.css" />
+<script src="manual.js" type="text/javascript"></script>
+<script type="text/javascript">overwriteStyle();</script>
+</head>
+<body class="chap2"  onload="jscontent()">
+
+
+<div class="chlinktop"><span class="chlink1">Goto Chapter: </span><a href="chap0.html">Top</a>  <a href="chap1.html">1</a>  <a href="chap2.html">2</a>  <a href="chap3.html">3</a>  <a href="chap4.html">4</a>  <a href="chapBib.html">Bib</a>  <a href="chapInd.html">Ind</a>  </div>
+
+<div class="chlinkprevnexttop">&nbsp;<a href="chap0.html">[Top of Book]</a>&nbsp;  <a href="chap0.html#contents">[Contents]</a>&nbsp;  &nbsp;<a href="chap1.html">[Previous Chapter]</a>&nbsp;  &nbsp;<a href="chap3.html">[Next Chapter]</a>&nbsp;  </div>
+
+<p id="mathjaxlink" class="pcenter"><a href="chap2_mj.html">[MathJax on]</a></p>
+<p><a id="X7A3C47A378964F1F" name="X7A3C47A378964F1F"></a></p>
+<div class="ChapSects"><a href="chap2.html#X7A3C47A378964F1F">2 <span class="Heading">Creating Predicata</span></a>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap2.html#X7D04FF187F27BB76">2.1 <span class="Heading">Predicaton – an extended finite automaton</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2.html#X7FD70C2980210882">2.1-1 Predicaton</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2.html#X85732CF382B64BB8">2.1-2 BuildPredicaton</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2.html#X825D25A87C0D02DA">2.1-3 IsPredicaton</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2.html#X818ADFEE7EC52BAF">2.1-4 Display</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2.html#X854CA0237F4B8E5D">2.1-5 View</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2.html#X7C64F1F682B596FF">2.1-6 Print</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2.html#X82BDA2E785ECEAB8">2.1-7 GetAlphabet</a></span>
+</div></div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap2.html#X87ACF62385B06FFF">2.2 <span class="Heading">Basic functions on Automata and Predicata</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2.html#X8720D1F186935FED">2.2-1 DisplayAut</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2.html#X81C510B7859139D9">2.2-2 DrawPredicaton</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2.html#X837962738642AA13">2.2-3 IsDeterministicAut</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2.html#X82BB21D07836FC43">2.2-4 IsNonDeterministicAut</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2.html#X8291B3E379A6DE70">2.2-5 TypeOfAut</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2.html#X79387C217C9E0645">2.2-6 AlphabetOfAut</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2.html#X7BB104337B972500">2.2-7 AlphabetOfAutAsList</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2.html#X7A1F901B7C19CB01">2.2-8 NumberStatesOfAut</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2.html#X7C0D702D869F7E62">2.2-9 SortedStatesAut</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2.html#X8150E8F278688F79">2.2-10 TransitionMatrixOfAut</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2.html#X785309187BAFF773">2.2-11 InitialStatesOfAut</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2.html#X812E72137E8ED4E1">2.2-12 SetInitialStatesOfAut</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2.html#X867925CC844D77D5">2.2-13 FinalStatesOfAut</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2.html#X80EF044086173940">2.2-14 SetFinalStatesOfAut</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2.html#X84FC26AF7F7F8393">2.2-15 SinkStatesOfAut</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2.html#X82B09FBE86E7D43A">2.2-16 PermutedStatesAut</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2.html#X84BCD89583863028">2.2-17 CopyAut</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2.html#X8377BBD382180F49">2.2-18 MinimalAut</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2.html#X802357D181BD700C">2.2-19 NegatedAut</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2.html#X7C09B02679BDA33D">2.2-20 IntersectionAut</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2.html#X82617D80836C976A">2.2-21 UnionAut</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2.html#X7FB4776D86776512">2.2-22 IsRecognizedByAut</a></span>
+</div></div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap2.html#X7B1626EA7E96CDB3">2.3 <span class="Heading">Basic functions on Predicata</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2.html#X7834545A7C3F35A9">2.3-1 DecToBin</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2.html#X7E89D7A880401BF4">2.3-2 BinToDec</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2.html#X85118B7386A66FDF">2.3-3 IsAcceptedWordByPredicaton</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2.html#X87CE47357E2AC5A9">2.3-4 AcceptedWordsByPredicaton</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2.html#X7EF0AB6485AC152E">2.3-5 DisplayAcceptedWordsByPredicaton</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2.html#X846C53368294CB6D">2.3-6 DisplayAcceptedWordsByPredicatonInNxN</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2.html#X82371B787CCA829E">2.3-7 AutomatonOfPredicaton</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2.html#X7E7B5E2A7F06E2E3">2.3-8 VariablePositionListOfPredicaton</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2.html#X807F1C9280B4D301">2.3-9 SetVariablePositionListOfPredicaton</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2.html#X7B90E3A88557996C">2.3-10 ProductLZeroPredicaton</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2.html#X7DCADD1379EDC7E5">2.3-11 RightQuotientLZeroPredicaton</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2.html#X84F6862E86B1F524">2.3-12 NormalizedLeadingZeroPredicaton</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2.html#X822C7C547B98A757">2.3-13 SortedAlphabetPredicaton</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2.html#X8231A0D579C2B8FC">2.3-14 FormattedPredicaton</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2.html#X827129EC7BB4C53B">2.3-15 IsValidInput</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2.html#X8209B57C805CBDFA">2.3-16 ExpandedPredicaton</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2.html#X801999F67F5E9CAF">2.3-17 ProjectedPredicaton</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2.html#X8034E12D7E2EE143">2.3-18 NegatedProjectedNegatedPredicaton</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2.html#X80379AA57C3C7145">2.3-19 IntersectionPredicata</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2.html#X863B344079D411DF">2.3-20 UnionPredicata</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2.html#X7E9F80777F2819AB">2.3-21 PermutedAlphabetPredicaton</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2.html#X7CEAFC23817A07F3">2.3-22 PredicatonFromAut</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2.html#X85F659CF86F44C8C">2.3-23 FinitelyManyWordsAccepted</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2.html#X87A60C328455D108">2.3-24 PredicatonToRatExp</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2.html#X7BCC385F80B24BF8">2.3-25 WordsOfRatExp</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2.html#X7F4EB504809AF2D0">2.3-26 WordsOfRatExpInterpreted</a></span>
+</div></div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap2.html#X8148D1EC7B7792E1">2.4 <span class="Heading">Special functions on Predicata</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2.html#X861D1891826AC634">2.4-1 IsValidInputList</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2.html#X87C84CD3859A6982">2.4-2 BooleanPredicaton</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2.html#X7E3F74E07B33E8A5">2.4-3 PredicataEqualAut</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2.html#X7DF4EB0B8064A222">2.4-4 EqualPredicaton</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2.html#X7B9D56F083877897">2.4-5 PredicataAdditionAut</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2.html#X7AFD4F9179934BAD">2.4-6 AdditionPredicaton</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2.html#X7C9BE5EB794C6765">2.4-7 AdditionPredicatonNSummands</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2.html#X7862B8187D278F8A">2.4-8 TimesNPredicaton</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2.html#X870AF29E808AA2BD">2.4-9 SumOfProductsPredicaton</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2.html#X7CF1412E820DD09C">2.4-10 TermEqualTermPredicaton</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2.html#X809814E082C02E7B">2.4-11 GreaterEqualNPredicaton</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2.html#X878216317D972D59">2.4-12 GreaterNPredicaton</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2.html#X7C3891F485E71911">2.4-13 SmallerEqualNPredicaton</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2.html#X7F12D5E77AB01A33">2.4-14 SmallerNPredicaton</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2.html#X86861D8579E34ED5">2.4-15 GreaterEqualPredicaton</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2.html#X879C942184F32572">2.4-16 GreaterPredicaton</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2.html#X7DAF215A7EC479BF">2.4-17 SmallerEqualPredicaton</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2.html#X7A6DFC5883D41218">2.4-18 SmallerPredicaton</a></span>
+</div></div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap2.html#X83AE98BC7EEF3304">2.5 <span class="Heading">Detailed look at the special functions on Predicata</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2.html#X84AA3F897FDA7314">2.5-1 AdditionPredicaton3Summands</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2.html#X852F7B358376A545">2.5-2 AdditionPredicatonNSummandsExplicit</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2.html#X85D14FB87F3B212C">2.5-3 AdditionPredicatonNSummandsIterative</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2.html#X807D2C6F7F73D3C7">2.5-4 AdditionPredicatonNSummandsRecursive</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2.html#X80833C9D7D71C842">2.5-5 TimesNPredicatonExplicit</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2.html#X87DE25827F946F58">2.5-6 TimesNPredicatonRecursive</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2.html#X7F48FCE67A934302">2.5-7 Times2Predicaton</a></span>
+</div></div>
+</div>
+
+<h3>2 <span class="Heading">Creating Predicata</span></h3>
+
+<p><a id="X7D04FF187F27BB76" name="X7D04FF187F27BB76"></a></p>
+
+<h4>2.1 <span class="Heading">Predicaton – an extended finite automaton</span></h4>
+
+<p><a id="X7FD70C2980210882" name="X7FD70C2980210882"></a></p>
+
+<h5>2.1-1 Predicaton</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; Predicaton</code>( <var class="Arg">Automaton</var>, <var class="Arg">VariablePositionList</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>A <code class="code">Predicaton</code> represents a first-order formulas, with <span class="SimpleMath">n</span> free variables, containing the nullary operations <span class="SimpleMath">0</span> and <span class="SimpleMath">1</span> and the binary operation <span class="SimpleMath">+</span>. It consists of an <code class="code">Automaton</code> and a <code class="code">VariablePositionList</code>.</p>
+
+<p>The first parameter is an <var class="Arg">Automaton</var> from the package <strong class="pkg">Automata</strong>, which is created as follows: <code class="code">Automaton(Type, Size, Alphabet, TransitionTable, Initial, Final)</code>. In order to create a <code class="code">Predicaton</code> the <var class="Arg">Type</var> must either be <code class="code">"det"</code> or <code class="code">"nondet"</code>. The <var class="Arg">Size</var> is a positive integer giving the number of states. The <var class="Arg">Alphabet</var> must be a list of length <span class="SimpleMath">2^n</span>, i.e. the list of all n-tuples <span class="SimpleMath">{0,1}^n</span>. The <var class="Arg">TransitionTable</var> gives the transition matrix, where the entry at <span class="SimpleMath">(i,j)</span> denotes the state reached with the <span class="SimpleMath">i</span>-th letter (<span class="SimpleMath">i</span>-th row) and the <span class="SimpleMath">j</span>-th state (<span class="SimpleMath">j</span>-th column). The <var class="Arg">Initial</var> and <var class="Arg">Final</var> are the initial and final state sets.</p>
+
+<p>The second parameter <var class="Arg">VariablePositionList</var> must be of length <span class="SimpleMath">n</span> and must contain <span class="SimpleMath">n</span> pairwise distinct positive integers. It internally represents the occurring variables in the first-order formula by assigning pairwise distinct natural numbers to each free variable. The <var class="Arg">VariablePositionList</var> coincides with the letters, i.e. the <span class="SimpleMath">i</span>-th position in the <span class="SimpleMath">n</span>-tuples correspond to the variable position at the <span class="SimpleMath">i</span>-th position in the list.</p>
+
+<p>A word over the alphabet <span class="SimpleMath">{0,1}^n</span> can be turned into <span class="SimpleMath">n</span> reversed binary representations of natural numbers by extracting the components of the letters. The <span class="SimpleMath">i</span>-th row of a word (choosing the <span class="SimpleMath">i</span>-th component of each letter) corresponds to the <span class="SimpleMath">i</span>-th entry in the <var class="Arg">VariablePositionList</var>. The accepted words of the automaton represent those <span class="SimpleMath">n</span> natural numbers, such that upon interpretation the first-order formula is satisfied.</p>
+
+<p>In the following example the <code class="code">Automaton A</code> represents the formula <span class="SimpleMath">x+y=z</span> with the following variables: the variable <span class="SimpleMath">x</span> is assigned to <span class="SimpleMath">1</span>, the variable <span class="SimpleMath">y</span> is assigned to <span class="SimpleMath">2</span> and the variable <span class="SimpleMath">z</span> is assigned to <span class="SimpleMath">3</span> The <code class="code">Predicaton P</code> is created with the deterministic finite automaton <code class="code">A</code> and the variable position list <code class="code">[ 1, 2, 3 ]</code>. This means the first entry in the letters corresponds to the variable with the assigned natural number 1, i.e. <span class="SimpleMath">x</span>, the second entry to the number <span class="SimpleMath">2</span>, i.e. the variable <span class="SimpleMath">y</span> and the third entry to the number <span class="SimpleMath">3</span>, i.e. the variable <span class="SimpleMath">z</span>.</p>
+
+<p>Later also a mathematically more intuitive method is introduced, see <code class="func">Predicaton</code> (<a href="chap4.html#X7EADB1F8866BA4DB"><span class="RefLink">4.1-3</span></a>) for creating a <code class="code">Predicaton</code> from a first-order formula.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">A:=Automaton("det", 3,</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">[ [ 0, 0, 0 ], [ 1, 0, 0 ], [ 0, 1, 0 ], [ 1, 1, 0 ],</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">[ 0, 0, 1 ], [ 1, 0, 1 ], [ 0, 1, 1 ], [ 1, 1, 1 ] ],</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">[ [ 1, 3, 3 ], [ 3, 2, 3 ], [ 3, 2, 3 ], [ 2, 3, 3 ],</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">[ 3, 1, 3 ], [ 1, 3, 3 ], [ 1, 3, 3 ], [ 3, 2, 3 ] ],</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">[ 1 ], [ 1 ]);</span>
+&lt; deterministic automaton on 8 letters with 3 states &gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">P:=Predicaton( A, [ 1, 2, 3 ]);</span>
+&lt; Predicaton: deterministic finite automaton on 8 letters with 3 states 
+and the variable position list [ 1, 2, 3 ]. &gt;
+</pre></div>
+
+<p><a id="X85732CF382B64BB8" name="X85732CF382B64BB8"></a></p>
+
+<h5>2.1-2 BuildPredicaton</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; BuildPredicaton</code>( <var class="Arg">Type</var>, <var class="Arg">Size</var>, <var class="Arg">Alphabet</var>, <var class="Arg">TransitionTable</var>, <var class="Arg">Initial</var>, <var class="Arg">Final</var>, <var class="Arg">VariablePositionList</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>The function <code class="code">BuildPredicaton</code> allows the creation of a <code class="code">Predicaton</code> without specifying an <code class="code">Automaton</code>.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">P:=BuildPredicaton("det", 3, [ [ 0, 0, 0 ], [ 1, 0, 0 ], [ 0, 1, 0 ],</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">[ 1, 1, 0 ], [ 0, 0, 1 ], [ 1, 0, 1 ], [ 0, 1, 1 ], [ 1, 1, 1 ] ],</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">[ [ 1, 3, 3 ], [ 3, 2, 3 ], [ 3, 2, 3 ], [ 2, 3, 3 ], [ 3, 1, 3 ],</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">[ 1, 3, 3 ], [ 1, 3, 3 ], [ 3, 2, 3 ] ], [ 1 ], [ 1 ], [ 1, 2, 3 ]);</span>
+&lt; Predicaton: deterministic finite automaton on 8 letters with 3 states 
+and the variable position list [ 1, 2, 3 ]. &gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Display(P);</span>
+Predicaton: deterministic finite automaton on 8 letters with 3 states, 
+the variable position list [ 1, 2, 3 ] and the following transitions:
+               |  1  2  3  
+---------------------------
+  [ 0, 0, 0 ]  |  1  3  3  
+  [ 1, 0, 0 ]  |  3  2  3  
+  [ 0, 1, 0 ]  |  3  2  3  
+  [ 1, 1, 0 ]  |  2  3  3  
+  [ 0, 0, 1 ]  |  3  1  3  
+  [ 1, 0, 1 ]  |  1  3  3  
+  [ 0, 1, 1 ]  |  1  3  3  
+  [ 1, 1, 1 ]  |  3  2  3  
+ Initial states: [ 1 ]
+ Final states:   [ 1 ]
+</pre></div>
+
+<p><a id="X825D25A87C0D02DA" name="X825D25A87C0D02DA"></a></p>
+
+<h5>2.1-3 IsPredicaton</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsPredicaton</code>( <var class="Arg">P</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>The function <code class="code">IsPredicaton</code> checks if <var class="Arg">P</var> is a <code class="code">Predicaton</code>.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">P:=BuildPredicaton("det", 2, [ [ 0, 0 ], [ 1, 0 ], [ 0, 1 ], [ 1, 1 ] ],</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">[ [ 1, 2 ], [ 2, 2 ], [ 2, 2 ], [ 1, 2 ] ], [ 1 ], [ 1 ], [ 1, 2 ]);</span>
+&lt; Predicaton: deterministic finite automaton on 4 letters with 2 states 
+and the variable position list [ 1, 2 ]. &gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">IsPredicaton(P);</span>
+true
+</pre></div>
+
+<p><a id="X818ADFEE7EC52BAF" name="X818ADFEE7EC52BAF"></a></p>
+
+<h5>2.1-4 Display</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; Display</code>( <var class="Arg">P</var> )</td><td class="tdright">(&nbsp;method&nbsp;)</td></tr></table></div>
+<p>The method <code class="code">Display</code> prints the transition table of the <code class="code">Predicaton</code> <var class="Arg">P</var>. The left side are the letters of the alphabet, the top row are the states and the transition from the <span class="SimpleMath">i</span>-th letter (row) and <span class="SimpleMath">j</span>-th state (column) is the entry <span class="SimpleMath">(i,j)</span>.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">P:=Predicaton(Automaton("det", 3, [ [ 0, 0, 0 ], [ 1, 0, 0 ], [ 0, 1, 0 ],</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">[ 1, 1, 0 ], [ 0, 0, 1 ], [ 1, 0, 1 ], [ 0, 1, 1 ], [ 1, 1, 1 ] ],</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">[ [ 1, 3, 3 ], [ 3, 2, 3 ], [ 3, 2, 3 ], [ 2, 3, 3 ], [ 3, 1, 3 ],</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">[ 1, 3, 3 ], [ 1, 3, 3 ], [ 3, 2, 3 ] ], [ 1 ], [ 1 ]), [ 1, 2, 3 ]);</span>
+&lt; Predicaton: deterministic finite automaton on 8 letters with 3 states 
+and the variable position list [ 1, 2, 3 ]. &gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Display(P);</span>
+Predicaton: deterministic finite automaton on 8 letters with 3 states, 
+the variable position list [ 1, 2, 3 ] and the following transitions:
+               |  1  2  3  
+---------------------------
+  [ 0, 0, 0 ]  |  1  3  3  
+  [ 1, 0, 0 ]  |  3  2  3  
+  [ 0, 1, 0 ]  |  3  2  3  
+  [ 1, 1, 0 ]  |  2  3  3  
+  [ 0, 0, 1 ]  |  3  1  3  
+  [ 1, 0, 1 ]  |  1  3  3  
+  [ 0, 1, 1 ]  |  1  3  3  
+  [ 1, 1, 1 ]  |  3  2  3  
+ Initial states: [ 1 ]
+ Final states:   [ 1 ]
+</pre></div>
+
+<p><a id="X854CA0237F4B8E5D" name="X854CA0237F4B8E5D"></a></p>
+
+<h5>2.1-5 View</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; View</code>( <var class="Arg">P</var> )</td><td class="tdright">(&nbsp;method&nbsp;)</td></tr></table></div>
+<p>The method <code class="code">View</code> applied on a <code class="code">Predicaton</code> <var class="Arg">P</var> returns the object text.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">P:=Predicaton(Automaton("det", 3, [ [ 0 ], [ 1 ] ], [ [ 2, 2, 3 ],</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">[ 3, 2, 2 ] ], [ 1 ], [ 3 ]), [ 1 ]);;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">View(P);</span>
+&lt; Predicaton: deterministic finite automaton on 2 letters with 3 states 
+and the variable position list [ 1 ]. &gt;
+</pre></div>
+
+<p><a id="X7C64F1F682B596FF" name="X7C64F1F682B596FF"></a></p>
+
+<h5>2.1-6 Print</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; Print</code>( <var class="Arg">P</var> )</td><td class="tdright">(&nbsp;method&nbsp;)</td></tr></table></div>
+<p>The method <code class="code">Print</code> applied on a <code class="code">Predicaton</code> <var class="Arg">P</var> prints the input as a string.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">P:=Predicaton(Automaton("det", 3, [ [ 0, 0 ], [ 1, 0 ], [ 0, 1 ], [ 1, 1 ] ], </span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">[ [ 1, 3, 3 ], [ 2, 3, 3 ], [ 3, 1, 3 ], [ 3, 2, 3 ] ], [ 1 ], [ 1 ]), </span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">[ 1, 2 ]);;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Print(P);</span>
+Predicaton(Automaton("det", 3, [ [ 0, 0 ], [ 1, 0 ], [ 0, 1 ], [ 1, 1 ] ], [ [ \
+1, 3, 3 ], [ 2, 3, 3 ], [ 3, 1, 3 ], [ 3, 2, 3 ] ], [ 1 ], [ 1 ]), [ 1, 2 ]);;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">String(P);</span>
+"Predicaton(Automaton(\"det\", 3, [ [ 0, 0 ], [ 1, 0 ], [ 0, 1 ], [ 1, 1 ] ], [ [\
+1, 3, 3 ], [ 2, 3, 3 ], [ 3, 1, 3 ], [ 3, 2, 3 ] ], [ 1 ], [ 1 ]), [ 1, 2 ]);;"
+</pre></div>
+
+<p><a id="X82BDA2E785ECEAB8" name="X82BDA2E785ECEAB8"></a></p>
+
+<h5>2.1-7 GetAlphabet</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; GetAlphabet</code>( <var class="Arg">n</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>The function <code class="code">GetAlphabet</code> returns the alphabet <span class="SimpleMath">A^n</span> for <span class="SimpleMath">A:={0,1}</span>.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">a1:=GetAlphabet(3);</span>
+[ [ 0, 0, 0 ], [ 1, 0, 0 ], [ 0, 1, 0 ], [ 1, 1, 0 ], 
+  [ 0, 0, 1 ], [ 1, 0, 1 ], [ 0, 1, 1 ], [ 1, 1, 1 ] ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">P1:=Predicaton(Automaton("det", 3, a1,</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">[ [ 1, 3, 3 ], [ 3, 2, 3 ], [ 3, 2, 3 ], [ 2, 3, 3 ], [ 3, 1, 3 ],</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">[ 1, 3, 3 ], [ 1, 3, 3 ], [ 3, 2, 3 ] ], [ 1 ], [ 1 ]), [ 1, 2, 3 ]);;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Display(P1);</span>
+Predicaton: deterministic finite automaton on 8 letters with 3 states, 
+the variable position list [ 1, 2, 3 ] and the following transitions:
+               |  1  2  3  
+---------------------------
+  [ 0, 0, 0 ]  |  1  3  3  
+  [ 1, 0, 0 ]  |  3  2  3  
+  [ 0, 1, 0 ]  |  3  2  3  
+  [ 1, 1, 0 ]  |  2  3  3  
+  [ 0, 0, 1 ]  |  3  1  3  
+  [ 1, 0, 1 ]  |  1  3  3  
+  [ 0, 1, 1 ]  |  1  3  3  
+  [ 1, 1, 1 ]  |  3  2  3  
+ Initial states: [ 1 ]
+ Final states:   [ 1 ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">a2:=GetAlphabet(0);</span>
+[ [  ] ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">P2:=Predicaton(Automaton("det", 1, a2, [ [ 1 ] ], [ 1 ], [ 1 ]), [ ]);;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Display(P2);</span>
+Predicaton: deterministic finite automaton on 1 letter with 1 state, 
+the variable position list [ ] and the following transitions:
+       |  1  
+-------------
+  [ ]  |  1  
+ Initial states: [ 1 ]
+ Final states:   [ 1 ]
+</pre></div>
+
+<p><a id="X87ACF62385B06FFF" name="X87ACF62385B06FFF"></a></p>
+
+<h4>2.2 <span class="Heading">Basic functions on Automata and Predicata</span></h4>
+
+<p>The package <strong class="pkg">Automata</strong> allows lists of lists as input for the alphabet, but unfortunately is lacking in further support. The functions regarding the alphabet takes only <code class="code">ShallowCopy</code> whereas a list of lists <code class="code">StructuralCopy</code> is needed, as well as the method <code class="code">Display</code> for automata prints with some weird spacing. Therefore this package reintroduces the basic <strong class="pkg">Automata</strong> functions with another name to ensure full control. Nevertheless all credit belongs to the creators of the package <strong class="pkg">Automata</strong>.</p>
+
+<p>Note that the <code class="code">Predicata</code> in the following examples corresponds to first-order formulas. The accepted natural numbers can be displayed with the functions from section <a href="chap2.html#X7B1626EA7E96CDB3"><span class="RefLink">2.3</span></a>.</p>
+
+<p>Furthermore, note that the following functions can be either called with an <code class="code">Automaton</code> or a <code class="code">Predicaton</code>.</p>
+
+<p><a id="X8720D1F186935FED" name="X8720D1F186935FED"></a></p>
+
+<h5>2.2-1 DisplayAut</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; DisplayAut</code>( <var class="Arg">P</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>The function <code class="code">DisplayAut</code> prints the <code class="code">Automaton</code> or <code class="code">Predicaton</code> <var class="Arg">P</var> (called by <code class="func">Display</code> (<a href="chap2.html#X818ADFEE7EC52BAF"><span class="RefLink">2.1-4</span></a>)).</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">A:=Automaton("det", 4, [ [ 0, 0 ], [ 1, 0 ], [ 0, 1 ], [ 1, 1 ] ],</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">[ [ 3, 2, 2, 4 ], [ 2, 2, 4, 2 ], [ 2, 2, 3, 2 ], [ 3, 2, 2, 4 ] ],</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">[ 1 ], [ 4 ]);</span>
+&lt; deterministic automaton on 4 letters with 4 states &gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">DisplayAut(A);</span>
+deterministic finite automaton on 4 letters with 4 states 
+and the following transitions:
+            |  1  2  3  4  
+---------------------------
+  [ 0, 0 ]  |  3  2  2  4  
+  [ 1, 0 ]  |  2  2  4  2  
+  [ 0, 1 ]  |  2  2  3  2  
+  [ 1, 1 ]  |  3  2  2  4  
+ Initial states: [ 1 ]
+ Final states:   [ 4 ]
+</pre></div>
+
+<p><a id="X81C510B7859139D9" name="X81C510B7859139D9"></a></p>
+
+<h5>2.2-2 DrawPredicaton</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; DrawPredicaton</code>( <var class="Arg">P</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>The function <code class="code">DrawPredicaton</code> calls the function <code class="code">DrawAutomaton</code> from the package <strong class="pkg">Automata</strong> which uses <code class="code">graphviz</code> <a href="chapBib.html#biBKoutsofiosNorth:2002">[DEG+02]</a>, a software for drawing graphs developed at AT &amp; T Labs, that can be obtained at <span class="URL"><a href="http://www.graphviz.org/">http://www.graphviz.org/</a></span>. For further details please refer to the manual of the package <strong class="pkg">Automata</strong>.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">A:=Automaton("det", 4, [ [ 0, 0 ], [ 1, 0 ], [ 0, 1 ], [ 1, 1 ] ],</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">[ [ 3, 2, 2, 4 ], [ 2, 2, 4, 2 ], [ 2, 2, 3, 2 ], [ 3, 2, 2, 4 ] ],</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">[ 1 ], [ 4 ]);</span>
+&lt; deterministic automaton on 4 letters with 4 states &gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">DisplayAut(A);</span>
+deterministic finite automaton on 4 letters with 4 states 
+and the following transitions:
+            |  1  2  3  4  
+---------------------------
+  [ 0, 0 ]  |  3  2  2  4  
+  [ 1, 0 ]  |  2  2  4  2  
+  [ 0, 1 ]  |  2  2  3  2  
+  [ 1, 1 ]  |  3  2  2  4  
+ Initial states: [ 1 ]
+ Final states:   [ 4 ]
+</pre></div>
+
+<p><a id="X837962738642AA13" name="X837962738642AA13"></a></p>
+
+<h5>2.2-3 IsDeterministicAut</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsDeterministicAut</code>( <var class="Arg">P</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>The function <code class="code">IsDeterministicAut</code> checks if the <code class="code">Type</code> of an <code class="code">Automaton</code> or a <code class="code">Predicaton</code> <var class="Arg">P</var> is <code class="code">"det"</code>. If yes then <code class="keyw">true</code>, otherwise <code class="keyw">false</code>.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">P:=Predicaton(Automaton("det", 5, [ [ 0 ], [ 1 ] ], [ [ 1, 2, 2, 3, 2 ], </span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">[ 2, 2, 1, 2, 4 ] ], [ 5 ], [ 1 ]), [ 1 ]);</span>
+&lt; Predicaton: deterministic finite automaton on 2 letters with 5 states 
+and the variable position list [ 1 ]. &gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">IsDeterministicAut(P);</span>
+true
+</pre></div>
+
+<p><a id="X82BB21D07836FC43" name="X82BB21D07836FC43"></a></p>
+
+<h5>2.2-4 IsNonDeterministicAut</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsNonDeterministicAut</code>( <var class="Arg">P</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>The function <code class="code">IsNonDeterministicAut</code> checks if the <code class="code">Type</code> of an <code class="code">Automaton</code> or a <code class="code">Predicaton</code> <var class="Arg">P</var> is <code class="code">"nondet"</code>. If yes then <code class="keyw">true</code>, otherwise <code class="keyw">false</code>.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">P:=Predicaton(Automaton("nondet", 2, [ [ 0 ], [ 1 ] ], [ [ 1  ], [  ] ],</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">[ 1 ], [ 1 ]), [ 1 ]);</span>
+&lt; Predicaton: nondeterministic finite automaton on 2 letters with 2 states 
+and the variable position list [ 1 ]. &gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Display(P);</span>
+Predicaton: nondeterministic finite automaton on 2 letters with 2 states, 
+the variable position list [ 1 ] and the following transitions:
+         |  1      2      
+--------------------------
+  [ 0 ]  |  [ 1 ]  [ ]    
+  [ 1 ]  |  [ ]    [ ]    
+ Initial states: [ 1 ]
+ Final states:   [ 1 ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">IsNonDeterministicAut(P);</span>
+true
+</pre></div>
+
+<p><a id="X8291B3E379A6DE70" name="X8291B3E379A6DE70"></a></p>
+
+<h5>2.2-5 TypeOfAut</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; TypeOfAut</code>( <var class="Arg">P</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>The function <code class="code">TypeOfAut</code> returns the <code class="code">Type</code> of an <code class="code">Automaton</code> or a <code class="code">Predicaton</code> <var class="Arg">P</var>, either <code class="code">"det"</code>, <code class="code">"nondet"</code> or <code class="code">"epsilon"</code>. Note that a <code class="code">Predicaton</code> can only be a deterministic or nondeterministic finite automaton.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">P:=Predicaton(Automaton("det", 5, [ [ 0, 0 ], [ 1, 0 ], [ 0, 1 ], [ 1, 1 ] ], </span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">[ [ 2, 2, 2, 2, 5 ], [ 2, 2, 5, 2, 2 ], [ 2, 2, 2, 3, 2 ], [ 4, 2, 2, 2, 2 ] ],</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">[ 1 ], [ 5 ]), [ 1, 2 ]);;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">TypeOfAut(P);</span>
+"det"
+</pre></div>
+
+<p><a id="X79387C217C9E0645" name="X79387C217C9E0645"></a></p>
+
+<h5>2.2-6 AlphabetOfAut</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; AlphabetOfAut</code>( <var class="Arg">P</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>The function <code class="code">AlphabetOfAut</code> returns the size of an <code class="code">Alphabet</code> of an <code class="code">Automaton</code> or a <code class="code">Predicaton</code> <var class="Arg">P</var>.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">P:=Predicaton(Automaton("det", 2, [ [ 0, 0 ], [ 1, 0 ], [ 0, 1 ], [ 1, 1 ] ], </span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">[ [ 1, 2 ], [ 2, 2 ], [ 2, 2 ], [ 1, 2 ] ], [ 1 ], [ 1 ]), [ 1, 2 ]);;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">AlphabetOfAut(P);</span>
+4
+</pre></div>
+
+<p><a id="X7BB104337B972500" name="X7BB104337B972500"></a></p>
+
+<h5>2.2-7 AlphabetOfAutAsList</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; AlphabetOfAutAsList</code>( <var class="Arg">P</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>The function <code class="code">AlphabetOfAutAsList</code> returns a <code class="code">StructuralCopy</code> of the <code class="code">Alphabet</code> of an <code class="code">Automaton</code> or a <code class="code">Predicaton</code> <var class="Arg">P</var>.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput"># Continued </span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">AlphabetOfAutAsList(P);</span>
+[ [ 0, 0 ], [ 1, 0 ], [ 0, 1 ], [ 1, 1 ] ]
+</pre></div>
+
+<p><a id="X7A1F901B7C19CB01" name="X7A1F901B7C19CB01"></a></p>
+
+<h5>2.2-8 NumberStatesOfAut</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; NumberStatesOfAut</code>( <var class="Arg">P</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>The function <code class="code">NumberStatesOfAut</code> returns the number of the <code class="code">States</code> of an <code class="code">Automaton</code> or a <code class="code">Predicaton</code> <var class="Arg">P</var>.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">P:=Predicaton(Automaton("det", 5, [ [ 0, 0 ], [ 1, 0 ], [ 0, 1 ], [ 1, 1 ] ],</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">[ [ 2, 2, 2, 2, 5 ], [ 4, 2, 5, 3, 2 ], [ 4, 2, 5, 3, 2 ], [ 2, 2, 2, 2, 2 ] ], </span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">[ 1 ], [ 5 ]), [ 1, 2 ]);;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">NumberStatesOfAut(P);</span>
+5
+</pre></div>
+
+<p><a id="X7C0D702D869F7E62" name="X7C0D702D869F7E62"></a></p>
+
+<h5>2.2-9 SortedStatesAut</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; SortedStatesAut</code>( <var class="Arg">P</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>The function <code class="code">SortedStatesAut</code> returns the <code class="code">Automaton</code> or the <code class="code">Predicaton</code> <var class="Arg">P</var> with sorted <code class="code">States</code>, such that the initial states have the lowest and the final states the highest number.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">P:=Predicaton(Automaton("det", 5, [ [ 0 ], [ 1 ] ], [ [ 1, 2, 2, 2, 2 ],</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">[ 2, 2, 1, 3, 4 ] ], [ 5 ], [ 1 ]), [ 1 ]);;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Display(P);</span>
+Predicaton: deterministic finite automaton on 2 letters with 5 states, 
+the variable position list [ 1 ] and the following transitions:
+         |  1  2  3  4  5  
+---------------------------
+  [ 0 ]  |  1  2  2  2  2  
+  [ 1 ]  |  2  2  1  3  4  
+ Initial states: [ 5 ]
+ Final states:   [ 1 ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">S:=SortedStatesAut(P);;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Display(S);</span>
+Predicaton: deterministic finite automaton on 2 letters with 5 states, 
+the variable position list [ 1 ] and the following transitions:
+         |  1  2  3  4  5  
+---------------------------
+  [ 0 ]  |  2  2  2  2  5  
+  [ 1 ]  |  4  2  5  3  2  
+ Initial states: [ 1 ]
+ Final states:   [ 5 ]
+</pre></div>
+
+<p><a id="X8150E8F278688F79" name="X8150E8F278688F79"></a></p>
+
+<h5>2.2-10 TransitionMatrixOfAut</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; TransitionMatrixOfAut</code>( <var class="Arg">P</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>The function <code class="code">TransitionMatrixOfAut</code> returns a <code class="code">StructuralCopy</code> of the <code class="code">TransitionMatrix</code> of an <code class="code">Automaton</code> or a <code class="code">Predicaton</code> <var class="Arg">P</var>.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">P:=Predicaton(Automaton("det", 5, [ [ 0 ], [ 1 ] ], [ [ 1, 2, 2, 2, 2 ],</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">[ 2, 2, 1, 3, 4 ] ], [ 5 ], [ 1 ]), [ 1 ]);;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Display(P);</span>
+Predicaton: deterministic finite automaton on 2 letters with 5 states, 
+the variable position list [ 1 ] and the following transitions:
+         |  1  2  3  4  5  
+---------------------------
+  [ 0 ]  |  1  2  2  2  2  
+  [ 1 ]  |  2  2  1  3  4  
+ Initial states: [ 5 ]
+ Final states:   [ 1 ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">TransitionMatrixOfAut(P);</span>
+[ [ 1, 2, 2, 2, 2 ], [ 2, 2, 1, 3, 4 ] ]
+</pre></div>
+
+<p><a id="X785309187BAFF773" name="X785309187BAFF773"></a></p>
+
+<h5>2.2-11 InitialStatesOfAut</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; InitialStatesOfAut</code>( <var class="Arg">P</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>The function <code class="code">InitialStatesOfAut</code> returns the <code class="code">Initial</code> states of an <code class="code">Automaton</code> or a <code class="code">Predicaton</code> <var class="Arg">P</var>.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">P:=Predicaton(Automaton("det", 5, [ [ 0 ], [ 1 ] ], [ [ 2, 2, 2, 3, 5 ], </span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">[ 4, 2, 5, 2, 2 ] ], [ 1 ], [ 5 ]), [ 1 ]);;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">InitialStatesOfAut(P);</span>
+[ 1 ]
+</pre></div>
+
+<p><a id="X812E72137E8ED4E1" name="X812E72137E8ED4E1"></a></p>
+
+<h5>2.2-12 SetInitialStatesOfAut</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; SetInitialStatesOfAut</code>( <var class="Arg">P</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>The function <code class="code">SetInitialStatesOfAut</code> sets the <code class="code">Initial</code> states of an <code class="code">Automaton</code> or a <code class="code">Predicaton</code> <var class="Arg">P</var>.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">P:=Predicaton(Automaton("det", 5, [ [ 0 ], [ 1 ] ], [ [ 2, 2, 2, 3, 5 ],</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">[ 4, 2, 5, 2, 2 ] ], [ 1 ], [ 5 ]), [ 1 ]);;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Display(P);</span>
+Predicaton: deterministic finite automaton on 2 letters with 5 states, 
+the variable position list [ 1 ] and the following transitions:
+         |  1  2  3  4  5  
+---------------------------
+  [ 0 ]  |  2  2  2  3  5  
+  [ 1 ]  |  4  2  5  2  2  
+ Initial states: [ 1 ]
+ Final states:   [ 5 ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">SetInitialStatesOfAut(P, 3);</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Display(P);</span>
+Predicaton: deterministic finite automaton on 2 letters with 5 states, 
+the variable position list [ 1 ] and the following transitions:
+         |  1  2  3  4  5  
+---------------------------
+  [ 0 ]  |  2  2  2  3  5  
+  [ 1 ]  |  4  2  5  2  2  
+ Initial states: [ 3 ]
+ Final states:   [ 5 ]
+</pre></div>
+
+<p><a id="X867925CC844D77D5" name="X867925CC844D77D5"></a></p>
+
+<h5>2.2-13 FinalStatesOfAut</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; FinalStatesOfAut</code>( <var class="Arg">P</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>The function <code class="code">FinalStatesOfAut</code> returns the <code class="code">Final</code> states of an <code class="code">Automaton</code> or a <code class="code">Predicaton</code> <var class="Arg">P</var>.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">P:=Predicaton(Automaton("det", 4, [ [ 0 ], [ 1 ] ], [ [ 2, 2, 2, 4 ],</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">[ 3, 2, 4, 2 ] ], [ 1 ], [ 4 ]), [ 1 ]);;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Display(P);</span>
+Predicaton: deterministic finite automaton on 2 letters with 4 states, 
+the variable position list [ 1 ] and the following transitions:
+         |  1  2  3  4  
+------------------------
+  [ 0 ]  |  2  2  2  4  
+  [ 1 ]  |  3  2  4  2  
+ Initial states: [ 1 ]
+ Final states:   [ 4 ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">FinalStatesOfAut(P);</span>
+[ 4 ]
+</pre></div>
+
+<p><a id="X80EF044086173940" name="X80EF044086173940"></a></p>
+
+<h5>2.2-14 SetFinalStatesOfAut</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; SetFinalStatesOfAut</code>( <var class="Arg">P</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>The function <code class="code">SetFinalStatesOfAut</code> sets the <code class="code">Final</code> states of an <code class="code">Automaton</code> or a <code class="code">Predicaton</code> <var class="Arg">P</var>.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">P:=Predicaton(Automaton("det", 4, [ [ 0 ], [ 1 ] ], [ [ 2, 2, 2, 4 ],</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">[ 3, 2, 4, 2 ] ], [ 1 ], [ 4 ]), [ 1 ]);;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Display(P);</span>
+Predicaton: deterministic finite automaton on 2 letters with 4 states, 
+the variable position list [ 1 ] and the following transitions:
+         |  1  2  3  4  
+------------------------
+  [ 0 ]  |  2  2  2  4  
+  [ 1 ]  |  3  2  4  2  
+ Initial states: [ 1 ]
+ Final states:   [ 4 ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">SetFinalStatesOfAut(P, [ 1, 2, 3 ]);</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Display(P);</span>
+Predicaton: deterministic finite automaton on 2 letters with 4 states, 
+the variable position list [ 1 ] and the following transitions:
+         |  1  2  3  4  
+------------------------
+  [ 0 ]  |  2  2  2  4  
+  [ 1 ]  |  3  2  4  2  
+ Initial states: [ 1 ]
+ Final states:   [ 1, 2, 3 ]
+</pre></div>
+
+<p><a id="X84FC26AF7F7F8393" name="X84FC26AF7F7F8393"></a></p>
+
+<h5>2.2-15 SinkStatesOfAut</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; SinkStatesOfAut</code>( <var class="Arg">P</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>The function <code class="code">SinkStatesOfAut</code> returns the sink states of an <code class="code">Automaton</code> or a <code class="code">Predicaton</code> <var class="Arg">P</var>.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">P:=Predicaton(Automaton("det", 3, [ [ 0 ], [ 1 ] ], [ [ 2, 2, 3 ],</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">[ 3, 2, 2 ] ], [ 1 ], [ 3 ]), [ 1 ]);;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Display(P);</span>
+Predicaton: deterministic finite automaton on 2 letters with 3 states, 
+the variable position list [ 1 ] and the following transitions:
+         |  1  2  3  
+---------------------
+  [ 0 ]  |  2  2  3  
+  [ 1 ]  |  3  2  2  
+ Initial states: [ 1 ]
+ Final states:   [ 3 ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">SinkStatesOfAut(P);</span>
+[ 2 ]
+</pre></div>
+
+<p><a id="X82B09FBE86E7D43A" name="X82B09FBE86E7D43A"></a></p>
+
+<h5>2.2-16 PermutedStatesAut</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; PermutedStatesAut</code>( <var class="Arg">P</var>, <var class="Arg">p</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>The function <code class="code">PermutedStatesAut</code> permutes the names of the states of an <code class="code">Automaton</code> or a <code class="code">Predicaton</code> <var class="Arg">P</var>. The list <var class="Arg">p</var> contains all states, where the state <code class="code">i</code> (i.e. <code class="code">i</code>-th position) is mapped to the state <code class="code">p[i]</code>.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">P:=Predicaton(Automaton("det", 6, [ [ 0 ], [ 1 ] ], [ [ 5, 2, 2, 3, 4, 6 ],</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">[ 2, 2, 6, 2, 2, 2 ] ], [ 1 ], [ 6 ]), [ 1 ]);;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Display(P);</span>
+Predicaton: deterministic finite automaton on 2 letters with 6 states, 
+the variable position list [ 1 ] and the following transitions:
+         |  1  2  3  4  5  6  
+------------------------------
+  [ 0 ]  |  5  2  2  3  4  6  
+  [ 1 ]  |  2  2  6  2  2  2  
+ Initial states: [ 1 ]
+ Final states:   [ 6 ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Q:=PermutedStatesAut(P,[1,6,4,3,2,5]);;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Display(Q);</span>
+Predicaton: deterministic finite automaton on 2 letters with 6 states, 
+the variable position list [ 1 ] and the following transitions:
+         |  1  2  3  4  5  6  
+------------------------------
+  [ 0 ]  |  2  3  4  6  5  6  
+  [ 1 ]  |  6  6  6  5  6  6  
+ Initial states: [ 1 ]
+ Final states:   [ 5 ]
+</pre></div>
+
+<p><a id="X84BCD89583863028" name="X84BCD89583863028"></a></p>
+
+<h5>2.2-17 CopyAut</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; CopyAut</code>( <var class="Arg">P</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; CopyPredicaton</code>( <var class="Arg">P</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>The function <code class="code">CopyAut</code> copies either the <code class="code">Automaton</code> or the <code class="code">Predicaton</code> <var class="Arg">P</var>.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">P:=Predicaton(Automaton("det", 2, [ [ 0 ], [ 1 ] ], [ [ 1, 2 ], [ 2, 2 ] ],</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">[ 1 ], [ 1 ]), [ 1 ]);;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">C:=CopyAut(P);;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">SetFinalStatesOfAut(C, 2);</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Display(P);</span>
+Predicaton: deterministic finite automaton on 2 letters with 2 states, 
+the variable position list [ 1 ] and the following transitions:
+         |  1  2  
+------------------
+  [ 0 ]  |  1  2  
+  [ 1 ]  |  2  2  
+ Initial states: [ 1 ]
+ Final states:   [ 1 ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Display(C);</span>
+Predicaton: deterministic finite automaton on 2 letters with 2 states, 
+the variable position list [ 1 ] and the following transitions:
+         |  1  2  
+------------------
+  [ 0 ]  |  1  2  
+  [ 1 ]  |  2  2  
+ Initial states: [ 1 ]
+ Final states:   [ 2 ]
+</pre></div>
+
+<p><a id="X8377BBD382180F49" name="X8377BBD382180F49"></a></p>
+
+<h5>2.2-18 MinimalAut</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; MinimalAut</code>( <var class="Arg">P</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>The function <code class="code">MinimalAut</code> returns the minimal deterministic finite automaton of an <code class="code">Automaton</code> <var class="Arg">P</var>. Given a <code class="code">Predicaton</code> <var class="Arg">P</var> its automaton is minimized and returned as a <code class="code">Predicaton</code> with the same variable position list.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">P:=Predicaton(Automaton("det", 9, [ [ 0, 0 ], [ 1, 0 ], [ 0, 1 ], [ 1, 1 ] ],</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">[ [ 2, 6, 7, 4, 5, 4, 5, 8, 9 ], [ 3, 6, 6, 4, 4, 4, 4, 8, 8 ],</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">[ 4, 4, 5, 4, 5, 8, 9, 4, 5 ], [ 5, 4, 4, 4, 4, 8, 8, 4, 4 ] ],</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">[ 1 ], [ 9 ]), [ 1, 2 ]);;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Display(P);</span>
+Predicaton: deterministic finite automaton on 4 letters with 9 states, 
+the variable position list [ 1, 2 ] and the following transitions:
+            |  1  2  3  4  5  6  7  8  9  
+------------------------------------------
+  [ 0, 0 ]  |  2  6  7  4  5  4  5  8  9  
+  [ 1, 0 ]  |  3  6  6  4  4  4  4  8  8  
+  [ 0, 1 ]  |  4  4  5  4  5  8  9  4  5  
+  [ 1, 1 ]  |  5  4  4  4  4  8  8  4  4  
+ Initial states: [ 1 ]
+ Final states:   [ 9 ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">M:=MinimalAut(P);;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Display(M);</span>
+Predicaton: deterministic finite automaton on 4 letters with 5 states, 
+the variable position list [ 1, 2 ] and the following transitions:
+            |  1  2  3  4  5  
+------------------------------
+  [ 0, 0 ]  |  1  2  2  3  2  
+  [ 1, 0 ]  |  2  2  2  2  4  
+  [ 0, 1 ]  |  2  2  1  2  2  
+  [ 1, 1 ]  |  2  2  2  2  2  
+ Initial states: [ 5 ]
+ Final states:   [ 1 ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">P:=Predicaton(Automaton("nondet", 8, [ [ 0 ], [ 1 ] ],</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">[ [ [ 2 ], [ 2 ], [ 2 ], [ 4 ], [ 7 ], [ 6 ], [ 6 ], [ 8 ] ],</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">[ [ 3 ], [ 2 ], [ 4 ], [ 2 ], [ 6 ], [ 6 ], [ 8 ], [ 6 ] ] ],</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">[ 1, 5 ], [ 4, 8 ]), [ 1 ]);;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">M:=MinimalAut(P);;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Display(M);</span>
+Predicaton: deterministic finite automaton on 2 letters with 4 states, 
+the variable position list [ 1 ] and the following transitions:
+         |  1  2  3  4  
+------------------------
+  [ 0 ]  |  1  2  2  3  
+  [ 1 ]  |  2  2  1  3  
+ Initial states: [ 4 ]
+ Final states:   [ 1 ]
+</pre></div>
+
+<p><a id="X802357D181BD700C" name="X802357D181BD700C"></a></p>
+
+<h5>2.2-19 NegatedAut</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; NegatedAut</code>( <var class="Arg">P</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>The function <code class="code">NegatedAut</code> changes the <code class="code">Final</code> states to non-final ones and the non-final states to <code class="code">Final</code> ones.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">P:=Predicaton(Automaton("det", 4, [ [ 0 ], [ 1 ] ], [ [ 2, 2, 2, 4 ],</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">[ 3, 2, 4, 2 ] ], [ 1 ], [ 4 ]), [ 1 ]);;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Display(P);</span>
+Predicaton: deterministic finite automaton on 2 letters with 4 states, 
+the variable position list [ 1 ] and the following transitions:
+         |  1  2  3  4  
+------------------------
+  [ 0 ]  |  2  2  2  4  
+  [ 1 ]  |  3  2  4  2  
+ Initial states: [ 1 ]
+ Final states:   [ 4 ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Q:=NegatedAut(P);;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Display(Q);</span>
+Predicaton: deterministic finite automaton on 2 letters with 4 states, 
+the variable position list [ 1 ] and the following transitions:
+         |  1  2  3  4  
+------------------------
+  [ 0 ]  |  2  2  2  4  
+  [ 1 ]  |  3  2  4  2  
+ Initial states: [ 1 ]
+ Final states:   [ 1, 2, 3 ]
+</pre></div>
+
+<p><a id="X7C09B02679BDA33D" name="X7C09B02679BDA33D"></a></p>
+
+<h5>2.2-20 IntersectionAut</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IntersectionAut</code>( <var class="Arg">P</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>The function <code class="code">IntersectionAut</code> returns the intersection of two <code class="code">Automata</code> or <code class="code">Predicata</code> <var class="Arg">P</var>. Note that the for intersection of two automata both must have the same ordered alphabet. For the intersection of two <code class="code">Predicata</code> with different alphabets use <code class="func">IntersectionPredicata</code> (<a href="chap2.html#X80379AA57C3C7145"><span class="RefLink">2.3-19</span></a>).</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">P1:=Predicaton(Automaton("det", 5, [ [ 0, 0 ], [ 1, 0 ], [ 0, 1 ], [ 1, 1 ] ],</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">[ [ 2, 2, 2, 3, 5 ], [ 2, 2, 2, 3, 5 ], [ 4, 2, 5, 2, 2 ], [ 4, 2, 5, 2, 2 ] ],</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">[ 1 ], [ 5 ]), [ 1, 2 ]);;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">P2:=Predicaton(Automaton("det", 2, [ [ 0, 0 ], [ 1, 0 ], [ 0, 1 ], [ 1, 1 ] ],</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">[ [ 1, 2 ], [ 2, 2 ], [ 2, 2 ], [ 1, 2 ] ], [ 1 ], [ 1 ]), [ 1, 2 ]);;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">P3:=IntersectionAut(P1, P2);;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Display(P3);</span>
+Predicaton: deterministic finite automaton on 4 letters with 9 states, 
+the variable position list [ 1, 2 ] and the following transitions:
+            |  1  2  3  4  5  6  7  8  9  
+------------------------------------------
+  [ 0, 0 ]  |  2  2  3  6  7  3  2  8  9  
+  [ 1, 0 ]  |  3  3  3  6  6  3  3  8  8  
+  [ 0, 1 ]  |  4  3  3  3  3  8  8  3  3  
+  [ 1, 1 ]  |  5  2  3  3  2  8  9  3  2  
+ Initial states: [ 1 ]
+ Final states:   [ 9 ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">P4:=MinimalAut(P3);;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Display(P4);</span>
+Predicaton: deterministic finite automaton on 4 letters with 5 states, 
+the variable position list [ 1, 2 ] and the following transitions:
+            |  1  2  3  4  5  
+------------------------------
+  [ 0, 0 ]  |  1  2  2  3  2  
+  [ 1, 0 ]  |  2  2  2  2  2  
+  [ 0, 1 ]  |  2  2  2  2  2  
+  [ 1, 1 ]  |  2  2  1  2  4  
+ Initial states: [ 5 ]
+ Final states:   [ 1 ]
+</pre></div>
+
+<p><a id="X82617D80836C976A" name="X82617D80836C976A"></a></p>
+
+<h5>2.2-21 UnionAut</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; UnionAut</code>( <var class="Arg">P</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>The function <code class="code">UnionAut</code> returns the union of two <code class="code">Automata</code> or <code class="code">Predicata</code> <var class="Arg">P</var>. Note that for the union of two automata both must have the same ordered alphabet. For the union of two <code class="code">Predicata</code> with different alphabets use <code class="func">UnionPredicata</code> (<a href="chap2.html#X863B344079D411DF"><span class="RefLink">2.3-20</span></a>).</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">P1:=Predicaton(Automaton("det", 2, [ [ 0 ], [ 1 ] ],</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">[ [ 1, 2 ], [ 2, 2 ] ], [ 1 ], [ 1 ]), [ 1 ]);;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">P2:=Predicaton(Automaton("det", 4, [ [ 0 ], [ 1 ] ],</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">[ [ 3, 2, 2, 4 ], [ 2, 2, 4, 2 ] ], [ 1 ], [ 4 ]), [ 1 ]);;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">P3:=UnionAut(P1, P2);;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Display(P3);</span>
+Predicaton: nondeterministic finite automaton on 2 letters with 6 states, 
+the variable position list [ 1 ] and the following transitions:
+         |  1      2      3      4      5      6      
+------------------------------------------------------
+  [ 0 ]  |  [ 1 ]  [ 2 ]  [ 5 ]  [ 4 ]  [ 4 ]  [ 6 ]  
+  [ 1 ]  |  [ 2 ]  [ 2 ]  [ 4 ]  [ 4 ]  [ 6 ]  [ 4 ]  
+ Initial states: [ 1, 3 ]
+ Final states:   [ 1, 6 ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">M:=MinimalAut(P3);;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Display(M);</span>
+Predicaton: deterministic finite automaton on 2 letters with 4 states, 
+the variable position list [ 1 ] and the following transitions:
+         |  1  2  3  4  
+------------------------
+  [ 0 ]  |  1  2  2  3  
+  [ 1 ]  |  1  1  2  1  
+ Initial states: [ 4 ]
+ Final states:   [ 2, 3, 4 ]
+</pre></div>
+
+<p><a id="X7FB4776D86776512" name="X7FB4776D86776512"></a></p>
+
+<h5>2.2-22 IsRecognizedByAut</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsRecognizedByAut</code>( <var class="Arg">P</var>, <var class="Arg">word</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>The function <code class="code">IsRecognizedByAut</code> checks if a <var class="Arg">word</var>, given by its letters, is accepted by the <code class="code">Automaton</code> or <code class="code">Predicaton</code> <var class="Arg">P</var>.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">P:=Predicaton(Automaton("det", 5, [ [ 0 ], [ 1 ] ],</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">[ [ 5, 5, 5, 4, 5 ], [ 2, 3, 4, 5, 5 ] ], [ 1 ], [ 4 ]), [ 1 ]);;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Display(P);</span>
+Predicaton: deterministic finite automaton on 2 letters with 5 states, 
+the variable position list [ 1 ] and the following transitions:
+         |  1  2  3  4  5  
+---------------------------
+  [ 0 ]  |  5  5  5  4  5  
+  [ 1 ]  |  2  3  4  5  5  
+ Initial states: [ 1 ]
+ Final states:   [ 4 ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">IsRecognizedByAut(P,[[1],[1],[1]]);</span>
+true
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">IsRecognizedByAut(P,[[1],[1],[1],[0],[0]]);</span>
+true
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">IsRecognizedByAut(P,[[1],[1],[0]]);</span>
+false
+</pre></div>
+
+<p><a id="X7B1626EA7E96CDB3" name="X7B1626EA7E96CDB3"></a></p>
+
+<h4>2.3 <span class="Heading">Basic functions on Predicata</span></h4>
+
+<p>The following functions act only on Predicata, accessing and modifying the alphabet <span class="SimpleMath">A:={0,1}^n</span> for a natural number <span class="Math">n</span> (including 0).</p>
+
+<p><a id="X7834545A7C3F35A9" name="X7834545A7C3F35A9"></a></p>
+
+<h5>2.3-1 DecToBin</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; DecToBin</code>( <var class="Arg">D</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>The function <code class="code">DecToBin</code> returns for a natural numbers <var class="Arg">D</var> or the list of its binary representation. Note that here, motivated on how the automata read the words, the binary representation are read in the other direction than usual, for example <span class="SimpleMath">4 = [0,0,1]_2</span>.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">DecToBin(4);</span>
+[ 0, 0, 1 ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">DecToBin(0);</span>
+[ 0 ]
+</pre></div>
+
+<p><a id="X7E89D7A880401BF4" name="X7E89D7A880401BF4"></a></p>
+
+<h5>2.3-2 BinToDec</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; BinToDec</code>( <var class="Arg">B</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>The function <code class="code">BinToDec</code> returns for a list <var class="Arg">B</var> (i.e. a binary representation), containing <code class="code">0</code>s and <code class="code">1</code>s, the corresponding natural number. Note again that here the <span class="SimpleMath">∑ b_i+1*2^i</span> starting at <span class="SimpleMath">i=0</span> is evaluated the other way around than it's usually done.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">BinToDec([ 0, 0, 1 ]);</span>
+4
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">BinToDec([ 0, 0, 1, 0, 0, 0, 0 ]);</span>
+4
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">BinToDec([ ]);</span>
+0
+
+</pre></div>
+
+<p><a id="X85118B7386A66FDF" name="X85118B7386A66FDF"></a></p>
+
+<h5>2.3-3 IsAcceptedWordByPredicaton</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsAcceptedWordByPredicaton</code>( <var class="Arg">P</var>, <var class="Arg">L</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsAcceptedByPredicaton</code>( <var class="Arg">P</var>, <var class="Arg">L</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>The function <code class="code">IsAcceptedWordByPredicaton</code> checks if a list of natural numbers <var class="Arg">L</var> or a list of binary representation <var class="Arg">L</var> is accepted by the <code class="code">Predicaton</code> <var class="Arg">P</var>. Compare with <code class="func">IsRecognizedByAut</code> (<a href="chap2.html#X7FB4776D86776512"><span class="RefLink">2.2-22</span></a>), which uses the letters instead of the words.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">P:=Predicaton(Automaton("det", 5, [ [ 0, 0 ], [ 1, 0 ], [ 0, 1 ], [ 1, 1 ] ],</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">[ [ 2, 2, 2, 2, 5 ], [ 4, 2, 2, 3, 2 ], [ 2, 2, 2, 2, 2 ], [ 2, 2, 5, 2, 2 ] ],</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">[ 1 ], [ 5 ]), [ 1, 2 ]);;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Display(P);</span>
+Predicaton: deterministic finite automaton on 4 letters with 5 states, 
+the variable position list [ 1, 2 ] and the following transitions:
+            |  1  2  3  4  5  
+------------------------------
+  [ 0, 0 ]  |  2  2  2  2  5  
+  [ 1, 0 ]  |  4  2  2  3  2  
+  [ 0, 1 ]  |  2  2  2  2  2  
+  [ 1, 1 ]  |  2  2  5  2  2  
+ Initial states: [ 1 ]
+ Final states:   [ 5 ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">IsAcceptedWordByPredicaton(P, [ 7, 4 ]);</span>
+true
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">IsAcceptedWordByPredicaton(P, [ DecToBin(7), DecToBin(4) ]);</span>
+true
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">IsAcceptedWordByPredicaton(P, [ [ 1, 1, 1, 0 ], [ 0, 0, 1, 0, 0, 0 ] ]);</span>
+true
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">IsRecognizedByAut(P, [ [ 1, 0 ], [ 1, 0 ], [ 1, 1 ] ]); # 1st row = 7, 2nd row = 4</span>
+true
+</pre></div>
+
+<p><a id="X87CE47357E2AC5A9" name="X87CE47357E2AC5A9"></a></p>
+
+<h5>2.3-4 AcceptedWordsByPredicaton</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; AcceptedWordsByPredicaton</code>( <var class="Arg">P</var>[, <var class="Arg">b</var>] )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; AcceptedByPredicaton</code>( <var class="Arg">P</var>[, <var class="Arg">b</var>] )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>The function <code class="code">AcceptedWordsByPredicaton</code> returns the accepted words of the <code class="code">Predicaton</code> <var class="Arg">P</var> up to an upper bound <var class="Arg">b</var> (on default <code class="code">b=10</code>), either a positive integer or a list with positive integers as an individual bound for each variable. Alternatively, list of lists where each list contains the to be tested values is also allowed.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">P:=Predicaton(Automaton("det", 5, [ [ 0, 0 ], [ 1, 0 ], [ 0, 1 ], [ 1, 1 ] ],</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">[ [ 2, 2, 2, 2, 5 ], [ 4, 2, 2, 3, 2 ], [ 2, 2, 2, 2, 2 ], [ 2, 2, 5, 2, 2 ] ],</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">[ 1 ], [ 5 ]), [ 1, 2 ]);;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">AcceptedWordsByPredicaton(P, [ 10, 20 ]);</span>
+[ [ 7, 4 ] ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">P:=Predicaton(Automaton("det", 3, [ [ 0 ], [ 1 ] ], </span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">[ [ 1, 3, 2 ], [ 2, 1, 3 ] ], [ 1 ], [ 1 ]), [ 1 ]);;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Display(P);</span>
+Predicaton: deterministic finite automaton on 2 letters with 3 states, 
+the variable position list [ 1 ] and the following transitions:
+         |  1  2  3  
+---------------------
+  [ 0 ]  |  1  3  2  
+  [ 1 ]  |  2  1  3  
+ Initial states: [ 1 ]
+ Final states:   [ 1 ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">AcceptedWordsByPredicaton(P, 29);</span>
+[ [ 0 ], [ 3 ], [ 6 ], [ 9 ], [ 12 ], [ 15 ], [ 18 ], [ 21 ], [ 24 ], [ 27 ] ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">AcceptedWordsByPredicaton(P, [ [121..144] ]);</span>
+[ [ 123 ], [ 126 ], [ 129 ], [ 132 ], [ 135 ], [ 138 ], [ 141 ], [ 144 ] ]
+</pre></div>
+
+<p><a id="X7EF0AB6485AC152E" name="X7EF0AB6485AC152E"></a></p>
+
+<h5>2.3-5 DisplayAcceptedWordsByPredicaton</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; DisplayAcceptedWordsByPredicaton</code>( <var class="Arg">P</var>[, <var class="Arg">b</var>, <var class="Arg">t</var>] )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; DisplayAcceptedByPredicaton</code>( <var class="Arg">P</var>[, <var class="Arg">b</var>, <var class="Arg">t</var>] )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>The function <code class="code">DisplayAcceptedWordsByPredicaton</code> prints the accepted words of the <code class="code">Predicaton</code> <var class="Arg">P</var> in a nice way. For one variable as a "list" with <code class="code">YES/no</code>, for two variables as a "matrix" containing <code class="code">YES/no</code> and for three variables as a "matrix", which entries are the third accepted natural numbers. The optional parameter <var class="Arg">b</var> gives an upper bound for the displayed natural numbers, where either a positive integer or a list of positive integers denotes the maximal natural numbers which are asked for. The second optional parameter, if <code class="code">true</code> allows to reduce <code class="code">YES/no</code> to <code class="code">Y/n</code> for the case of one variable.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">P:=Predicaton(Automaton("det", 5, [ [ 0, 0 ], [ 1, 0 ], [ 0, 1 ], [ 1, 1 ] ], </span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">[ [ 2, 2, 2, 3, 5 ], [ 4, 2, 2, 3, 2 ], [ 2, 2, 2, 3, 2 ], [ 2, 2, 5, 3, 2 ] ],</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">[ 1 ], [ 5 ]), [ 1, 2 ]);;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">AcceptedWordsByPredicaton(P);</span>
+[ [ 5, 4 ], [ 5, 6 ], [ 7, 4 ], [ 7, 6 ] ]  
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">DisplayAcceptedWordsByPredicaton(P, [8,10]);</span>
+ If the following words are accepted by the given automaton, then: YES,
+ otherwise if not accepted: no.
+
+     | 0   1   2   3   4   5   6   7   8   9   10  
+ -------------------------------------------------
+   0 | no  no  no  no  no  no  no  no  no  no  no  
+   1 | no  no  no  no  no  no  no  no  no  no  no  
+   2 | no  no  no  no  no  no  no  no  no  no  no  
+   3 | no  no  no  no  no  no  no  no  no  no  no  
+   4 | no  no  no  no  no  no  no  no  no  no  no  
+   5 | no  no  no  no  YES no  YES no  no  no  no  
+   6 | no  no  no  no  no  no  no  no  no  no  no  
+   7 | no  no  no  no  YES no  YES no  no  no  no  
+   8 | no  no  no  no  no  no  no  no  no  no  no
+   
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">P:=Predicaton(Automaton("det", 5, [ [ 0 ], [ 1 ] ], </span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">[ [ 3, 2, 5, 4, 4 ], [ 3, 2, 4, 2, 4 ] ], </span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">[ 1 ], [ 3, 4, 5, 1 ]), [ 1 ]);;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Display(P);</span>
+Predicaton: deterministic finite automaton on 2 letters with 5 states, 
+the variable position list [ 1 ] and the following transitions:
+         |  1  2  3  4  5  
+---------------------------
+  [ 0 ]  |  3  2  5  4  4  
+  [ 1 ]  |  3  2  4  2  4  
+ Initial states: [ 1 ]
+ Final states:   [ 1, 3, 4, 5 ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">AcceptedWordsByPredicaton(P, 19);</span>
+[ [ 0 ], [ 1 ], [ 2 ], [ 3 ], [ 4 ], [ 5 ] ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">DisplayAcceptedWordsByPredicaton(P, 29, true);</span>
+ If the following words are accepted by the given automaton, then: Y,
+ otherwise if not accepted: n.
+   0: Y   1: Y   2: Y   3: Y   4: Y   5: Y   6: n   7: n   8: n   9: n
+  10: n  11: n  12: n  13: n  14: n  15: n  16: n  17: n  18: n  19: n
+  20: n  21: n  22: n  23: n  24: n  25: n  26: n  27: n  28: n  29: n
+
+</pre></div>
+
+<p><a id="X846C53368294CB6D" name="X846C53368294CB6D"></a></p>
+
+<h5>2.3-6 DisplayAcceptedWordsByPredicatonInNxN</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; DisplayAcceptedWordsByPredicatonInNxN</code>( <var class="Arg">P</var>[, <var class="Arg">b</var>] )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; DisplayAcceptedByPredicatonInNxN</code>( <var class="Arg">P</var>[, <var class="Arg">b</var>] )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>The function <code class="code">DisplayAcceptedWordsByPredicatonInNxN</code> prints the accepted words of the <code class="code">Predicaton</code> <var class="Arg">P</var> with a variable position list of length two in a fancy way in <span class="SimpleMath">ℕ × ℕ</span>. It "draws" the natural number solutions of linear equations, which can be seen, due to the linearity, as "lines". The optional parameter <var class="Arg">l</var> gives an upper bound for the displayed accepted words, it must be a list containing two positive integers.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">P:=Predicaton(Automaton("det", 14, [ [ 0, 0 ], [ 1, 0 ], [ 0, 1 ], [ 1, 1 ] ],</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">[ [ 6, 2, 2, 3, 4, 2, 2, 3, 7, 2, 10, 12, 12, 14 ], </span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">[ 2, 2, 12, 2, 9, 11, 7, 7, 2, 13, 2, 2, 7, 2 ], </span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">[ 2, 2, 12, 2, 7, 8, 14, 14, 2, 14, 2, 2, 14, 2 ], </span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">[ 5, 2, 2, 12, 3, 2, 2, 12, 7, 2, 13, 2, 2, 14 ] ], </span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">[ 1 ], [ 12, 13, 14 ]), [ 1, 2 ]);;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Display(P);</span>
+Predicaton: deterministic finite automaton on 4 letters with 14 states, 
+the variable position list [ 1, 2 ] and the following transitions:
+            |  1  2  3  4  5  6  7  8  9  10 11 12 13 14 
+---------------------------------------------------------
+  [ 0, 0 ]  |  6  2  2  3  4  2  2  3  7  2  10 12 12 14 
+  [ 1, 0 ]  |  2  2  12 2  9  11 7  7  2  13 2  2  7  2  
+  [ 0, 1 ]  |  2  2  12 2  7  8  14 14 2  14 2  2  14 2  
+  [ 1, 1 ]  |  5  2  2  12 3  2  2  12 7  2  13 2  2  14 
+ Initial states: [ 1 ]
+ Final states:   [ 12, 13, 14 ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">DisplayAcceptedWordsByPredicatonInNxN(P, [ 15, 15 ]);</span>
+  15 -                                      o                         
+     |
+  14 -                                  o                             
+     |
+  13 -                              o                                 
+     |
+  12 -                          o                                     
+     |
+  11 -                      o                                         
+     |
+  10 -  o               o                                             
+     |
+   9 -      o       o                                                 
+     |
+   8 -          o                                                     
+     |
+   7 -      o       o                                                 
+     |
+   6 -  o               o                                             
+     |
+   5 -                      o                                         
+     |
+   4 -                          o                                     
+     |
+   3 -                              o                                 
+     |
+   2 -                                  o                             
+     |
+   1 -                                      o                         
+     |
+   0 -                                          o                     
+     |
+   --+--|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|----&gt;
+     |  0   1   2   3   4   5   6   7   8   9  10  11  12  13  14  15 
+</pre></div>
+
+<p><a id="X82371B787CCA829E" name="X82371B787CCA829E"></a></p>
+
+<h5>2.3-7 AutomatonOfPredicaton</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; AutomatonOfPredicaton</code>( <var class="Arg">P</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; AutOfPredicaton</code>( <var class="Arg">P</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>The function <code class="code">AutomatonOfPredicaton</code> returns the <code class="code">Automaton</code> of a <code class="code">Predicaton</code> <var class="Arg">P</var>.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">P:=Predicaton(Automaton("det", 4, [ [ 0 ], [ 1 ] ], </span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">[ [ 4, 2, 3, 3 ], [ 3, 2, 2, 3 ] ], [ 1 ], [ 3, 4, 1 ]), [ 1 ]);</span>
+&lt; Predicaton: deterministic finite automaton on 2 letters with 4 states 
+and the variable position list [ 1 ]. &gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">AutomatonOfPredicaton(P);</span>
+&lt; deterministic automaton on 2 letters with 4 states &gt;
+</pre></div>
+
+<p><a id="X7E7B5E2A7F06E2E3" name="X7E7B5E2A7F06E2E3"></a></p>
+
+<h5>2.3-8 VariablePositionListOfPredicaton</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; VariablePositionListOfPredicaton</code>( <var class="Arg">P</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; VarPosListOfPredicaton</code>( <var class="Arg">P</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>The function <code class="code">VariablePositionListOfPredicaton</code> returns the variable position list of a <code class="code">Predicaton</code> <var class="Arg">P</var>.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">P:=Predicaton(Automaton("det", 5, [ [ 0, 0 ], [ 1, 0 ], [ 0, 1 ], [ 1, 1 ] ],</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">[ [ 1, 2, 2, 3, 2 ], [ 4, 2, 2, 5, 2 ], [ 2, 2, 1, 2, 3 ], [ 2, 2, 4, 2, 5 ] ],</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">[ 1 ], [ 1 ]), [ 4, 9 ]);;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">VariablePositionListOfPredicaton(P);</span>
+[ 4, 9 ]
+</pre></div>
+
+<p><a id="X807F1C9280B4D301" name="X807F1C9280B4D301"></a></p>
+
+<h5>2.3-9 SetVariablePositionListOfPredicaton</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; SetVariablePositionListOfPredicaton</code>( <var class="Arg">P</var>, <var class="Arg">l</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; SetVarPosListOfPredicaton</code>( <var class="Arg">P</var>, <var class="Arg">l</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>The function <code class="code">SetVariablePositionListOfPredicaton</code> sets the variable position list of a <code class="code">Predicaton</code> <var class="Arg">P</var>, permuting the alphabet if necessary, see <code class="func">PermutedAlphabetPredicaton</code> (<a href="chap2.html#X7E9F80777F2819AB"><span class="RefLink">2.3-21</span></a>).</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">P:=Predicaton(Automaton("det", 5, [ [ 0, 0 ], [ 1, 0 ], [ 0, 1 ], [ 1, 1 ] ],</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">[ [ 1, 2, 2, 3, 2 ], [ 4, 2, 2, 5, 2 ], [ 2, 2, 1, 2, 3 ], [ 2, 2, 4, 2, 5 ] ],</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">[ 1 ], [ 1 ]), [ 4, 9 ]);;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">SetVariablePositionListOfPredicaton(P, [ 1, 2 ]);</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">VariablePositionListOfPredicaton(P);</span>
+[ 1, 2 ]
+</pre></div>
+
+<p><a id="X7B90E3A88557996C" name="X7B90E3A88557996C"></a></p>
+
+<h5>2.3-10 ProductLZeroPredicaton</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; ProductLZeroPredicaton</code>( <var class="Arg">P</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>The function <code class="code">ProductLZeroPredicaton</code> takes the <code class="code">Predicaton</code> <var class="Arg">P</var> and adds a new state. This new state is final and is reached through <code class="code">[0,...,0]</code> from all <code class="code">Final</code> states. Hence the returned <code class="code">Predicaton</code> recognizes the product of the languages of the given <code class="code">Predicaton</code> and the language containing all the zero words.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">P:=Predicaton(Automaton("det", 5, [ [ 0 ], [ 1 ] ], [ [ 3, 2, 4, 2, 2 ],</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">[ 2, 2, 2, 5, 2 ] ], [ 1 ], [ 5 ]), [ 1 ]);;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Display(P);</span>
+Predicaton: deterministic finite automaton on 2 letters with 5 states, 
+the variable position list [ 1 ] and the following transitions:
+         |  1  2  3  4  5  
+---------------------------
+  [ 0 ]  |  3  2  4  2  2  
+  [ 1 ]  |  2  2  2  5  2  
+ Initial states: [ 1 ]
+ Final states:   [ 5 ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">IsAcceptedWordByPredicaton(P, [ [ 0, 0, 1 ] ]);</span>
+true
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">IsAcceptedWordByPredicaton(P, [ [ 0, 0, 1, 0 ] ]);</span>
+false
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">PredicatonToRatExp(P);</span>
+[ 0 ][ 0 ][ 1 ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Q:=ProductLZeroPredicaton(P);;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Display(Q);</span>
+Predicaton: nondeterministic finite automaton on 2 letters with 6 states, 
+the variable position list [ 1 ] and the following transitions:
+         |  1         2         3         4         5         6         
+------------------------------------------------------------------------
+  [ 0 ]  |  [ 3 ]     [ 2 ]     [ 4 ]     [ 2 ]     [ 2, 6 ]  [ 6 ]     
+  [ 1 ]  |  [ 2 ]     [ 2 ]     [ 2 ]     [ 5 ]     [ 2 ]     [ ]       
+ Initial states: [ 1 ]
+ Final states:   [ 5, 6 ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">IsAcceptedWordByPredicaton(Q, [ [ 0, 0, 1 ] ]);</span>
+true
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">IsAcceptedWordByPredicaton(Q, [ [ 0, 0, 1, 0 ] ]);</span>
+true
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">PredicatonToRatExp(Q);</span>
+[ 0 ][ 0 ][ 1 ]([ 0 ][ 0 ]*U@)
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">M:=MinimalAut(Q);;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">M:=PermutedStatesAut(M, [ 5, 2, 4, 3, 1 ]);;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Display(M);</span>
+Predicaton: deterministic finite automaton on 2 letters with 5 states, 
+the variable position list [ 1 ] and the following transitions:
+         |  1  2  3  4  5  
+---------------------------
+  [ 0 ]  |  3  2  4  2  5  
+  [ 1 ]  |  2  2  2  5  2  
+ Initial states: [ 1 ]
+ Final states:   [ 5 ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">PredicatonToRatExp(M);</span>
+[ 0 ][ 0 ][ 1 ][ 0 ]*
+</pre></div>
+
+<p><a id="X7DCADD1379EDC7E5" name="X7DCADD1379EDC7E5"></a></p>
+
+<h5>2.3-11 RightQuotientLZeroPredicaton</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; RightQuotientLZeroPredicaton</code>( <var class="Arg">P</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>The function <code class="code">RightQuotientLZeroPredicaton</code> takes the <code class="code">Predicaton</code> <var class="Arg">P</var> and runs through all final states. If a <code class="code">Final</code> state is reached with <code class="code">[0,...,0]</code> then this state is added to the final states. Hence the returned <code class="code">Predicaton</code> recognizes the right quotient of the language of the given <code class="code">Predicaton</code> with the language containing only the zero words.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">P:=Predicaton(Automaton("det", 6, [ [ 0 ], [ 1 ] ], [ [ 3, 2, 4, 2, 6, 2 ],</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">[ 2, 2, 2, 5, 2, 2 ] ], [ 1 ], [ 6 ]), [ 1 ]);;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Display(P);</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Display(P);</span>
+Predicaton: deterministic finite automaton on 2 letters with 6 states, 
+the variable position list [ 1 ] and the following transitions:
+         |  1  2  3  4  5  6  
+------------------------------
+  [ 0 ]  |  3  2  4  2  6  2  
+  [ 1 ]  |  2  2  2  5  2  2  
+ Initial states: [ 1 ]
+ Final states:   [ 6 ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">IsAcceptedWordByPredicaton(P, [ 4 ]);</span>
+false
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">IsAcceptedWordByPredicaton(P, [ [ 0, 0, 1 ] ]);</span>
+false
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">IsAcceptedWordByPredicaton(P, [ [ 0, 0, 1, 0 ] ]);</span>
+true
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">PredicatonToRatExp(P);</span>
+[ 0 ][ 0 ][ 1 ][ 0 ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Q:=RightQuotientLZeroPredicaton(P);;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Display(Q);</span>
+Predicaton: nondeterministic finite automaton on 2 letters with 6 states, 
+the variable position list [ 1 ] and the following transitions:
+         |  1      2      3      4      5      6      
+------------------------------------------------------
+  [ 0 ]  |  [ 3 ]  [ 2 ]  [ 4 ]  [ 2 ]  [ 6 ]  [ 2 ]  
+  [ 1 ]  |  [ 2 ]  [ 2 ]  [ 2 ]  [ 5 ]  [ 2 ]  [ 2 ]  
+ Initial states: [ 1 ]
+ Final states:   [ 5, 6 ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">IsAcceptedWordByPredicaton(Q, [ 4 ]);</span>
+true
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">IsAcceptedWordByPredicaton(Q, [ [ 0, 0, 1 ] ]);</span>
+true
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">IsAcceptedWordByPredicaton(Q, [ [ 0, 0, 1, 0 ] ]);</span>
+true
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">PredicatonToRatExp(Q);</span>
+[ 0 ][ 0 ][ 1 ]([ 0 ]U@)
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">M:=MinimalAut(Q);;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">M:=PermutedStatesAut(M, [ 6, 2, 5, 4, 3, 1 ]);;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Display(M);</span>
+Predicaton: deterministic finite automaton on 2 letters with 6 states, 
+the variable position list [ 1 ] and the following transitions:
+         |  1  2  3  4  5  6  
+------------------------------
+  [ 0 ]  |  3  2  4  2  6  2  
+  [ 1 ]  |  2  2  2  5  2  2  
+ Initial states: [ 1 ]
+ Final states:   [ 5, 6 ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">IsAcceptedWordByPredicaton(M, [ 4 ]);</span>
+true
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">PredicatonToRatExp(M);</span>
+[ 0 ][ 0 ][ 1 ]([ 0 ]U@)
+</pre></div>
+
+<p><a id="X84F6862E86B1F524" name="X84F6862E86B1F524"></a></p>
+
+<h5>2.3-12 NormalizedLeadingZeroPredicaton</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; NormalizedLeadingZeroPredicaton</code>( <var class="Arg">P</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>The function <code class="code">NormalizedLeadingZeroPredicaton</code> returns the union of <code class="func">ProductLZeroPredicaton</code> (<a href="chap2.html#X7B90E3A88557996C"><span class="RefLink">2.3-10</span></a>) and <code class="func">RightQuotientLZeroPredicaton</code> (<a href="chap2.html#X7DCADD1379EDC7E5"><span class="RefLink">2.3-11</span></a>) of the given <code class="code">Predicaton</code> <var class="Arg">P</var>. Therefore the returned <code class="code">Predicaton</code> accepts any previously accepted words with cancelled or added leading zeros.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">P:=Predicaton(Automaton("det", 7, [ [ 0 ], [ 1 ] ], [ [ 3, 2, 4, 2, 6, 2, 2], </span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">[ 2, 2, 7, 5, 2, 2, 2 ] ], [ 1 ], [ 6, 7 ]), [ 1 ]);;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Display(P);</span>
+Predicaton: deterministic finite automaton on 2 letters with 7 states, 
+the variable position list [ 1 ] and the following transitions:
+         |  1  2  3  4  5  6  7  
+---------------------------------
+  [ 0 ]  |  3  2  4  2  6  2  2  
+  [ 1 ]  |  2  2  7  5  2  2  2  
+ Initial states: [ 1 ]
+ Final states:   [ 6, 7 ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">IsAcceptedWordByPredicaton(P, [ [ 0, 1 ] ]);</span>
+true
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">IsAcceptedWordByPredicaton(P, [ [ 0, 1, 0 ] ]);</span>
+false
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">IsAcceptedWordByPredicaton(P, [ [ 0, 0, 1 ] ]);</span>
+false
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">IsAcceptedWordByPredicaton(P, [ [ 0, 0, 1, 0 ] ]);</span>
+true
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">PredicatonToRatExp(P);</span>
+[ 0 ]([ 1 ]U[ 0 ][ 1 ][ 0 ])
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Q:=NormalizedLeadingZeroPredicaton(P);;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Display(Q);</span>
+Predicaton: nondeterministic finite automaton on 2 letters with 16 states,
+the variable position list [ 1 ] and the following transitions:
+         |  1       2       3       4       5       6       7       8       
+----------------------------------------------------------------------------
+  [ 0 ]  |  [ 2 ]   [ 4 ]   [ 3 ]   [ 3 ]   [ 7 ]   [ 8 ]   [ 9 ]   [ 7 ]   
+  [ 1 ]  |  [ 3 ]   [ 5 ]   [ 3 ]   [ 6 ]   [ 3 ]   [ 3 ]   [ 3 ]   [ 3 ]   
+ ...
+         |  9       10      11      12      13      14      15      16      
+----------------------------------------------------------------------------
+  [ 0 ]  |  [ 9 ]   [ 11 ]  [ 13 ]  [ 12 ]  [ 12 ]  [ 12 ]  [ 16 ]  [ 12 ]  
+  [ 1 ]  |  [ 3 ]   [ 12 ]  [ 14 ]  [ 12 ]  [ 15 ]  [ 12 ]  [ 12 ]  [ 12 ]  
+ Initial states: [ 1, 10 ]
+ Final states:   [ 5, 7, 8, 9, 14, 15, 16 ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">AcceptedWordsByPredicaton(Q, 10);</span>
+[ [ 2 ], [ 4 ] ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">IsAcceptedWordByPredicaton(Q, [ [ 0, 1 ] ]);</span>
+true
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">IsAcceptedWordByPredicaton(Q, [ [ 0, 1, 0 ] ]);</span>
+true
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">IsAcceptedWordByPredicaton(Q, [ [ 0, 0, 1 ] ]);</span>
+true
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">IsAcceptedWordByPredicaton(Q, [ [ 0, 0, 1, 0 ] ]);</span>
+true
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">M:=MinimalAut(Q);;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">M:=PermutedStatesAut(M, [ 3, 5, 1, 4, 2 ]);;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Display(M);</span>
+Predicaton: deterministic finite automaton on 2 letters with 5 states,
+the variable position list [ 1 ] and the following transitions:
+         |  1  2  3  4  5  
+---------------------------
+  [ 0 ]  |  3  2  4  2  5  
+  [ 1 ]  |  2  2  5  5  2  
+ Initial states: [ 1 ]
+ Final states:   [ 5 ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">AcceptedWordsByPredicaton(M, 10);</span>
+[ [ 2 ], [ 4 ] ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">PredicatonToRatExp(M);</span>
+[ 0 ]([ 0 ][ 1 ]U[ 1 ])[ 0 ]*
+</pre></div>
+
+<p><a id="X822C7C547B98A757" name="X822C7C547B98A757"></a></p>
+
+<h5>2.3-13 SortedAlphabetPredicaton</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; SortedAlphabetPredicaton</code>( <var class="Arg">P</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; SortedAbcPredicaton</code>( <var class="Arg">P</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>The function <code class="code">SortedAlphabetPredicaton</code> returns the <code class="code">Predicaton</code> <var class="Arg">P</var> with the component-wise sorted <code class="code">Alphabet</code> (from right to left with <span class="SimpleMath">0&lt;1</span>).</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">P:=Predicaton(Automaton("det", 3, [ [ 0, 0, 0 ], [ 0, 0, 1 ], [ 1, 0, 0 ],</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">[ 1, 0, 1 ], [ 0, 1, 0 ], [ 0, 1, 1 ], [ 1, 1, 0 ], [ 1, 1, 1 ] ],</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">[ [ 1, 3, 3 ], [ 3, 2, 3 ], [ 3, 2, 3 ], [ 2, 3, 3 ], [ 3, 1, 3 ], </span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">[ 1, 3, 3 ], [ 1, 3, 3 ], [ 3, 2, 3 ] ], [ 1 ], [ 1 ]), [ 1, 2, 3 ]);;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Display(P);</span>
+Predicaton: deterministic finite automaton on 8 letters with 3 states, 
+the variable position list [ 1, 2, 3 ] and the following transitions:
+               |  1  2  3  
+ ---------------------------
+  [ 0, 0, 0 ]  |  1  3  3  
+  [ 0, 0, 1 ]  |  3  2  3  
+  [ 1, 0, 0 ]  |  3  2  3  
+  [ 1, 0, 1 ]  |  2  3  3  
+  [ 0, 1, 0 ]  |  3  1  3  
+  [ 0, 1, 1 ]  |  1  3  3  
+  [ 1, 1, 0 ]  |  1  3  3  
+  [ 1, 1, 1 ]  |  3  2  3  
+ Initial states: [ 1 ]
+ Final states:   [ 1 ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Q:=SortedAlphabetPredicaton(P);;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Display(Q);</span>
+Predicaton: deterministic finite automaton on 8 letters with 3 states,
+the variable position list [ 1, 2, 3 ] and the following transitions:
+               |  1  2  3  
+ ---------------------------
+  [ 0, 0, 0 ]  |  1  3  3  
+  [ 1, 0, 0 ]  |  3  2  3  
+  [ 0, 1, 0 ]  |  3  1  3  
+  [ 1, 1, 0 ]  |  1  3  3  
+  [ 0, 0, 1 ]  |  3  2  3  
+  [ 1, 0, 1 ]  |  2  3  3  
+  [ 0, 1, 1 ]  |  1  3  3  
+  [ 1, 1, 1 ]  |  3  2  3  
+ Initial states: [ 1 ]
+ Final states:   [ 1 ]
+</pre></div>
+
+<p><a id="X8231A0D579C2B8FC" name="X8231A0D579C2B8FC"></a></p>
+
+<h5>2.3-14 FormattedPredicaton</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; FormattedPredicaton</code>( <var class="Arg">P</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>The function <code class="code"></code> computes first the <code class="func">NormalizedLeadingZeroPredicaton</code> (<a href="chap2.html#X84F6862E86B1F524"><span class="RefLink">2.3-12</span></a>) and then the <code class="func">MinimalAut</code> (<a href="chap2.html#X8377BBD382180F49"><span class="RefLink">2.2-18</span></a>) of the <code class="code">Predicaton</code> <var class="Arg">P</var>.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">P:=Predicaton(Automaton("det", 7, [ [ 0 ], [ 1 ] ], [ [ 3, 2, 4, 2, 6, 2, 2], </span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">[ 2, 2, 7, 5, 2, 2, 2 ] ], [ 1 ], [ 6, 7 ]), [ 1 ]);;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Display(P);</span>
+Predicaton: deterministic finite automaton on 2 letters with 7 states, 
+the variable position list [ 1 ] and the following transitions:
+         |  1  2  3  4  5  6  7  
+---------------------------------
+  [ 0 ]  |  3  2  4  2  6  2  2  
+  [ 1 ]  |  2  2  7  5  2  2  2  
+ Initial states: [ 1 ]
+ Final states:   [ 6, 7 ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">PredicatonToRatExp(P);</span>
+[ 0 ]([ 1 ]U[ 0 ][ 1 ][ 0 ])
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">M:=FormattedPredicaton(P);;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Display(M);</span>
+Predicaton: deterministic finite automaton on 2 letters with 5 states, 
+the variable position list [ 1 ] and the following transitions:
+         |  1  2  3  4  5  
+---------------------------
+  [ 0 ]  |  4  2  1  5  5  
+  [ 1 ]  |  2  5  5  2  5  
+ Initial states: [ 3 ]
+ Final states:   [ 2 ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">PredicatonToRatExp(M);</span>
+[ 0 ]([ 0 ][ 1 ]U[ 1 ])[ 0 ]*
+</pre></div>
+
+<p><a id="X827129EC7BB4C53B" name="X827129EC7BB4C53B"></a></p>
+
+<h5>2.3-15 IsValidInput</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsValidInput</code>( <var class="Arg">P</var>, <var class="Arg">n</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>The function <code class="code">IsValidInput</code> checks if the list <var class="Arg">n</var> contains positive integers and if it is a valid variable position list of the given <code class="code">Predicaton</code> <var class="Arg">P</var>, i.e. variable position list is a subset of <var class="Arg">n</var>.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">P:=Predicaton(Automaton("det", 2, [ [ 0, 0 ], [ 1, 0 ], [ 0, 1 ], [ 1, 1 ] ], </span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">[ [ 1, 2 ], [ 2, 2 ], [ 1, 2 ], [ 2, 2 ] ], [ 1 ], [ 1 ]), [ 2, 4 ]);;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">IsValidInput(P, [ 1, 2, 3 ]);</span>
+The new variable position list must contain the old one of the Predicaton. 
+Compare [ 2, 4 ] with [ 1, 2, 3 ].
+false
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">IsValidInput(P, [ 1, 2, 3, 4 ]);</span>
+true
+</pre></div>
+
+<p><a id="X8209B57C805CBDFA" name="X8209B57C805CBDFA"></a></p>
+
+<h5>2.3-16 ExpandedPredicaton</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; ExpandedPredicaton</code>( <var class="Arg">P</var>, <var class="Arg">n</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>The function <code class="code">ExpandedPredicaton</code> returns the <code class="code">Predicaton</code> <var class="Arg">P</var> with the new variable position list <var class="Arg">n</var>. For each new variable position in <var class="Arg">n</var>, the alphabet size doubles. In each step 0s and 1s are added at the correct position in all letters of the alphabet, whereas the transition matrix rows are copied accordingly. Formally this corresponds to the preimage of the homomorphism ignoring a component of the letters applied to the deterministic finite automaton.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">P:=Predicaton(Automaton("det", 3, [ [ 0 ], [ 1 ] ], [ [ 2, 2, 3 ], </span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">[ 3, 2, 2 ] ], [ 1 ], [ 3 ]), [ 1 ]);</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Display(P);</span>
+Predicaton: deterministic finite automaton on 2 letters with 3 states, 
+the variable position list [ 1 ] and the following transitions:
+         |  1  2  3  
+---------------------
+  [ 0 ]  |  2  2  3  
+  [ 1 ]  |  3  2  2  
+ Initial states: [ 1 ]
+ Final states:   [ 3 ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Q:=ExpandedPredicaton(P, [ 1, 2, 3 ]);;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Display(Q);</span>
+Predicaton: deterministic finite automaton on 8 letters with 3 states, 
+the variable position list [ 1, 2, 3 ] and the following transitions:
+               |  1  2  3  
+---------------------------
+  [ 0, 0, 0 ]  |  2  2  3  
+  [ 1, 0, 0 ]  |  3  2  2  
+  [ 0, 1, 0 ]  |  2  2  3  
+  [ 1, 1, 0 ]  |  3  2  2  
+  [ 0, 0, 1 ]  |  2  2  3  
+  [ 1, 0, 1 ]  |  3  2  2  
+  [ 0, 1, 1 ]  |  2  2  3  
+  [ 1, 1, 1 ]  |  3  2  2  
+ Initial states: [ 1 ]
+ Final states:   [ 3 ]
+</pre></div>
+
+<p><a id="X801999F67F5E9CAF" name="X801999F67F5E9CAF"></a></p>
+
+<h5>2.3-17 ProjectedPredicaton</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; ProjectedPredicaton</code>( <var class="Arg">P</var>, <var class="Arg">p</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>The function <code class="code">ProjectedPredicaton</code> returns the <code class="code">Predicaton</code> <var class="Arg">P</var> with the new variable position list without <var class="Arg">p</var>. The alphabet is halved, ignoring the 0s and 1s entries at position <var class="Arg">p</var> relative to the <code class="code">VariablePositionList</code>, whereas the transition matrix rows are combined accordingly. Formally this corresponds to the image of homomorphism which ignores the <var class="Arg">p</var>-th component of the letters applied to the deterministic finite automaton. This function is used for the interpretation of the existence quantifier.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">P:=Predicaton(Automaton("det", 3, [ [ 0, 0 ], [ 1, 0 ], [ 0, 1 ], [ 1, 1 ] ],</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">[ [ 1, 3, 3 ], [ 2, 3, 3 ], [ 3, 1, 3 ], [ 3, 2, 3 ] ], [ 1 ], [ 1 ]),</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">[ 1, 2 ]);;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Display(P);</span>
+Predicaton: deterministic finite automaton on 4 letters with 3 states, 
+the variable position list [ 1, 2 ] and the following transitions:
+            |  1  2  3  
+------------------------
+  [ 0, 0 ]  |  1  3  3  
+  [ 1, 0 ]  |  2  3  3  
+  [ 0, 1 ]  |  3  1  3  
+  [ 1, 1 ]  |  3  2  3  
+ Initial states: [ 1 ]
+ Final states:   [ 1 ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Q:=ProjectedPredicaton(P, 1);;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Display(Q);</span>
+Predicaton: deterministic finite automaton on 2 letters with 3 states, 
+the variable position list [ 2 ] and the following transitions:
+         |  1  2  3  
+---------------------
+  [ 0 ]  |  1  2  2  
+  [ 1 ]  |  1  2  1  
+ Initial states: [ 3 ]
+ Final states:   [ 2, 3 ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">AcceptedWordsByPredicaton(P, 10);</span>
+[ [ 0, 0 ], [ 1, 2 ], [ 2, 4 ], [ 3, 6 ], [ 4, 8 ], [ 5, 10 ] ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">AcceptedWordsByPredicaton(Q, 10);</span>
+[ [ 0 ], [ 2 ], [ 4 ], [ 6 ], [ 8 ], [ 10 ] ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">PredicatonToRatExp(P);</span>
+([ 1, 0 ][ 1, 1 ]*[ 0, 1 ]U[ 0, 0 ])*
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">PredicatonToRatExp(Q);</span>
+[ 0 ]([ 0 ]U[ 1 ])*U@
+</pre></div>
+
+<p><a id="X8034E12D7E2EE143" name="X8034E12D7E2EE143"></a></p>
+
+<h5>2.3-18 NegatedProjectedNegatedPredicaton</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; NegatedProjectedNegatedPredicaton</code>( <var class="Arg">P</var>, <var class="Arg">p</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>The function <code class="code">NegatedProjectedNegatedPredicaton</code> returns the negated (<code class="func">NegatedAut</code> (<a href="chap2.html#X802357D181BD700C"><span class="RefLink">2.2-19</span></a>)), projected (<code class="func">ProjectedPredicaton</code> (<a href="chap2.html#X801999F67F5E9CAF"><span class="RefLink">2.3-17</span></a>) with <var class="Arg">p</var>) and negated <code class="code">Predicaton</code> <var class="Arg">P</var>. This function is used for the interpretation of the for all quantifier.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">P:=Predicaton(Automaton("det", 2, [ [ 0, 0 ], [ 1, 0 ], [ 0, 1 ], [ 1, 1 ] ], </span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">[ [ 1, 2 ], [ 2, 2 ], [ 2, 2 ], [ 1, 2 ] ], [ 1 ], [ 1 ]), [ 1, 2 ]);;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Display(P);</span>
+Predicaton: deterministic finite automaton on 4 letters with 2 states, 
+the variable position list [ 1, 2 ] and the following transitions:
+            |  1  2  
+---------------------
+  [ 0, 0 ]  |  1  2  
+  [ 1, 0 ]  |  2  2  
+  [ 0, 1 ]  |  2  2  
+  [ 1, 1 ]  |  1  2  
+ Initial states: [ 1 ]
+ Final states:   [ 1 ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">AcceptedWordsByPredicaton(P, 5);</span>
+[ [ 0, 0 ], [ 1, 1 ], [ 2, 2 ], [ 3, 3 ], [ 4, 4 ], [ 5, 5 ] ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Q1:=ProjectedPredicaton(P, 1);;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Display(Q1);</span>
+Predicaton: deterministic finite automaton on 2 letters with 1 state, 
+the variable position list [ 2 ] and the following transitions:
+         |  1  
+---------------
+  [ 0 ]  |  1  
+  [ 1 ]  |  1  
+ Initial states: [ 1 ]
+ Final states:   [ 1 ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">AcceptedWordsByPredicaton(Q1, 5);</span>
+[ [ 0 ], [ 1 ], [ 2 ], [ 3 ], [ 4 ], [ 5 ] ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Q2:=NegatedProjectedNegatedPredicaton(Q1, 2);;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Display(Q2);</span>
+Predicaton: deterministic finite automaton on 1 letter with 1 state, 
+the variable position list [ ] and the following transitions:
+       |  1  
+-------------
+  [ ]  |  1  
+ Initial states: [ 1 ]
+ Final states:   [ 1 ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">AcceptedWordsByPredicaton(Q2);</span>
+[ true ]
+</pre></div>
+
+<p><a id="X80379AA57C3C7145" name="X80379AA57C3C7145"></a></p>
+
+<h5>2.3-19 IntersectionPredicata</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IntersectionPredicata</code>( <var class="Arg">P1</var>, <var class="Arg">P2</var>, <var class="Arg">n</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>The function <code class="code">IntersectionPredicata</code> returns the intersection (<code class="func">IntersectionAut</code> (<a href="chap2.html#X7C09B02679BDA33D"><span class="RefLink">2.2-20</span></a>)) of the <code class="code">Predicata</code> of <var class="Arg">P1</var> and <var class="Arg">P2</var> after resizing (<code class="func">ExpandedPredicaton</code> (<a href="chap2.html#X8209B57C805CBDFA"><span class="RefLink">2.3-16</span></a>)) and sorting (<code class="func">SortedAlphabetPredicaton</code> (<a href="chap2.html#X822C7C547B98A757"><span class="RefLink">2.3-13</span></a>)) the alphabet to match the new variable position list <var class="Arg">n</var>.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">P1:=Predicaton(Automaton("det", 5, [ [ 0, 0 ], [ 1, 0 ], [ 0, 1 ], [ 1, 1 ] ],</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">[ [ 4, 2, 2, 2, 5 ], [ 2, 2, 5, 2, 2 ], [ 2, 2, 2, 3, 2 ], [ 4, 2, 2, 2, 2 ] ],</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">[ 1 ], [ 5 ]), [ 1, 2 ]);;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Display(P1);</span>
+Predicaton: deterministic finite automaton on 4 letters with 5 states, 
+the variable position list [ 1, 2 ] and the following transitions:
+            |  1  2  3  4  5  
+------------------------------
+  [ 0, 0 ]  |  4  2  2  2  5  
+  [ 1, 0 ]  |  2  2  5  2  2  
+  [ 0, 1 ]  |  2  2  2  3  2  
+  [ 1, 1 ]  |  4  2  2  2  2  
+ Initial states: [ 1 ]
+ Final states:   [ 5 ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">AcceptedByPredicaton(P1, 10);</span>
+[ [ 4, 2 ], [ 5, 3 ] ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">P2:=Predicaton(Automaton("det", 6, [ [ 0, 0 ], [ 1, 0 ], [ 0, 1 ], [ 1, 1 ] ],</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">[ [ 5, 2, 2, 3, 2, 6 ], [ 2, 2, 6, 2, 2, 2 ], [ 4, 2, 2, 2, 3, 2 ], </span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">[ 2, 2, 2, 2, 2, 2 ] ], [ 1 ], [ 6 ]), [ 1, 2 ]);;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Display(P2);</span>
+Predicaton: deterministic finite automaton on 4 letters with 6 states,
+the variable position list [ 1, 2 ] and the following transitions:
+            |  1  2  3  4  5  6  
+---------------------------------
+  [ 0, 0 ]  |  5  2  2  3  2  6  
+  [ 1, 0 ]  |  2  2  6  2  2  2  
+  [ 0, 1 ]  |  4  2  2  2  3  2  
+  [ 1, 1 ]  |  2  2  2  2  2  2  
+ Initial states: [ 1 ]
+ Final states:   [ 6 ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">AcceptedByPredicaton(P2, 10);</span>
+[ [ 4, 1 ], [ 4, 2 ] ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">P3:=IntersectionPredicata(P1, P2, [ 1, 2 ]);;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Display(P3);</span>
+Predicaton: deterministic finite automaton on 4 letters with 5 states, 
+the variable position list [ 1, 2 ] and the following transitions:
+            |  1  2  3  4  5  
+------------------------------
+  [ 0, 0 ]  |  1  2  2  2  4  
+  [ 1, 0 ]  |  2  2  1  2  2  
+  [ 0, 1 ]  |  2  2  2  3  2  
+  [ 1, 1 ]  |  2  2  2  2  2  
+ Initial states: [ 5 ]
+ Final states:   [ 1 ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">AcceptedByPredicaton(P3, 10);</span>
+[ [ 4, 2 ] ]
+</pre></div>
+
+<p><a id="X863B344079D411DF" name="X863B344079D411DF"></a></p>
+
+<h5>2.3-20 UnionPredicata</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; UnionPredicata</code>( <var class="Arg">P</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>The function <code class="code">UnionPredicata</code> returns union (<code class="func">UnionAut</code> (<a href="chap2.html#X82617D80836C976A"><span class="RefLink">2.2-21</span></a>)) of the <code class="code">Predicata</code> of <var class="Arg">P1</var> and <var class="Arg">P2</var> after resizing (<code class="func">ExpandedPredicaton</code> (<a href="chap2.html#X8209B57C805CBDFA"><span class="RefLink">2.3-16</span></a>)) and sorting (<code class="func">SortedAlphabetPredicaton</code> (<a href="chap2.html#X822C7C547B98A757"><span class="RefLink">2.3-13</span></a>)) the alphabet to match the new variable position list <var class="Arg">n</var>.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">P1:=Predicaton(Automaton("det", 5, [ [ 0, 0 ], [ 1, 0 ], [ 0, 1 ], [ 1, 1 ] ],</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">[ [ 4, 2, 2, 2, 5 ], [ 2, 2, 5, 2, 2 ], [ 2, 2, 2, 3, 2 ], [ 4, 2, 2, 2, 2 ] ],</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">[ 1 ], [ 5 ]), [ 1, 2 ]);;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Display(P1);</span>
+Predicaton: deterministic finite automaton on 4 letters with 5 states,
+the variable position list [ 1, 2 ] and the following transitions:
+            |  1  2  3  4  5  
+------------------------------
+  [ 0, 0 ]  |  4  2  2  2  5  
+  [ 1, 0 ]  |  2  2  5  2  2  
+  [ 0, 1 ]  |  2  2  2  3  2  
+  [ 1, 1 ]  |  4  2  2  2  2  
+ Initial states: [ 1 ]
+ Final states:   [ 5 ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">AcceptedByPredicaton(P1, 10);</span>
+[ [ 4, 2 ], [ 5, 3 ] ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">P2:=Predicaton(Automaton("det", 6, [ [ 0, 0 ], [ 1, 0 ], [ 0, 1 ], [ 1, 1 ] ],</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">[ [ 5, 2, 2, 3, 2, 6 ], [ 2, 2, 6, 2, 2, 2 ], [ 4, 2, 2, 2, 3, 2 ], </span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">[ 2, 2, 2, 2, 2, 2 ] ], [ 1 ], [ 6 ]), [ 1, 2 ]);;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Display(P2);</span>
+Predicaton: deterministic finite automaton on 4 letters with 6 states, 
+the variable position list [ 1, 2 ] and the following transitions:
+            |  1  2  3  4  5  6  
+---------------------------------
+  [ 0, 0 ]  |  5  2  2  3  2  6  
+  [ 1, 0 ]  |  2  2  6  2  2  2  
+  [ 0, 1 ]  |  4  2  2  2  3  2  
+  [ 1, 1 ]  |  2  2  2  2  2  2  
+ Initial states: [ 1 ]
+ Final states:   [ 6 ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">AcceptedByPredicaton(P2, 10);</span>
+[ [ 4, 1 ], [ 4, 2 ] ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">P3:=UnionPredicata(P1, P2, [ 1, 2 ]);;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Display(P3);</span>
+Predicaton: deterministic finite automaton on 4 letters with 6 states, 
+the variable position list [ 1, 2 ] and the following transitions:
+            |  1  2  3  4  5  6  
+---------------------------------
+  [ 0, 0 ]  |  1  6  6  3  2  6  
+  [ 1, 0 ]  |  6  6  1  6  6  6  
+  [ 0, 1 ]  |  6  3  6  6  4  6  
+  [ 1, 1 ]  |  6  6  6  6  2  6  
+ Initial states: [ 5 ]
+ Final states:   [ 1 ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">AcceptedWordsByPredicaton(P3, 9);</span>
+[ [ 4, 1 ], [ 4, 2 ], [ 5, 3 ] ]
+</pre></div>
+
+<p><a id="X7E9F80777F2819AB" name="X7E9F80777F2819AB"></a></p>
+
+<h5>2.3-21 PermutedAlphabetPredicaton</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; PermutedAlphabetPredicaton</code>( <var class="Arg">A</var>, <var class="Arg">l</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; PermutedAbcPredicaton</code>( <var class="Arg">A</var>, <var class="Arg">l</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>The function <code class="code">PermutedAlphabetPredicaton</code> returns the <code class="code">Predicaton</code> of the <code class="code">Automaton</code> <var class="Arg">A</var> with permuted alphabet according to <var class="Arg">l</var> and accordingly swapped transition matrix rows. This is relevant for the first call of specific automata, where the variable order matters. E.g. the following automaton corresponds to the formula <span class="SimpleMath">x+y=z</span>, where the the variable <span class="SimpleMath">x</span> is at position <span class="SimpleMath">1</span>, <span class="SimpleMath">y</span> at <span class="SimpleMath">2</span> and <span class="SimpleMath">z</span> at <span class="SimpleMath">3</span>. So creating the the automaton recognizing the same formula but with variable <span class="SimpleMath">x</span> at position <span class="SimpleMath">3</span>, <span class="SimpleMath">y</span> at <span class="SimpleMath">2</span> and <span class="SimpleMath">z</span> at <span class="SimpleMath">1</span> needs the permuted alphabet, i.e. each letter is permuted according to the given variable position list <var class="Arg">l</var> (here <code class="code">l=[ 3, 2, 1 ]</code>).</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">A:=Automaton("det", 3, [ [ 0, 0, 0 ], [ 0, 0, 1 ], [ 1, 0, 0 ], [ 1, 0, 1 ],</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">[ 0, 1, 0 ], [ 0, 1, 1 ], [ 1, 1, 0 ], [ 1, 1, 1 ] ], </span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">[ [ 1, 3, 3 ], [ 3, 2, 3 ], [ 3, 2, 3 ], [ 2, 3, 3 ], [ 3, 1, 3 ], [ 1, 3, 3 ],</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">[ 1, 3, 3 ], [ 3, 2, 3 ] ], [ 1 ], [ 1 ]);;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">DisplayAut(A);</span>
+deterministic finite automaton on 8 letters with 3 states 
+and the following transitions:
+               |  1  2  3  
+---------------------------
+  [ 0, 0, 0 ]  |  1  3  3  
+  [ 0, 0, 1 ]  |  3  2  3  
+  [ 1, 0, 0 ]  |  3  2  3  
+  [ 1, 0, 1 ]  |  2  3  3  
+  [ 0, 1, 0 ]  |  3  1  3  
+  [ 0, 1, 1 ]  |  1  3  3  
+  [ 1, 1, 0 ]  |  1  3  3  
+  [ 1, 1, 1 ]  |  3  2  3  
+ Initial states: [ 1 ]
+ Final states:   [ 1 ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">P:=PermutedAlphabetPredicaton(A, [3,2,1]);;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Display(P);</span>
+Predicaton: deterministic finite automaton on 8 letters with 3 states, 
+the variable position list [ 1, 2, 3 ] and the following transitions:
+               |  1  2  3  
+---------------------------
+  [ 0, 0, 0 ]  |  1  3  3  
+  [ 1, 0, 0 ]  |  3  2  3  
+  [ 0, 0, 1 ]  |  3  2  3  
+  [ 1, 0, 1 ]  |  2  3  3  
+  [ 0, 1, 0 ]  |  3  1  3  
+  [ 1, 1, 0 ]  |  1  3  3  
+  [ 0, 1, 1 ]  |  1  3  3  
+  [ 1, 1, 1 ]  |  3  2  3  
+ Initial states: [ 1 ]
+ Final states:   [ 1 ]
+</pre></div>
+
+<p><a id="X7CEAFC23817A07F3" name="X7CEAFC23817A07F3"></a></p>
+
+<h5>2.3-22 PredicatonFromAut</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; PredicatonFromAut</code>( <var class="Arg">A</var>, <var class="Arg">l</var>, <var class="Arg">n</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>The function <code class="code">PredicatonFromAut</code> returns the according to <var class="Arg">n</var> resized (<code class="func">ExpandedPredicaton</code> (<a href="chap2.html#X8209B57C805CBDFA"><span class="RefLink">2.3-16</span></a>)) <code class="code">Predicaton</code> of the <code class="code">Automaton</code> <var class="Arg">A</var> with the permuted alphabet (<code class="func">PermutedAlphabetPredicaton</code> (<a href="chap2.html#X7E9F80777F2819AB"><span class="RefLink">2.3-21</span></a>)), if the <code class="code">VariablePositionList</code> <var class="Arg">l</var> isn't sorted.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">A:=Automaton("det", 3, [ [ 0, 0, 0 ], [ 0, 0, 1 ], [ 1, 0, 0 ], [ 1, 0, 1 ],</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">[ 0, 1, 0 ], [ 0, 1, 1 ], [ 1, 1, 0 ], [ 1, 1, 1 ] ], </span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">[ [ 1, 3, 3 ], [ 3, 2, 3 ], [ 3, 2, 3 ], [ 2, 3, 3 ], [ 3, 1, 3 ], [ 1, 3, 3 ],</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">[ 1, 3, 3 ], [ 3, 2, 3 ] ], [ 1 ], [ 1 ]);;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">DisplayAut(A);</span>
+deterministic finite automaton on 8 letters with 3 states 
+and the following transitions:
+               |  1  2  3  
+---------------------------
+  [ 0, 0, 0 ]  |  1  3  3  
+  [ 0, 0, 1 ]  |  3  2  3  
+  [ 1, 0, 0 ]  |  3  2  3  
+  [ 1, 0, 1 ]  |  2  3  3  
+  [ 0, 1, 0 ]  |  3  1  3  
+  [ 0, 1, 1 ]  |  1  3  3  
+  [ 1, 1, 0 ]  |  1  3  3  
+  [ 1, 1, 1 ]  |  3  2  3  
+ Initial states: [ 1 ]
+ Final states:   [ 1 ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">P:=PredicatonFromAut(A,[3,2,1],[1,2,3,4]);;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Display(P);</span>
+Predicaton: deterministic finite automaton on 16 letters with 3 states, 
+the variable position list [ 1, 2, 3, 4 ] and the following transitions:
+                  |  1  2  3  
+------------------------------
+  [ 0, 0, 0, 0 ]  |  1  3  3  
+  [ 1, 0, 0, 0 ]  |  3  2  3  
+  [ 0, 0, 1, 0 ]  |  3  2  3  
+  [ 1, 0, 1, 0 ]  |  2  3  3  
+  [ 0, 1, 0, 0 ]  |  3  1  3  
+  [ 1, 1, 0, 0 ]  |  1  3  3  
+  [ 0, 1, 1, 0 ]  |  1  3  3  
+  [ 1, 1, 1, 0 ]  |  3  2  3  
+  [ 0, 0, 0, 1 ]  |  1  3  3  
+  [ 1, 0, 0, 1 ]  |  3  2  3  
+  [ 0, 0, 1, 1 ]  |  3  2  3  
+  [ 1, 0, 1, 1 ]  |  2  3  3  
+  [ 0, 1, 0, 1 ]  |  3  1  3  
+  [ 1, 1, 0, 1 ]  |  1  3  3  
+  [ 0, 1, 1, 1 ]  |  1  3  3  
+  [ 1, 1, 1, 1 ]  |  3  2  3  
+ Initial states: [ 1 ]
+ Final states:   [ 1 ]
+</pre></div>
+
+<p><a id="X85F659CF86F44C8C" name="X85F659CF86F44C8C"></a></p>
+
+<h5>2.3-23 FinitelyManyWordsAccepted</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; FinitelyManyWordsAccepted</code>( <var class="Arg">A</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>The function <code class="code">FinitelyManyWordsAccepted</code> checks if a <code class="code">Predicaton</code> has only finitely many solutions, except the leading zero completion.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">P:=Predicaton(Automaton("det", 5, [ [ 0 ], [ 1 ] ], </span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">[ [ 4, 2, 2, 3, 5 ], [ 2, 2, 5, 2, 2 ] ], [ 1 ], [ 5 ]), [ 1 ]);;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">AcceptedWordsByPredicaton(P);</span>
+[ [ 4 ] ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">FinitelyManyWordsAccepted(P);</span>
+true
+</pre></div>
+
+<p><a id="X87A60C328455D108" name="X87A60C328455D108"></a></p>
+
+<h5>2.3-24 PredicatonToRatExp</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; PredicatonToRatExp</code>( <var class="Arg">P</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>The function <code class="code">PredicatonToRatExp</code> returns the regular expression of the <code class="code">Automaton</code> or <code class="code">Predicaton</code> <var class="Arg">P</var>.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput"># Continued</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">P:=Predicaton(Automaton("det", 5, [ [ 0 ], [ 1 ] ],</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">[ [ 5, 5, 5, 4, 5 ], [ 2, 3, 4, 5, 5 ] ], [ 1 ], [ 4 ]), [ 1 ]);;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">PredicatonToRatExp(P);</span>
+[ 1 ][ 1 ][ 1 ][ 0 ]*
+</pre></div>
+
+<p><a id="X7BCC385F80B24BF8" name="X7BCC385F80B24BF8"></a></p>
+
+<h5>2.3-25 WordsOfRatExp</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; WordsOfRatExp</code>( <var class="Arg">r</var>, <var class="Arg">depth</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>The function <code class="code">WordsOfRatExp</code> returns all words which can be created from the regular expression <var class="Arg">r</var> by applying the star operator at most <var class="Arg">depth</var> times.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">A:=Automaton("det", 3,</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">[ [ 0, 0, 0 ], [ 1, 0, 0 ], [ 0, 1, 0 ], [ 1, 1, 0 ],</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">[ 0, 0, 1 ], [ 1, 0, 1 ], [ 0, 1, 1 ], [ 1, 1, 1 ] ],</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">[ [ 1, 3, 3 ], [ 3, 2, 3 ], [ 3, 2, 3 ], [ 2, 3, 3 ],</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">[ 3, 1, 3 ], [ 1, 3, 3 ], [ 1, 3, 3 ], [ 3, 2, 3 ] ],</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">[ 1 ], [ 1 ]);</span>
+&lt; deterministic automaton on 8 letters with 3 states &gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">r:=PredicatonToRatExp(A);</span>
+([ 1, 1, 0 ]([ 1, 0, 0 ]U[ 0, 1, 0 ]U[ 1, 1, 1 ])*
+ [ 0, 0, 1 ]U[ 0, 0, 0 ]U[ 1, 0, 1 ]U[ 0, 1, 1 ])*
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">WordsOfRatExp(r, 1);</span>
+[ [ [ 1, 1, 0 ], [ 1, 0, 0 ], [ 0, 0, 1 ] ], 
+  [ [ 1, 1, 0 ], [ 0, 1, 0 ], [ 0, 0, 1 ] ], 
+  [ [ 1, 1, 0 ], [ 1, 1, 1 ], [ 0, 0, 1 ] ], 
+  [ [ 1, 1, 0 ], [  ], [ 0, 0, 1 ] ],
+  [ [ 0, 0, 0 ] ], [ [ 1, 0, 1 ] ], 
+  [ [ 0, 1, 1 ] ],
+  [ [  ] ] ]
+</pre></div>
+
+<p><a id="X7F4EB504809AF2D0" name="X7F4EB504809AF2D0"></a></p>
+
+<h5>2.3-26 WordsOfRatExpInterpreted</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; WordsOfRatExpInterpreted</code>( <var class="Arg">r</var>[, <var class="Arg">depth</var>] )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>The function <code class="code">WordsOfRatExpInterpreted</code> returns all words which can be created from the regular expression <var class="Arg">r</var> by applying the star operator at most <var class="Arg">depth</var> times (default <code class="code">depth=1</code>) as a list of natural numbers.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">A:=Automaton("det", 3,</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">[ [ 0, 0, 0 ], [ 1, 0, 0 ], [ 0, 1, 0 ], [ 1, 1, 0 ],</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">[ 0, 0, 1 ], [ 1, 0, 1 ], [ 0, 1, 1 ], [ 1, 1, 1 ] ],</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">[ [ 1, 3, 3 ], [ 3, 2, 3 ], [ 3, 2, 3 ], [ 2, 3, 3 ],</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">[ 3, 1, 3 ], [ 1, 3, 3 ], [ 1, 3, 3 ], [ 3, 2, 3 ] ],</span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">[ 1 ], [ 1 ]);</span>
+&lt; deterministic automaton on 8 letters with 3 states &gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">r:=PredicatonToRatExp(A);</span>
+([ 1, 1, 0 ]([ 1, 0, 0 ]U[ 0, 1, 0 ]U[ 1, 1, 1 ])*
+ [ 0, 0, 1 ]U[ 0, 0, 0 ]U[ 1, 0, 1 ]U[ 0, 1, 1 ])*
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">WordsOfRatExpInterpreted(r, 1);</span>
+[ [ 0, 0, 0 ], [ 0, 1, 1 ], [ 1, 0, 1 ], [ 1, 1, 2 ], [ 1, 3, 4 ], 
+  [ 3, 1, 4 ], [ 3, 3, 6 ] ]
+</pre></div>
+
+<p><a id="X8148D1EC7B7792E1" name="X8148D1EC7B7792E1"></a></p>
+
+<h4>2.4 <span class="Heading">Special functions on Predicata</span></h4>
+
+<p><a id="X861D1891826AC634" name="X861D1891826AC634"></a></p>
+
+<h5>2.4-1 IsValidInputList</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsValidInputList</code>( <var class="Arg">l</var>, <var class="Arg">n</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>The function <code class="code">IsValidInputList</code> checks if the lists <var class="Arg">l</var> and <var class="Arg">n</var> correct lists for calling a <code class="code">Predicaton</code>, i.e. both lists must contain positive unique integers and <var class="Arg">l</var> must be a subset of <var class="Arg">n</var>.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">IsValidInputList([1,2,3], [1,2,3,4]);</span>
+true
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">IsValidInputList([1,1,2,3], [1,2,3,4]);</span>
+Variable position list must contain unique positive integers.
+false
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">IsValidInputList([4,3,5], [4,5]);</span>
+Variable position list must be a subset of requested size list. 
+Compare: [ 4, 3, 5 ] with [ 4, 5 ]
+false
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">IsValidInputList([4,3,5], [3,4,5,6]);</span>
+true
+</pre></div>
+
+<p><a id="X87C84CD3859A6982" name="X87C84CD3859A6982"></a></p>
+
+<h5>2.4-2 BooleanPredicaton</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; BooleanPredicaton</code>( <var class="Arg">B</var>, <var class="Arg">n</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>The function <code class="code">BooleanPredicaton</code> returns the <code class="code">Predicaton</code> which consists of one state. This state is a final state if <var class="Arg">B</var> is <code class="code">"true"</code> and a non-final state if <var class="Arg">B</var> is <code class="code">"false"</code>. The list <var class="Arg">n</var> gives the resized variable position list.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">P1:=BooleanPredicaton("true",[]);;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Display(P1);</span>
+Predicaton: deterministic finite automaton on 1 letter with 1 state, 
+the variable position list [ ] and the following transitions:
+       |  1  
+-------------
+  [ ]  |  1  
+ Initial states: [ 1 ]
+ Final states:   [ 1 ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">P2:=BooleanPredicaton("false", [ 1, 2 ]);;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Display(P2);</span>
+Predicaton: deterministic finite automaton on 4 letters with 1 state, 
+the variable position list [ 1, 2 ] and the following transitions:
+            |  1  
+------------------
+  [ 0, 0 ]  |  1  
+  [ 1, 0 ]  |  1  
+  [ 0, 1 ]  |  1  
+  [ 1, 1 ]  |  1  
+ Initial states: [ 1 ]
+ Final states:   [ ]
+</pre></div>
+
+<p><a id="X7E3F74E07B33E8A5" name="X7E3F74E07B33E8A5"></a></p>
+
+<h5>2.4-3 PredicataEqualAut</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; PredicataEqualAut</code></td><td class="tdright">(&nbsp;global variable&nbsp;)</td></tr></table></div>
+<p>The variable <code class="code">PredicataEqualAut</code> returns the <code class="code">Automaton</code> which recognizes the language of <span class="SimpleMath">x=y</span>.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">A:=PredicataEqualAut;</span>
+&lt; deterministic automaton on 4 letters with 2 states &gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">DisplayAut(A);</span>
+deterministic finite automaton on 4 letters with 2 states 
+and the following transitions:
+            |  1  2  
+---------------------
+  [ 0, 0 ]  |  1  2  
+  [ 1, 0 ]  |  2  2  
+  [ 0, 1 ]  |  2  2  
+  [ 1, 1 ]  |  1  2  
+ Initial states: [ 1 ]
+ Final states:   [ 1 ]
+</pre></div>
+
+<p><a id="X7DF4EB0B8064A222" name="X7DF4EB0B8064A222"></a></p>
+
+<h5>2.4-4 EqualPredicaton</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; EqualPredicaton</code>( <var class="Arg">l</var>, <var class="Arg">n</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>The function <code class="code">EqualPredicaton</code> returns the <code class="code">Predicaton</code> which recognizes the language of <span class="SimpleMath">x=y</span>, where <span class="SimpleMath">x</span> is at position <var class="Arg">l[1]</var> and <span class="SimpleMath">y</span> is at position <var class="Arg">l[2]</var>. The list <var class="Arg">n</var> gives the resized variable position list.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">P1:=EqualPredicaton([ 1, 2 ], [ 1, 2 ]);;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Display(P1);</span>
+Predicaton: deterministic finite automaton on 4 letters with 2 states, 
+the variable position list [ 1, 2 ] and the following transitions:
+            |  1  2  
+---------------------
+  [ 0, 0 ]  |  1  2  
+  [ 1, 0 ]  |  2  2  
+  [ 0, 1 ]  |  2  2  
+  [ 1, 1 ]  |  1  2  
+ Initial states: [ 1 ]
+ Final states:   [ 1 ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">P2:=EqualPredicaton([ 3, 4 ], [ 1, 2, 3, 4 ]);;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Display(P2);</span>
+Predicaton: deterministic finite automaton on 16 letters with 2 states, 
+the variable position list [ 1, 2, 3, 4 ] and the following transitions:
+                  |  1  2  
+---------------------------
+  [ 0, 0, 0, 0 ]  |  1  2  
+  [ 0, 0, 1, 0 ]  |  2  2  
+  [ 0, 0, 0, 1 ]  |  2  2  
+  [ 0, 0, 1, 1 ]  |  1  2  
+  [ 1, 0, 0, 0 ]  |  1  2  
+  [ 1, 0, 1, 0 ]  |  2  2  
+  [ 1, 0, 0, 1 ]  |  2  2  
+  [ 1, 0, 1, 1 ]  |  1  2  
+  [ 0, 1, 0, 0 ]  |  1  2  
+  [ 0, 1, 1, 0 ]  |  2  2  
+  [ 0, 1, 0, 1 ]  |  2  2  
+  [ 0, 1, 1, 1 ]  |  1  2  
+  [ 1, 1, 0, 0 ]  |  1  2  
+  [ 1, 1, 1, 0 ]  |  2  2  
+  [ 1, 1, 0, 1 ]  |  2  2  
+  [ 1, 1, 1, 1 ]  |  1  2  
+ Initial states: [ 1 ]
+ Final states:   [ 1 ]
+</pre></div>
+
+<p><a id="X7B9D56F083877897" name="X7B9D56F083877897"></a></p>
+
+<h5>2.4-5 PredicataAdditionAut</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; PredicataAdditionAut</code></td><td class="tdright">(&nbsp;global variable&nbsp;)</td></tr></table></div>
+<p>The variable <code class="code">PredicataAdditionAut</code> returns the <code class="code">Automaton</code> which recognizes the language <span class="SimpleMath">x+y=z.</span></p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">A:=PredicataAdditionAut;</span>
+&lt; deterministic automaton on 8 letters with 3 states &gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">DisplayAut(A);</span>
+deterministic finite automaton on 8 letters with 3 states 
+and the following transitions:
+               |  1  2  3  
+---------------------------
+  [ 0, 0, 0 ]  |  1  3  3  
+  [ 1, 0, 0 ]  |  3  2  3  
+  [ 0, 1, 0 ]  |  3  2  3  
+  [ 1, 1, 0 ]  |  2  3  3  
+  [ 0, 0, 1 ]  |  3  1  3  
+  [ 1, 0, 1 ]  |  1  3  3  
+  [ 0, 1, 1 ]  |  1  3  3  
+  [ 1, 1, 1 ]  |  3  2  3  
+ Initial states: [ 1 ]
+ Final states:   [ 1 ]
+
+</pre></div>
+
+<p><a id="X7AFD4F9179934BAD" name="X7AFD4F9179934BAD"></a></p>
+
+<h5>2.4-6 AdditionPredicaton</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; AdditionPredicaton</code>( <var class="Arg">l</var>, <var class="Arg">n</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>The function <code class="code">AdditionPredicaton</code> returns the <code class="code">Predicaton</code> which recognizes the language <span class="SimpleMath">x+y=z</span>, where <span class="SimpleMath">x</span> is at position <var class="Arg">l[1]</var>, <span class="SimpleMath">y</span> is at position <var class="Arg">l[2]</var> and <span class="SimpleMath">z</span> is at position <var class="Arg">l[3]</var>. The list <var class="Arg">n</var> gives the resized variable position list.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">P:=AdditionPredicaton([1,2,3],[1,2,3]);;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Display(P);</span>
+Predicaton: deterministic finite automaton on 8 letters with 3 states, 
+the variable position list [ 1, 2, 3 ] and the following transitions:
+               |  1  2  3  
+---------------------------
+  [ 0, 0, 0 ]  |  1  3  3  
+  [ 1, 0, 0 ]  |  3  2  3  
+  [ 0, 1, 0 ]  |  3  2  3  
+  [ 1, 1, 0 ]  |  2  3  3  
+  [ 0, 0, 1 ]  |  3  1  3  
+  [ 1, 0, 1 ]  |  1  3  3  
+  [ 0, 1, 1 ]  |  1  3  3  
+  [ 1, 1, 1 ]  |  3  2  3  
+ Initial states: [ 1 ]
+ Final states:   [ 1 ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">DisplayAcceptedByPredicaton(P, [ 15, 15, 30 ]);</span>
+
+     | 0   1   2   3   4   5   6   7   8   9   10  11  12  13  14  15  
+ ---------------------------------------------------------------------
+   0 | 0   1   2   3   4   5   6   7   8   9   10  11  12  13  14  15  
+   1 | 1   2   3   4   5   6   7   8   9   10  11  12  13  14  15  16  
+   2 | 2   3   4   5   6   7   8   9   10  11  12  13  14  15  16  17  
+   3 | 3   4   5   6   7   8   9   10  11  12  13  14  15  16  17  18  
+   4 | 4   5   6   7   8   9   10  11  12  13  14  15  16  17  18  19  
+   5 | 5   6   7   8   9   10  11  12  13  14  15  16  17  18  19  20  
+   6 | 6   7   8   9   10  11  12  13  14  15  16  17  18  19  20  21  
+   7 | 7   8   9   10  11  12  13  14  15  16  17  18  19  20  21  22  
+   8 | 8   9   10  11  12  13  14  15  16  17  18  19  20  21  22  23  
+   9 | 9   10  11  12  13  14  15  16  17  18  19  20  21  22  23  24  
+  10 | 10  11  12  13  14  15  16  17  18  19  20  21  22  23  24  25  
+  11 | 11  12  13  14  15  16  17  18  19  20  21  22  23  24  25  26  
+  12 | 12  13  14  15  16  17  18  19  20  21  22  23  24  25  26  27  
+  13 | 13  14  15  16  17  18  19  20  21  22  23  24  25  26  27  28  
+  14 | 14  15  16  17  18  19  20  21  22  23  24  25  26  27  28  29  
+  15 | 15  16  17  18  19  20  21  22  23  24  25  26  27  28  29  30
+  
+</pre></div>
+
+<p><a id="X7C9BE5EB794C6765" name="X7C9BE5EB794C6765"></a></p>
+
+<h5>2.4-7 AdditionPredicatonNSummands</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; AdditionPredicatonNSummands</code>( <var class="Arg">N</var>, <var class="Arg">l</var>, <var class="Arg">n</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>The function <code class="code">AdditionPredicatonNSummands</code> calls the function <code class="func">AdditionPredicatonNSummandsExplicit</code> (<a href="chap2.html#X852F7B358376A545"><span class="RefLink">2.5-2</span></a>) and returns the <code class="code">Predicaton</code> recognizing the language <span class="SimpleMath">x_1+... x_N=x_N+1</span>. The variables position list <var class="Arg">l</var> gives the positions of the variables <span class="SimpleMath">x_i</span> and the list <var class="Arg">n</var> gives the resized variable position list. The two functions <code class="func">AdditionPredicatonNSummandsIterative</code> (<a href="chap2.html#X85D14FB87F3B212C"><span class="RefLink">2.5-3</span></a>) and <code class="func">AdditionPredicatonNSummandsRecursive</code> (<a href="chap2.html#X807D2C6F7F73D3C7"><span class="RefLink">2.5-4</span></a>) create it in a more naive way, i.e. the first creates the <code class="code">Predicaton</code> from the simple automaton recognizing <span class="SimpleMath">x+y=z</span> step by step and the second creates the <code class="code">Predicaton</code> recursively by splitting the variable position list.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">P:=AdditionPredicatonNSummands(3, [ 1, 6, 3, 9 ], [ 1, 3, 6, 9 ]);;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Display(P);</span>
+Predicaton: deterministic finite automaton on 16 letters with 4 states, 
+the variable position list [ 1, 3, 6, 9 ] and the following transitions:
+                  |  1  2  3  4  
+---------------------------------
+  [ 0, 0, 0, 0 ]  |  1  4  2  4  
+  [ 1, 0, 0, 0 ]  |  4  2  4  4  
+  [ 0, 0, 1, 0 ]  |  4  2  4  4  
+  [ 1, 0, 1, 0 ]  |  2  4  3  4  
+  [ 0, 1, 0, 0 ]  |  4  2  4  4  
+  [ 1, 1, 0, 0 ]  |  2  4  3  4  
+  [ 0, 1, 1, 0 ]  |  2  4  3  4  
+  [ 1, 1, 1, 0 ]  |  4  3  4  4  
+  [ 0, 0, 0, 1 ]  |  4  1  4  4  
+  [ 1, 0, 0, 1 ]  |  1  4  2  4  
+  [ 0, 0, 1, 1 ]  |  1  4  2  4  
+  [ 1, 0, 1, 1 ]  |  4  2  4  4  
+  [ 0, 1, 0, 1 ]  |  1  4  2  4  
+  [ 1, 1, 0, 1 ]  |  4  2  4  4  
+  [ 0, 1, 1, 1 ]  |  4  2  4  4  
+  [ 1, 1, 1, 1 ]  |  2  4  3  4  
+ Initial states: [ 1 ]
+ Final states:   [ 1 ]
+</pre></div>
+
+<p><a id="X7862B8187D278F8A" name="X7862B8187D278F8A"></a></p>
+
+<h5>2.4-8 TimesNPredicaton</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; TimesNPredicaton</code>( <var class="Arg">N</var>, <var class="Arg">l</var>, <var class="Arg">n</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>The function <code class="code">TimesNPredicaton</code> returns the <code class="code">Predicaton</code> calls the function <code class="func">TimesNPredicatonExplicit</code> (<a href="chap2.html#X80833C9D7D71C842"><span class="RefLink">2.5-5</span></a>) and returns the <code class="code">Predicaton</code> recognizing the language <span class="SimpleMath">N⋅ x=y</span>, where <span class="SimpleMath">x</span> is at position <var class="Arg">l[1]</var> and <span class="SimpleMath">y</span> is at position <var class="Arg">l[2]</var>. Note that <span class="SimpleMath">N⋅ x</span> is a shortcut for <span class="SimpleMath">N</span>-times the addition of <span class="SimpleMath">x</span>. The list <var class="Arg">n</var> gives the resized variable position list. The function <code class="code">TimesNPredicatonRecursive</code> creates the <code class="code">Predicaton</code> recursively from multiplications with <span class="SimpleMath">N&lt;10</span>.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">P:=TimesNPredicaton(10, [ 1, 2 ], [ 1, 2 ]);;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Display(P);</span>
+Predicaton: deterministic finite automaton on 4 letters with 11 states, 
+the variable position list [ 1, 2 ] and the following transitions:
+            |  1  2  3  4  5  6  7  8  9  10 11 
+------------------------------------------------
+  [ 0, 0 ]  |  1  11 2  11 3  11 4  11 5  11 11 
+  [ 1, 0 ]  |  6  11 7  11 8  11 9  11 10 11 11 
+  [ 0, 1 ]  |  11 1  11 2  11 3  11 4  11 5  11 
+  [ 1, 1 ]  |  11 6  11 7  11 8  11 9  11 10 11 
+ Initial states: [ 1 ]
+ Final states:   [ 1 ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">AcceptedByPredicaton(P, [ 10, 60 ]);</span>
+[ [ 0, 0 ], [ 1, 10 ], [ 2, 20 ], [ 3, 30 ], [ 4, 40 ], [ 5, 50 ], [ 6, 60 ] ]
+</pre></div>
+
+<p><a id="X870AF29E808AA2BD" name="X870AF29E808AA2BD"></a></p>
+
+<h5>2.4-9 SumOfProductsPredicaton</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; SumOfProductsPredicaton</code>( <var class="Arg">l</var>, <var class="Arg">m</var>, <var class="Arg">n</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>The function <code class="code">SumOfProductsPredicatonExplicit</code> returns the <code class="code">Predicaton</code> recognizing the language <span class="SimpleMath">∑ m_i ⋅ x_i = 0</span>. The variables position list <var class="Arg">l</var> gives the positions of the variables <span class="SimpleMath">x_i</span>, the list <var class="Arg">m</var> gives the integers (positive or negative) and the list <var class="Arg">n</var> gives the resized variable position list.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">P:=SumOfProductsPredicaton([ 1, 2, 3 ], [ 7, 4, -5 ], [ 1, 2, 3 ]);</span>
+&lt; Predicaton: deterministic finite automaton on 8 letters with 16 states 
+and the variable position list [ 1, 2, 3 ]. &gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">DisplayAcceptedByPredicaton(P, [ 15, 15, 100 ]);</span>
+
+     | 0   1   2   3   4   5   6   7   8   9   10  11  12  13  14  15  
+ ---------------------------------------------------------------------
+   0 | 0   --  --  --  --  4   --  --  --  --  8   --  --  --  --  12  
+   1 | --  --  3   --  --  --  --  7   --  --  --  --  11  --  --  --  
+   2 | --  --  --  --  6   --  --  --  --  10  --  --  --  --  14  --  
+   3 | --  5   --  --  --  --  9   --  --  --  --  13  --  --  --  --  
+   4 | --  --  --  8   --  --  --  --  12  --  --  --  --  16  --  --  
+   5 | 7   --  --  --  --  11  --  --  --  --  15  --  --  --  --  19  
+   6 | --  --  10  --  --  --  --  14  --  --  --  --  18  --  --  --  
+   7 | --  --  --  --  13  --  --  --  --  17  --  --  --  --  21  --  
+   8 | --  12  --  --  --  --  16  --  --  --  --  20  --  --  --  --  
+   9 | --  --  --  15  --  --  --  --  19  --  --  --  --  23  --  --  
+  10 | 14  --  --  --  --  18  --  --  --  --  22  --  --  --  --  26  
+  11 | --  --  17  --  --  --  --  21  --  --  --  --  25  --  --  --  
+  12 | --  --  --  --  20  --  --  --  --  24  --  --  --  --  28  --  
+  13 | --  19  --  --  --  --  23  --  --  --  --  27  --  --  --  --  
+  14 | --  --  --  22  --  --  --  --  26  --  --  --  --  30  --  --  
+  15 | 21  --  --  --  --  25  --  --  --  --  29  --  --  --  --  33  
+</pre></div>
+
+<p><a id="X7CF1412E820DD09C" name="X7CF1412E820DD09C"></a></p>
+
+<h5>2.4-10 TermEqualTermPredicaton</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; TermEqualTermPredicaton</code>( <var class="Arg">l1</var>, <var class="Arg">m1</var>, <var class="Arg">i1</var>, <var class="Arg">l2</var>, <var class="Arg">m2</var>, <var class="Arg">i2</var>, <var class="Arg">n</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>The function <code class="code">TermEqualTermPredicaton</code> returns the <code class="code">Predicaton</code> recognizing the language <span class="SimpleMath">∑ m_1_i ⋅ x_i + ∑ i_1 = ∑ m_2_i ⋅ y_i + ∑ i_2</span>. The variables position lists <var class="Arg">l1</var> and <var class="Arg">l2</var> gives the positions of the variables <span class="SimpleMath">x_i</span> and <span class="SimpleMath">y_i</span> respectively, the lists <var class="Arg">m1</var> and <var class="Arg">m2</var> gives the integers (positive or negative) and the list <var class="Arg">n</var> gives the resized variable position list. Note: This function allows double occurrences of the same variable in both variable position lists <var class="Arg">l1</var> and <var class="Arg">l2</var>. The lists <var class="Arg">i1</var> and <var class="Arg">i1</var> gives the integer additions on the left and right side, whereas <var class="Arg">l1</var> and <var class="Arg">m1</var> or <var class="Arg">l2</var> and <var class="Arg">m2</var> must contain at it's position <code class="code">"int"</code>. This function calls <code class="func">SumOfProductsPredicaton</code> (<a href="chap2.html#X870AF29E808AA2BD"><span class="RefLink">2.4-9</span></a>).</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput"># 5*x1 + 2*x1 + 4 = 6*x2 + 1*x3</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">P:=TermEqualTermPredicaton( [ 1, 1, "int" ], [ 5, 2, "int" ], [ 4 ], </span>
+<span class="GAPprompt">&gt;</span> <span class="GAPinput">[ 2, 3 ], [ 6, 1 ], [ ], [ 1, 2, 3 ]);</span>
+&lt; Predicaton: deterministic finite automaton on 8 letters with 14 states 
+and the variable position list [ 1, 2, 3 ]. &gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">AcceptedByPredicaton(P);</span>
+[ [ 0, 0, 4 ], [ 1, 1, 5 ], [ 2, 2, 6 ], [ 2, 3, 0 ], [ 3, 3, 7 ], [ 3, 4, 1 ],
+  [ 4, 4, 8 ], [ 4, 5, 2 ], [ 5, 5, 9 ], [ 5, 6, 3 ], [ 6, 6, 10 ], [ 6, 7, 4 ],
+  [ 7, 8, 5 ], [ 8, 9, 6 ], [ 8, 10, 0 ], [ 9, 10, 7 ] ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">DisplayAcceptedByPredicaton(P, [10, 15, 100]);</span>
+
+     | 0   1   2   3   4   5   6   7   8   9   10  11  12  13  14  15  
+ ---------------------------------------------------------------------
+   0 | 4   --  --  --  --  --  --  --  --  --  --  --  --  --  --  --  
+   1 | 11  5   --  --  --  --  --  --  --  --  --  --  --  --  --  --  
+   2 | 18  12  6   0   --  --  --  --  --  --  --  --  --  --  --  --  
+   3 | 25  19  13  7   1   --  --  --  --  --  --  --  --  --  --  --  
+   4 | 32  26  20  14  8   2   --  --  --  --  --  --  --  --  --  --  
+   5 | 39  33  27  21  15  9   3   --  --  --  --  --  --  --  --  --  
+   6 | 46  40  34  28  22  16  10  4   --  --  --  --  --  --  --  --  
+   7 | 53  47  41  35  29  23  17  11  5   --  --  --  --  --  --  --  
+   8 | 60  54  48  42  36  30  24  18  12  6   0   --  --  --  --  --  
+   9 | 67  61  55  49  43  37  31  25  19  13  7   1   --  --  --  --  
+  10 | 74  68  62  56  50  44  38  32  26  20  14  8   2   --  --  --  
+
+</pre></div>
+
+<p><a id="X809814E082C02E7B" name="X809814E082C02E7B"></a></p>
+
+<h5>2.4-11 GreaterEqualNPredicaton</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; GreaterEqualNPredicaton</code>( <var class="Arg">N</var>, <var class="Arg">l</var>, <var class="Arg">n</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>The function <code class="code">GreaterEqualNPredicaton</code> returns the <code class="code">Predicaton</code> recognizing the language <span class="SimpleMath">x&gt;=N</span>.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">P:=GreaterEqualNPredicaton(15, [ 1 ], [ 1 ]);;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">P:=SortedStatesAut(P);;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Display(P);</span>
+Predicaton: deterministic finite automaton on 2 letters with 8 states, 
+the variable position list [ 1 ] and the following transitions:
+         |  1  2  3  4  5  6  7  8  
+------------------------------------
+  [ 0 ]  |  7  6  3  3  4  4  6  8  
+  [ 1 ]  |  2  5  8  3  3  4  6  8  
+ Initial states: [ 1 ]
+ Final states:   [ 8 ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">DisplayAcceptedByPredicaton(P, 29, true);</span>
+ If the following words are accepted by the given automaton, then: Y, 
+ otherwise if not accepted: n.
+   0: n   1: n   2: n   3: n   4: n   5: n   6: n   7: n   8: n   9: n
+  10: n  11: n  12: n  13: n  14: n  15: Y  16: Y  17: Y  18: Y  19: Y
+  20: Y  21: Y  22: Y  23: Y  24: Y  25: Y  26: Y  27: Y  28: Y  29: Y
+ 
+</pre></div>
+
+<p><a id="X878216317D972D59" name="X878216317D972D59"></a></p>
+
+<h5>2.4-12 GreaterNPredicaton</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; GreaterNPredicaton</code>( <var class="Arg">N</var>, <var class="Arg">l</var>, <var class="Arg">n</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>The function <code class="code">GreaterNPredicaton</code> returns the <code class="code">Predicaton</code> recognizing the language <span class="SimpleMath">x&gt;N</span>.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">P:=GreaterNPredicaton(15, [ 1 ], [ 1 ]);;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">P:=SortedStatesAut(P);;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Display(P);</span>
+Predicaton: deterministic finite automaton on 2 letters with 6 states, 
+the variable position list [ 1 ] and the following transitions:
+         |  1  2  3  4  5  6  
+------------------------------
+  [ 0 ]  |  5  2  2  3  4  6  
+  [ 1 ]  |  5  6  2  3  4  6  
+ Initial states: [ 1 ]
+ Final states:   [ 6 ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">DisplayAcceptedByPredicaton(P, 29, true);</span>
+ If the following words are accepted by the given automaton, then: Y, 
+ otherwise if not accepted: n.
+   0: n   1: n   2: n   3: n   4: n   5: n   6: n   7: n   8: n   9: n
+  10: n  11: n  12: n  13: n  14: n  15: n  16: Y  17: Y  18: Y  19: Y
+  20: Y  21: Y  22: Y  23: Y  24: Y  25: Y  26: Y  27: Y  28: Y  29: Y
+</pre></div>
+
+<p><a id="X7C3891F485E71911" name="X7C3891F485E71911"></a></p>
+
+<h5>2.4-13 SmallerEqualNPredicaton</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; SmallerEqualNPredicaton</code>( <var class="Arg">N</var>, <var class="Arg">l</var>, <var class="Arg">n</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>The function <code class="code">SmallerEqualNPredicaton</code> returns the <code class="code">Predicaton</code> recognizing the language <span class="SimpleMath">x&lt;=N</span>.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">P:=SmallerEqualNPredicaton(15, [ 1 ], [ 1 ]);;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">P:=SortedStatesAut(P);;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Display(P);</span>
+Predicaton: deterministic finite automaton on 2 letters with 6 states, 
+the variable position list [ 1 ] and the following transitions:
+         |  1  2  3  4  5  6  
+------------------------------
+  [ 0 ]  |  6  2  3  3  4  5  
+  [ 1 ]  |  6  2  2  3  4  5  
+ Initial states: [ 1 ]
+ Final states:   [ 1, 3, 4, 5, 6 ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">DisplayAcceptedByPredicaton(P, 29, true);</span>
+ If the following words are accepted by the given automaton, then: Y, 
+ otherwise if not accepted: n.
+   0: Y   1: Y   2: Y   3: Y   4: Y   5: Y   6: Y   7: Y   8: Y   9: Y
+  10: Y  11: Y  12: Y  13: Y  14: Y  15: Y  16: n  17: n  18: n  19: n
+  20: n  21: n  22: n  23: n  24: n  25: n  26: n  27: n  28: n  29: n
+</pre></div>
+
+<p><a id="X7F12D5E77AB01A33" name="X7F12D5E77AB01A33"></a></p>
+
+<h5>2.4-14 SmallerNPredicaton</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; SmallerNPredicaton</code>( <var class="Arg">N</var>, <var class="Arg">l</var>, <var class="Arg">n</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>The function <code class="code">SmallerNPredicaton</code> returns the <code class="code">Predicaton</code> recognizing the language <span class="SimpleMath">x&lt;N</span>.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">P:=SmallerNPredicaton(15, [ 1 ], [ 1 ]);;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">P:=SortedStatesAut(P);;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Display(P);</span>
+Predicaton: deterministic finite automaton on 2 letters with 8 states, 
+the variable position list [ 1 ] and the following transitions:
+         |  1  2  3  4  5  6  7  8  
+------------------------------------
+  [ 0 ]  |  8  2  7  4  4  5  5  7  
+  [ 1 ]  |  3  2  6  2  4  4  5  7  
+ Initial states: [ 1 ]
+ Final states:   [ 1, 3, 4, 5, 6, 7, 8 ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">DisplayAcceptedByPredicaton(P, 29, true);</span>
+ If the following words are accepted by the given automaton,  then: Y, 
+ otherwise if not accepted: n.
+   0: Y   1: Y   2: Y   3: Y   4: Y   5: Y   6: Y   7: Y   8: Y   9: Y
+  10: Y  11: Y  12: Y  13: Y  14: Y  15: n  16: n  17: n  18: n  19: n
+  20: n  21: n  22: n  23: n  24: n  25: n  26: n  27: n  28: n  29: n
+
+</pre></div>
+
+<p><a id="X86861D8579E34ED5" name="X86861D8579E34ED5"></a></p>
+
+<h5>2.4-15 GreaterEqualPredicaton</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; GreaterEqualPredicaton</code>( <var class="Arg">l</var>, <var class="Arg">n</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>The function <code class="code">GreaterEqualPredicaton</code> returns the <code class="code">Predicaton</code> recognizing the language <span class="SimpleMath">x&gt;=y</span> with the variables position list <var class="Arg">l</var> giving the positions of the variables <span class="SimpleMath">x</span> and <span class="SimpleMath">y</span>. The list <var class="Arg">n</var> gives the resized variable position list.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">P:=GreaterEqualPredicaton([1,2],[1,2]);;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Display(P);</span>
+Predicaton: deterministic finite automaton on 4 letters with 2 states, 
+the variable position list [ 1, 2 ] and the following transitions:
+            |  1  2  
+---------------------
+  [ 0, 0 ]  |  1  2  
+  [ 1, 0 ]  |  2  2  
+  [ 0, 1 ]  |  1  1  
+  [ 1, 1 ]  |  1  2  
+ Initial states: [ 2 ]
+ Final states:   [ 2 ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">DisplayAcceptedByPredicaton(P, 10);</span>
+ If the following words are accepted by the given automaton, then: YES, 
+ otherwise if not accepted: no.
+     | 0   1   2   3   4   5   6   7   8   9   10  
+ -------------------------------------------------
+   0 | YES no  no  no  no  no  no  no  no  no  no  
+   1 | YES YES no  no  no  no  no  no  no  no  no  
+   2 | YES YES YES no  no  no  no  no  no  no  no  
+   3 | YES YES YES YES no  no  no  no  no  no  no  
+   4 | YES YES YES YES YES no  no  no  no  no  no  
+   5 | YES YES YES YES YES YES no  no  no  no  no  
+   6 | YES YES YES YES YES YES YES no  no  no  no  
+   7 | YES YES YES YES YES YES YES YES no  no  no  
+   8 | YES YES YES YES YES YES YES YES YES no  no  
+   9 | YES YES YES YES YES YES YES YES YES YES no  
+  10 | YES YES YES YES YES YES YES YES YES YES YES 
+</pre></div>
+
+<p><a id="X879C942184F32572" name="X879C942184F32572"></a></p>
+
+<h5>2.4-16 GreaterPredicaton</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; GreaterPredicaton</code>( <var class="Arg">l</var>, <var class="Arg">n</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>The function <code class="code">GreaterPredicaton</code> returns the <code class="code">Predicaton</code> recognizing the language <span class="SimpleMath">x&gt;y</span> with the variables position list <var class="Arg">l</var> giving the positions of the variables <span class="SimpleMath">x</span> and <span class="SimpleMath">y</span>. The list <var class="Arg">n</var> gives the resized variable position list.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">P:=GreaterPredicaton([1,2],[1,2]);;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Display(P);</span>
+Predicaton: deterministic finite automaton on 4 letters with 2 states, 
+the variable position list [ 1, 2 ] and the following transitions:
+            |  1  2  
+---------------------
+  [ 0, 0 ]  |  1  2  
+  [ 1, 0 ]  |  1  1  
+  [ 0, 1 ]  |  2  2  
+  [ 1, 1 ]  |  1  2  
+ Initial states: [ 2 ]
+ Final states:   [ 1 ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">DisplayAcceptedByPredicaton(P, 10);</span>
+ If the following words are accepted by the given automaton, then: YES, 
+ otherwise if not accepted: no.
+     | 0   1   2   3   4   5   6   7   8   9   10  
+ -------------------------------------------------
+   0 | no  no  no  no  no  no  no  no  no  no  no  
+   1 | YES no  no  no  no  no  no  no  no  no  no  
+   2 | YES YES no  no  no  no  no  no  no  no  no  
+   3 | YES YES YES no  no  no  no  no  no  no  no  
+   4 | YES YES YES YES no  no  no  no  no  no  no  
+   5 | YES YES YES YES YES no  no  no  no  no  no  
+   6 | YES YES YES YES YES YES no  no  no  no  no  
+   7 | YES YES YES YES YES YES YES no  no  no  no  
+   8 | YES YES YES YES YES YES YES YES no  no  no  
+   9 | YES YES YES YES YES YES YES YES YES no  no  
+  10 | YES YES YES YES YES YES YES YES YES YES no  
+</pre></div>
+
+<p><a id="X7DAF215A7EC479BF" name="X7DAF215A7EC479BF"></a></p>
+
+<h5>2.4-17 SmallerEqualPredicaton</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; SmallerEqualPredicaton</code>( <var class="Arg">l</var>, <var class="Arg">n</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>The function <code class="code">SmallerEqualPredicaton</code> returns the <code class="code">Predicaton</code> recognizing the language <span class="SimpleMath">x&lt;=y</span> with the variables position list <var class="Arg">l</var> giving the positions of the variables <span class="SimpleMath">x</span> and <span class="SimpleMath">y</span>. The list <var class="Arg">n</var> gives the resized variable position list.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">P:=SmallerEqualPredicaton([ 1, 2 ], [ 1, 2 ]);;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Display(P);</span>
+Predicaton: deterministic finite automaton on 4 letters with 2 states, 
+the variable position list [ 1, 2 ] and the following transitions:
+            |  1  2  
+---------------------
+  [ 0, 0 ]  |  1  2  
+  [ 1, 0 ]  |  1  1  
+  [ 0, 1 ]  |  2  2  
+  [ 1, 1 ]  |  1  2  
+ Initial states: [ 2 ]
+ Final states:   [ 2 ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">DisplayAcceptedByPredicaton(P, 10);</span>
+ If the following words are accepted by the given automaton, then: YES, 
+ otherwise if not accepted: no.
+     | 0   1   2   3   4   5   6   7   8   9   10  
+ -------------------------------------------------
+   0 | YES YES YES YES YES YES YES YES YES YES YES 
+   1 | no  YES YES YES YES YES YES YES YES YES YES 
+   2 | no  no  YES YES YES YES YES YES YES YES YES 
+   3 | no  no  no  YES YES YES YES YES YES YES YES 
+   4 | no  no  no  no  YES YES YES YES YES YES YES 
+   5 | no  no  no  no  no  YES YES YES YES YES YES 
+   6 | no  no  no  no  no  no  YES YES YES YES YES 
+   7 | no  no  no  no  no  no  no  YES YES YES YES 
+   8 | no  no  no  no  no  no  no  no  YES YES YES 
+   9 | no  no  no  no  no  no  no  no  no  YES YES 
+  10 | no  no  no  no  no  no  no  no  no  no  YES 
+</pre></div>
+
+<p><a id="X7A6DFC5883D41218" name="X7A6DFC5883D41218"></a></p>
+
+<h5>2.4-18 SmallerPredicaton</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; SmallerPredicaton</code>( <var class="Arg">l</var>, <var class="Arg">n</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>The function <code class="code">SmallerPredicaton</code> returns the <code class="code">Predicaton</code> recognizing the language <span class="SimpleMath">x&lt;y</span> with the variables position list <var class="Arg">l</var> giving the positions of the variables <span class="SimpleMath">x</span> and <span class="SimpleMath">y</span>. The list <var class="Arg">n</var> gives the resized variable position list.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">P:=SmallerPredicaton([ 1, 2 ], [ 1, 2 ]);;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Display(P);</span>
+Predicaton: deterministic finite automaton on 4 letters with 2 states, 
+the variable position list [ 1, 2 ] and the following transitions:
+            |  1  2  
+---------------------
+  [ 0, 0 ]  |  1  2  
+  [ 1, 0 ]  |  2  2  
+  [ 0, 1 ]  |  1  1  
+  [ 1, 1 ]  |  1  2  
+ Initial states: [ 2 ]
+ Final states:   [ 1 ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">DisplayAcceptedByPredicaton(P, 10);</span>
+ If the following words are accepted by the given automaton, then: YES, 
+ otherwise if not accepted: no.
+     | 0   1   2   3   4   5   6   7   8   9   10  
+ -------------------------------------------------
+   0 | no  YES YES YES YES YES YES YES YES YES YES 
+   1 | no  no  YES YES YES YES YES YES YES YES YES 
+   2 | no  no  no  YES YES YES YES YES YES YES YES 
+   3 | no  no  no  no  YES YES YES YES YES YES YES 
+   4 | no  no  no  no  no  YES YES YES YES YES YES 
+   5 | no  no  no  no  no  no  YES YES YES YES YES 
+   6 | no  no  no  no  no  no  no  YES YES YES YES 
+   7 | no  no  no  no  no  no  no  no  YES YES YES 
+   8 | no  no  no  no  no  no  no  no  no  YES YES 
+   9 | no  no  no  no  no  no  no  no  no  no  YES 
+  10 | no  no  no  no  no  no  no  no  no  no  no  
+</pre></div>
+
+<p><a id="X83AE98BC7EEF3304" name="X83AE98BC7EEF3304"></a></p>
+
+<h4>2.5 <span class="Heading">Detailed look at the special functions on Predicata</span></h4>
+
+<p>This section explains how the sums and products are computed and describes different methods. The explicit method, which computes the transition matrix with a transition formula, is more efficient than the other given methods. The recursive and iterative methods explain a more naive way how to compute the requested automaton, but are lacking in speed. Therefore they are not used in any further computation.</p>
+
+<p><a id="X84AA3F897FDA7314" name="X84AA3F897FDA7314"></a></p>
+
+<h5>2.5-1 AdditionPredicaton3Summands</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; AdditionPredicaton3Summands</code>( <var class="Arg">l</var>, <var class="Arg">n</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; AdditionPredicaton4Summands</code>( <var class="Arg">l</var>, <var class="Arg">n</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; AdditionPredicaton5Summands</code>( <var class="Arg">l</var>, <var class="Arg">n</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>The functions <code class="code">AdditionPredicatonNSummands</code> returns the <code class="code">Predicaton</code> recognizing the language <span class="SimpleMath">x_1+... x_N=x_N+1</span> for <span class="SimpleMath">N=3,4,5</span>.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">P:=AdditionPredicaton3Summands([ 1, 2, 3, 4 ],[ 1, 2, 3, 4 ]);</span>
+&lt; Predicaton: deterministic finite automaton on 16 letters with 4 states 
+and the variable position list [ 1, 2, 3, 4 ]. &gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">P:=AdditionPredicaton4Summands([ 1, 2, 3, 4, 5 ], [ 1, 2, 3, 4, 5 ]);</span>
+&lt; Predicaton: deterministic finite automaton on 32 letters with 5 states 
+and the variable position list [ 1, 2, 3, 4, 5 ]. &gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">P:=AdditionPredicaton5Summands([ 1, 2, 3, 4, 5, 6 ], [ 1, 2, 3, 4, 5, 6 ]);</span>
+&lt; Predicaton: deterministic finite automaton on 64 letters with 6 states 
+and the variable position list [ 1, 2, 3, 4, 5, 6 ]. &gt;
+
+</pre></div>
+
+<p><a id="X852F7B358376A545" name="X852F7B358376A545"></a></p>
+
+<h5>2.5-2 AdditionPredicatonNSummandsExplicit</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; AdditionPredicatonNSummandsExplicit</code>( <var class="Arg">N</var>, <var class="Arg">l</var>, <var class="Arg">n</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>The function <code class="code">AdditionPredicatonNSummandsExplicit</code> returns the <code class="code">Predicaton</code> recognizing the language <span class="SimpleMath">x_1+... x_N=x_N+1</span>. The <code class="code">TransitionTable</code> is assigned explicitly with the following transition property: The <span class="SimpleMath">i</span>-th state denotes carry <span class="SimpleMath">i</span> and there is a transition from state <span class="SimpleMath">i</span> to state <span class="SimpleMath">j</span> for the letter <span class="SimpleMath">a</span> if <span class="Math">\sum_{i=1}^{N}a_i = a_{N+1} + i + 2 (j-i)</span> holds. The variables position list <var class="Arg">l</var> gives the positions of the variables <span class="SimpleMath">x_i</span> and the list <var class="Arg">n</var> gives the resized variable position list.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">P:=AdditionPredicatonNSummandsExplicit(3, [6, 11, 2, 9], [2, 3, 6, 7, 9, 11]);</span>
+&lt; Predicaton: deterministic finite automaton on 64 letters with 4 states 
+and the variable position list [ 2, 3, 6, 7, 9, 11 ]. &gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">P:=AdditionPredicatonNSummandsExplicit(11, [ 1..12 ], [ 1..12 ]);</span>
+&lt; Predicaton: deterministic finite automaton on 4096 letters with 12 states 
+and the variable position list 
+[ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12 ]. &gt;
+</pre></div>
+
+<p><a id="X85D14FB87F3B212C" name="X85D14FB87F3B212C"></a></p>
+
+<h5>2.5-3 AdditionPredicatonNSummandsIterative</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; AdditionPredicatonNSummandsIterative</code>( <var class="Arg">N</var>, <var class="Arg">l</var>, <var class="Arg">n</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>The function <code class="code">AdditionPredicatonNSummandsIterative</code> returns the <code class="code">Predicaton</code> recognizing the language <span class="SimpleMath">x_1+... x_N=x_N+1</span>. The <code class="code">Predicaton</code> is created by intersection <span class="SimpleMath">(N-1)</span>-times the simple automaton recognizing <span class="SimpleMath">x+y=z</span>. Due to intersecting and minimizing that often, this function shouldn't be used for large <span class="SimpleMath">N</span> (for example <span class="SimpleMath">N&gt;10</span>).</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">P:=AdditionPredicatonNSummandsIterative(7, [ 1..8 ], [ 1..8 ]);</span>
+&lt; Predicaton: deterministic finite automaton on 256 letters with 8 states 
+and the variable position list [ 1, 2, 3, 4, 5, 6, 7, 8 ]. &gt;
+</pre></div>
+
+<p><a id="X807D2C6F7F73D3C7" name="X807D2C6F7F73D3C7"></a></p>
+
+<h5>2.5-4 AdditionPredicatonNSummandsRecursive</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; AdditionPredicatonNSummandsRecursive</code>( <var class="Arg">N</var>, <var class="Arg">l</var>, <var class="Arg">n</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>The function <code class="code">AdditionPredicatonNSummandsRecursive</code> returns the <code class="code">Predicaton</code> recognizing the language <span class="SimpleMath">x_1+... x_N=x_N+1</span>. The <code class="code">Predicaton</code> is created recursively splitting the variable position list until a length of 3 is reached, where the base cases are the simple automaton recognizing <span class="SimpleMath">x+y=z</span>. It is slightly faster than <code class="func">AdditionPredicatonNSummandsIterative</code> (<a href="chap2.html#X85D14FB87F3B212C"><span class="RefLink">2.5-3</span></a>) but nevertheless it shouldn't be used for large <span class="SimpleMath">N</span> (for example <span class="SimpleMath">N&gt;10</span>).</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">P:=AdditionPredicatonNSummandsRecursive(7, [ 1..8 ], [ 1..8 ]);</span>
+&lt; Predicaton: deterministic finite automaton on 256 letters with 8 states 
+and the variable position list [ 1, 2, 3, 4, 5, 6, 7, 8 ]. &gt;
+</pre></div>
+
+<p><a id="X80833C9D7D71C842" name="X80833C9D7D71C842"></a></p>
+
+<h5>2.5-5 TimesNPredicatonExplicit</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; TimesNPredicatonExplicit</code>( <var class="Arg">N</var>, <var class="Arg">l</var>, <var class="Arg">n</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>The function <code class="code">TimesNPredicatonExplicit</code> returns the <code class="code">Predicaton</code> recognizing the language <span class="SimpleMath">N⋅ x=y</span>. The <code class="code">TransitionTable</code> is assigned explicitly with the following transition property: The <span class="SimpleMath">i</span>-th state denotes carry <span class="SimpleMath">i</span> and there is a transition from state <span class="SimpleMath">i</span> to state <span class="SimpleMath">j</span> for the letter <span class="SimpleMath">a</span> if <span class="Math">N \cdot a_1 = a_2 + i + 2 (j - i).</span> The variables position list <var class="Arg">l</var> gives the positions of the variables <span class="SimpleMath">x_i</span> and the list <var class="Arg">n</var> gives the resized variable position list.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">P:=TimesNPredicatonExplicit(1000, [ 1, 2 ], [ 1, 2 ]);</span>
+&lt; Predicaton: deterministic finite automaton on 4 letters with 1001 states 
+and the variable position list [ 1, 2 ]. &gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">IsAcceptedByPredicaton(P, [ 1, 1000 ]);</span>
+true
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">IsAcceptedByPredicaton(P, [ 2, 2000 ]);</span>
+true
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">IsAcceptedByPredicaton(P, [ 3, 3000 ]);</span>
+true
+</pre></div>
+
+<p><a id="X87DE25827F946F58" name="X87DE25827F946F58"></a></p>
+
+<h5>2.5-6 TimesNPredicatonRecursive</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; TimesNPredicatonRecursive</code>( <var class="Arg">N</var>, <var class="Arg">l</var>, <var class="Arg">n</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>The function <code class="code">TimesNPredicatonRecursive</code> returns the <code class="code">Predicaton</code> recognizing the language <span class="SimpleMath">N ⋅ x=y</span>. It splits the the multiplication into a multiplications of <span class="SimpleMath">N_1</span> and <span class="SimpleMath">N_2</span>, where <span class="SimpleMath">N = N_1 ⋅ N_2</span>.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">P:=TimesNPredicatonRecursive(100, [1,2],[1,2]);</span>
+&lt; Predicaton: deterministic finite automaton on 4 letters with 101 states 
+and the variable position list [ 1, 2 ]. &gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">P:=TimesNPredicatonRecursive(1000, [1,2],[1,2]);</span>
+&lt; Predicaton: deterministic finite automaton on 4 letters with 1001 states 
+and the variable position list [ 1, 2 ]. &gt;
+</pre></div>
+
+<p><a id="X7F48FCE67A934302" name="X7F48FCE67A934302"></a></p>
+
+<h5>2.5-7 Times2Predicaton</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; Times2Predicaton</code>( <var class="Arg">l</var>, <var class="Arg">n</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; Times3Predicaton</code>( <var class="Arg">l</var>, <var class="Arg">n</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; Times4Predicaton</code>( <var class="Arg">l</var>, <var class="Arg">n</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; Times5Predicaton</code>( <var class="Arg">l</var>, <var class="Arg">n</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; Times6Predicaton</code>( <var class="Arg">l</var>, <var class="Arg">n</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; Times7Predicaton</code>( <var class="Arg">l</var>, <var class="Arg">n</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; Times8Predicaton</code>( <var class="Arg">l</var>, <var class="Arg">n</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; Times9Predicaton</code>( <var class="Arg">l</var>, <var class="Arg">n</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>The functions <code class="code">Times2Predicaton</code>, <code class="code">Times3Predicaton</code>,... returns the <code class="code">Predicaton</code> recognizing the language <span class="SimpleMath">N ⋅ x=y</span> for <span class="SimpleMath">N=2,...,9</span>.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">P:=Times2Predicaton([ 1, 2 ], [ 1, 2 ]);;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Display(P);</span>
+Predicaton: deterministic finite automaton on 4 letters with 3 states, 
+the variable position list [ 1, 2 ] and the following transitions:
+            |  1  2  3  
+------------------------
+  [ 0, 0 ]  |  1  3  3  
+  [ 1, 0 ]  |  2  3  3  
+  [ 0, 1 ]  |  3  1  3  
+  [ 1, 1 ]  |  3  2  3  
+ Initial states: [ 1 ]
+ Final states:   [ 1 ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">P:=Times3Predicaton([ 1, 2 ], [ 1, 2 ]);;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Display(P);</span>
+Predicaton: deterministic finite automaton on 4 letters with 4 states, 
+the variable position list [ 1, 2 ] and the following transitions:
+            |  1  2  3  4  
+---------------------------
+  [ 0, 0 ]  |  1  4  2  4  
+  [ 1, 0 ]  |  4  3  4  4  
+  [ 0, 1 ]  |  4  1  4  4  
+  [ 1, 1 ]  |  2  4  3  4  
+ Initial states: [ 1 ]
+ Final states:   [ 1 ]
+</pre></div>
+
+
+<div class="chlinkprevnextbot">&nbsp;<a href="chap0.html">[Top of Book]</a>&nbsp;  <a href="chap0.html#contents">[Contents]</a>&nbsp;  &nbsp;<a href="chap1.html">[Previous Chapter]</a>&nbsp;  &nbsp;<a href="chap3.html">[Next Chapter]</a>&nbsp;  </div>
+
+
+<div class="chlinkbot"><span class="chlink1">Goto Chapter: </span><a href="chap0.html">Top</a>  <a href="chap1.html">1</a>  <a href="chap2.html">2</a>  <a href="chap3.html">3</a>  <a href="chap4.html">4</a>  <a href="chapBib.html">Bib</a>  <a href="chapInd.html">Ind</a>  </div>
+
+<hr />
+<p class="foot">generated by <a href="http://www.math.rwth-aachen.de/~Frank.Luebeck/GAPDoc">GAPDoc2HTML</a></p>
+</body>
+</html>

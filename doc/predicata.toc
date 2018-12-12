@@ -1,0 +1,190 @@
+\contentsline {chapter}{\numberline {1}\leavevmode {\color {Chapter }Introduction}}{4}{chapter.1}
+\contentsline {chapter}{\numberline {2}\leavevmode {\color {Chapter }Creating Predicata}}{6}{chapter.2}
+\contentsline {section}{\numberline {2.1}\leavevmode {\color {Chapter }Predicaton {\textendash } an extended finite automaton}}{6}{section.2.1}
+\contentsline {subsection}{\numberline {2.1.1}\leavevmode {\color {Chapter }Predicaton (Automaton with variable position list)}}{6}{subsection.2.1.1}
+\contentsline {subsection}{\numberline {2.1.2}\leavevmode {\color {Chapter }BuildPredicaton}}{7}{subsection.2.1.2}
+\contentsline {subsection}{\numberline {2.1.3}\leavevmode {\color {Chapter }IsPredicaton}}{7}{subsection.2.1.3}
+\contentsline {subsection}{\numberline {2.1.4}\leavevmode {\color {Chapter }Display (Predicaton)}}{8}{subsection.2.1.4}
+\contentsline {subsection}{\numberline {2.1.5}\leavevmode {\color {Chapter }View (Predicaton)}}{8}{subsection.2.1.5}
+\contentsline {subsection}{\numberline {2.1.6}\leavevmode {\color {Chapter }Print (Predicaton)}}{8}{subsection.2.1.6}
+\contentsline {subsection}{\numberline {2.1.7}\leavevmode {\color {Chapter }GetAlphabet}}{9}{subsection.2.1.7}
+\contentsline {section}{\numberline {2.2}\leavevmode {\color {Chapter }Basic functions on Automata and Predicata}}{10}{section.2.2}
+\contentsline {subsection}{\numberline {2.2.1}\leavevmode {\color {Chapter }DisplayAut}}{10}{subsection.2.2.1}
+\contentsline {subsection}{\numberline {2.2.2}\leavevmode {\color {Chapter }DrawPredicaton}}{10}{subsection.2.2.2}
+\contentsline {subsection}{\numberline {2.2.3}\leavevmode {\color {Chapter }IsDeterministicAut}}{11}{subsection.2.2.3}
+\contentsline {subsection}{\numberline {2.2.4}\leavevmode {\color {Chapter }IsNonDeterministicAut}}{11}{subsection.2.2.4}
+\contentsline {subsection}{\numberline {2.2.5}\leavevmode {\color {Chapter }TypeOfAut}}{11}{subsection.2.2.5}
+\contentsline {subsection}{\numberline {2.2.6}\leavevmode {\color {Chapter }AlphabetOfAut}}{12}{subsection.2.2.6}
+\contentsline {subsection}{\numberline {2.2.7}\leavevmode {\color {Chapter }AlphabetOfAutAsList}}{12}{subsection.2.2.7}
+\contentsline {subsection}{\numberline {2.2.8}\leavevmode {\color {Chapter }NumberStatesOfAut}}{12}{subsection.2.2.8}
+\contentsline {subsection}{\numberline {2.2.9}\leavevmode {\color {Chapter }SortedStatesAut}}{12}{subsection.2.2.9}
+\contentsline {subsection}{\numberline {2.2.10}\leavevmode {\color {Chapter }TransitionMatrixOfAut}}{13}{subsection.2.2.10}
+\contentsline {subsection}{\numberline {2.2.11}\leavevmode {\color {Chapter }InitialStatesOfAut}}{13}{subsection.2.2.11}
+\contentsline {subsection}{\numberline {2.2.12}\leavevmode {\color {Chapter }SetInitialStatesOfAut}}{14}{subsection.2.2.12}
+\contentsline {subsection}{\numberline {2.2.13}\leavevmode {\color {Chapter }FinalStatesOfAut}}{14}{subsection.2.2.13}
+\contentsline {subsection}{\numberline {2.2.14}\leavevmode {\color {Chapter }SetFinalStatesOfAut}}{15}{subsection.2.2.14}
+\contentsline {subsection}{\numberline {2.2.15}\leavevmode {\color {Chapter }SinkStatesOfAut}}{15}{subsection.2.2.15}
+\contentsline {subsection}{\numberline {2.2.16}\leavevmode {\color {Chapter }PermutedStatesAut}}{16}{subsection.2.2.16}
+\contentsline {subsection}{\numberline {2.2.17}\leavevmode {\color {Chapter }CopyAut}}{16}{subsection.2.2.17}
+\contentsline {subsection}{\numberline {2.2.18}\leavevmode {\color {Chapter }MinimalAut}}{17}{subsection.2.2.18}
+\contentsline {subsection}{\numberline {2.2.19}\leavevmode {\color {Chapter }NegatedAut}}{18}{subsection.2.2.19}
+\contentsline {subsection}{\numberline {2.2.20}\leavevmode {\color {Chapter }IntersectionAut}}{18}{subsection.2.2.20}
+\contentsline {subsection}{\numberline {2.2.21}\leavevmode {\color {Chapter }UnionAut}}{19}{subsection.2.2.21}
+\contentsline {subsection}{\numberline {2.2.22}\leavevmode {\color {Chapter }IsRecognizedByAut}}{20}{subsection.2.2.22}
+\contentsline {section}{\numberline {2.3}\leavevmode {\color {Chapter }Basic functions on Predicata}}{20}{section.2.3}
+\contentsline {subsection}{\numberline {2.3.1}\leavevmode {\color {Chapter }DecToBin}}{20}{subsection.2.3.1}
+\contentsline {subsection}{\numberline {2.3.2}\leavevmode {\color {Chapter }BinToDec}}{21}{subsection.2.3.2}
+\contentsline {subsection}{\numberline {2.3.3}\leavevmode {\color {Chapter }IsAcceptedWordByPredicaton}}{21}{subsection.2.3.3}
+\contentsline {subsection}{\numberline {2.3.4}\leavevmode {\color {Chapter }AcceptedWordsByPredicaton}}{22}{subsection.2.3.4}
+\contentsline {subsection}{\numberline {2.3.5}\leavevmode {\color {Chapter }DisplayAcceptedWordsByPredicaton}}{22}{subsection.2.3.5}
+\contentsline {subsection}{\numberline {2.3.6}\leavevmode {\color {Chapter }DisplayAcceptedWordsByPredicatonInNxN}}{23}{subsection.2.3.6}
+\contentsline {subsection}{\numberline {2.3.7}\leavevmode {\color {Chapter }AutomatonOfPredicaton}}{24}{subsection.2.3.7}
+\contentsline {subsection}{\numberline {2.3.8}\leavevmode {\color {Chapter }VariablePositionListOfPredicaton}}{25}{subsection.2.3.8}
+\contentsline {subsection}{\numberline {2.3.9}\leavevmode {\color {Chapter }SetVariablePositionListOfPredicaton}}{25}{subsection.2.3.9}
+\contentsline {subsection}{\numberline {2.3.10}\leavevmode {\color {Chapter }ProductLZeroPredicaton}}{25}{subsection.2.3.10}
+\contentsline {subsection}{\numberline {2.3.11}\leavevmode {\color {Chapter }RightQuotientLZeroPredicaton}}{26}{subsection.2.3.11}
+\contentsline {subsection}{\numberline {2.3.12}\leavevmode {\color {Chapter }NormalizedLeadingZeroPredicaton}}{28}{subsection.2.3.12}
+\contentsline {subsection}{\numberline {2.3.13}\leavevmode {\color {Chapter }SortedAlphabetPredicaton}}{29}{subsection.2.3.13}
+\contentsline {subsection}{\numberline {2.3.14}\leavevmode {\color {Chapter }FormattedPredicaton}}{30}{subsection.2.3.14}
+\contentsline {subsection}{\numberline {2.3.15}\leavevmode {\color {Chapter }IsValidInput}}{31}{subsection.2.3.15}
+\contentsline {subsection}{\numberline {2.3.16}\leavevmode {\color {Chapter }ExpandedPredicaton}}{31}{subsection.2.3.16}
+\contentsline {subsection}{\numberline {2.3.17}\leavevmode {\color {Chapter }ProjectedPredicaton}}{32}{subsection.2.3.17}
+\contentsline {subsection}{\numberline {2.3.18}\leavevmode {\color {Chapter }NegatedProjectedNegatedPredicaton}}{32}{subsection.2.3.18}
+\contentsline {subsection}{\numberline {2.3.19}\leavevmode {\color {Chapter }IntersectionPredicata}}{33}{subsection.2.3.19}
+\contentsline {subsection}{\numberline {2.3.20}\leavevmode {\color {Chapter }UnionPredicata}}{34}{subsection.2.3.20}
+\contentsline {subsection}{\numberline {2.3.21}\leavevmode {\color {Chapter }PermutedAlphabetPredicaton}}{36}{subsection.2.3.21}
+\contentsline {subsection}{\numberline {2.3.22}\leavevmode {\color {Chapter }PredicatonFromAut}}{37}{subsection.2.3.22}
+\contentsline {subsection}{\numberline {2.3.23}\leavevmode {\color {Chapter }FinitelyManyWordsAccepted}}{38}{subsection.2.3.23}
+\contentsline {subsection}{\numberline {2.3.24}\leavevmode {\color {Chapter }PredicatonToRatExp}}{38}{subsection.2.3.24}
+\contentsline {subsection}{\numberline {2.3.25}\leavevmode {\color {Chapter }WordsOfRatExp}}{38}{subsection.2.3.25}
+\contentsline {subsection}{\numberline {2.3.26}\leavevmode {\color {Chapter }WordsOfRatExpInterpreted}}{39}{subsection.2.3.26}
+\contentsline {section}{\numberline {2.4}\leavevmode {\color {Chapter }Special functions on Predicata}}{39}{section.2.4}
+\contentsline {subsection}{\numberline {2.4.1}\leavevmode {\color {Chapter }IsValidInputList}}{39}{subsection.2.4.1}
+\contentsline {subsection}{\numberline {2.4.2}\leavevmode {\color {Chapter }BooleanPredicaton}}{39}{subsection.2.4.2}
+\contentsline {subsection}{\numberline {2.4.3}\leavevmode {\color {Chapter }PredicataEqualAut}}{40}{subsection.2.4.3}
+\contentsline {subsection}{\numberline {2.4.4}\leavevmode {\color {Chapter }EqualPredicaton}}{40}{subsection.2.4.4}
+\contentsline {subsection}{\numberline {2.4.5}\leavevmode {\color {Chapter }PredicataAdditionAut}}{41}{subsection.2.4.5}
+\contentsline {subsection}{\numberline {2.4.6}\leavevmode {\color {Chapter }AdditionPredicaton}}{42}{subsection.2.4.6}
+\contentsline {subsection}{\numberline {2.4.7}\leavevmode {\color {Chapter }AdditionPredicatonNSummands}}{43}{subsection.2.4.7}
+\contentsline {subsection}{\numberline {2.4.8}\leavevmode {\color {Chapter }TimesNPredicaton}}{44}{subsection.2.4.8}
+\contentsline {subsection}{\numberline {2.4.9}\leavevmode {\color {Chapter }SumOfProductsPredicaton}}{44}{subsection.2.4.9}
+\contentsline {subsection}{\numberline {2.4.10}\leavevmode {\color {Chapter }TermEqualTermPredicaton}}{45}{subsection.2.4.10}
+\contentsline {subsection}{\numberline {2.4.11}\leavevmode {\color {Chapter }GreaterEqualNPredicaton}}{45}{subsection.2.4.11}
+\contentsline {subsection}{\numberline {2.4.12}\leavevmode {\color {Chapter }GreaterNPredicaton}}{46}{subsection.2.4.12}
+\contentsline {subsection}{\numberline {2.4.13}\leavevmode {\color {Chapter }SmallerEqualNPredicaton}}{46}{subsection.2.4.13}
+\contentsline {subsection}{\numberline {2.4.14}\leavevmode {\color {Chapter }SmallerNPredicaton}}{47}{subsection.2.4.14}
+\contentsline {subsection}{\numberline {2.4.15}\leavevmode {\color {Chapter }GreaterEqualPredicaton}}{47}{subsection.2.4.15}
+\contentsline {subsection}{\numberline {2.4.16}\leavevmode {\color {Chapter }GreaterPredicaton}}{48}{subsection.2.4.16}
+\contentsline {subsection}{\numberline {2.4.17}\leavevmode {\color {Chapter }SmallerEqualPredicaton}}{49}{subsection.2.4.17}
+\contentsline {subsection}{\numberline {2.4.18}\leavevmode {\color {Chapter }SmallerPredicaton}}{50}{subsection.2.4.18}
+\contentsline {section}{\numberline {2.5}\leavevmode {\color {Chapter }Detailed look at the special functions on Predicata}}{50}{section.2.5}
+\contentsline {subsection}{\numberline {2.5.1}\leavevmode {\color {Chapter }AdditionPredicaton3Summands}}{51}{subsection.2.5.1}
+\contentsline {subsection}{\numberline {2.5.2}\leavevmode {\color {Chapter }AdditionPredicatonNSummandsExplicit}}{51}{subsection.2.5.2}
+\contentsline {subsection}{\numberline {2.5.3}\leavevmode {\color {Chapter }AdditionPredicatonNSummandsIterative}}{51}{subsection.2.5.3}
+\contentsline {subsection}{\numberline {2.5.4}\leavevmode {\color {Chapter }AdditionPredicatonNSummandsRecursive}}{52}{subsection.2.5.4}
+\contentsline {subsection}{\numberline {2.5.5}\leavevmode {\color {Chapter }TimesNPredicatonExplicit}}{52}{subsection.2.5.5}
+\contentsline {subsection}{\numberline {2.5.6}\leavevmode {\color {Chapter }TimesNPredicatonRecursive}}{52}{subsection.2.5.6}
+\contentsline {subsection}{\numberline {2.5.7}\leavevmode {\color {Chapter }Times2Predicaton}}{53}{subsection.2.5.7}
+\contentsline {chapter}{\numberline {3}\leavevmode {\color {Chapter }Parsing first-order formulas}}{54}{chapter.3}
+\contentsline {section}{\numberline {3.1}\leavevmode {\color {Chapter }PredicataFormula {\textendash } strings representing first-order formulas}}{54}{section.3.1}
+\contentsline {subsection}{\numberline {3.1.1}\leavevmode {\color {Chapter }PredicataFormulaSymbols}}{54}{subsection.3.1.1}
+\contentsline {subsection}{\numberline {3.1.2}\leavevmode {\color {Chapter }PredicataIsStringType}}{54}{subsection.3.1.2}
+\contentsline {subsection}{\numberline {3.1.3}\leavevmode {\color {Chapter }PredicataGrammarVerification}}{55}{subsection.3.1.3}
+\contentsline {subsection}{\numberline {3.1.4}\leavevmode {\color {Chapter }PredicataFormula}}{55}{subsection.3.1.4}
+\contentsline {subsection}{\numberline {3.1.5}\leavevmode {\color {Chapter }IsPredicataFormula}}{55}{subsection.3.1.5}
+\contentsline {subsection}{\numberline {3.1.6}\leavevmode {\color {Chapter }Display (PredicataFormula)}}{55}{subsection.3.1.6}
+\contentsline {subsection}{\numberline {3.1.7}\leavevmode {\color {Chapter }View (PredicataFormula)}}{56}{subsection.3.1.7}
+\contentsline {subsection}{\numberline {3.1.8}\leavevmode {\color {Chapter }Print (PredicataFormula)}}{56}{subsection.3.1.8}
+\contentsline {subsection}{\numberline {3.1.9}\leavevmode {\color {Chapter }FreeVariablesOfPredicataFormula}}{56}{subsection.3.1.9}
+\contentsline {subsection}{\numberline {3.1.10}\leavevmode {\color {Chapter }BoundedVariablesOfPredicataFormula}}{56}{subsection.3.1.10}
+\contentsline {subsection}{\numberline {3.1.11}\leavevmode {\color {Chapter }PredicataFormulaFormatted}}{57}{subsection.3.1.11}
+\contentsline {subsection}{\numberline {3.1.12}\leavevmode {\color {Chapter }IsPredicataFormulaFormatted}}{57}{subsection.3.1.12}
+\contentsline {subsection}{\numberline {3.1.13}\leavevmode {\color {Chapter }Display (PredicataFormulaFormatted)}}{57}{subsection.3.1.13}
+\contentsline {subsection}{\numberline {3.1.14}\leavevmode {\color {Chapter }View (PredicataFormulaFormatted)}}{57}{subsection.3.1.14}
+\contentsline {subsection}{\numberline {3.1.15}\leavevmode {\color {Chapter }Print (PredicataFormulaFormatted)}}{58}{subsection.3.1.15}
+\contentsline {section}{\numberline {3.2}\leavevmode {\color {Chapter }PredicataTree {\textendash } converting first-order formulas into trees}}{58}{section.3.2}
+\contentsline {subsection}{\numberline {3.2.1}\leavevmode {\color {Chapter }PredicataTree}}{58}{subsection.3.2.1}
+\contentsline {subsection}{\numberline {3.2.2}\leavevmode {\color {Chapter }IsPredicataTree}}{58}{subsection.3.2.2}
+\contentsline {subsection}{\numberline {3.2.3}\leavevmode {\color {Chapter }Display (PredicataTree)}}{58}{subsection.3.2.3}
+\contentsline {subsection}{\numberline {3.2.4}\leavevmode {\color {Chapter }View (PredicataTree)}}{59}{subsection.3.2.4}
+\contentsline {subsection}{\numberline {3.2.5}\leavevmode {\color {Chapter }Print (PredicataTree)}}{59}{subsection.3.2.5}
+\contentsline {subsection}{\numberline {3.2.6}\leavevmode {\color {Chapter }IsEmptyPredicataTree}}{59}{subsection.3.2.6}
+\contentsline {subsection}{\numberline {3.2.7}\leavevmode {\color {Chapter }RootOfPredicataTree}}{59}{subsection.3.2.7}
+\contentsline {subsection}{\numberline {3.2.8}\leavevmode {\color {Chapter }SetRootOfPredicataTree}}{60}{subsection.3.2.8}
+\contentsline {subsection}{\numberline {3.2.9}\leavevmode {\color {Chapter }InsertChildToPredicataTree}}{60}{subsection.3.2.9}
+\contentsline {subsection}{\numberline {3.2.10}\leavevmode {\color {Chapter }ChildOfPredicataTree}}{60}{subsection.3.2.10}
+\contentsline {subsection}{\numberline {3.2.11}\leavevmode {\color {Chapter }NumberOfChildrenOfPredicataTree}}{60}{subsection.3.2.11}
+\contentsline {subsection}{\numberline {3.2.12}\leavevmode {\color {Chapter }ParentOfPredicataTree}}{61}{subsection.3.2.12}
+\contentsline {subsection}{\numberline {3.2.13}\leavevmode {\color {Chapter }ReturnedChildOfPredicataTree}}{61}{subsection.3.2.13}
+\contentsline {subsection}{\numberline {3.2.14}\leavevmode {\color {Chapter }PredicataFormulaFormattedToTree}}{62}{subsection.3.2.14}
+\contentsline {subsection}{\numberline {3.2.15}\leavevmode {\color {Chapter }FreeVariablesOfPredicataTree}}{62}{subsection.3.2.15}
+\contentsline {subsection}{\numberline {3.2.16}\leavevmode {\color {Chapter }BoundedVariablesOfPredicataTree}}{62}{subsection.3.2.16}
+\contentsline {subsection}{\numberline {3.2.17}\leavevmode {\color {Chapter }PredicataTreeToPredicaton}}{63}{subsection.3.2.17}
+\contentsline {subsection}{\numberline {3.2.18}\leavevmode {\color {Chapter }PredicataTreeToPredicatonRecursive}}{63}{subsection.3.2.18}
+\contentsline {subsection}{\numberline {3.2.19}\leavevmode {\color {Chapter }PredicataRepresentationOfPredicataTree}}{64}{subsection.3.2.19}
+\contentsline {section}{\numberline {3.3}\leavevmode {\color {Chapter }PredicataRepresentation {\textendash } Predicata assigned with names and arities}}{64}{section.3.3}
+\contentsline {subsection}{\numberline {3.3.1}\leavevmode {\color {Chapter }PredicatonRepresentation}}{64}{subsection.3.3.1}
+\contentsline {subsection}{\numberline {3.3.2}\leavevmode {\color {Chapter }IsPredicatonRepresentation}}{65}{subsection.3.3.2}
+\contentsline {subsection}{\numberline {3.3.3}\leavevmode {\color {Chapter }Display (PredicatonRepresentation)}}{65}{subsection.3.3.3}
+\contentsline {subsection}{\numberline {3.3.4}\leavevmode {\color {Chapter }View (PredicatonRepresentation)}}{66}{subsection.3.3.4}
+\contentsline {subsection}{\numberline {3.3.5}\leavevmode {\color {Chapter }Print (PredicatonRepresentation)}}{66}{subsection.3.3.5}
+\contentsline {subsection}{\numberline {3.3.6}\leavevmode {\color {Chapter }NameOfPredicatonRepresentation}}{66}{subsection.3.3.6}
+\contentsline {subsection}{\numberline {3.3.7}\leavevmode {\color {Chapter }ArityOfPredicatonRepresentation}}{66}{subsection.3.3.7}
+\contentsline {subsection}{\numberline {3.3.8}\leavevmode {\color {Chapter }AutOfPredicatonRepresentation}}{67}{subsection.3.3.8}
+\contentsline {subsection}{\numberline {3.3.9}\leavevmode {\color {Chapter }CopyPredicatonRepresentation}}{67}{subsection.3.3.9}
+\contentsline {subsection}{\numberline {3.3.10}\leavevmode {\color {Chapter }PredicataRepresentation}}{67}{subsection.3.3.10}
+\contentsline {subsection}{\numberline {3.3.11}\leavevmode {\color {Chapter }IsPredicataRepresentation}}{68}{subsection.3.3.11}
+\contentsline {subsection}{\numberline {3.3.12}\leavevmode {\color {Chapter }Display (PredicataRepresentation)}}{68}{subsection.3.3.12}
+\contentsline {subsection}{\numberline {3.3.13}\leavevmode {\color {Chapter }View (PredicataRepresentation)}}{69}{subsection.3.3.13}
+\contentsline {subsection}{\numberline {3.3.14}\leavevmode {\color {Chapter }Print (PredicataRepresentation)}}{69}{subsection.3.3.14}
+\contentsline {subsection}{\numberline {3.3.15}\leavevmode {\color {Chapter }NamesOfPredicataRepresentation}}{69}{subsection.3.3.15}
+\contentsline {subsection}{\numberline {3.3.16}\leavevmode {\color {Chapter }AritiesOfPredicatonRepresentation}}{70}{subsection.3.3.16}
+\contentsline {subsection}{\numberline {3.3.17}\leavevmode {\color {Chapter }AutsOfPredicataRepresentation}}{70}{subsection.3.3.17}
+\contentsline {subsection}{\numberline {3.3.18}\leavevmode {\color {Chapter }ElementOfPredicataRepresentation}}{70}{subsection.3.3.18}
+\contentsline {subsection}{\numberline {3.3.19}\leavevmode {\color {Chapter }Add (PredicataRepresenation)}}{70}{subsection.3.3.19}
+\contentsline {subsection}{\numberline {3.3.20}\leavevmode {\color {Chapter }Add (PredicataRepresenation (variant 2))}}{71}{subsection.3.3.20}
+\contentsline {subsection}{\numberline {3.3.21}\leavevmode {\color {Chapter }Remove (PredicataRepresenation)}}{71}{subsection.3.3.21}
+\contentsline {subsection}{\numberline {3.3.22}\leavevmode {\color {Chapter }CopyPredicataRepresentation}}{71}{subsection.3.3.22}
+\contentsline {subsection}{\numberline {3.3.23}\leavevmode {\color {Chapter }PredicataList}}{72}{subsection.3.3.23}
+\contentsline {subsection}{\numberline {3.3.24}\leavevmode {\color {Chapter }AddToPredicataList}}{72}{subsection.3.3.24}
+\contentsline {subsection}{\numberline {3.3.25}\leavevmode {\color {Chapter }ClearPredicataList}}{72}{subsection.3.3.25}
+\contentsline {subsection}{\numberline {3.3.26}\leavevmode {\color {Chapter }RemoveFromPredicataList}}{73}{subsection.3.3.26}
+\contentsline {section}{\numberline {3.4}\leavevmode {\color {Chapter }Converting PredicataFormulas via PredicataTrees into Predicata}}{73}{section.3.4}
+\contentsline {subsection}{\numberline {3.4.1}\leavevmode {\color {Chapter }PredicataFormulaToPredicaton}}{73}{subsection.3.4.1}
+\contentsline {subsection}{\numberline {3.4.2}\leavevmode {\color {Chapter }StringToPredicaton}}{74}{subsection.3.4.2}
+\contentsline {chapter}{\numberline {4}\leavevmode {\color {Chapter }Using Predicata}}{75}{chapter.4}
+\contentsline {section}{\numberline {4.1}\leavevmode {\color {Chapter }Creating Predicata from first-order formulas}}{75}{section.4.1}
+\contentsline {subsection}{\numberline {4.1.1}\leavevmode {\color {Chapter }PredicataGrammar}}{75}{subsection.4.1.1}
+\contentsline {subsection}{\numberline {4.1.2}\leavevmode {\color {Chapter }PredicataPredefinedPredicates}}{76}{subsection.4.1.2}
+\contentsline {subsection}{\numberline {4.1.3}\leavevmode {\color {Chapter }Predicaton (PredicataFormula)}}{76}{subsection.4.1.3}
+\contentsline {subsection}{\numberline {4.1.4}\leavevmode {\color {Chapter }Predicaton (PredicataFormula with variable list)}}{77}{subsection.4.1.4}
+\contentsline {subsection}{\numberline {4.1.5}\leavevmode {\color {Chapter }Predicaton (String)}}{77}{subsection.4.1.5}
+\contentsline {subsection}{\numberline {4.1.6}\leavevmode {\color {Chapter }Predicaton (String with variable list)}}{78}{subsection.4.1.6}
+\contentsline {subsection}{\numberline {4.1.7}\leavevmode {\color {Chapter }VariableListOfPredicaton}}{78}{subsection.4.1.7}
+\contentsline {subsection}{\numberline {4.1.8}\leavevmode {\color {Chapter }SetVariableListOfPredicaton}}{79}{subsection.4.1.8}
+\contentsline {subsection}{\numberline {4.1.9}\leavevmode {\color {Chapter }VariableAdjustedPredicaton}}{80}{subsection.4.1.9}
+\contentsline {subsection}{\numberline {4.1.10}\leavevmode {\color {Chapter }VariableAdjustedPredicata}}{81}{subsection.4.1.10}
+\contentsline {subsection}{\numberline {4.1.11}\leavevmode {\color {Chapter }AndPredicata}}{82}{subsection.4.1.11}
+\contentsline {subsection}{\numberline {4.1.12}\leavevmode {\color {Chapter }OrPredicata}}{84}{subsection.4.1.12}
+\contentsline {subsection}{\numberline {4.1.13}\leavevmode {\color {Chapter }NotPredicaton}}{85}{subsection.4.1.13}
+\contentsline {subsection}{\numberline {4.1.14}\leavevmode {\color {Chapter }ImpliesPredicata}}{85}{subsection.4.1.14}
+\contentsline {subsection}{\numberline {4.1.15}\leavevmode {\color {Chapter }EquivalentPredicata}}{87}{subsection.4.1.15}
+\contentsline {subsection}{\numberline {4.1.16}\leavevmode {\color {Chapter }ExistsPredicaton}}{88}{subsection.4.1.16}
+\contentsline {subsection}{\numberline {4.1.17}\leavevmode {\color {Chapter }ForallPredicaton}}{89}{subsection.4.1.17}
+\contentsline {subsection}{\numberline {4.1.18}\leavevmode {\color {Chapter }LeastAcceptedNumber}}{90}{subsection.4.1.18}
+\contentsline {subsection}{\numberline {4.1.19}\leavevmode {\color {Chapter }GreatestAcceptedNumber}}{90}{subsection.4.1.19}
+\contentsline {subsection}{\numberline {4.1.20}\leavevmode {\color {Chapter }LeastNonAcceptedNumber}}{91}{subsection.4.1.20}
+\contentsline {subsection}{\numberline {4.1.21}\leavevmode {\color {Chapter }GreatestNonAcceptedNumber}}{92}{subsection.4.1.21}
+\contentsline {subsection}{\numberline {4.1.22}\leavevmode {\color {Chapter }InterpretedPredicaton}}{93}{subsection.4.1.22}
+\contentsline {subsection}{\numberline {4.1.23}\leavevmode {\color {Chapter }AreEquivalentPredicata}}{94}{subsection.4.1.23}
+\contentsline {subsection}{\numberline {4.1.24}\leavevmode {\color {Chapter }LinearSolveOverN}}{95}{subsection.4.1.24}
+\contentsline {subsection}{\numberline {4.1.25}\leavevmode {\color {Chapter }NullSpaceOverN}}{95}{subsection.4.1.25}
+\contentsline {section}{\numberline {4.2}\leavevmode {\color {Chapter }Examples}}{96}{section.4.2}
+\contentsline {subsection}{\numberline {4.2.1}\leavevmode {\color {Chapter }Example 1: Getting familiar}}{96}{subsection.4.2.1}
+\contentsline {subsection}{\numberline {4.2.2}\leavevmode {\color {Chapter }Example 2: Recalling the motivation}}{99}{subsection.4.2.2}
+\contentsline {subsection}{\numberline {4.2.3}\leavevmode {\color {Chapter }Example 3: Divisible by three}}{101}{subsection.4.2.3}
+\contentsline {subsection}{\numberline {4.2.4}\leavevmode {\color {Chapter }Example 4: Linear congruences}}{103}{subsection.4.2.4}
+\contentsline {subsection}{\numberline {4.2.5}\leavevmode {\color {Chapter }Example 5: GCD and LCM}}{105}{subsection.4.2.5}
+\contentsline {subsection}{\numberline {4.2.6}\leavevmode {\color {Chapter }Example 6: Theorems}}{107}{subsection.4.2.6}
+\contentsline {chapter}{References}{110}{chapter*.5}
+\contentsline {chapter}{Index}{111}{section*.6}
