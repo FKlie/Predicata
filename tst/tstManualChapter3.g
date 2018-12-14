@@ -114,7 +114,6 @@ t:=PredicataFormulaFormattedToTree(F);;
 P:=PredicataTreeToPredicatonRecursive(t, [[ "x", "z" ], [ "x", "y", "z" ]]);;
 Display(P[2]);
 t:=PredicataTree("root");;
-PredicataRepresentationOfPredicataTree(t);
 A:=Predicaton(Automaton("det", 3, [ [ 0, 0, 0 ], [ 1, 0, 0 ], [ 0, 1, 0 ], 
 [ 1, 1, 0 ], [ 0, 0, 1 ], [ 1, 0, 1 ], [ 0, 1, 1 ], [ 1, 1, 1 ] ], 
 [ [ 1, 3, 3 ], [ 3, 2, 3 ], [ 3, 2, 3 ], [ 2, 3, 3 ], [ 3, 1, 3 ], 
@@ -128,9 +127,9 @@ A:=Predicaton(Automaton("det", 2, [ [ 0 ], [ 1 ] ], [ [ 1, 2 ], [ 2, 2 ] ],
 [ 1 ], [ 1 ]), [ 1 ]);;
 p:=PredicatonRepresentation("EqualZero", 1, A);;
 Display(p);
-A:=Automaton("det", 4, [ [ 0, 0 ], [ 1, 0 ], [ 0, 1 ], [ 1, 1 ] ],
+A:=Predicaton(Automaton("det", 4, [ [ 0, 0 ], [ 1, 0 ], [ 0, 1 ], [ 1, 1 ] ],
 [ [ 1, 2, 2, 3 ], [ 2, 2, 4, 2 ], [ 2, 2, 1, 2 ], [ 3, 2, 2, 4 ] ],
-[ 1 ], [ 1 ]);;
+[ 1 ], [ 1 ]), [ 1, 2 ]);;
 p:=PredicatonRepresentation("MultipleOfThree", 2, A);;
 View(p);
 A:=Predicaton(Automaton("det", 2, [ [ 0 ], [ 1 ] ], [ [ 1, 2 ], [ 2, 2 ] ],
@@ -149,9 +148,17 @@ ArityOfPredicatonRepresentation(p);
 A:=Predicaton(Automaton("det", 4, [ [ 0 ], [ 1 ] ], [ [ 4, 2, 3, 3 ],
 [ 3, 3, 3, 2 ] ], [ 1 ], [ 3, 4, 1 ]), [ 1 ]);;
 p:=PredicatonRepresentation("NotTwo", 1, A);;
+PredicatonOfPredicatonRepresentation(p);
+A:=Predicaton(Automaton("det", 4, [ [ 0 ], [ 1 ] ], [ [ 4, 2, 3, 3 ],
+[ 3, 3, 3, 2 ] ], [ 1 ], [ 3, 4, 1 ]), [ 1 ]);;
+p:=PredicatonRepresentation("NotTwo", 1, A);;
+BaseOfPredicatonRepresentation(p);
+A:=Predicaton(Automaton("det", 4, [ [ 0 ], [ 1 ] ], [ [ 4, 2, 3, 3 ],
+[ 3, 3, 3, 2 ] ], [ 1 ], [ 3, 4, 1 ]), [ 1 ]);;
+p:=PredicatonRepresentation("NotTwo", 1, A);;
 AutOfPredicatonRepresentation(p);
-A:=Automaton("det", 3, [ [ 0, 0 ], [ 1, 0 ], [ 0, 1 ], [ 1, 1 ] ],
-[ [ 1, 3, 3 ], [ 2, 3, 3 ], [ 3, 1, 3 ], [ 3, 2, 3 ] ], [ 1 ], [ 1 ]);;
+A:=Predicaton(Automaton("det", 3, [ [ 0, 0 ], [ 1, 0 ], [ 0, 1 ], [ 1, 1 ] ],
+[ [ 1, 3, 3 ], [ 2, 3, 3 ], [ 3, 1, 3 ], [ 3, 2, 3 ] ], [ 1 ], [ 1 ]), [ 1, 2 ] );;
 p:=PredicatonRepresentation("CopyPred", 2, A);;
 q:=CopyPredicatonRepresentation(p);
 A1:=Predicaton(Automaton("det", 3, [ [ 0, 0, 0 ], [ 1, 0, 0 ], [ 0, 1, 0 ], 
@@ -164,21 +171,30 @@ A2:=Predicaton(Automaton("det", 2, [ [ 0, 0 ], [ 1, 0 ], [ 0, 1 ], [ 1, 1 ] ],
 p2:=PredicatonRepresentation("MyEqual", 2, A2);;
 P:=PredicataRepresentation(p1, p2);
 f:=PredicataFormula("MyAdd[x,y,z] and MyEqual[x,y]", P);
+# Continued example: PredicataRepresentation
 IsPredicataRepresentation(P);
+# Continued example: PredicataRepresentation
 Display(P);
 P:=PredicataRepresentation();;
 View(P);
+# Continued example: PredicataRepresentation
 Print(P);
 String(P);
+# Continued example: PredicataRepresentation
 NamesOfPredicataRepresentation(P);
+# Continued example: PredicataRepresentation
 AritiesOfPredicataRepresentation(P);
-AutsOfPredicataRepresentation(P);
+# Continued example: PredicataRepresentation
+PredicataOfPredicataRepresentation(P);
+# Continued example: PredicataRepresentation
 ElementOfPredicataRepresentation(P, 1);
+# Continued example: PredicataRepresentation
 A3:=Predicaton(Automaton("det", 2, [ [ 0 ], [ 1 ] ], [ [ 1, 2 ], [ 2, 2 ] ], 
 [ 1 ], [ 2 ]), [ 1 ]);;
 p3:=PredicatonRepresentation("GreaterZero", 1, A3);;
 Add(P, p3);
 P;
+# Continued example: PredicataRepresentation
 A4:=Predicaton(Automaton("det", 2, [ [ 0 ], [ 1 ] ], [ [ 1, 2 ], [ 2, 2 ] ], 
 [ 1 ], [ 1 ]), [ 1 ]);;
 Add(P, "EqualZero", 1, A4);
@@ -190,8 +206,8 @@ Add(P, p5);
 P;
 Remove(P, 1);
 P;
-A:=Automaton("det", 3, [ [ 0, 0 ], [ 1, 0 ], [ 0, 1 ], [ 1, 1 ] ],
-[ [ 1, 3, 3 ], [ 2, 3, 3 ], [ 3, 1, 3 ], [ 3, 2, 3 ] ], [ 1 ], [ 1 ]);;
+A:=Predicaton(Automaton("det", 3, [ [ 0, 0 ], [ 1, 0 ], [ 0, 1 ], [ 1, 1 ] ],
+[ [ 1, 3, 3 ], [ 2, 3, 3 ], [ 3, 1, 3 ], [ 3, 2, 3 ] ], [ 1 ], [ 1 ]), [ 1, 2 ]);;
 p:=PredicatonRepresentation("CopyPred", 2, A);;
 P:=PredicataRepresentation(p);
 Q:=CopyPredicataRepresentation(P);
@@ -204,6 +220,7 @@ p1:=PredicatonRepresentation("MyAdd", 3, A1);;
 Add(PredicataList, p1);
 PredicataList;
 f:=PredicataFormula("MyAdd[x,y,z]");
+# Continued example: PredicataList
 A2:=Predicaton(Automaton("det", 2, [ [ 0, 0 ], [ 1, 0 ], [ 0, 1 ], [ 1, 1 ] ],
 [ [ 1, 2 ], [ 2, 2 ], [ 2, 2 ], [ 1, 2 ] ], [ 1 ], [ 1 ]), [ 1, 2 ]);;
 p2:=PredicatonRepresentation("MyEqual", 2, A2);;
@@ -213,6 +230,7 @@ A3:=Predicaton(Automaton("det", 2, [ [ 0 ], [ 1 ] ], [ [ 1, 2 ], [ 2, 2 ] ],
 AddToPredicataList("GreaterZero", 1, A3);
 PredicataList;
 f:=PredicataFormula("MyAdd[x,y,z] and MyEqual[x,y]");
+# Continued example: PredicataList
 ClearPredicataList();
 PredicataList;
 A:=Predicaton(Automaton("det", 4, [ [ 0 ], [ 1 ] ], [ [ 4, 2, 3, 3 ],
