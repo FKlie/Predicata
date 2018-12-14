@@ -342,15 +342,17 @@ InstallGlobalFunction( ProjectedPredicaton, function ( A, p )
   while i <= length do
     pos:= Positions(a,a[i]);  # checks for the same letter, which occurce more than once due to removal of the p-th position
     if Length(pos) > 1 then
-      a:=a{Difference([1..Length(a)],pos{[2,Length(pos)]})}; #removing duplicate letters, keep the first of pos.
+      a:=a{Difference([1..Length(a)],pos{[2..Length(pos)]})}; #removing duplicate letters, keep the first of pos.
       T[pos[1]]:=List([1..q],r->List([1..Length(pos)],s->T[pos[s]][r])); # s runs through all positions, r runs through all states, collecting entries for the NFA.
-      T:=T{Difference([1..Length(T)],pos{[2,Length(pos)]})}; #removing transitions that have been added into the NFA transitions at pos[1].
+      T:=T{Difference([1..Length(T)],pos{[2..Length(pos)]})}; #removing transitions that have been added into the NFA transitions at pos[1].
     fi;
     i:=i+1;
     length:=Length(a);
   od;
   Remove(l, Position(l, p));  # removes the variable position p from the variable position list.
   Sort(l);
+  Print("a:", a,"\n");
+  Print("T:", T,"\n");
   return FormattedPredicaton(Predicaton(Automaton("nondet", NumberStatesOfPredicaton(A), a, T, InitialStatesOfPredicaton(A), FinalStatesOfPredicaton(A)), l, BaseOfPredicaton(A)));
 end);
 
