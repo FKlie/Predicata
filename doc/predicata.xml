@@ -15,10 +15,10 @@
 <TitlePage>
   <Title>Predicata</Title>
   <Subtitle>Deciding Presburger Arithmetic Using Automata Theory</Subtitle>
-  <Version>Version 1.0</Version>
+  <Version>Version 1.1</Version>
   <!-- <TitleComment>   </TitleComment>-->
   <Author>Fritz Kliemann <Email>fritz.kliemann@gmx.at</Email></Author>
-  <Date>October 1, 2018</Date>
+  <Date>December 14, 2018</Date>
   <Address>Linz, Austria</Address>
   <Abstract>J. Shallit has successfully used automata theory to find properties of automatic sequences <Cite Key="Shallit:2013"/>. 
             In a summer school course at RISC, JKU Linz <Cite Key="SummerSchool2016"/>, 

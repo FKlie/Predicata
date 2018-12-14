@@ -557,7 +557,7 @@ This section explains how to assign a name and an arity to a <C>Predicata</C> su
 <ManSection>
 <Func Name="PredicatonRepresentation" Arg="name, arity, automaton"/>
 <Description>
-The function <C>PredicatonRepresentation</C> creates the representation of a Predicaton, assigned with a <A>name</A>, an <A>arity</A> and an <A>automaton</A> (input may also be a <C>Predicaton</C>), allowing it to be called in a <Ref Func="PredicataFormula"/> with <C>Name[x1,...xN]</C> (where <C>N</C> is the arity).
+The function <C>PredicatonRepresentation</C> creates the representation of a Predicaton, assigned with a <A>name</A>, an <A>arity</A> and a <C>Predicaton</C>, allowing it to be called in a <Ref Func="PredicataFormula"/> with <C>Name[x1,...xN]</C> (where <C>N</C> is the arity).
 <Example><![CDATA[
 gap> A:=Predicaton(Automaton("det", 3, [ [ 0, 0, 0 ], [ 1, 0, 0 ], [ 0, 1, 0 ], 
 > [ 1, 1, 0 ], [ 0, 0, 1 ], [ 1, 0, 1 ], [ 0, 1, 1 ], [ 1, 1, 1 ] ], 
@@ -595,16 +595,16 @@ gap> A:=Predicaton(Automaton("det", 2, [ [ 0 ], [ 1 ] ], [ [ 1, 2 ], [ 2, 2 ] ],
 > [ 1 ], [ 1 ]), [ 1 ]);;
 gap> p:=PredicatonRepresentation("EqualZero", 1, A);;
 gap> Display(p);
-Predicata represented with the name: EqualZero, the arity: 1 and 
-the following automaton: 
-deterministic finite automaton on 2 letters with 2 states and 
-the following transitions:
-         |  1  2  
+Predicaton represented with the name: EqualZero, the arity: 1 and the following Predicaton:
+Predicaton: deterministic finite automaton on 2 letters with 2 states,
+the variable position list [ 1 ] and the following transitions:
+         |  1  2
 ------------------
-  [ 0 ]  |  1  2  
-  [ 1 ]  |  2  2  
+  [ 0 ]  |  1  2
+  [ 1 ]  |  2  2
  Initial states: [ 1 ]
  Final states:   [ 1 ]
+
 ]]></Example>
 </Description>
 </ManSection>
@@ -614,9 +614,9 @@ the following transitions:
 <Description>
 The method <C>View</C> applied on a <C>PredicatonRepresentation</C> <A>p</A> returns the object text.
 <Example><![CDATA[
-gap> A:=Automaton("det", 4, [ [ 0, 0 ], [ 1, 0 ], [ 0, 1 ], [ 1, 1 ] ],
+gap> A:=Predicaton(Automaton("det", 4, [ [ 0, 0 ], [ 1, 0 ], [ 0, 1 ], [ 1, 1 ] ],
 > [ [ 1, 2, 2, 3 ], [ 2, 2, 4, 2 ], [ 2, 2, 1, 2 ], [ 3, 2, 2, 4 ] ],
-> [ 1 ], [ 1 ]);;
+> [ 1 ], [ 1 ]), [ 1, 2 ]);;
 gap> p:=PredicatonRepresentation("MultipleOfThree", 2, A);;
 gap> View(p);
 < Predicaton represented with the name "MultipleOfThree", the arity 2 and 
@@ -634,11 +634,12 @@ gap> A:=Predicaton(Automaton("det", 2, [ [ 0 ], [ 1 ] ], [ [ 1, 2 ], [ 2, 2 ] ],
 > [ 1 ], [ 2 ]), [ 1 ]);;
 gap> p:=PredicatonRepresentation("GreaterZero", 1, A);;
 gap> Print(p);
-PredicatonRepresentation("GreaterZero", 1, Automaton("det", 2,\
-[ [ 0 ], [ 1 ] ], [ [ 1, 2 ], [ 2, 2 ] ], [ 1 ], [ 2 ]))
+PredicatonRepresentation("GreaterZero", 1, Predicaton(Automaton("det",
+2, [ [ 0 ], [ 1 ] ], [ [ 1, 2 ], [ 2, 2 ] ], [ 1 ], [ 2 ]), [ 1 ], 2))
+
 gap> String(p);
-"PredicatonRepresentation(\"GreaterZero\", 1, Automaton(\"det\", 2,\
-[ [ 0 ], [ 1 ] ], [ [ 1, 2 ], [ 2, 2 ] ], [ 1 ], [ 2 ]))"
+"PredicatonRepresentation(\"GreaterZero\", 1, Predicaton(Automaton(\"det\",
+2, [ [ 0 ], [ 1 ] ], [ [ 1, 2 ], [ 2, 2 ] ], [ 1 ], [ 2 ]), [ 1 ], 2))"
 ]]></Example>
 </Description>
 </ManSection>
@@ -672,9 +673,38 @@ gap> ArityOfPredicatonRepresentation(p);
 </ManSection>
 
 <ManSection>
+<Func Name="PredicatonOfPredicatonRepresentation" Arg="p"/>
+<Description>
+The function <C>PredicatonOfPredicatonRepresentation</C> returns the <C>Predicaton</C> of <A>p</A>.
+<Example><![CDATA[
+gap> A:=Predicaton(Automaton("det", 4, [ [ 0 ], [ 1 ] ], [ [ 4, 2, 3, 3 ],
+> [ 3, 3, 3, 2 ] ], [ 1 ], [ 3, 4, 1 ]), [ 1 ]);;
+gap> p:=PredicatonRepresentation("NotTwo", 1, A);;
+gap> PredicatonOfPredicatonRepresentation(p);
+< Predicaton: deterministic finite automaton on 2 letters with 4 states 
+and the variable position list [ 1 ]. >
+]]></Example>
+</Description>
+</ManSection>
+
+<ManSection>
+<Func Name="BaseOfPredicatonRepresentation" Arg="p"/>
+<Description>
+The function <C>BaseOfPredicatonRepresentation</C> returns the <C>Base</C> of the <C>Predicaton</C> <A>p</A>.
+<Example><![CDATA[
+gap> A:=Predicaton(Automaton("det", 4, [ [ 0 ], [ 1 ] ], [ [ 4, 2, 3, 3 ],
+> [ 3, 3, 3, 2 ] ], [ 1 ], [ 3, 4, 1 ]), [ 1 ]);;
+gap> p:=PredicatonRepresentation("NotTwo", 1, A);;
+gap> BaseOfPredicatonRepresentation(p);
+2
+]]></Example>
+</Description>
+</ManSection>
+
+<ManSection>
 <Func Name="AutOfPredicatonRepresentation" Arg="p"/>
 <Description>
-The function <C>AutOfPredicatonRepresentation</C> returns the <C>automaton</C> of <A>p</A>.
+The function <C>AutOfPredicatonRepresentation</C> returns the <C>Automaton</C> of the <C>Predicaton</C> <A>p</A>.
 <Example><![CDATA[
 gap> A:=Predicaton(Automaton("det", 4, [ [ 0 ], [ 1 ] ], [ [ 4, 2, 3, 3 ],
 > [ 3, 3, 3, 2 ] ], [ 1 ], [ 3, 4, 1 ]), [ 1 ]);;
@@ -690,8 +720,8 @@ gap> AutOfPredicatonRepresentation(p);
 <Description>
 The function <C>CopyPredicatonRepresentation</C> copies <A>p</A>.
 <Example><![CDATA[
-gap> A:=Automaton("det", 3, [ [ 0, 0 ], [ 1, 0 ], [ 0, 1 ], [ 1, 1 ] ],
-> [ [ 1, 3, 3 ], [ 2, 3, 3 ], [ 3, 1, 3 ], [ 3, 2, 3 ] ], [ 1 ], [ 1 ]);;
+gap> A:=Predicaton(Automaton("det", 3, [ [ 0, 0 ], [ 1, 0 ], [ 0, 1 ], [ 1, 1 ] ],
+> [ [ 1, 3, 3 ], [ 2, 3, 3 ], [ 3, 1, 3 ], [ 3, 2, 3 ] ], [ 1 ], [ 1 ]), [ 1, 2 ] );;
 gap> p:=PredicatonRepresentation("CopyPred", 2, A);;
 gap> q:=CopyPredicatonRepresentation(p);
 < Predicaton represented with the name "CopyPred", the arity 2 and 
@@ -744,32 +774,30 @@ The method <C>Display</C> prints the <C>PredicataRepresentation</C> <A>P</A>.
 gap> # Continued example: PredicataRepresentation
 gap> Display(P);
 Predicata representation containing the following PredicatonRepresentations:
-Predicata represented with the name: MyEqual, the arity: 2 and 
-the following automaton:
-deterministic finite automaton on 4 letters with 2 states and 
-the following transitions:
-            |  1  2  
+Predicaton represented with the name: MyEqual, the arity: 2 and the following Predicaton:
+Predicaton: deterministic finite automaton on 4 letters with 2 states,
+the variable position list [ 1, 2 ] and the following transitions:
+            |  1  2
 ---------------------
-  [ 0, 0 ]  |  1  2  
-  [ 1, 0 ]  |  2  2  
-  [ 0, 1 ]  |  2  2  
-  [ 1, 1 ]  |  1  2  
+  [ 0, 0 ]  |  1  2
+  [ 1, 0 ]  |  2  2
+  [ 0, 1 ]  |  2  2
+  [ 1, 1 ]  |  1  2
  Initial states: [ 1 ]
  Final states:   [ 1 ]
-Predicata represented with the name: MyAdd, the arity: 3 and 
-the following automaton:
-deterministic finite automaton on 8 letters with 3 states and 
-the following transitions:
-               |  1  2  3  
+Predicaton represented with the name: MyAdd, the arity: 3 and the following Predicaton:
+Predicaton: deterministic finite automaton on 8 letters with 3 states,
+ the variable position list [ 1, 2, 3 ] and the following transitions:
+               |  1  2  3
 ---------------------------
-  [ 0, 0, 0 ]  |  1  3  3  
-  [ 1, 0, 0 ]  |  3  2  3  
-  [ 0, 1, 0 ]  |  3  2  3  
-  [ 1, 1, 0 ]  |  2  3  3  
-  [ 0, 0, 1 ]  |  3  1  3  
-  [ 1, 0, 1 ]  |  1  3  3  
-  [ 0, 1, 1 ]  |  1  3  3  
-  [ 1, 1, 1 ]  |  3  2  3  
+  [ 0, 0, 0 ]  |  1  3  3
+  [ 1, 0, 0 ]  |  3  2  3
+  [ 0, 1, 0 ]  |  3  2  3
+  [ 1, 1, 0 ]  |  2  3  3
+  [ 0, 0, 1 ]  |  3  1  3
+  [ 1, 0, 1 ]  |  1  3  3
+  [ 0, 1, 1 ]  |  1  3  3
+  [ 1, 1, 1 ]  |  3  2  3
  Initial states: [ 1 ]
  Final states:   [ 1 ]
 ]]></Example>
@@ -795,23 +823,23 @@ The method <C>Print</C> prints the <C>PredicataRepresentation</C> <A>P</A> as a 
 <Example><![CDATA[
 gap> # Continued example: PredicataRepresentation
 gap> Print(P);
-PredicataRepresentation(PredicatonRepresentation("MyEqual", 2, Automaton\
-("det", 2, [ [ 0, 0 ], [ 1, 0 ], [ 0, 1 ], [ 1, 1 ] ], [ [ 1, 2 ], [ 2, 2 ], [\
- 2, 2 ], [ 1, 2 ] ], [ 1 ], [ 1 ])), PredicatonRepresentation("MyAdd", 3\
-, Automaton("det", 3, [ [ 0, 0, 0 ], [ 1, 0, 0 ], [ 0, 1, 0 ], [ 1, 1, 0 ], [ \
-0, 0, 1 ], [ 1, 0, 1 ], [ 0, 1, 1 ], [ 1, 1, 1 ] ], [ [ 1, 3, 3 ], [ 3, 2, 3 ]\
-, [ 3, 2, 3 ], [ 2, 3, 3 ], [ 3, 1, 3 ], [ 1, 3, 3 ], [ 1, 3, 3 ], [ 3, 2, 3 ]\
- ], [ 1 ], [ 1 ])))
+PredicataRepresentation(PredicatonRepresentation("MyEqual", 2, Predicaton( \
+Automaton("det", 2, [ [ 0, 0 ], [ 1, 0 ], [ 0, 1 ], [ 1, 1 ] ], [ [ 1, 2 ],\
+[ 2, 2 ], [ 2, 2 ], [ 1, 2 ] ], [ 1 ], [ 1 ]), [ 1, 2 ], 2)), PredicatonRep\
+resentation("MyAdd", 3, Predicaton(Automaton("det", 3, [ [ 0, 0, 0 ], [ 1, \
+0, 0 ], [ 0, 1, 0 ], [ 1, 1, 0 ], [ 0, 0, 1 ], [ 1, 0, 1 ], [ 0, 1, 1 ], [ \
+1, 1, 1 ] ], [ [ 1, 3, 3 ], [ 3, 2, 3 ], [ 3, 2, 3 ], [ 2, 3, 3 ], [ 3, 1, \
+3 ], [ 1, 3, 3 ], [ 1, 3, 3 ], [ 3, 2, 3 ] ], [ 1 ], [ 1 ]), [ 1, 2, 3 ], 2\
+)))
 gap> String(P);
-"PredicataRepresentation(PredicatonRepresentation(\"MyEqual\", 2, Automa\
-ton(\"det\", 2, [ [ 0, 0 ], [ 1, 0 ], [ 0, 1 ], [ 1, 1 ] ], [ [ 1, 2 ], [ 2, 2\
- ], [ 2, 2 ], [ 1, 2 ] ], [ 1 ], [ 1 ])), PredicatonRepresentation(\"MyA\
-dd\", 3, Automaton(\"det\", 3, [ [ 0, 0, 0 ], [ 1, 0, 0 ], [ 0, 1, 0 ], [ 1, 1\
-, 0 ], [ 0, 0, 1 ], [ 1, 0, 1 ], [ 0, 1, 1 ], [ 1, 1, 1 ] ], [ [ 1, 3, 3 ], [ \
-3, 2, 3 ], [ 3, 2, 3 ], [ 2, 3, 3 ], [ 3, 1, 3 ], [ 1, 3, 3 ], [ 1, 3, 3 ], [ \
-3, 2, 3 ] ], [ 1 ], [ 1 ])), PredicatonRepresentation(\"GreaterZero\", 1\
-, Automaton(\"det\", 2, [ [ 0 ], [ 1 ] ], [ [ 1, 2 ], [ 2, 2 ] ], [ 1 ], [ 2 ]\
-)))"
+"PredicataRepresentation(PredicatonRepresentation(\"MyEqual\", 2, Predicato\
+n(Automaton(\"det\", 2, [ [ 0, 0 ], [ 1, 0 ], [ 0, 1 ], [ 1, 1 ] ], [ [ 1, \
+2 ], [ 2, 2 ], [ 2, 2 ], [ 1, 2 ] ], [ 1 ], [ 1 ]), [ 1, 2 ], 2)), Predicat\
+onRepresentation(\"MyAdd\", 3, Predicaton(Automaton(\"det\", 3, [ [ 0, 0, 0\
+ ], [ 1, 0, 0 ], [ 0, 1, 0 ], [ 1, 1, 0 ], [ 0, 0, 1 ], [ 1, 0, 1 ], [ 0, 1\
+ , 1 ], [ 1, 1, 1 ] ], [ [ 1, 3, 3 ], [ 3, 2, 3 ], [ 3, 2, 3 ], [ 2, 3, 3 ]\
+ , [ 3, 1, 3 ], [ 1, 3, 3 ], [ 1, 3, 3 ], [ 3, 2, 3 ] ], [ 1 ], [ 1 ]), [ 1\
+ , 2, 3 ], 2)))"
 ]]></Example>
 </Description>
 </ManSection>
@@ -841,14 +869,16 @@ gap> AritiesOfPredicataRepresentation(P);
 </ManSection>
 
 <ManSection>
-<Func Name="AutsOfPredicataRepresentation" Arg="P"/>
+<Func Name="PredicataOfPredicataRepresentation" Arg="P"/>
 <Description>
-The function <C>AutOfPredicataRepresentation</C> returns the automaton of <A>P</A>.
+The function <C>PredicataOfPredicataRepresentation</C> returns the automaton of <A>P</A>.
 <Example><![CDATA[
 gap> # Continued example: PredicataRepresentation
-gap> AutsOfPredicataRepresentation(P);
-[ < deterministic automaton on 4 letters with 2 states >, 
-  < deterministic automaton on 8 letters with 3 states > ]
+gap> PredicataOfPredicataRepresentation(P);
+[ < Predicaton: deterministic finite automaton on 4 letters with 2 states
+ and the variable position list [ 1, 2 ]. >,
+  < Predicaton: deterministic finite automaton on 8 letters with 3 states 
+  and the variable position list [ 1, 2, 3 ]. > ]
 ]]></Example>
 </Description>
 </ManSection>
@@ -926,8 +956,8 @@ gap> P;
 <Description>
 The function <C>CopyPredicataRepresentation</C> copies the <C>PredicataRepresentation</C> <A>P</A>.
 <Example><![CDATA[
-gap> A:=Automaton("det", 3, [ [ 0, 0 ], [ 1, 0 ], [ 0, 1 ], [ 1, 1 ] ],
-> [ [ 1, 3, 3 ], [ 2, 3, 3 ], [ 3, 1, 3 ], [ 3, 2, 3 ] ], [ 1 ], [ 1 ]);;
+gap> A:=Predicaton(Automaton("det", 3, [ [ 0, 0 ], [ 1, 0 ], [ 0, 1 ], [ 1, 1 ] ],
+> [ [ 1, 3, 3 ], [ 2, 3, 3 ], [ 3, 1, 3 ], [ 3, 2, 3 ] ], [ 1 ], [ 1 ]), [ 1, 2 ]);;
 gap> p:=PredicatonRepresentation("CopyPred", 2, A);;
 gap> P:=PredicataRepresentation(p);
 < PredicataRepresentation containing the following predicates: [ "CopyPred" ]. >
