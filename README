@@ -1,6 +1,8 @@
-GAP package Predicata - Deciding Presburger Arithmetic Using Automata Theory
+GAP package Predicata - Deciding Presburger Arithmetic Using Automata Theory - Version 1.1 (Beta)
 
-October 1, 2018
+December 14, 2018
+
+After finishing my master's degree, I had some time and enough distance to revisit this package I wrote for my master thesis. This version introduces cleaner function names, deleted unneccessary functions and introduces the global variable PredicataBase k, allowing to create Predicata over the alphabet [1..k-1]^n for k > 1.
 
 == Licence == 
 Copyright (copyright) 2018 by Fritz Kliemann
@@ -21,4 +23,4 @@ either version 3 of the License, or (at your option) any later version.
 * Call the package with LoadPackage("Predicata");
 
 == Contact ==
-Fritz Kliemann, fritz.kliemann@gmx.at
+Fritz Kliemann, fritz dot kliemann at gmx dot at

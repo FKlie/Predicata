@@ -1,0 +1,78 @@
+== Predicata Version 1.1 (Beta) ==
+After finishing my master's degree, I had some time and enough distance to revisit this package I wrote for my master thesis. This version introduces cleaner function names, deleted unnecessary functions and introduces the global variable PredicataBase k, allowing to create Predicata over the alphabet [1..k-1]^n for k > 1.
+
+=== Renaming functions ===
+The version 1.1 aims for cleaner disambiguous function names. This means all functions that are applied on Predicata and contain the word ''Aut'' instead of ''Predicaton'' have been renamed. I.e. the word ''Aut'' have been replaced with ''Predicaton, e.g. ''IsDeterministicAut'' -> ''IsDeterministicPredicaton''.
+
+* Renamed the functions 
+** IsDeterministicAut to IsDeterministicPredicaton.
+** IsNonDeterministicAut to IsNonDeterministicPredicaton.
+** TypeOfAut to TypeOfPredicaton.
+** AlphabetOfAut to AlphabetOfPredicaton.
+** AlphabetOfAutAsList to AlphabetOfPredicatonAsList.
+** NumberStatesOfAut to NumberStatesOfPredicaton.
+** SortedStatesAut to SortedStatesPredicaton.
+** TransitionMatrixOfAut to TransitionMatrixOfPredicaton.
+** InitialStatesOfAut to InitialStatesOfPredicaton.
+** SetInitialStatesOfAut to SetInitialStatesOfPredicaton.
+** FinalStatesOfAut to FinalStatesOfPredicaton.
+** SetFinalStatesOfAut to SetFinalStatesOfPredicaton.
+** SinkStatesOfAut to SinkStatesOfPredicaton.
+** CopyAut to CopyPredicaton.
+** PermutedStatesAut to PermutedStatesPredicaton.
+** NegatedAut to NegatedPredicaton.
+** MinimalAut to MinimalPredicaton.
+** IsRecognizedByAut to IsRecognizedByPredicaton.
+** AutToString to PredicatonToString.
+** DisplayAut to DisplayPredicaton.
+** GetAlphabet (Synonym: GetAbc removed) to PredicataAlphabet.
+
+=== Deleting functions ===
+Revisiting my package I detected lots of functions which have been useful during the process of creation this package but now there is no justification in keeping them anymore.
+
+* Deleted unnecessary functions:
+** IntersectionAut
+** UnionAut
+** DisplayAut
+** InsertAt
+** ProjectedPredCombinedList
+** PredicataEqualAut
+** PredicataAdditionAut
+** AdditionPredicaton3Summands, AdditionPredicaton4Summands, AdditionPredicaton5Summands
+** AdditionPredicatonNSummandsIterative, AdditionPredicatonNSummandsRecursive, AdditionPredicatonNSummandsExplicit, AdditionPredicatonNSummands
+** Times3Predicaton - Times9Predicaton, TimesNPredicatonRecursive, TimesNPredicatonExplicit, TimesNPredicaton
+** NSummandsPredicaton, TermEqualAtomPredicaton
+
+=== PredicataBase ===
+The version 1.1 also introduces a global variable called PredicataBase k (with SetPredicataBase(i); and ReturnPredicataBase();) to created use the Predicata over the alphabet [1..k-1]^n instead of the base 2 representation in version 1.0. The default value is still 2.
+Changing the base representation is done by SetPredicataBase(i), everything else is handled internally, i.e. nothing changed for the calls of a Predicaton by a first-order formula.
+
+* Added:
+** the global variable PredicataBase and the corresponding SetPredicataBase and ReturnPredicataBase.
+** BaseRepToDec and DecToBaseRep.
+** BaseOfPredicaton.
+
+* Changed:
+** Predicaton takes now an additional argument, namely Base for the base representation of the alphabet.
+*** Predicaton called on an Automaton and a VariablePositionList used the global variable PredicataBase.
+** PredicataAlphabet to use the argument base or the global variable PredicataBase.
+** IsAcceptedByPredicaton and DisplayAcceptedByPredicaton to use the argument base or the global variable PredicataBase.
+** ProjectedPredicaton and ExpandedPredicaton to use the base of the Predicaton.
+** ProductLZeroPredicaton and RightQuotientLZeroPredicaton to use the base of the Predicaton.
+** BooleanPredicaton, EqualPredicaton, AdditionPredicaton, EqualNPredicaton to use the argument base or the global variable PredicataBase.
+** SumOfProductsPredicaton and TermEqualTermPredicaton to use the argument base or the global variable PredicataBase.
+** SmallerPredicaton, SmallerEqualPredicaton, GreaterPredicaton, GreaterEqualPredicaton to use the argument base or the global variable PredicataBase.
+** SmallerNPredicaton, SmallerEqualNPredicaton, GreaterNPredicaton, GreaterEqualNPredicaton to use the argument base or the global variable PredicataBase.
+** BuchiPredicaton and PowerPredicaton to use the argument base or the global variable PredicataBase.
+
+The PredicatonRepresentation has been changed to take a Predicaton and NOT an Automaton anymore. This ensures that there won't be different base representation conflict.
+
+Changed:
+** PredicatonRepresentation now takes only a Predicaton and NOT an Automaton anymore.
+
+Updated:
+** all according PredicatonRepresentation functions to fit this change from Automaton to Predicaton.
+
+
+
+
