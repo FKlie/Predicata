@@ -86,17 +86,17 @@ InstallGlobalFunction( PredicataFormulaToPredicaton, function (f, args...)
     return fail;
   fi;
   if IsList(A) and Length(A) = 2 and A[1] = "Pred" and IsPredicaton(A[2]) then
-    B:=SortedStatesAut(FormattedPredicaton(A[2]));
+    B:=SortedStatesPredicaton(FormattedPredicaton(A[2]));
     SetVariableListOfPredicaton(B, VariableListOfPredicaton(A[2]));
     Display(B);
-    if NumberStatesOfAut(B) < 20 then
+    if NumberStatesOfPredicaton(B) < 20 then
       r:=PredicatonToRatExp(B);
       if Length(String(r)) <= 200 then
         Print("\n Regular expression of the Automaton:\n   ", r, "\n");
       fi;
     fi;
-    if VariablePositionListOfPredicaton(B) = [] and AlphabetOfAut(B) = 1 and NumberStatesOfAut(B) = 1 then
-      if Length(FinalStatesOfAut(B)) = 1 then
+    if VariablePositionListOfPredicaton(B) = [] and AlphabetOfPredicaton(B) = 1 and NumberStatesOfPredicaton(B) = 1 then
+      if Length(FinalStatesOfPredicaton(B)) = 1 then
         Print("\n Due to the Automaton/regular expression the formula is true.\n   true\n");
       else
         Print("\n Due to the Automaton/regular expression the formula is false.\n   false\n");
@@ -298,7 +298,7 @@ InstallGlobalFunction( AndPredicata, function (P1, P2, args...)
   if P = fail then 
     return fail;
   fi;
-  P:=SortedStatesAut(IntersectionPredicata(P[1], P[2], P[3])); 
+  P:=SortedStatesPredicaton(IntersectionPredicata(P[1], P[2], P[3])); 
   SetVariableListOfPredicaton(P, V);
   return P;
 end);
@@ -324,7 +324,7 @@ InstallGlobalFunction( OrPredicata, function (P1, P2, args...)
   if P = fail then 
     return fail;
   fi;
-  P:=SortedStatesAut(UnionPredicata(P[1], P[2], P[3]));
+  P:=SortedStatesPredicaton(UnionPredicata(P[1], P[2], P[3]));
   SetVariableListOfPredicaton(P, V);
   return P;
 end);
@@ -350,7 +350,7 @@ InstallGlobalFunction( NotPredicaton, function (P, args...)
   if P = fail then 
     return fail;
   fi;
-  Q:=SortedStatesAut(NegatedAut(Q));
+  Q:=SortedStatesPredicaton(NegatedPredicaton(Q));
   SetVariableListOfPredicaton(Q, V);
   return Q;
 end);
@@ -376,7 +376,7 @@ InstallGlobalFunction( ImpliesPredicata, function (P1, P2, args...)
   if P = fail then 
     return fail;
   fi;
-  P:=SortedStatesAut(UnionPredicata(NegatedAut(P[1]), P[2], P[3]));
+  P:=SortedStatesPredicaton(UnionPredicata(NegatedPredicaton(P[1]), P[2], P[3]));
   SetVariableListOfPredicaton(P, V);
   return P;
 end);
@@ -402,7 +402,7 @@ InstallGlobalFunction( EquivalentPredicata, function (P1, P2, args...)
   if P = fail then 
     return fail;
   fi;
-  P:=SortedStatesAut(UnionPredicata(IntersectionPredicata(NegatedAut(P[1]), NegatedAut(P[2]), P[3]), IntersectionPredicata(P[1], P[2], P[3]), P[3]));
+  P:=SortedStatesPredicaton(UnionPredicata(IntersectionPredicata(NegatedPredicaton(P[1]), NegatedPredicaton(P[2]), P[3]), IntersectionPredicata(P[1], P[2], P[3]), P[3]));
   SetVariableListOfPredicaton(P, V);
   return P;
 end);
@@ -434,7 +434,7 @@ InstallGlobalFunction( ExistsPredicaton, function (P, v, args...)
     return fail;
   fi;
   Remove(V,p);
-  Q:=SortedStatesAut(ProjectedPredicaton(Q, p));
+  Q:=SortedStatesPredicaton(ProjectedPredicaton(Q, p));
   SetVariableListOfPredicaton(Q, V);
   return Q;
 end);
@@ -466,7 +466,7 @@ InstallGlobalFunction( ForallPredicaton, function (P, v, args...)
     return fail;
   fi;
   Remove(V,p);
-  Q:=SortedStatesAut(NegatedProjectedNegatedPredicaton(Q, p));
+  Q:=SortedStatesPredicaton(NegatedProjectedNegatedPredicaton(Q, p));
   SetVariableListOfPredicaton(Q, V);
   return Q;
 end);
@@ -496,7 +496,7 @@ InstallGlobalFunction( LeastAcceptedNumber, function ( A, args... )
   else 
     var:="x";
   fi;
-  p:=PredicatonRepresentation("P1", 1, AutOfPredicaton(A));
+  p:=PredicatonRepresentation("P1", 1, A);
   P:=PredicataRepresentation(p);
   if b then
     f:=PredicataFormula(Concatenation("P1[", var,"] and (A x2:  (0 < x2 and x2 < ", var,") implies not P1[x2]) and 0 < ", var), P); 
@@ -523,7 +523,7 @@ InstallGlobalFunction( GreatestAcceptedNumber, function ( A )
   else 
     var:="x";
   fi;
-  p:=PredicatonRepresentation("P1", 1, AutOfPredicaton(A));
+  p:=PredicatonRepresentation("P1", 1, A);
   P:=PredicataRepresentation(p);
   f:=PredicataFormula(Concatenation("P1[", var,"] and (A x2: x2 > ", var," implies not P1[x2])"), P); 
   return PredicataFormulaToPredicaton(f);  
@@ -546,7 +546,7 @@ InstallGlobalFunction( LeastNonAcceptedNumber, function ( A )
   else 
     var:="x";
   fi;
-  p:=PredicatonRepresentation("P1", 1, AutOfPredicaton(A));
+  p:=PredicatonRepresentation("P1", 1, A);
   P:=PredicataRepresentation(p);
   f:=PredicataFormula(Concatenation("(A x2: x2 < ", var," implies P1[x2]) and not P1[", var,"]"), P); 
   return PredicataFormulaToPredicaton(f);  
@@ -569,7 +569,7 @@ InstallGlobalFunction( GreatestNonAcceptedNumber, function ( A )
   else 
     var:="x";
   fi;
-  p:=PredicatonRepresentation("P1", 1, AutOfPredicaton(A));
+  p:=PredicatonRepresentation("P1", 1, A);
   P:=PredicataRepresentation(p);
   f:=PredicataFormula(Concatenation("(A x2: x2 > ", var," implies P1[x2]) and not P1[", var,"]"), P);
   return PredicataFormulaToPredicaton(f);  
@@ -616,13 +616,13 @@ InstallGlobalFunction( FindCircleInPredicaton, function ( A, V, s, d, loop, fina
   local B, C, F, N, R, S, T, a, c, p0, i, l;
   B:=[];
   c:=1;
-  a:=AlphabetOfAutAsList(A);
-  l:=AlphabetOfAut(A);
+  a:=AlphabetOfPredicatonAsList(A);
+  l:=AlphabetOfPredicaton(A);
   p0:=Position(a, ListWithIdenticalEntries(Length(a[1]), 0));
-  T:=TransitionMatrixOfAut(A);
-  F:=FinalStatesOfAut(A);
-  S:=SinkStatesOfAut(A);
-  N:=NumberStatesOfAut(A);
+  T:=TransitionMatrixOfPredicaton(A);
+  F:=FinalStatesOfPredicaton(A);
+  S:=SinkStatesOfPredicaton(A);
+  N:=NumberStatesOfPredicaton(A);
   if d = 2 * N - 1 then
     #Print("reached max depth\n");
     return false;
@@ -694,7 +694,7 @@ end);
 ##
 InstallGlobalFunction( FinitelyManyWordsAccepted, function ( A , args...)
   local B;
-  if not IsPredicaton(A) and not IsDeterministicAut(A) then
+  if not IsPredicaton(A) and not IsDeterministicPredicaton(A) then
     Error("FinitelyManySolutionsPred failed, the argument must be a Predicaton with a deterministic Automaton.\n");
   fi;
   if Length(args) = 0 or Length(args) = 1 and args[1] = false then
@@ -704,7 +704,7 @@ InstallGlobalFunction( FinitelyManyWordsAccepted, function ( A , args...)
   else
     Error("FinitelyManySolutionsPred failed, the optional argument must be a boolean.\n");
   fi;
-  return not FindCircleInPredicaton(B, [], InitialStatesOfAut(B)[1], 1, false, false);
+  return not FindCircleInPredicaton(B, [], InitialStatesOfPredicaton(B)[1], 1, false, false);
 end);  
 ####################################################################################################
 ##
@@ -807,12 +807,12 @@ end);
 ##
 InstallGlobalFunction( InterpretedPredicaton, function ( A )
   local B, states, final;
-  states:=NumberStatesOfAut(A);
-  final:=FinalStatesOfAut(A);
+  states:=NumberStatesOfPredicaton(A);
+  final:=FinalStatesOfPredicaton(A);
   if states > 1 then
     B:=FormattedPredicaton(A);
-    states:=NumberStatesOfAut(B);
-    final:=FinalStatesOfAut(B);
+    states:=NumberStatesOfPredicaton(B);
+    final:=FinalStatesOfPredicaton(B);
   fi;
   if states = 1 and Length(final) = 1 then
     if Length(VariablePositionListOfPredicaton(A)) > 0 then
@@ -849,7 +849,7 @@ InstallGlobalFunction( AreEquivalentPredicata, function ( A, B, args... )
   if b then
     return InterpretedPredicaton(EquivalentPredicata(A, B));
   else
-    return InterpretedPredicaton(UnionPredicata(IntersectionPredicata(NegatedAut(A), NegatedAut(B)), IntersectionPredicata(A, B)));
+    return InterpretedPredicaton(UnionPredicata(IntersectionPredicata(NegatedPredicaton(A), NegatedPredicaton(B)), IntersectionPredicata(A, B)));
   fi;
 end);
 ##

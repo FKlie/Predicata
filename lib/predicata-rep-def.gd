@@ -12,10 +12,10 @@ DeclareCategoryCollections( "IsPredicatonRepresentationObj" );
 ##
 #R  IsPredicatonRepresentationRep
 ##
-DeclareRepresentation( "IsPredicatonRepresentationRep", IsComponentObjectRep, ["name", "arity", "aut"] );
+DeclareRepresentation( "IsPredicatonRepresentationRep", IsComponentObjectRep, ["name", "arity", "predicaton"] );
 ####################################################################################################
 ##
-#F  PredicatonRepresentation(Name, Arity, Aut)
+#F  PredicatonRepresentation(Name, Arity, Predicaton)
 ##
 DeclareGlobalFunction( "PredicatonRepresentation" );
 ####################################################################################################
@@ -29,23 +29,37 @@ DeclareGlobalFunction( "IsPredicatonRepresentation" );
 ##
 #F  NameOfPredicatonRepresentation(p)
 ##
-##  Returns the name of an Predicata representation element.
+##  Returns the name of an Predicaton representation element.
 ##
 DeclareGlobalFunction( "NameOfPredicatonRepresentation" ); 
 ####################################################################################################
 ##
 #F  ArityOfPredicatonRepresentation(p)
 ##
-##  Returns the name of an Predicata representation element.
+##  Returns the name of an Predicaton representation element.
 ##
 DeclareGlobalFunction( "ArityOfPredicatonRepresentation" );
 ####################################################################################################
 ##
+#F  PredicatonOfPredicatonRepresentation(p)
+##
+##  Returns the Predicaton of an Predicaton representation element.
+##
+DeclareGlobalFunction( "PredicatonOfPredicatonRepresentation" );
+####################################################################################################
+##
 #F  AutOfPredicatonRepresentation(p)
 ##
-##  Returns the automaton of an Predicata representation element.
+##  Returns the Automaton of an Predicaton representation element.
 ##
 DeclareGlobalFunction( "AutOfPredicatonRepresentation" );
+####################################################################################################
+##
+#F  BaseOfPredicatonRepresentation(p)
+##
+##  Returns the base of the Predicaton of an Predicaton representation element.
+##
+DeclareGlobalFunction( "BaseOfPredicatonRepresentation" );
 ####################################################################################################
 ##
 #F  CopyPredicatonRepresentation(p)
@@ -63,7 +77,7 @@ DeclareCategoryCollections( "IsPredicataRepresentationObj" );
 ##
 #R  IsPredicataRepresentationRep
 ##
-DeclareRepresentation( "IsPredicataRepresentationRep", IsComponentObjectRep, ["lowercasenamelist", "namelist", "aritylist", "autlist"] );
+DeclareRepresentation( "IsPredicataRepresentationRep", IsComponentObjectRep, ["lowercasenamelist", "namelist", "aritylist", "predicatonlist"] );
 ####################################################################################################
 ##
 #F  PredicataRepresentation(args...)
@@ -99,11 +113,11 @@ DeclareGlobalFunction( "NamesOfPredicataRepresentation" );
 DeclareGlobalFunction( "AritiesOfPredicataRepresentation" );
 ####################################################################################################
 ##
-#F  AutListOfPredicataRepresentation(P)
+#F  PredicataOfPredicataRepresentation(P)
 ##
-##  Returns the automaton list of an Predicata representation element.
+##  Returns the Predicata list of an Predicata representation element.
 ##
-DeclareGlobalFunction( "AutsOfPredicataRepresentation" );
+DeclareGlobalFunction( "PredicataOfPredicataRepresentation" );
 ####################################################################################################
 ##
 #F  CopyPredicataRepresentation(P)

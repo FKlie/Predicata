@@ -10,7 +10,7 @@
 ##
 InstallGlobalFunction(AutomatonOfPredicaton, function ( A ) 
   if IsPredicatonObj(A) then
-    return CopyAut(A!.aut);
+    return CopyPredicaton(A!.aut);
   else
     Error("AutomatonOfPredicaton failed, the argument must be a Predicaton.\n");
   fi;
@@ -50,6 +50,19 @@ InstallGlobalFunction( SetVariablePositionListOfPredicaton, function ( A, l )
     fi;
   else
     Error("SetVariablePositionListOfPredicaton failed, the first argument must be a Predicaton.\n");
+  fi;
+end);
+####################################################################################################
+##
+#F  BaseOfPredicaton(A)
+##
+##  Returns the base of the Predicaton.
+##
+InstallGlobalFunction(BaseOfPredicaton, function ( A ) 
+  if IsPredicatonObj(A) then
+    return ShallowCopy(A!.base);
+  else
+    Error("BaseOfPredicaton failed, the argument must be a Predicaton.\n");
   fi;
 end);
 ####################################################################################################
@@ -94,13 +107,13 @@ InstallGlobalFunction( ProductLZeroPredicaton, function ( A )
   if not IsPredicaton(A) then
     Error("ProductLZeroPredicaton failed, the argument must be a Predicaton.\n");
   fi;
-  S:=NumberStatesOfAut(A)+1;
-  a:=AlphabetOfAutAsList(A);
-  T:=TransitionMatrixOfAut(A);
-  I:=InitialStatesOfAut(A);
-  F:=FinalStatesOfAut(A);
+  S:=NumberStatesOfPredicaton(A)+1;
+  a:=AlphabetOfPredicatonAsList(A);
+  T:=TransitionMatrixOfPredicaton(A);
+  I:=InitialStatesOfPredicaton(A);
+  F:=FinalStatesOfPredicaton(A);
   p:=Position(a, ListWithIdenticalEntries(Length(a[1]), 0));
-  if IsDeterministicAut(A) then
+  if IsDeterministicPredicaton(A) then
     for i in [1..Length(T)] do
       Apply(T[i], s->[s]);
     od;
@@ -110,7 +123,7 @@ InstallGlobalFunction( ProductLZeroPredicaton, function ( A )
   od;
   Add(T[p], [S]); # Adding the zero loop in the new state S
   Add(F, S);
-  return Predicaton(Automaton("nondet", S, a, T, I, F), VariablePositionListOfPredicaton(A));
+  return Predicaton(Automaton("nondet", S, a, T, I, F), VariablePositionListOfPredicaton(A), BaseOfPredicaton(A));
 end);
 ####################################################################################################
 ##
@@ -124,13 +137,13 @@ InstallGlobalFunction( RightQuotientLZeroPredicaton, function ( A )
   if not IsPredicaton(A) then
     Error("RightQuotientLZeroPredicaton failed, the argument must be a Predicaton.\n");
   fi;
-  S:=NumberStatesOfAut(A);
-  a:=AlphabetOfAutAsList(A);
-  T:=TransitionMatrixOfAut(A);
-  I:=InitialStatesOfAut(A);
-  F:=FinalStatesOfAut(A);
+  S:=NumberStatesOfPredicaton(A);
+  a:=AlphabetOfPredicatonAsList(A);
+  T:=TransitionMatrixOfPredicaton(A);
+  I:=InitialStatesOfPredicaton(A);
+  F:=FinalStatesOfPredicaton(A);
   p:=Position(a, ListWithIdenticalEntries(Length(a[1]),0));
-  if IsDeterministicAut(A) then
+  if IsDeterministicPredicaton(A) then
     for i in [1..Length(T)] do
       Apply(T[i],s->[s]);
     od;
@@ -144,7 +157,7 @@ InstallGlobalFunction( RightQuotientLZeroPredicaton, function ( A )
       fi;
     od;
   od;
-  return Predicaton(Automaton("nondet", S, a, T, I, F), VariablePositionListOfPredicaton(A));
+  return Predicaton(Automaton("nondet", S, a, T, I, F), VariablePositionListOfPredicaton(A), BaseOfPredicaton(A));
 end);
 ####################################################################################################
 ##
@@ -155,7 +168,7 @@ end);
 ##
 InstallGlobalFunction( NormalizedLeadingZeroPredicaton, function ( A )
   if IsPredicaton(A) then
-    return UnionAut(ProductLZeroPredicaton(A), RightQuotientLZeroPredicaton(A));
+    return UnionPredicata(ProductLZeroPredicaton(A), RightQuotientLZeroPredicaton(A));
   else
     Error("NormalizedLeadingZeroPredicaton failed, the argument must be a Predicaton.\n");
   fi;
@@ -164,24 +177,26 @@ end);
 ##
 #F  SortedAlphabetPredicaton(A)
 ##
-##  Sorts the alphabet to be like the function GetAlphabet, also sorts the transition matrix.
+##  Sorts the alphabet to be like the function PredicataAlphabet, also sorts the transition matrix.
 ##
 InstallGlobalFunction( SortedAlphabetPredicaton, function ( A )
-  local a, newa, T, newT, i;
+  local B, a, newa, T, newT, i;
   if not IsPredicaton(A) then
-    Error("SortedAbcPredicaton failed, the argument must be a Predicaton.\n"); 
+    Error("SortedAlphabetPredicaton failed, the argument must be a Predicaton.\n"); 
   fi;
-  a:=AlphabetOfAutAsList(A);
-  newa:=GetAlphabet(Length(VariablePositionListOfPredicaton(A)));
+  a:=AlphabetOfPredicatonAsList(A);
+  newa:=PredicataAlphabet(Length(VariablePositionListOfPredicaton(A)),BaseOfPredicaton(A));
   if a = newa then
     return A;
   else
-    T:=TransitionMatrixOfAut(A);
+    T:=TransitionMatrixOfPredicaton(A);
     newT:=[];
     for i in [1..Length(newa)] do
       newT[i]:=T[Position(a, newa[i])];
     od;
-    return Predicaton(Automaton(TypeOfAut(A), NumberStatesOfAut(A), newa, newT, InitialStatesOfAut(A), FinalStatesOfAut(A)), VariablePositionListOfPredicaton(A));
+    B:=Predicaton(Automaton(TypeOfPredicaton(A), NumberStatesOfPredicaton(A), newa, newT, InitialStatesOfPredicaton(A), FinalStatesOfPredicaton(A)), VariablePositionListOfPredicaton(A), BaseOfPredicaton(A));
+    B!.varnames:=A!.varnames;
+    return B;
   fi;
 end);
 ####################################################################################################
@@ -192,8 +207,8 @@ end);
 ##
 InstallGlobalFunction( FormattedPredicaton, function ( A )
   if IsPredicaton(A) then
-    return MinimalAut(NormalizedLeadingZeroPredicaton(A));
-    #return SortedAlphabetPredicaton(MinimalAut(NormalizedLeadingZeroPredicaton(A)));   #check how much slower
+    return MinimalPredicaton(NormalizedLeadingZeroPredicaton(A));
+    #return SortedAlphabetPredicaton(MinimalPredicaton(NormalizedLeadingZeroPredicaton(A)));   #check how much slower
   else
     Error("FormattedPredicaton failed, the argument must be a Predicaton.\n");
   fi;
@@ -230,32 +245,55 @@ end);
 ##  position p to the second half. The transition matrix is doubled.
 ##
 BindGlobal( "ExpandPredOneStep", function ( A, p ) 
+  local T, a, b, i, j, k, l, pos;
+  if not IsPredicaton(A) or not IsInt(p) then
+    Error("ExpandPredOneStep failed, the arguments must be a Predicaton and a positive integer.\n");
+  elif p in VariablePositionListOfPredicaton(A) then
+    return A;
+  else
+    k:=BaseOfPredicaton(A);
+    b:=List([1..k],i->AlphabetOfPredicatonAsList(A));
+    l:=VariablePositionListOfPredicaton(A);
+    Add(l,p);  # add p to variable position list
+    Sort(l);
+    pos:=Position(l,p);
+    for i in [1..AlphabetOfPredicaton(A)] do
+      for j in [0..k-1] do
+        Add(b[j+1][i], j, pos);  # adding j corresponding to the position of pos
+      od;
+    od;
+    a:=Concatenation(b); # Concatenating b.
+    T:=Concatenation(List([1..k],i->TransitionMatrixOfPredicaton(A)));  # duplicate the transition matrix k-times
+    return Predicaton(Automaton(TypeOfPredicaton(A), NumberStatesOfPredicaton(A), a, T, InitialStatesOfPredicaton(A), FinalStatesOfPredicaton(A)), l, k);
+  fi;
+end);
+BindGlobal( "ExpandPredOneStepOLD", function ( A, p ) 
   local T, a, b, l, i, pos;
   if not IsPredicaton(A) or not IsInt(p) then
     Error("ExpandPredOneStep failed, the arguments must be a Predicaton and a positive integer.\n");
   elif p in VariablePositionListOfPredicaton(A) then
     return A;
   else
-    a:=AlphabetOfAutAsList(A);
-    b:=AlphabetOfAutAsList(A);
+    a:=AlphabetOfPredicatonAsList(A);
+    b:=AlphabetOfPredicatonAsList(A);
     l:=VariablePositionListOfPredicaton(A);
     Add(l,p);  # add p to variable position list
     Sort(l);
     pos:=Position(l,p);
-    for i in [1..AlphabetOfAut(A)] do
-      a[i]:=InsertAt(a[i], 0, pos);  # add 0 corresponding to the position of p
-      b[i]:=InsertAt(b[i], 1, pos);  # add 1 corresponding to the position of p
+    for i in [1..AlphabetOfPredicaton(A)] do
+      Add(a[i], 0, pos);  # add 0 corresponding to the position of p
+      Add(b[i], 1, pos);  # add 1 corresponding to the position of p
     od;
     Append(a, b);
-    T:=Concatenation(TransitionMatrixOfAut(A), TransitionMatrixOfAut(A));  # duplicate the transition matrix
-    return Predicaton(Automaton(TypeOfAut(A), NumberStatesOfAut(A), a, T, InitialStatesOfAut(A), FinalStatesOfAut(A)), l);
+    T:=Concatenation(TransitionMatrixOfPredicaton(A), TransitionMatrixOfPredicaton(A));  # duplicate the transition matrix
+    return Predicaton(Automaton(TypeOfPredicaton(A), NumberStatesOfPredicaton(A), a, T, InitialStatesOfPredicaton(A), FinalStatesOfPredicaton(A)), l);
   fi;
 end);
 ####################################################################################################
 ##
 #F  ExpandedPredicaton(A, n)
 ##
-##  Expands the alphabet size to 2^|n| regarding comparing the variable
+##  Expands the alphabet size to base k^|n| regarding comparing the variable
 ##  position list and copying the transition matrix corresponding to the entries
 ##
 ##  For calling a Predicaton the first time, use PredicatonFromAut, where the variable
@@ -267,7 +305,7 @@ InstallGlobalFunction( ExpandedPredicaton, function ( A, n )
     Error("ExpandedPredicaton failed, the arguments must be a Predicaton and a new variable position list.\n");
   fi;
   l:=VariablePositionListOfPredicaton(A);
-  B:=CopyAut(A);
+  B:=CopyPredicaton(A);
   Sort(n);
   for i in n do
     B:=ExpandPredOneStep(B, i);
@@ -276,9 +314,48 @@ InstallGlobalFunction( ExpandedPredicaton, function ( A, n )
   # return FormattedPredicaton(B); # check if so much slower with it.
 end);
 ####################################################################################################
-## 
-##  Auxilary function for CombineList
 ##
+#F  ProjectedPredicaton(A, p)
+##
+##  Deletes in the alphabet of the Predicaton the p-th position, i.e.
+##  projects it down from {0,...,k-1}^n to {0,...,k-1}^n-1 
+##  The corresponding transition matrix rows are combined (NFA).
+##
+##  Existence quantifier!
+##
+InstallGlobalFunction( ProjectedPredicaton, function ( A, p )
+  local B, T, a, l, i, length, pos, q;
+  if not IsPredicaton(A) or not p in VariablePositionListOfPredicaton(A) then
+    Error("ProjectedPredicaton failed, the arguments must be a Predicaton and positive integer in the variable position list.\n");
+  fi;
+  l:=VariablePositionListOfPredicaton(A);
+  Sort(l);
+  length:=AlphabetOfPredicaton(A);
+  a:=AlphabetOfPredicatonAsList(A);
+  q:=NumberStatesOfPredicaton(A);
+  pos:=Position(l, p);
+  for i in [1..length] do
+    Remove(a[i],pos);   # remove p-th position of the alphabet.
+  od;
+  T:=TransitionMatrixOfPredicaton(A);
+  i:=1;
+  while i <= length do
+    pos:= Positions(a,a[i]);  # checks for the same letter, which occurce more than once due to removal of the p-th position
+    if Length(pos) > 1 then
+      a:=a{Difference([1..Length(a)],pos{[2,Length(pos)]})}; #removing duplicate letters, keep the first of pos.
+      T[pos[1]]:=List([1..q],r->List([1..Length(pos)],s->T[pos[s]][r])); # s runs through all positions, r runs through all states, collecting entries for the NFA.
+      T:=T{Difference([1..Length(T)],pos{[2,Length(pos)]})}; #removing transitions that have been added into the NFA transitions at pos[1].
+    fi;
+    i:=i+1;
+    length:=Length(a);
+  od;
+  Remove(l, Position(l, p));  # removes the variable position p from the variable position list.
+  Sort(l);
+  return FormattedPredicaton(Predicaton(Automaton("nondet", NumberStatesOfPredicaton(A), a, T, InitialStatesOfPredicaton(A), FinalStatesOfPredicaton(A)), l, BaseOfPredicaton(A)));
+end);
+
+
+
 BindGlobal( "ProjectedPredCombinedList", function ( l1, l2 )
   local l, m, i;
   if not IsList(l1) or not IsList(l2) then
@@ -291,30 +368,20 @@ BindGlobal( "ProjectedPredCombinedList", function ( l1, l2 )
   od;
   return l;
 end);
-####################################################################################################
-##
-#F  ProjectedPredicaton(A, p)
-##
-##  Deletes in the alphabet of the Predicaton the p-th position, i.e.
-##  projects it down from {0,1}^n to {0,1}^n-1 
-##  The corresponding transition matrix rows are combined (NFA).
-##
-##  Existence quantifier!
-##
-InstallGlobalFunction( ProjectedPredicaton, function ( A, p )
+BindGlobal( "ProjectedPredicaton2", function ( A, p )
   local B, T, a, l, i, length, pos;
   if not IsPredicaton(A) or not p in VariablePositionListOfPredicaton(A) then
     Error("ProjectedPredicaton failed, the arguments must be a Predicaton and positive integer in the variable position list.\n");
   fi;
   l:=VariablePositionListOfPredicaton(A);
   Sort(l);
-  length:=AlphabetOfAut(A);
-  a:=AlphabetOfAutAsList(A);
+  length:=AlphabetOfPredicaton(A);
+  a:=AlphabetOfPredicatonAsList(A);
   pos:=Position(l, p);
   for i in [1..length] do
     Remove(a[i],pos);   # remove p-th position of the alphabet.
   od;
-  T:=TransitionMatrixOfAut(A);
+  T:=TransitionMatrixOfPredicaton(A);
   i:=1;
   while i <= length do
     pos:= Positions(a,a[i]);  # checks for the same letter, which occurce twice due to removal of the p-th position
@@ -328,7 +395,7 @@ InstallGlobalFunction( ProjectedPredicaton, function ( A, p )
   od;
   Remove(l, Position(l, p));  # removes the variable position p from the variable position list.
   Sort(l);
-  return FormattedPredicaton(Predicaton(Automaton("nondet", NumberStatesOfAut(A), a, T, InitialStatesOfAut(A), FinalStatesOfAut(A)),l));
+  return FormattedPredicaton(Predicaton(Automaton("nondet", NumberStatesOfPredicaton(A), a, T, InitialStatesOfPredicaton(A), FinalStatesOfPredicaton(A)),l));
 end);
 ####################################################################################################
 ##
@@ -341,76 +408,14 @@ end);
 ## 
 InstallGlobalFunction( NegatedProjectedNegatedPredicaton, function ( A, p )
   if IsPredicaton(A) and p in VariablePositionListOfPredicaton(A) then
-    return FormattedPredicaton(NegatedAut(FormattedPredicaton(ProjectedPredicaton(NegatedAut(FormattedPredicaton(A)),p))));
+    return FormattedPredicaton(NegatedPredicaton(FormattedPredicaton(ProjectedPredicaton(NegatedPredicaton(FormattedPredicaton(A)),p))));
   else
     Error("NegatedProjectedNegatedPredicaton failed, the arguments must be a Predicaton and positive integer in the variable position list.\n");
   fi;
 end);
 ####################################################################################################
 ##
-#F  IntersectionPredicaton(A, B,[ n])
-##
-##  Intersects two Predicatons A and B after resizing them to the same
-##  variable positions and sorting the alphabet list to be in the same order.
-## 
-InstallGlobalFunction( IntersectionPredicata, function ( A, B, args... )
-  local A1, B1, n, n1;
-  if not IsPredicaton(A) then
-    Error("IntersectionPredicata failed, the first argument must be a Predicaton.\n");
-  elif not IsPredicaton(B) then
-    Error("IntersectionPredicata failed, the second argument must be a Predicaton.\n");
-  fi;
-  n1:=Union(VariablePositionListOfPredicaton(A), VariablePositionListOfPredicaton(B)); # working only with the neccessary variable positions
-  if Length(args) = 0 then
-    n:=n1;
-  elif Length(args) = 1 and IsList(args[1]) and IsValidInput(A, args[1]) and IsValidInput(B, args[1]) then
-    n:=args[1];
-  else
-    Error("IntersectionPredicata failed, the optional argument must be a list of integers.\n");
-  fi;
-  A1:=ExpandedPredicaton(A, n1);                  # expands to the equal variable position list
-  B1:=ExpandedPredicaton(B, n1);                  # sorting the alphabet list should happen in ExpandedPred
-  if AlphabetOfAutAsList(A1) <> AlphabetOfAutAsList(B1) then
-    A1:=SortedAlphabetPredicaton(A1);             # if not do it here.
-    B1:=SortedAlphabetPredicaton(B1);             #
-  fi;
-  A1:=IntersectionAut(A1, B1);                    # Calls IntersectionAut on the resized Predicata
-  return ExpandedPredicaton(MinimalAut(A1),n);    # format it and expand it
-end);
-####################################################################################################
-##
-#F  UnionPredicata(A, B,[ n])
-##
-##  Unites two Predicata A and B after resizing them to the same
-##  variable positions and sorting the alphabet list to be in the same order.
-## 
-InstallGlobalFunction( UnionPredicata, function ( A, B, args... )
-  local A1, B1, n, n1;
-  if not IsPredicaton(A) then
-    Error("UnionPredicata failed, the first argument must be a Predicaton.\n");
-  elif not IsPredicaton(B) then
-    Error("UnionPredicata failed, the second argument must be a Predicaton.\n");
-  fi;
-  n1:=Union(VariablePositionListOfPredicaton(A), VariablePositionListOfPredicaton(B)); # working only with the neccessary variable positions
-  if Length(args) = 0 then
-    n:=n1;
-  elif Length(args) = 1 and IsList(args[1]) and IsValidInput(A, args[1]) and IsValidInput(B, args[1]) then
-    n:=args[1];
-  else
-    Error("UnionPredicata failed, the optional argument must be a list of integers.\n");
-  fi;
-  A1:=ExpandedPredicaton(A, n1);                  # expands to the equal variable position list
-  B1:=ExpandedPredicaton(B, n1);                  # sorting the alphabet list should happen in ExpandedPred
-  if AlphabetOfAutAsList(A1) <> AlphabetOfAutAsList(B1) then
-    A1:=SortedAlphabetPredicaton(A1);             # if not do it here.
-    B1:=SortedAlphabetPredicaton(B1);             #
-  fi;
-  A1:=UnionAut(A1, B1);                           # calls UnionAut on the resized Predicata
-  return ExpandedPredicaton(MinimalAut(A1),n);    # format it and expand it
-end);
-####################################################################################################
-##
-#F  PermutedAlphabetPredicaton(A, l)
+#F  PermutedAlphabetPredicaton(A, l[, base])
 ##
 ##  Returns the Predicaton with the permuted alphabet.
 ##  Relevant for the first call of an specific Predicaton, especially 
@@ -422,39 +427,49 @@ end);
 ##  each alphabet letter the position of x and y while leaving the transition
 ##  matrix unchanged.
 ##
-InstallGlobalFunction( PermutedAlphabetPredicaton, function ( A, l )
-  local a, newa, p, i;
+InstallGlobalFunction( PermutedAlphabetPredicaton, function ( A, l, args... )
+  local a, newa, p, i, k;
+  if Length(args) = 0 then
+    k:=ReturnPredicataBase();
+  elif Length(args) = 1 and IsInt(args[1]) and args[1]>1 then
+    k:=args[1];
+  fi;
   if not IsAutomaton(A) or not IsList(l) or not ForAll(l, i->IsPosInt(i)) then
     Error("PermutedAlphabetPredicaton failed, the first argument must be a Automaton and the second argument must be a list containing positive integers.\n");
   fi;
   p:=SortingPerm(l);              # Sorts the list and returns a list that can be applied to a permutation
   if p = () then
-    return Predicaton(A, l);       # nothing to do here, everything in correct order.
+    return Predicaton(A, l, k);       # nothing to do here, everything in correct order.
   else
-    a:=AlphabetOfAutAsList(A);
+    a:=AlphabetOfPredicatonAsList(A);
     newa:=StructuralCopy(a);
     for i in [1..Length(a)] do
       newa[i]:=Permuted(a[i], p); # permute the positions in the list of the i-th letter according to SortingPerm(l)
     od;
     Sort(l);
-    return Predicaton(Automaton(TypeOfAut(A), NumberStatesOfAut(A), newa, TransitionMatrixOfAut(A), InitialStatesOfAut(A), FinalStatesOfAut(A)), l);
+    return Predicaton(Automaton(TypeOfPredicaton(A), NumberStatesOfPredicaton(A), newa, TransitionMatrixOfPredicaton(A), InitialStatesOfPredicaton(A), FinalStatesOfPredicaton(A)), l, k);
   fi;
 end);
 ####################################################################################################
 ##
-#F  PredicatonFromAut(A, l, n)
+#F  PredicatonFromAut(A, l, n[, base])
 ##
 ##  Returns the permuted and expanded Predicaton A.
 ##
 ##  Use this for calling a Predicaton the first time, where variable position
 ##  list order matters, see PermutedAlphabetPred.
 ##
-InstallGlobalFunction( PredicatonFromAut, function ( A, l, n )
-  local B;
+InstallGlobalFunction( PredicatonFromAut, function ( A, l, n, args...)
+  local B, k;
   if not IsAutomaton(A) or not ForAll(n, i -> IsPosInt(i)) or not IsSubsetSet(n, l) then
     Error("PredicatonFromAut failed, the first argument must be a Automaton and the second and third argument must be a list containing positive integers.\n");
   fi;
-  B:=PermutedAlphabetPredicaton(A, l);
+  if Length(args) = 0 then
+    k:=ReturnPredicataBase();
+  elif Length(args) = 1 and IsInt(args[1]) and args[1]>1 then
+    k:=args[1];
+  fi;
+  B:=PermutedAlphabetPredicaton(A, l, k);
   return ExpandedPredicaton(B, n);
 end);
 ##

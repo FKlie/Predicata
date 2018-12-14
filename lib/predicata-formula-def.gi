@@ -472,7 +472,6 @@ InstallMethod( String,
   true, 
   [IsPredicataFormulaObj and IsPredicataFormulaRep], 0, 
   function( f )
-    local P;
     if f!.predrep!.namelist = [] then
       return Concatenation("PredicataFormula(\"",f!.string, "\");");
     else
@@ -723,11 +722,10 @@ InstallMethod( String,
   true, 
   [IsPredicataFormulaFormattedObj and IsPredicataFormulaFormattedRep], 0, 
   function( f )
-  local P;
     if f!.predrep!.namelist = [] then
       return Concatenation("PredicataFormulaFormatted(PredicataFormula(\"",Concatenation(f!.stringlist), "\"));");
     else
-      return Concatenation("PredicataFormulaFormatted(PredicataFormula(\"",Concatenation(f!.stringlist), "\", ",  String(P), "));");
+      return Concatenation("PredicataFormulaFormatted(PredicataFormula(\"",Concatenation(f!.stringlist), "\", ",  String(f!.predrep), "));");
     fi;
 end);
 ##

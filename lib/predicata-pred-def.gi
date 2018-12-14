@@ -4,16 +4,46 @@
 ##
 ####################################################################################################
 ##
-#F  Predicaton(Automaton, VariablePositionList)
+#V  PredicataBase
+##
+##  Global variable storing the number of base represenation.
+##
+InstallFlushableValue( PredicataBase, [ 2 ] );
+####################################################################################################
+##
+#F  SetPredicataBase
+##
+##  Setting the base for the base represenation.
+##
+InstallGlobalFunction( SetPredicataBase, function ( i ) 
+  if IsInt(i) and i > 1 then
+    Remove(PredicataBase, 1);
+    Add(PredicataBase, i);
+  else 
+    Print("SetPredicataBase failed, the base must be an integer greater equal 2.\n");
+  fi;
+end);
+####################################################################################################
+##
+#F  ReturnPredicataBase
+##
+##  Returning the base for the base represenation.
+##
+InstallGlobalFunction( ReturnPredicataBase, function () 
+  return PredicataBase[1];
+end);
+####################################################################################################
+##
+#F  Predicaton(Automaton, VariablePositionList, Base)
 ##
 InstallMethod( 
   Predicaton, 
   "default method",
 	true,
-	[IsAutomatonObj, IsList],
+	[IsAutomatonObj, IsList, IsInt],
 	0,
-  function( Automaton, VariablePositionList )
-  local A, F, a, predicaton;
+  function( Automaton, VariablePositionList, Base )
+  local A, F, a, k, predicaton;
   # Testing for correct input 
   # Testing for Automaton from the package "automata" and variable position list being a list.
     if not IsAutomaton(Automaton) or not IsList(VariablePositionList) then
@@ -43,32 +73,36 @@ InstallMethod(
     if Length(VariablePositionList) <> a[1] then
       Error("Input failed, variable list must be of the same length as each letter.\n");
     fi;
-  # The alphabet must be all combinations of ({0,1})^n, where n is the size of the variable position list.
+  # The alphabet must be all combinations of ({0,..,Base-1})^n, where n is the size of the variable position list.
     a:=AlphabetOfAutomatonAsList(Automaton);
-    if Length(Unique(a)) <> 2^Length(a[1]) then
-      Error("Input failed, alphabet must be unique letters and the length must be equal 2^length of the letters.\n");
+    if not IsEqualSet(PredicataAlphabet(Length(a[1]),Base),a) then
+      Error("Input failed, alphabet must contain all letters from [0..", Base-1, "]^",Length(a[1]),". Instead the alphabet is:\n", a, "\n");
     fi;
-    if Length(a) > 1 then
-      a:=AlphabetOfAutomatonAsList(Automaton);
-      Apply(a,i->Maximum(i));
-      if Maximum(a) > 1 then
-        Error(" Input failed, alphabet must be over {0,1}^n.\n");
-      fi;
-      a:=AlphabetOfAutomatonAsList(Automaton);
-      Apply(a,i->Minimum(i));
-      if Minimum(a) < 0 then
-        Error(" Input failed, alphabet must be over {0,1}^n.\n");
-      fi;
-    elif Length(a) = 1 and not a[1] = [] then
-      Error(" Input failed, alphabet must be over {0,1}^0, i.e. the only letter is [].\n");
-    fi; 
+  # The Base for the base representation must be an integer greater equal 2.
+    if not (IsInt(Base) and Base > 1) then
+      Error("The Base must be an integer greater equal 2.\n");
+    fi;
   # Defining new family
     F:=NewFamily("PredicataFam", IsPredicatonObj);
-    predicaton:=rec(aut:=Automaton, var:=VariablePositionList, varnames:=[]);
+    predicaton:=rec(aut:=Automaton, var:=VariablePositionList, varnames:=[], base:=Base);
     A:=Objectify(NewType(F, IsPredicatonObj and IsPredicatonRep and IsAttributeStoringRep), predicaton);
   # Return the predicata.
     return A;
-end);   
+end);
+####################################################################################################
+##
+#M  Predicaton(F)
+##
+##  Overloads the function Predicaton with PredicataFormula.
+##
+InstallOtherMethod( Predicaton,
+  "default method using internal PredicataBase",
+  true, 
+  [IsAutomatonObj, IsList], 
+  0, 
+  function( Automaton, VariablePositionList )
+  return Predicaton(Automaton, VariablePositionList, ReturnPredicataBase());
+end);
 ####################################################################################################
 ##
 #F  IsPredicaton(A)
@@ -87,7 +121,7 @@ InstallMethod ( DisplayString,
   true,
   [IsPredicatonObj and IsPredicatonRep], 0,
   function( A )
-    return AutToString(A);
+    return PredicatonToString(A);
 end);
 ####################################################################################################
 ##

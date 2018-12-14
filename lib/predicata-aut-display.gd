@@ -5,20 +5,19 @@
 ##
 ####################################################################################################
 ##
-#F  AutToString ( A )
+#F  PredicatonToString ( A )
 ##
 ##  Returns an Automaton or a Predicaton nicely formatted as a string.
 ##
-DeclareGlobalFunction( "AutToString" );
+DeclareGlobalFunction( "PredicatonToString" );
 ####################################################################################################
 ##
-#F  DisplayAut(A)
+#F  DisplayPredicaton(A)
 ##
 ##  Displays an Automaton or a Predicaton. 
 ##  Note: Display from the "Automata" package will not work properly on alphabet lists.
 ##
-DeclareGlobalFunction( "DisplayAut" );
-DeclareSynonym( "DisplayPredicaton", DisplayAut );
+DeclareGlobalFunction( "DisplayPredicaton" );
 ####################################################################################################
 ##
 #M  RenameAlphabet(Abc)

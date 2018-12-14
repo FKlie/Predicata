@@ -5,11 +5,11 @@
 ##
 ####################################################################################################
 ##
-#F  IsDeterministicAut(A)
+#F  IsDeterministicPredicaton(A)
 ##
 ##  Tests if A is a deterministic Automaton or Predicaton.
 ##
-InstallGlobalFunction( IsDeterministicAut, function ( A )
+InstallGlobalFunction( IsDeterministicPredicaton, function ( A )
   if IsAutomatonObj(A) then
     return IsDeterministicAutomaton(A);
   elif IsPredicatonObj(A) then
@@ -20,11 +20,11 @@ InstallGlobalFunction( IsDeterministicAut, function ( A )
 end);
 ####################################################################################################
 ##
-#F  IsNonDeterministicAut(A)
+#F  IsNonDeterministicPredicaton(A)
 ##
 ##  Tests if A is a non deterministic Automaton or Predicaton.
 ##
-InstallGlobalFunction( IsNonDeterministicAut, function ( A )
+InstallGlobalFunction( IsNonDeterministicPredicaton, function ( A )
   if IsAutomatonObj(A) then
     return IsNonDeterministicAutomaton(A);
   elif IsPredicatonObj(A) then
@@ -35,307 +35,338 @@ InstallGlobalFunction( IsNonDeterministicAut, function ( A )
 end);
 ####################################################################################################
 ##
-#F  TypeOfAut(A)
+#F  TypeOfPredicaton(A)
 ##
 ##  Returns the type.
 ##
-InstallGlobalFunction( TypeOfAut, function ( A )
+InstallGlobalFunction( TypeOfPredicaton, function ( A )
   if IsAutomatonObj(A) then
     return ShallowCopy(A!.type);
   elif IsPredicatonObj(A) then
     return ShallowCopy(A!.aut!.type);
   else 
-    Error("TypeOfAut failed, the argument must be an Automaton or a Predicaton.\n");
+    Error("TypeOfPredicaton failed, the argument must be an Automaton or a Predicaton.\n");
   fi;
 end);
 ####################################################################################################
 ##
-#F  AlphabetOfAut(A)
+#F  AlphabetOfPredicaton(A)
 ##
 ##  Returns the number of letters in the alphabet.
 ##
-InstallGlobalFunction( AlphabetOfAut, function( A )
+InstallGlobalFunction( AlphabetOfPredicaton, function( A )
   if IsAutomatonObj(A) then
     return StructuralCopy(A!.alphabet);
   elif IsPredicatonObj(A) then
     return StructuralCopy(A!.aut!.alphabet); 
   else 
-    Error("AlphabetOfAut failed, the argument must be an Automaton or a Predicaton.\n");
+    Error("AlphabetOfPredicaton failed, the argument must be an Automaton or a Predicaton.\n");
   fi;
 end);
 ####################################################################################################
 ##
-#F  AlphabetOfAutAsList(A)
+#F  AlphabetOfPredicatonAsList(A)
 ##
 ##  Returns the alphabet as list.
 ##
-InstallGlobalFunction( AlphabetOfAutAsList, function( A )
+InstallGlobalFunction( AlphabetOfPredicatonAsList, function( A )
   if IsAutomatonObj(A) then
     return StructuralCopy(FamilyObj(A)!.alphabet);
   elif IsPredicatonObj(A) then
     return StructuralCopy(FamilyObj(A!.aut)!.alphabet); 
   else 
-    Error("AlphabetOfAutAsList failed, the argument must be an Automaton or a Predicaton.\n");
+    Error("AlphabetOfPredicatonAsList failed, the argument must be an Automaton or a Predicaton.\n");
   fi;
 end);
 ####################################################################################################
 ##
-#F  NumberStatesOfAut(A)
+#F  NumberStatesOfPredicaton(A)
 ##
 ##  Returns the number of states.
 ##
-InstallGlobalFunction( NumberStatesOfAut, function( A )
+InstallGlobalFunction( NumberStatesOfPredicaton, function( A )
   if IsAutomatonObj(A) then
     return A!.states ;
   elif IsPredicatonObj(A) then
     return A!.aut!.states ;
   else
-    Error("NumberStatesOfAut failed, the argument must be an Automaton or a Predicaton.\n");
+    Error("NumberStatesOfPredicaton failed, the argument must be an Automaton or a Predicaton.\n");
   fi;
 end);
 ####################################################################################################
 ##
-#F  SortedStatesAut(A)
+#F  SortedStatesPredicaton(A)
 ##
 ##  Returns the Automaton or the Predicaton with sorted states,
 ##  such that the intial states have the lowest and the final states the highest number.
 ##
-InstallGlobalFunction( SortedStatesAut, function( A )
+InstallGlobalFunction( SortedStatesPredicaton, function( A )
   local B; 
   if IsAutomatonObj(A) then
     return NormalizedAutomaton(A);
   elif IsPredicatonObj(A) then
-    B:=Predicaton(NormalizedAutomaton(A!.aut), A!.var);
+    B:=Predicaton(NormalizedAutomaton(A!.aut), A!.var, BaseOfPredicaton(A));
     B!.varnames:=A!.varnames;
     return B;
   else
-    Error("SortedStatesAut failed, the argument must be an Automaton or a Predicaton.\n");
+    Error("SortedStatesPredicaton failed, the argument must be an Automaton or a Predicaton.\n");
   fi;
 end);
 ####################################################################################################
 ##
-#F  TransitionMatrixOfAut(A)
+#F  TransitionMatrixOfPredicaton(A)
 ##
 ##  Returns the transition matrix.
 ##
-InstallGlobalFunction( TransitionMatrixOfAut, function( A )
+InstallGlobalFunction( TransitionMatrixOfPredicaton, function( A )
   if IsAutomatonObj(A) then
     return StructuralCopy(A!.transitions);
   elif IsPredicatonObj(A) then
     return StructuralCopy(A!.aut!.transitions); 
   else 
-    Error("TransitionMatrixOfAut failed, the argument must be an Automaton or a Predicaton.\n");
+    Error("TransitionMatrixOfPredicaton failed, the argument must be an Automaton or a Predicaton.\n");
   fi;
 end);
 ####################################################################################################
 ##
-#F  InitialStatesOfAut(A)
+#F  InitialStatesOfPredicaton(A)
 ##
 ##  Returns the initial states.
 ##
-InstallGlobalFunction( InitialStatesOfAut, function( A )
+InstallGlobalFunction( InitialStatesOfPredicaton, function( A )
   if IsAutomatonObj(A) then
     return ShallowCopy(A!.initial);
   elif IsPredicatonObj(A) then
     return ShallowCopy(A!.aut!.initial); 
   else 
-    Error("InitialStatesOfAut failed, the argument must be an Automaton or a Predicaton.\n");
+    Error("InitialStatesOfPredicaton failed, the argument must be an Automaton or a Predicaton.\n");
   fi;
 end);
 ####################################################################################################
 ##
-#F  SetInitialStatesOfAut(A)
+#F  SetInitialStatesOfPredicaton(A)
 ##
 ##  Sets the initial states.
 ##
-InstallGlobalFunction( SetInitialStatesOfAut, function( A, I )
+InstallGlobalFunction( SetInitialStatesOfPredicaton, function( A, I )
   if IsAutomatonObj(A) then
     SetInitialStatesOfAutomaton(A, I);
   elif IsPredicatonObj(A) then
     SetInitialStatesOfAutomaton(A!.aut, I);
   else
-    Error("SetInitialStatesOfAut failed, the argument must be an Automaton or a Predicaton.\n");
+    Error("SetInitialStatesOfPredicaton failed, the argument must be an Automaton or a Predicaton.\n");
   fi;
 end);
 ####################################################################################################
 ##
-#F  FinalStatesOfAut(A)
+#F  FinalStatesOfPredicaton(A)
 ##
 ##  Returns the final states.
 ##
-InstallGlobalFunction(FinalStatesOfAut, function( A )
+InstallGlobalFunction(FinalStatesOfPredicaton, function( A )
   if IsAutomatonObj(A) then
     return ShallowCopy(A!.accepting);
   elif IsPredicatonObj(A) then
     return ShallowCopy(A!.aut!.accepting); 
   else 
-    Error("FinalStatesOfAut failed, the argument must be an Automaton or a Predicaton.\n");
+    Error("FinalStatesOfPredicaton failed, the argument must be an Automaton or a Predicaton.\n");
   fi;
 end);
 ####################################################################################################
 ##
-#F  SetFinalStatesOfAut(A)
+#F  SetFinalStatesOfPredicaton(A)
 ##
 ##  Sets the final states.
 ##
-InstallGlobalFunction( SetFinalStatesOfAut, function( A, F )
+InstallGlobalFunction( SetFinalStatesOfPredicaton, function( A, F )
   if IsAutomatonObj(A) then
     SetFinalStatesOfAutomaton(A, F);
   elif IsPredicatonObj(A) then
     SetFinalStatesOfAutomaton(A!.aut, F);
   else
-    Error("SetFinalStatesOfAut failed, the argument must be an Automaton or a Predicaton.\n");
+    Error("SetFinalStatesOfPredicaton failed, the argument must be an Automaton or a Predicaton.\n");
   fi;
 end);
 ####################################################################################################
 ##
-#F  SinkStatesOfAut(A)
+#F  SinkStatesOfPredicaton(A)
 ##
 ##  Returns the sink states.
 ##
-InstallGlobalFunction(SinkStatesOfAut, function( A )
+InstallGlobalFunction(SinkStatesOfPredicaton, function( A )
   if IsAutomatonObj(A) then
     return ShallowCopy(ListSinkStatesAut(A));
   elif IsPredicatonObj(A) then
     return ShallowCopy(ListSinkStatesAut(A!.aut)); 
   else 
-    Error("FinalStatesOfAut failed, the argument must be an Automaton or a Predicaton.\n");
+    Error("FinalStatesOfPredicaton failed, the argument must be an Automaton or a Predicaton.\n");
   fi;
 end);
 ####################################################################################################
 ##
-#F  CopyAut(A)
+#F  CopyPredicaton(A)
 ##
 ##  Returns a copy.
 ##
-InstallGlobalFunction( CopyAut, function ( A )
+InstallGlobalFunction( CopyPredicaton, function ( A )
   local B;
   if IsAutomaton(A) then
-    return Automaton(TypeOfAut(A), NumberStatesOfAut(A), AlphabetOfAutAsList(A), TransitionMatrixOfAut(A), 
-                      InitialStatesOfAut(A), FinalStatesOfAut(A));
+    return Automaton(TypeOfPredicaton(A), NumberStatesOfPredicaton(A), AlphabetOfPredicatonAsList(A), TransitionMatrixOfPredicaton(A), 
+                      InitialStatesOfPredicaton(A), FinalStatesOfPredicaton(A));
   elif IsPredicatonObj(A) then
-    B:=Predicaton(Automaton(TypeOfAut(A!.aut), NumberStatesOfAut(A!.aut), AlphabetOfAutAsList(A!.aut), TransitionMatrixOfAut(A!.aut), 
-                         InitialStatesOfAut(A!.aut), FinalStatesOfAut(A!.aut)),A!.var);
-    B!.varnames:=A!.varnames;
+    B:=Predicaton(Automaton(TypeOfPredicaton(A!.aut), NumberStatesOfPredicaton(A!.aut), AlphabetOfPredicatonAsList(A!.aut), TransitionMatrixOfPredicaton(A!.aut), 
+                         InitialStatesOfPredicaton(A!.aut), FinalStatesOfPredicaton(A!.aut)), ShallowCopy(A!.var), ShallowCopy(A!.base));
+    B!.varnames:=ShallowCopy(A!.varnames);
     return B;
   else
-    Error("CopyAut failed, the argument must be an Automaton or a Predicaton.\n");
+    Error("CopyPredicaton failed, the argument must be an Automaton or a Predicaton.\n");
   fi;
 end);
 ####################################################################################################
 ##
-#F  PermutedStatesAut(A)
+#F  PermutedStatesPredicaton(A)
 ##
 ##  Returns the permuted states Automaton.
 ##
-InstallGlobalFunction( PermutedStatesAut, function ( A, p )
+InstallGlobalFunction( PermutedStatesPredicaton, function ( A, p )
   local B;
-  if IsAutomaton(A) and IsEqualSet([1..NumberStatesOfAut(A)], p) then
+  if IsAutomaton(A) and IsEqualSet([1..NumberStatesOfPredicaton(A)], p) then
     return PermutedAutomaton(A, p);
-  elif IsPredicatonObj(A) and IsEqualSet([1..NumberStatesOfAut(A)], p) then
-    B:=Predicaton(PermutedAutomaton(A!.aut, p), A!.var);
+  elif IsPredicatonObj(A) and IsEqualSet([1..NumberStatesOfPredicaton(A)], p) then
+    B:=Predicaton(PermutedAutomaton(A!.aut, p), A!.var, BaseOfPredicaton(A));
     B!.varnames:=A!.varnames;
     return B;
   else
-    Error("PermutedStatesAut failed, the first argument must be an Automaton or a Predicaton, the second must be a list which is equal to the set containing all states.\n");
+    Error("PermutedStatesPredicaton failed, the first argument must be an Automaton or a Predicaton, the second must be a list which is equal to the set containing all states.\n");
   fi;
 end);
 ####################################################################################################
 ##
-#F  NegatedAut(A)
+#F  NegatedPredicaton(A)
 ##
 ##  Negates the Automaton swapping the final states to non-final and vice-versa.
 ##
-InstallGlobalFunction( NegatedAut , function ( A )
+InstallGlobalFunction( NegatedPredicaton , function ( A )
   local B, S;
   if IsAutomaton(A) or IsPredicaton(A) then
-    B:=CopyAut(A);
-    S:=[1..NumberStatesOfAut(B)];
-    SubtractSet(S,FinalStatesOfAut(B));
+    B:=CopyPredicaton(A);
+    S:=[1..NumberStatesOfPredicaton(B)];
+    SubtractSet(S,FinalStatesOfPredicaton(B));
     Sort(S);
-    SetFinalStatesOfAut(B, S);
+    SetFinalStatesOfPredicaton(B, S);
     return B;
   else
-    Error("NegatedAut failed, the argument must be an Automaton or a Predicaton.\n");
+    Error("NegatedPredicaton failed, the argument must be an Automaton or a Predicaton.\n");
   fi;
 end);
 ####################################################################################################
 ##
-#F  IntersectionAut(A)
+#F  IntersectionPredicaton(A, B,[ n])
 ##
 ##  Returns the intersection of two Automata or Predicata.
-##
-InstallGlobalFunction( IntersectionAut, function ( A, B )
+##  Intersects two Predicatons A and B after resizing them to the same
+##  variable positions and sorting the alphabet list to be in the same order.
+## 
+InstallGlobalFunction( IntersectionPredicata, function ( A, B, args... )
+  local A1, B1, C, n, n1;
   if IsAutomaton(A) and IsAutomaton(B) then
     return IntersectionAutomaton(A,B);
   elif IsPredicatonObj(A) and IsPredicatonObj(B) then
-    if IsEqualSet(A!.var, B!.var) and AlphabetOfAutAsList(A!.aut) = AlphabetOfAutAsList(B!.aut) then
-      return Predicaton(IntersectionAutomaton(A!.aut,B!.aut), A!.var);
-    else
-      Print("Compare the variable position lists: ", A!.var , " and ", B!.var, "\nCompare the two Automata:\n");
-      Display(A);
-      Display(B);
-      Error("IntersectionAut failed, please use IntersectionPred for the intersection of two Predicata with different variable lists.\n");
+    if BaseOfPredicaton(A) <> BaseOfPredicaton(B) then
+      Error("IntersectionPredicata failed, please do not intersect two Predicata with a different base.\n");
     fi;
+    n1:=Union(VariablePositionListOfPredicaton(A), VariablePositionListOfPredicaton(B)); # working only with the neccessary variable positions
+    if Length(args) = 0 then
+      n:=n1;
+    elif Length(args) = 1 and IsList(args[1]) and IsValidInput(A, args[1]) and IsValidInput(B, args[1]) then
+      n:=args[1];
+    else
+      Error("IntersectionPredicata failed, the optional argument must be a list of integers.\n");
+    fi;
+    A1:=ExpandedPredicaton(A, n1);                  # expands to the equal variable position list
+    B1:=ExpandedPredicaton(B, n1);                  # sorting the alphabet list should happen in ExpandedPred
+    if AlphabetOfPredicatonAsList(A1) <> AlphabetOfPredicatonAsList(B1) then
+      A1:=SortedAlphabetPredicaton(A1);             # if not do it here.
+      B1:=SortedAlphabetPredicaton(B1);             # and here
+    fi;
+    C:=IntersectionAutomaton(A1!.aut, B1!.aut);     # Calls IntersectionAutomaton on the automatons of the Predicata
+    return ExpandedPredicaton(MinimalPredicaton(Predicaton(C, A1!.var, BaseOfPredicaton(A))),n);    # format it and expand it
   else 
-    Error("IntersectionAut failed, the arguments must be both of type Automaton or Predicaton.\n");
+    Error("IntersectionPredicata failed, the arguments must be both either Automaton or Predicaton.\n");
   fi;
 end);
 ####################################################################################################
 ##
-#F  UnionAut(A)
+#F  UnionPredicata(A, B,[ n])
 ##
 ##  Returns the union of two Automata or Predicata.
-##
-InstallGlobalFunction( UnionAut, function ( A, B )
+##  Unites two Predicata A and B after resizing them to the same
+##  variable positions and sorting the alphabet list to be in the same order.
+## 
+InstallGlobalFunction( UnionPredicata, function ( A, B, args... )
+  local A1, B1, C, n, n1;
   if IsAutomaton(A) and IsAutomaton(B) then
     return UnionAutomata(A,B);
   elif IsPredicatonObj(A) and IsPredicatonObj(B) then
-    if IsEqualSet(A!.var, B!.var) and AlphabetOfAutAsList(A!.aut) = AlphabetOfAutAsList(B!.aut) then
-      return Predicaton(UnionAutomata(A!.aut,B!.aut), A!.var);
-    else 
-      Error("UnionAut failed, please use UnionPred for the union of two Predicata with different variable lists.\n");
+    if BaseOfPredicaton(A) <> BaseOfPredicaton(B) then
+      Error("IntersectionPredicata failed, please do not unite two Predicata with a different base.\n");
     fi;
+    n1:=Union(VariablePositionListOfPredicaton(A), VariablePositionListOfPredicaton(B)); # working only with the neccessary variable positions
+    if Length(args) = 0 then
+      n:=n1;
+    elif Length(args) = 1 and IsList(args[1]) and IsValidInput(A, args[1]) and IsValidInput(B, args[1]) then
+      n:=args[1];
+    else
+      Error("UnionPredicata failed, the optional argument must be a list of integers.\n");
+    fi;
+    A1:=ExpandedPredicaton(A, n1);                  # expands to the equal variable position list
+    B1:=ExpandedPredicaton(B, n1);                  # sorting the alphabet list should happen in ExpandedPred
+    if AlphabetOfPredicatonAsList(A1) <> AlphabetOfPredicatonAsList(B1) then
+      A1:=SortedAlphabetPredicaton(A1);             # if not do it here.
+      B1:=SortedAlphabetPredicaton(B1);             #
+    fi;
+    C:=UnionAutomata(A1!.aut, B1!.aut);             # Calls UnionAutomata on the automatons of the Predicata
+    return ExpandedPredicaton(MinimalPredicaton(Predicaton(C, A1!.var, BaseOfPredicaton(A))),n);    # format it and expand it
   else 
-    Error("UnionAut failed, the arguments must be both of type Automaton or Predicaton.\n");
+    Error("UnionPredicata failed, the arguments must be both either Automaton or Predicaton.\n");
   fi;
 end);
 ####################################################################################################
 ##
-#F   MinimalAut(A)
+#F   MinimalPredicaton(A)
 ##
 ##  Returns the minimal Automaton or minimal Predicaton, i.e. the minimal DFA.
 ##
-InstallGlobalFunction( MinimalAut, function ( A )
+InstallGlobalFunction( MinimalPredicaton, function ( A )
   local B;
   if IsAutomaton(A) then
     return MinimalizedAut(A);
   elif IsPredicatonObj(A) then
-    B:=Predicaton(MinimalAut(A!.aut), A!.var);
+    B:=Predicaton(MinimalizedAut(A!.aut), A!.var,BaseOfPredicaton(A));
     B!.varnames:=A!.varnames;
     return B;
   else 
-    Error("MinimalAut failed, the argument must be an Automaton or a Predicaton.\n");
+    Error("MinimalPredicaton failed, the argument must be an Automaton or a Predicaton.\n");
   fi;
 end);
 ####################################################################################################
 ##
-#F  IsRecognizedByAut(A, word)
+#F  IsRecognizedByPredicaton(A, word)
 ##
 ##  Tests if a given word is recognized by the given Automaton or Predicaton.
 ##
-InstallGlobalFunction( IsRecognizedByAut, function( A , word )
+InstallGlobalFunction( IsRecognizedByPredicaton, function( A , word )
   if IsAutomatonObj(A) then
     return IsRecognizedByAutomaton( A, word );
   elif IsPredicatonObj(A) then
     return IsRecognizedByAutomaton( A!.aut, word );
   else
-    Error("IsRecognizedByAut failed, the first argument must be an Automaton or a Predicaton and the second must be a word over the language\n");
+    Error("IsRecognizedByPredicaton failed, the first argument must be an Automaton or a Predicaton and the second must be a word over the language\n");
   fi;
 end);
 ####################################################################################################
 ##
-#F  PredToRatExp
+#F  PredicatonToRatExp
 ##
 ##  Returns the rational expression for the Predicaton (Automatons are also allowed)
 ##
@@ -345,7 +376,7 @@ InstallGlobalFunction( PredicatonToRatExp, function ( A )
   elif IsPredicatonObj(A) then
     return AutToRatExp(A!.aut);
   else
-    Error("PredToRatExp failed, the argument must be an Automaton or a Predicaton.\n");
+    Error("PredicatonToRatExp failed, the argument must be an Automaton or a Predicaton.\n");
   fi;
 end);
 ##

@@ -351,6 +351,8 @@ InstallGlobalFunction( PredicataTreeToPredicatonRecursive, function (T, V)
       p:=ElementOfPredicataRepresentation(P, Position(Pnames, root));       # get the corresponding predicata represenation element
       if ArityOfPredicatonRepresentation(p) <> l then
         Error("PredicataTreeToPredicatonRecursive failed, the predicate arity is ", ArityOfPredicatonRepresentation(p), ", but the predicate is called on ", l , " variables.\n");
+      elif BaseOfPredicatonRepresentation(p) <> ReturnPredicataBase() then
+        Error("PredicataTreeToPredicatonRecursive failed, the predicate base is ", BaseOfPredicatonRepresentation(p), ", but the current PredicataBase is ", ReturnPredicataBase(), ".\nPlease use SetPredicataBase(", BaseOfPredicatonRepresentation(p), ");.\n");
       else
         n:=FixedVariablePositions(V[1],V[2]);
         v:=[];
@@ -454,7 +456,7 @@ InstallGlobalFunction( PredicataTreeToPredicatonRecursive, function (T, V)
       if c1[1] = "var" and c2[1] = "int" then                                 # var >= int
         return["Pred", GreaterEqualNPredicaton(c2[2][1], c1[2],n)];
       elif c1[1] = "int" and c2[1] = "var" then                               # int >= var <-> not int < var
-        return["Pred", NegatedAut(GreaterNPredicaton(c1[2][1], c2[2],n))];
+        return["Pred", NegatedPredicaton(GreaterNPredicaton(c1[2][1], c2[2],n))];
       elif c1[1] = "var" and c2[1] = "var" then                               # var >= var
         return["Pred", GreaterEqualPredicaton(Concatenation(c1[2], c2[2]),n)];
       else
@@ -465,7 +467,7 @@ InstallGlobalFunction( PredicataTreeToPredicatonRecursive, function (T, V)
       if c1[1] = "var" and c2[1] = "int" then                                 # var > int
         return["Pred", GreaterNPredicaton(c2[2][1], c1[2],n)];
       elif c1[1] = "int" and c2[1] = "var" then                               # int > var <-> not int <= var
-        return["Pred", NegatedAut(GreaterEqualNPredicaton(c1[2][1], c2[2],n))];
+        return["Pred", NegatedPredicaton(GreaterEqualNPredicaton(c1[2][1], c2[2],n))];
       elif c1[1] = "var" and c2[1] = "var" then                               # var > var
         return["Pred", GreaterPredicaton(Concatenation(c1[2], c2[2]),n)];
       else
@@ -476,7 +478,7 @@ InstallGlobalFunction( PredicataTreeToPredicatonRecursive, function (T, V)
       if c1[1] = "int" and c2[1] = "var" then                                 # int <= var
         return["Pred", GreaterEqualNPredicaton(c1[2][1], c2[2],n)];
       elif c1[1] = "var" and c2[1] = "int" then                               # var <= int <-> not var > int
-        return["Pred", NegatedAut(GreaterNPredicaton(c2[2][1], c1[2],n))];
+        return["Pred", NegatedPredicaton(GreaterNPredicaton(c2[2][1], c1[2],n))];
       elif c1[1] = "var" and c2[1] = "var" then                               # var <= var
         return["Pred", GreaterEqualPredicaton(Concatenation(c2[2], c1[2]),n)];
       else
@@ -487,7 +489,7 @@ InstallGlobalFunction( PredicataTreeToPredicatonRecursive, function (T, V)
       if c1[1] = "int" and c2[1] = "var" then                                 # int < var
         return["Pred", GreaterNPredicaton(c1[2][1], c2[2],n)];
       elif c1[1] = "var" and c2[1] = "int" then                               # var < int <-> not var >= int
-        return["Pred", NegatedAut(GreaterEqualNPredicaton(c2[2][1], c1[2],n))];
+        return["Pred", NegatedPredicaton(GreaterEqualNPredicaton(c2[2][1], c1[2],n))];
       elif c1[1] = "var" and c2[1] = "var" then                               # var < var
         return["Pred", GreaterPredicaton(Concatenation(c2[2], c1[2]),n)];
       else
@@ -510,14 +512,14 @@ InstallGlobalFunction( PredicataTreeToPredicatonRecursive, function (T, V)
     elif root = "equiv" then                                                  # equiv
       n:=FixedVariablePositions(V[1], V[2]);
       if c1[1] = "Pred" and c2[1] = "Pred" then
-        return ["Pred", UnionPredicata( IntersectionPredicata(NegatedAut(c1[2]), NegatedAut(c2[2]), n), IntersectionPredicata(c1[2], c2[2], n), n)];
+        return ["Pred", UnionPredicata( IntersectionPredicata(NegatedPredicaton(c1[2]), NegatedPredicaton(c2[2]), n), IntersectionPredicata(c1[2], c2[2], n), n)];
       else
         Error("PredicataTreeToPredicatonRecursive failed at the equivalence of predicatas.\n");
       fi;
     elif root = "implies" then                                                # implies  
       n:=FixedVariablePositions(V[1], V[2]);
       if c1[1] = "Pred" and c2[1] = "Pred" then
-        return ["Pred", UnionPredicata( NegatedAut(c1[2]), c2[2], n)];
+        return ["Pred", UnionPredicata( NegatedPredicaton(c1[2]), c2[2], n)];
       else
         Error("PredicataTreeToPredicatonRecursive failed at the implication of predicatas.\n");
       fi;
@@ -539,6 +541,8 @@ InstallGlobalFunction( PredicataTreeToPredicatonRecursive, function (T, V)
       p:=ElementOfPredicataRepresentation(P, Position(Pnames, root));         # get the position and then the predicate represenation, p_name, p_arity, p_automata
       if ArityOfPredicatonRepresentation(p) <> 2 then
         Error("PredicataTreeToPredicatonRecursive failed, the predicate arity is ", ArityOfPredicatonRepresentation(p), ", but the predicate is called on 2 variables.\n");
+      elif BaseOfPredicatonRepresentation(p) <> ReturnPredicataBase() then
+        Error("PredicataTreeToPredicatonRecursive failed, the predicate base is ", BaseOfPredicatonRepresentation(p), ", but the current PredicataBase is ", ReturnPredicataBase(), ".\nPlease use SetPredicataBase(", BaseOfPredicatonRepresentation(p), ");.\n");
       else
         n:=FixedVariablePositions(V[1], V[2]);
         v:=[];
@@ -572,7 +576,7 @@ InstallGlobalFunction( PredicataTreeToPredicatonRecursive, function (T, V)
       return c;
     elif root = "not" then                                                    # not
       if c[1] = "Pred" then
-        return ["Pred", NegatedAut(NormalizedLeadingZeroPredicaton(c[2]))];
+        return ["Pred", NegatedPredicaton(NormalizedLeadingZeroPredicaton(c[2]))];
       else
         Error("PredicataTreeToPredicatonRecursive failed at negating an Predicata.\n");
       fi;
@@ -580,6 +584,8 @@ InstallGlobalFunction( PredicataTreeToPredicatonRecursive, function (T, V)
       p:=ElementOfPredicataRepresentation(P, Position(Pnames, root));         # get the position and then the predicate represenation, p_name, p_arity, p_automata
       if ArityOfPredicatonRepresentation(p) <> 1 then
         Error("PredicataTreeToPredicatonRecursive failed, the predicate arity is ", ArityOfPredicatonRepresentation(p), ", but the predicate is called on 1 variable.\n");
+      elif BaseOfPredicatonRepresentation(p) <> ReturnPredicataBase() then
+        Error("PredicataTreeToPredicatonRecursive failed, the predicate base is ", BaseOfPredicatonRepresentation(p), ", but the current PredicataBase is ", ReturnPredicataBase(), ".\nPlease use SetPredicataBase(", BaseOfPredicatonRepresentation(p), ");.\n");
       else
         n:=FixedVariablePositions(V[1], V[2]);
         v:=[];
@@ -619,6 +625,8 @@ InstallGlobalFunction( PredicataTreeToPredicatonRecursive, function (T, V)
       p:=ElementOfPredicataRepresentation(P, Position(Pnames, root));         # get the position and then the predicate represenation, p_name, p_arity, p_automata
       if ArityOfPredicatonRepresentation(p) <> 0 then
         Error("PredicataTreeToPredicatonRecursive failed, the predicate arity is ", ArityOfPredicatonRepresentation(p), ", but the predicate is called on 0 variables.\n");
+      elif BaseOfPredicatonRepresentation(p) <> ReturnPredicataBase() then
+        Error("PredicataTreeToPredicatonRecursive failed, the predicate base is ", BaseOfPredicatonRepresentation(p), ", but the current PredicataBase is ", ReturnPredicataBase(), ".\nPlease use SetPredicataBase(", BaseOfPredicatonRepresentation(p), ");.\n");
       else
         n:=FixedVariablePositions(V[1], V[2]);
         return ["Pred", PredicatonFromAut(AutOfPredicatonRepresentation(p), [], n )];               

@@ -4,20 +4,29 @@
 ##
 ####################################################################################################
 ##
-#F  InsertAt(l, e, p )
-##
-##  Inserts into a list l the element e at position p, 
-##  where the position p can be 0 <= p <= Length(l)+1.
-##
-DeclareGlobalFunction( "InsertAt", [IsList, , IsPosInt] );
-####################################################################################################
-##
-#F  GetAlphabet(N)
+#F  PredicataAlphabet(N[,base])
 ##
 ##  Returns the alphabet of length N, i.e. ({0,1})^N.
 ##
-DeclareGlobalFunction( "GetAlphabet", [IsInt] );
-DeclareSynonym( "GetAbc", GetAlphabet);
+DeclareGlobalFunction( "PredicataAlphabet", [IsInt] );
+####################################################################################################
+##
+#F  DecToBaseRep(D[,base])
+##
+##  Converts a decimal number into a base k=PredicataBase representation. 
+##  Note: The binary representation list is reversed, i.e.
+##        D = B[1] * k^0 + B[2] * k^1 + ...
+##
+DeclareGlobalFunction( "DecToBaseRep" );
+####################################################################################################
+##
+#F  BaseRepToDec(B[,base])
+##
+##  Converts a base k=PredicataBase representation list into a decimal number 
+##  Note: The base k representation list is reversed, i.e.
+##        B[1] * k^0 + B[2] * k^1 +... = D
+##
+DeclareGlobalFunction( "BaseRepToDec" );
 ####################################################################################################
 ##
 #F  DecToBin(D)

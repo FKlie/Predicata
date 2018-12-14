@@ -5,11 +5,11 @@
 ##
 ####################################################################################################
 ##
-#F  AutToString( A )
+#F  PredicatonToString( A )
 ##
 ##  Returns an Automaton or a Predicaton nicely formatted as a string.
 ##
-InstallGlobalFunction ( AutToString, function( A, args... )
+InstallGlobalFunction ( PredicatonToString, function( A, args... )
  local a, t, i, j, k, tl, c, s, m, M, n, S, L, V, intro, mid, outro, alphabet0, alphabet, line0, line, states0, states, pos, pos0;
   # Optional: screen width parameter
   if Length(args) = 0 then
@@ -17,10 +17,10 @@ InstallGlobalFunction ( AutToString, function( A, args... )
   elif Length(args) = 1 and IsPosInt(args[1]) then
     S:=args[1];
   else
-    return "AutToString failed, optional parameter must be an positive integer.\n";
+    return "PredicatonToString failed, optional parameter must be an positive integer.\n";
   fi;
   if S <= 50 then
-    return "AutToString failed, cannot really work with that small size for the table.\n";
+    return "PredicatonToString failed, cannot really work with that small size for the table.\n";
   fi;
   # Checking for the type, Automaton or Predicaton
   if IsAutomaton(A) then
@@ -30,12 +30,12 @@ InstallGlobalFunction ( AutToString, function( A, args... )
     A:=SortedAlphabetPredicaton(A);
     intro:="Predicaton: ";
   else
-    Error("AutToString failed, input must be an Automaton or a Predicaton.\n");
+    Error("PredicatonToString failed, input must be an Automaton or a Predicaton.\n");
   fi;
-  a:=AlphabetOfAutAsList(A);
-  t:=TransitionMatrixOfAut(A);
+  a:=AlphabetOfPredicatonAsList(A);
+  t:=TransitionMatrixOfPredicaton(A);
   tl:=1;
-  if IsDeterministicAut(A) then
+  if IsDeterministicPredicaton(A) then
     intro:=Concatenation(intro, "deterministic finite automaton ");
   else
     c:=StructuralCopy(t); 
@@ -45,15 +45,15 @@ InstallGlobalFunction ( AutToString, function( A, args... )
     od;
     intro:=Concatenation(intro, "nondeterministic finite automaton ");
   fi;
-  if AlphabetOfAut(A) = 1 then
-    intro:=Concatenation(intro, "on ", String(AlphabetOfAut(A)), " letter ");
+  if AlphabetOfPredicaton(A) = 1 then
+    intro:=Concatenation(intro, "on ", String(AlphabetOfPredicaton(A)), " letter ");
   else 
-    intro:=Concatenation(intro, "on ", String(AlphabetOfAut(A)), " letters ");
+    intro:=Concatenation(intro, "on ", String(AlphabetOfPredicaton(A)), " letters ");
   fi;
-  if NumberStatesOfAut(A) = 1 then
-    intro:=Concatenation(intro, "with ", String(NumberStatesOfAut(A)), " state");
+  if NumberStatesOfPredicaton(A) = 1 then
+    intro:=Concatenation(intro, "with ", String(NumberStatesOfPredicaton(A)), " state");
   else
-    intro:=Concatenation(intro, "with ", String(NumberStatesOfAut(A)), " states");
+    intro:=Concatenation(intro, "with ", String(NumberStatesOfPredicaton(A)), " states");
   fi;
   if IsPredicaton(A) then
     intro:=Concatenation(intro, ", the variable position list ", String(A!.var));
@@ -81,15 +81,15 @@ InstallGlobalFunction ( AutToString, function( A, args... )
   states0:="";                                     # states in the first row
   states:="";                                      # transition table
   s:=0;
-  for i in [1..NumberStatesOfAut(A)] do
+  for i in [1..NumberStatesOfPredicaton(A)] do
     states0:=Concatenation(states0, String(i));
-    if IsDeterministicAut(A) then
+    if IsDeterministicPredicaton(A) then
       if i < 10 then
         states0:=Concatenation(states0, "  ");
       elif i < 100 then
         states0:=Concatenation(states0, " ");
       fi;
-      if NumberStatesOfAut(A) > 99 then
+      if NumberStatesOfPredicaton(A) > 99 then
         states0:=Concatenation(states0, " ");
         s:=s+1;
       fi;
@@ -102,7 +102,7 @@ InstallGlobalFunction ( AutToString, function( A, args... )
       else
         states0:=Concatenation(states0, " ");
       fi;
-      if NumberStatesOfAut(A) > 99 then
+      if NumberStatesOfPredicaton(A) > 99 then
         states0:=Concatenation(states0, " ");
         s:=s+1;
       fi;
@@ -129,13 +129,13 @@ InstallGlobalFunction ( AutToString, function( A, args... )
     states[i]:="";
     for j in [1..Length(t[i])] do
       states[i]:=Concatenation(states[i], String(t[i][j]));
-      if IsDeterministicAut(A) then
+      if IsDeterministicPredicaton(A) then
         if t[i][j] < 10 then
           states[i]:=Concatenation(states[i], "  ");
         elif t[i][j] < 100 then
           states[i]:=Concatenation(states[i], " ");
         fi;
-        if NumberStatesOfAut(A) > 99 then
+        if NumberStatesOfPredicaton(A) > 99 then
           states[i]:=Concatenation(states[i], " ");
         fi;
       else
@@ -143,7 +143,7 @@ InstallGlobalFunction ( AutToString, function( A, args... )
           states[i]:=Concatenation(states[i], " ");
         od;
         states[i]:=Concatenation(states[i], "  ");
-        if NumberStatesOfAut(A) > 99 then
+        if NumberStatesOfPredicaton(A) > 99 then
           states0:=Concatenation(states0, " ");
         fi;
       fi;
@@ -183,9 +183,9 @@ InstallGlobalFunction ( AutToString, function( A, args... )
       mid:=Concatenation(mid, " ...\n");
     fi;
   od;
-  i:=InitialStatesOfAut(A);
+  i:=InitialStatesOfPredicaton(A);
   Sort(i);
-  j:=FinalStatesOfAut(A);
+  j:=FinalStatesOfPredicaton(A);
   Sort(j);
   outro:=Concatenation(" Initial states: ", String(i), "\n Final states:   ", String(j), "\n");
   if IsPredicaton(A) and Length(A!.var) > 0 and Length(V) > 0 then
@@ -195,13 +195,13 @@ InstallGlobalFunction ( AutToString, function( A, args... )
 end);
 ####################################################################################################
 ##
-#F  DisplayAut ( A )
+#F  DisplayPredicaton ( A )
 ##
 ##  Displays an Automaton or a Predicaton. 
 ##  Note: Display from the "automata" package will not work properly on alphabet lists.
 ##
-InstallGlobalFunction ( DisplayAut, function( A, args... )
-  Print(AutToString(A));
+InstallGlobalFunction ( DisplayPredicaton, function( A, args... )
+  Print(PredicatonToString(A));
 end);
 ####################################################################################################
 ##
@@ -244,7 +244,7 @@ InstallGlobalFunction ( DrawPredicaton, function (A, name...)
     Error("DrawPredicaton failed, input must be an Automaton or a Predicaton.\n");
   fi;
   #Drawing with smaller letter lists: DISABLED
-  #a:=AlphabetOfAutAsList(B);
+  #a:=AlphabetOfPredicatonAsList(B);
   #a:=RenameAlphabet(a);
   #B:=Automaton(B!.type, B!.states, a, B!.transitions,B!.initial,B!.accepting);
   if name = [] then 
@@ -302,20 +302,20 @@ end);
 ##  Predicaton. 
 ##
 InstallGlobalFunction( IsAcceptedWordByPredicaton, function ( A, L )
-  local B, i;
+  local B, i, k;
   if IsPredicaton(A) and IsList(L) and ForAll(L, i-> i >= 0 and IsInt(i)) then
     B:=[];
     for i in [1..Length(L)] do
-      B[i]:=DecToBin(L[i]);
+      B[i]:=DecToBaseRep(L[i],BaseOfPredicaton(A));
     od;
-    return IsRecognizedByAut(A, MakePairPredicaton(B));
+    return IsRecognizedByPredicaton(A, MakePairPredicaton(B));
   elif IsPredicaton(A) and IsList(L) and ForAll(L, IsList) then
     for i in [1..Length(L)] do
       if not ForAll(L[i], i -> i >=0 and i <= 1) then
         Error("IsRecognizedByPred failed, the second argument must be a list containing lists which represent a binary number.\n");
       fi;
     od;
-    return IsRecognizedByAut(A, MakePairPredicaton(L));
+    return IsRecognizedByPredicaton(A, MakePairPredicaton(L));
   else
     Error("IsRecognizedByPred failed, the first argument must be a Predicaton, the second argument must be a list containing natural numbers.\n");
   fi;
@@ -345,8 +345,8 @@ InstallGlobalFunction( AcceptedWordsByPredicaton, function ( A, args... )
   else  
     Error("AcceptedWordsByPred failed, the optional argument must either an positive integer or a list containing integers.\n");
   fi;
-  if IsPredicaton(A) and VariablePositionListOfPredicaton(A) = [] and AlphabetOfAut(A) = 1 and NumberStatesOfAut(A) = 1 then
-    if Length(FinalStatesOfAut(A)) = 1 then
+  if IsPredicaton(A) and VariablePositionListOfPredicaton(A) = [] and AlphabetOfPredicaton(A) = 1 and NumberStatesOfPredicaton(A) = 1 then
+    if Length(FinalStatesOfPredicaton(A)) = 1 then
       return [true];
     else
       return [false];
@@ -408,15 +408,15 @@ InstallGlobalFunction( DisplayAcceptedWordsByPredicaton, function (A, args...)
       Error("DisplayAcceptedWordsByPred failed, the second optional argument must be a boolean.\n");
     fi;
   fi;
-  if IsPredicaton(A) and VariablePositionListOfPredicaton(A) = [] and AlphabetOfAut(A) = 1 and NumberStatesOfAut(A) = 1 then
-    if Length(FinalStatesOfAut(A)) = 1 then
+  if IsPredicaton(A) and VariablePositionListOfPredicaton(A) = [] and AlphabetOfPredicaton(A) = 1 and NumberStatesOfPredicaton(A) = 1 then
+    if Length(FinalStatesOfPredicaton(A)) = 1 then
       Print("\n Due to the Automaton the formula is true.\n   true\n");
     else
       Print("\n Due to the Automaton the formula is false.\n   false\n");
     fi;
   elif IsPredicaton(A) and l = 1 then
     B:=[0..N[1]];
-    Apply(B, i->DecToBin(i));
+    Apply(B, i->DecToBaseRep(i,BaseOfPredicaton(A)));
     if t then
       Print(" If the following words are accepted by the given Automaton, then: Y, otherwise if not accepted: n.\n ");
     else
@@ -429,7 +429,7 @@ InstallGlobalFunction( DisplayAcceptedWordsByPredicaton, function (A, args...)
         Print(" ");
       fi;
       Print(i, ": ");
-      if IsRecognizedByAut(A, MakePairPredicaton([B[i+1]])) then
+      if IsRecognizedByPredicaton(A, MakePairPredicaton([B[i+1]])) then
         if t then
           Print("Y");
         else
@@ -469,7 +469,7 @@ InstallGlobalFunction( DisplayAcceptedWordsByPredicaton, function (A, args...)
     Print(Concatenation(s));
     Print("\n");
     B:=[0..Maximum(N)];
-    Apply(B,i->DecToBin(i));
+    Apply(B,i->DecToBaseRep(i,BaseOfPredicaton(A)));
     for i in [0..N[1]] do
       if i < 10 then
         Print("   ");
@@ -480,7 +480,7 @@ InstallGlobalFunction( DisplayAcceptedWordsByPredicaton, function (A, args...)
       fi;
       Print(i, " | ");
       for j in [0..N[2]] do
-        if IsRecognizedByAut(A, MakePairPredicaton([B[i+1],B[j+1]])) then
+        if IsRecognizedByPredicaton(A, MakePairPredicaton([B[i+1],B[j+1]])) then
           Print("YES ");
         else
           Print("no  ");
@@ -491,7 +491,7 @@ InstallGlobalFunction( DisplayAcceptedWordsByPredicaton, function (A, args...)
     Print("\n");
   elif IsPredicaton(A) and l = 3 then
     B:=[0..Maximum(N)];
-    Apply(B,i->DecToBin(i));
+    Apply(B,i->DecToBaseRep(i,BaseOfPredicaton(A)));
     T:=[0..N[2]];
     Apply(T,i->[]);
     P:=[0..N[1]];
@@ -499,7 +499,7 @@ InstallGlobalFunction( DisplayAcceptedWordsByPredicaton, function (A, args...)
     for i in [0..N[1]] do
       for j in [0..N[2]] do
         for k in [0..N[3]] do
-          if IsRecognizedByAut(A, MakePairPredicaton([B[i+1],B[j+1],B[k+1]])) then
+          if IsRecognizedByPredicaton(A, MakePairPredicaton([B[i+1],B[j+1],B[k+1]])) then
             Add(P[i+1][j+1],k);
           fi;
         od;
@@ -590,7 +590,7 @@ InstallGlobalFunction(  DisplayAcceptedWordsByPredicatonInNxN, function (A, args
     Print(" This function draws in N_0 x N_0. Please make sure to add your x-variable as an optional parameter in PredicataFormulaToPredicaton, otherwise it may be flipped.\n\n     | ");
     Print("\n");
     B:=[0..Maximum(N)];
-    Apply(B,i->DecToBin(i));
+    Apply(B,i->DecToBaseRep(i,BaseOfPredicaton(A)));
     l:=Reversed([0..N[2]]); 
     for i in l do     # i -> y variable
       if i < 10 then
@@ -602,7 +602,7 @@ InstallGlobalFunction(  DisplayAcceptedWordsByPredicatonInNxN, function (A, args
       fi;
       Print(i, " -");
       for j in [0..N[1]] do   # j -> x variable
-        if IsRecognizedByAut(A, MakePairPredicaton([B[j+1],B[i+1]])) then
+        if IsRecognizedByPredicaton(A, MakePairPredicaton([B[j+1],B[i+1]])) then
           Print("  o ");
         else
           Print("    ");

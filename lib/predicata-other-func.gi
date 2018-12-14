@@ -17,44 +17,102 @@ BindGlobal( "MaximumOrZero", function ( l )
 end);
 ####################################################################################################
 ##
-#F  InsertAt(l, e, p)
-##
-##  Inserts into a list l the element e at position p, 
-##  where the position p can be 0 <= p <= Length(l)+1.
-##
-InstallGlobalFunction( InsertAt, function (l, e, p )
-  if not IsList(l) or not IsInt(p) or p < 0 or p > Length(l)+1 then
-    Error("InsertAt failed, the first argument must be of type list, the third argument of type integer.\n");
-  elif p = 0 then
-    return Concatenation([e],l);
-  else
-    return Concatenation(l{[1..p-1]}, [e], l{[p..Length(l)]});
-  fi;
-end);
-####################################################################################################
-##
-#F  GetAlphabet(N)
+#F  PredicataAlphabet(N[,base])
 ##
 ##  Returns the alphabet of length N, i.e. ({0,1})^N.
 ##
-InstallGlobalFunction( GetAlphabet, function ( N )
-  local a0, a1, n, i, p;
+InstallGlobalFunction( PredicataAlphabet, function ( N, args...)
+  local a, b, n, i, j, k;
   if not IsInt(N) or N < 0 then
-    Error("GetAlphabet failed, input must be of type integer greater equal 0.\n");
+    Error("PredicataAlphabet failed, input must be an integer greater equal 0.\n");
+  fi;
+  if Length(args) = 0 then
+    k:=ReturnPredicataBase();
+  elif Length(args) = 1 and IsInt(args[1]) and args[1]>1 then
+    k:=args[1];
+  fi;
+  a:=[[]];
+  for n in [1..N] do
+    for i in [1..Length(a)] do
+      b:=[];
+      for j in [0..k-1] do
+        b[j+1]:=List([1..Length(a)],l->Concatenation(ShallowCopy(a[l]),[j]));
+      od;
+    od;
+    a:=Concatenation(b);
+  od;
+  return a;
+end);
+BindGlobal( "PredicataAlphabet2", function ( N, args...)
+ local a0, a1, n, i, p;
+  if not IsInt(N) or N < 0 then
+    Error("PredicataAlphabet failed, input must be an integer greater equal 0.\n");
   fi;
   a0:=[[]];
   a1:=[[]];
   p:=1;
   for n in [1..N] do
     for i in [1..Length(a0)] do
-      a0[i]:=InsertAt(a0[i], 0, p);
-      a1[i]:=InsertAt(a1[i], 1, p);
+      Add(a0[i], 0, p);
+      Add(a1[i], 1, p);
     od;
     Append(a0, a1);
     a1:=StructuralCopy(a0);
     p:=p+1;
   od;
   return a0;
+end);
+####################################################################################################
+##
+#F  DecToBaseRep(D[,base])
+##
+##  Converts a decimal number into a base k=PredicataBase representation. 
+##  Note: The binary representation list is reversed, i.e.
+##        D = B[1] * k^0 + B[2] * k^1 + ...
+##
+InstallGlobalFunction( DecToBaseRep, function ( D, args... )
+  local i, k, B;
+  if Length(args) = 0 then
+    k:=ReturnPredicataBase();
+  elif Length(args) = 1 and IsInt(args[1]) and args[1]>1 then
+    k:=args[1];
+  fi;
+  if not IsInt(D) or D < 0 then
+    Error("DecToBaseRep failed, the argument must be an integer greater equal than 0.\n");
+  fi;
+  B:=[];
+  if D = 0 then
+    return [0];
+  fi;
+  while D > 0 do
+    Add(B,RemInt(D,k));
+    D:=QuoInt(D,k);
+  od;
+  return B;
+end);
+####################################################################################################
+##
+#F  BaseRepToDec(B[,base])
+##
+##  Converts a base k=PredicataBase representation list into a decimal number 
+##  Note: The base k representation list is reversed, i.e.
+##        B[1] * k^0 + B[2] * k^1 +... = D
+##
+InstallGlobalFunction( BaseRepToDec, function ( B, args... )
+  local i, k, D;
+  if Length(args) = 0 then
+    k:=ReturnPredicataBase();
+  elif Length(args) = 1 and IsInt(args[1]) and args[1]>1 then
+    k:=args[1];
+  fi;
+  if not IsList(B) or (not B=[] and (Maximum(B) >= k or Minimum(B) < 0)) then
+    Error("BaseRepToDec failed, the argument must be a list containing 0,..,k-1.\n");
+  fi;
+  D:=0;
+  for i in [1..Length(B)] do
+    D:=D+B[i]*k^(i-1);
+  od;
+  return D;
 end);
 ####################################################################################################
 ##
@@ -65,19 +123,10 @@ end);
 ##        D = B[1] * 2^0 + B[2] * 2^1 + ...
 ##
 InstallGlobalFunction( DecToBin, function ( D )
-  local i, B;
   if not IsInt(D) or D < 0 then
-    Error("DecToBin failed, the argument must be of type integer greater equal than 0.\n");
+    Error("DecToBin failed, the argument must be an integer greater equal than 0.\n");
   fi;
-  B:=[];
-  if D = 0 then
-    return [0];
-  fi;
-  while D > 0 do
-    Add(B,RemInt(D,2));
-    D:=BestQuoInt(D,2);
-  od;
-  return B;
+  return DecToBaseRep(D, 2);
 end);
 ####################################################################################################
 ##
@@ -90,13 +139,9 @@ end);
 InstallGlobalFunction( BinToDec, function ( B )
   local i, D;
   if not IsList(B) or (not B=[] and (Maximum(B) > 1 or Minimum(B) < 0)) then
-    Error("BinToDec failed, the argument must be of type list containing 0s and 1s.\n");
+    Error("BinToDec failed, the argument must be a list containing 0s and 1s.\n");
   fi;
-  D:=0;
-  for i in [1..Length(B)] do
-    D:=D+B[i]*2^(i-1);
-  od;
-  return D;
+  return BaseRepToDec(B, 2);
 end);
 ####################################################################################################
 ##

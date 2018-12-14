@@ -28,6 +28,13 @@ DeclareGlobalFunction( "SetVariablePositionListOfPredicaton" );
 DeclareSynonym( "SetVarPosListOfPredicaton", SetVariablePositionListOfPredicaton);
 ####################################################################################################
 ##
+#F  BaseOfPredicaton(A)
+##
+##  Returns the base of the Predicaton.
+##
+DeclareGlobalFunction( "BaseOfPredicaton" );
+####################################################################################################
+##
 #F  VariableListOfPredicaton(A)
 ##
 ##  Returns the variable names.
@@ -90,7 +97,7 @@ DeclareGlobalFunction( "IsValidInput" );
 ##
 #F  ExpandedPredicaton(A, n)
 ##
-##  Expands the alphabet size to 2^|n| regarding comparing the variable
+##  Expands the alphabet size to base k^|n| regarding comparing the variable
 ##  position list and copying the transition matrix corresponding to the entries
 ##
 DeclareGlobalFunction( "ExpandedPredicaton" );
@@ -99,7 +106,7 @@ DeclareGlobalFunction( "ExpandedPredicaton" );
 #F  ProjectedPredicaton(A, p)
 ##
 ##  Deletes in the alphabet of the predicata the p-th position, i.e.
-##  projects it down from {0,1}^n to {0,1}^n-1 
+##  projects it down from {0,...,k-1}^n to {0,...,k-1}^n-1 
 ##  The corresponding transition matrix rows are combined (NFA).
 ##
 DeclareGlobalFunction( "ProjectedPredicaton" );
@@ -115,23 +122,7 @@ DeclareGlobalFunction( "ProjectedPredicaton" );
 DeclareGlobalFunction( "NegatedProjectedNegatedPredicaton" );
 ####################################################################################################
 ##
-#F  IntersectionPredicata(A, B, n)
-##
-##  Intersects two predicatas A and B after resizing them to the same
-##  variable positions and sorting the alphabet list to be in the same order.
-## 
-DeclareGlobalFunction( "IntersectionPredicata" );
-####################################################################################################
-##
-#F  UnionPredicata(A, B, n)
-##
-##  Unites two predicatas A and B after resizing them to the same
-##  variable positions and sorting the alphabet list to be in the same order.
-## 
-DeclareGlobalFunction( "UnionPredicata" );
-####################################################################################################
-##
-#F  PermutedAlphabetPredicaton(A, l)
+#F  PermutedAlphabetPredicaton(A, l[, base])
 ##
 ##  Returns the predicata with the permuted alphabet.
 ##  Relevant for the first call of an specific predicata, especially 
@@ -147,7 +138,7 @@ DeclareGlobalFunction( "PermutedAlphabetPredicaton" );
 DeclareSynonym( "PermutedAbcPredicaton", PermutedAlphabetPredicaton);
 ####################################################################################################
 ##
-#F  PredFromAut(A)
+#F  PredicatonFromAut(A, l, n[, base])
 ##
 ##  Returns the permuted and expanded predicata A.
 ##

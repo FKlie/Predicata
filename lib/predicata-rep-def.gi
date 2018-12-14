@@ -4,16 +4,13 @@
 ##
 ####################################################################################################
 ##
-#F  PredicatonRepresentation(Name, Arity, Aut)
+#F  PredicatonRepresentation(Name, Arity, Pred)
 ##
-InstallGlobalFunction( PredicatonRepresentation, function ( Name, Arity, Aut )
+InstallGlobalFunction( PredicatonRepresentation, function ( Name, Arity, Predicaton )
   local A, F, n, predrepel;
   # checking if input is: String, PosInt, Automaton with alphabet with 2^Arity letters.
-  if not (IsString(Name) and IsInt(Arity) and Arity >= 0 and (IsAutomaton(Aut) or IsPredicaton(Aut)) and AlphabetOfAut(Aut) = 2^Arity and (IsDeterministicAut(Aut) or IsNonDeterministicAut(Aut))) then
-    if AlphabetOfAut(Aut) <> 2^Arity then
-      Print("The arity doesn't match with size of the alphabet of the automaton (or the size of the variable position list).\n");
-    fi;
-    Error("PredicatonRepresentation failed, the first argument must be a string, the second a positive integer and the third a Predicata/Automaton.\n");
+  if not (IsString(Name) and IsInt(Arity) and Arity >= 0 and IsPredicaton(Predicaton) and IsDeterministicPredicaton(Predicaton)) then
+    Error("PredicatonRepresentation failed, the first argument must be a string, the second a positive integer and the third a Predicaton.\n");
   fi;
   # checking if input is not an already used string.
   if Length(Name) = 0 then
@@ -32,12 +29,9 @@ InstallGlobalFunction( PredicatonRepresentation, function ( Name, Arity, Aut )
       return fail;
     fi;
   fi;
-  if IsPredicaton(Aut) then
-    Aut:=AutOfPredicaton(Aut);
-  fi;  
   # Defining new family
   F:=NewFamily("PredicatonRepresentation", IsPredicatonRepresentationObj);
-  predrepel:=rec(name:=Name, arity:=Arity, aut:=Aut);
+  predrepel:=rec(name:=Name, arity:=Arity, predicaton:=Predicaton);
   A:=Objectify(NewType(F, IsPredicatonRepresentationObj and IsPredicatonRepresentationRep and IsAttributeStoringRep), predrepel);
   # Return the PredicatonRepresentation.
   return A;
@@ -60,7 +54,7 @@ InstallMethod ( DisplayString,
   true,
   [IsPredicatonRepresentationObj and IsPredicatonRepresentationRep], 0,
   function( p )
-    return Concatenation("Predicaton represented with the name: ", String(p!.name), ", the arity: ", String(p!.arity), " and the following automaton:\n", AutToString(p!.aut));
+    return Concatenation("Predicaton represented with the name: ", String(p!.name), ", the arity: ", String(p!.arity), " and the following Predicaton:\n", PredicatonToString(p!.predicaton));
 end);
 ####################################################################################################
 ##
@@ -73,12 +67,12 @@ InstallMethod( ViewString,
   function( p )
     local S;
     S:=Concatenation("< Predicaton represented with the name \"", String(p!.name), "\", the arity ", String(p!.arity));
-    if TypeOfAut(p!.aut) = "det" then
+    if TypeOfPredicaton(p!.predicaton) = "det" then
       S:=Concatenation(S, " and the deterministic finite automaton ");
     else
       S:=Concatenation(S, " and the non-deterministic finite automaton ");
     fi;
-    S:=Concatenation(S, "on ", String(AlphabetOfAut(p!.aut)), " letters and ", String(NumberStatesOfAut(p!.aut)), " states. >");
+    S:=Concatenation(S, "on ", String(AlphabetOfPredicaton(p!.predicaton)), " letters and ", String(NumberStatesOfPredicaton(p!.predicaton)), " states. >");
     return S;
 end);
 ####################################################################################################
@@ -90,13 +84,13 @@ InstallMethod( String,
   true,
   [IsPredicatonRepresentationObj and IsPredicatonRepresentationRep], 0,
   function( p )
-    return Concatenation("PredicatonRepresentation(\"", String(p!.name), "\", ", String(p!.arity), ", ", "Automaton(\"", String(p!.aut!.type), "\", ", String(p!.aut!.states), ", ", String(AlphabetOfAutomatonAsList(p!.aut)), ", ", String(p!.aut!.transitions), ", ", String(p!.aut!.initial), ", ", String(p!.aut!.accepting), "))");
+    return Concatenation("PredicatonRepresentation(\"", String(p!.name), "\", ", String(p!.arity), ", ", "Predicaton(Automaton(\"", String(p!.predicaton!.aut!.type), "\", ", String(p!.predicaton!.aut!.states), ", ", String(AlphabetOfAutomatonAsList(p!.predicaton!.aut)), ", ", String(p!.predicaton!.aut!.transitions), ", ", String(p!.predicaton!.aut!.initial), ", ", String(p!.predicaton!.aut!.accepting), "), ", String(p!.predicaton!.var), ", ", String(p!.predicaton!.base),"))");
 end);
 ####################################################################################################
 ##
 #F  NameOfPredicatonRepresentation(p)
 ##
-##  Returns the name of an predicata representation element.
+##  Returns the name of an Predicaton representation element.
 ##
 InstallGlobalFunction( NameOfPredicatonRepresentation, function (p) 
   if IsPredicatonRepresentationObj(p) then
@@ -109,7 +103,7 @@ end);
 ##
 #F  ArityOfPredicatonRepresentation(p)
 ##
-##  Returns the name of an predicata representation element.
+##  Returns the name of an Predicaton representation element.
 ##
 InstallGlobalFunction( ArityOfPredicatonRepresentation, function (p) 
   if IsPredicatonRepresentationObj(p) then
@@ -120,15 +114,41 @@ InstallGlobalFunction( ArityOfPredicatonRepresentation, function (p)
 end);
 ####################################################################################################
 ##
+#F  PredicatonOfPredicatonRepresentation(p)
+##
+##  Returns the Predicaton of an Predicaton representation element.
+##
+InstallGlobalFunction( PredicatonOfPredicatonRepresentation, function (p) 
+  if IsPredicatonRepresentationObj(p) then
+    return CopyPredicaton(p!.predicaton);
+  else
+    Error("PredicatonOfPredicatonRepresentation failed, the argument must be a PredicatonRepresentation.\n");
+  fi;
+end);
+####################################################################################################
+##
+#F  BaseOfPredicatonRepresentation(p)
+##
+##  Returns the base of the Predicaton of an Predicaton representation element.
+##
+InstallGlobalFunction( BaseOfPredicatonRepresentation, function (p) 
+  if IsPredicatonRepresentationObj(p) then
+    return ShallowCopy(p!.predicaton!.base);
+  else
+    Error("BaseOfPredicatonRepresentation failed, the argument must be a PredicatonRepresentation.\n");
+  fi;
+end);
+####################################################################################################
+##
 #F  AutOfPredicatonRepresentation(p)
 ##
-##  Returns the automaton of an predicata representation element.
+##  Returns the Automaton of an Predicaton representation element.
 ##
 InstallGlobalFunction( AutOfPredicatonRepresentation, function (p) 
   if IsPredicatonRepresentationObj(p) then
-    return CopyAut(p!.aut);
+    return AutomatonOfPredicaton(p!.predicaton);
   else
-    Error("AutOfPredicatonRepresentation failed, the argument must be a PredicatonRepresentation.\n");
+    Error("PredicatonOfPredicatonRepresentation failed, the argument must be a PredicatonRepresentation.\n");
   fi;
 end);
 ####################################################################################################
@@ -139,9 +159,9 @@ end);
 ##
 InstallGlobalFunction( CopyPredicatonRepresentation, function (p) 
   if IsPredicatonRepresentationObj(p) then
-    return PredicatonRepresentation(ShallowCopy(p!.name), ShallowCopy(p!.arity), CopyAut(p!.aut));
+    return PredicatonRepresentation(ShallowCopy(p!.name), ShallowCopy(p!.arity), CopyPredicaton(p!.predicaton));
   else
-    Error("CopyOfPredicatonRepresentation failed, the argument must be a PredicatonRepresentation.\n");
+    Error("CopyPredicatonRepresentation failed, the argument must be a PredicatonRepresentation.\n");
   fi;
 end);
 ####################################################################################################
@@ -158,17 +178,17 @@ end);
 #F  PredicataRepresentation(args...)
 ##
 InstallGlobalFunction( PredicataRepresentation, function ( args... )
-  local LowercaseNameList, NameList, ArityList, AutList, i, p, A, F, predrep;
+  local LowercaseNameList, NameList, ArityList, PredicataList, i, p, A, F, predrep;
   if Length(args) = 0 then
     LowercaseNameList:=[];
     NameList:=[];
     ArityList:=[];
-    AutList:=[];
+    PredicataList:=[];
   elif ForAll(args, i-> IsPredicatonRepresentation(i)) then
     LowercaseNameList:=[];
     NameList:=[];
     ArityList:=[];
-    AutList:=[];
+    PredicataList:=[];
     for i in [1..Length(args)] do
       if LowercaseString(NameOfPredicatonRepresentation(args[i])) in LowercaseNameList then
         Print("AddPredicataRepresentation failed, predicata name is already used, ignoring upper- and lowercase.\n");
@@ -177,18 +197,18 @@ InstallGlobalFunction( PredicataRepresentation, function ( args... )
       Add(NameList, NameOfPredicatonRepresentation(args[i]));
       Add(LowercaseNameList, LowercaseString(NameOfPredicatonRepresentation(args[i])));
       Add(ArityList, ArityOfPredicatonRepresentation(args[i]));
-      Add(AutList, AutOfPredicatonRepresentation(args[i]));
+      Add(PredicataList, PredicatonOfPredicatonRepresentation(args[i]));
     od;
     p:=Sortex(LowercaseNameList, PredicataCMPRGR);
     NameList:=Permuted(NameList, p);
     ArityList:=Permuted(ArityList, p);
-    AutList:=Permuted(AutList, p);
+    PredicataList:=Permuted(PredicataList, p);
   else
     Error("PredicataRepresentation failed, the optional arguments must be a PredicatonRepresentation.\n");
   fi;
   # Defining new family
   F:=NewFamily("PredicataRepresentation", IsPredicataRepresentationObj);
-  predrep:=rec(lowercasenamelist:=LowercaseNameList, namelist:=NameList, aritylist:=ArityList, autlist:=AutList);
+  predrep:=rec(lowercasenamelist:=LowercaseNameList, namelist:=NameList, aritylist:=ArityList, predicatalist:=PredicataList);
   A:=Objectify(NewType(F, IsPredicataRepresentationObj and IsPredicataRepresentationRep and IsAttributeStoringRep), predrep);
   # Return the PredicataRepresentation.
   return A;
@@ -280,26 +300,26 @@ InstallOtherMethod ( Add,
   Add(P!.lowercasenamelist, name);
   Add(P!.namelist, Name);
   Add(P!.aritylist, ShallowCopy(p!.arity));
-  Add(P!.autlist, CopyAut(p!.aut));
+  Add(P!.predicatalist, CopyPredicaton(p!.predicaton));
   # Sorting for proper renaming
   p:=Sortex(P!.lowercasenamelist, PredicataCMPRGR);
   P!.namelist:=Permuted(P!.namelist, p);
   P!.aritylist:=Permuted(P!.aritylist, p);
-  P!.autlist:=Permuted(P!.autlist, p);
+  P!.predicatalist:=Permuted(P!.predicatalist, p);
 end);
 ####################################################################################################
 ##
-#M  Add(P, name, arity, Predicata )
+#M  Add(P, name, arity, Predicaton )
 ##
-##  Adds a PredicatonRepresentation given as the three components name, arity, predicata/automaton.
+##  Adds a PredicatonRepresentation given as the three components name, arity, predicaton.
 ##
 InstallOtherMethod ( Add, 
         "Adds a Predicata Representation.",
         true,
         [IsPredicataRepresentationObj and IsPredicataRepresentationRep, IsString, IsInt, IsPredicatonObj and IsPredicatonRep], 0,
-        function( P, name, arity, Predicata )
+        function( P, name, arity, Predicaton )
   local p;
-  p:=PredicatonRepresentation(name, arity, Predicata);
+  p:=PredicatonRepresentation(name, arity, Predicaton );
   if p = fail then
     return fail;
   fi;
@@ -324,11 +344,11 @@ InstallOtherMethod ( Remove,
   p:=[];
   p[1]:=ShallowCopy(P!.namelist[i]);
   p[2]:=ShallowCopy(P!.aritylist[i]);
-  p[3]:=CopyAut(P!.autlist[i]);
+  p[3]:=CopyPredicaton(P!.predicatalist[i]);
   P!.lowercasenamelist:=P!.lowercasenamelist{n};
   P!.namelist:=P!.namelist{n};
   P!.aritylist:=P!.aritylist{n};
-  P!.autlist:=P!.autlist{n};
+  P!.predicatalist:=P!.predicatalist{n};
   return PredicatonRepresentation(p[1], p[2], p[3]);
 end);
 ####################################################################################################
@@ -346,7 +366,7 @@ InstallGlobalFunction( ElementOfPredicataRepresentation, function ( P, i )
   elif i > Length(P!.namelist) then
     return fail;
   else
-    return PredicatonRepresentation(StructuralCopy(P!.namelist[i]), StructuralCopy(P!.aritylist[i]), CopyAut(P!.autlist[i]));
+    return PredicatonRepresentation(StructuralCopy(P!.namelist[i]), StructuralCopy(P!.aritylist[i]), CopyPredicaton(P!.predicatalist[i]));
   fi;
 end);
 ####################################################################################################
@@ -377,15 +397,15 @@ InstallGlobalFunction( AritiesOfPredicataRepresentation, function (P)
 end);
 ####################################################################################################
 ##
-#F  AutsOfPredicataRepresentation(P)
+#F  PredicataOfPredicataRepresentation(P)
 ##
-##  Returns the automaton list of an predicata representation element.
+##  Returns the Predicata list of an predicata representation element.
 ##
-InstallGlobalFunction( AutsOfPredicataRepresentation, function (P) 
+InstallGlobalFunction( PredicataOfPredicataRepresentation, function (P) 
   if IsPredicataRepresentationObj(P) then
-    return StructuralCopy(P!.autlist);
+    return StructuralCopy(P!.predicatalist);
   else
-    Error("AutsOfPredicataRepresentation failed, the argument must be a PredicataRepresentation.\n");
+    Error("PredicataOfPredicataRepresentation failed, the argument must be a PredicataRepresentation.\n");
   fi;
 end);
 ####################################################################################################
@@ -401,7 +421,7 @@ InstallGlobalFunction( CopyPredicataRepresentation, function (P)
     Q!.lowercasenamelist:=ShallowCopy(P!.lowercasenamelist);
     Q!.namelist:=ShallowCopy(P!.namelist);
     Q!.aritylist:=ShallowCopy(P!.aritylist);
-    Q!.autlist:=StructuralCopy(P!.autlist);
+    Q!.predicatalist:=StructuralCopy(P!.predicatalist);
     return Q; 
   else
     Error("CopyPredicataRepresentation failed, the argument must be a PredicatonRepresentation.\n");
