@@ -351,8 +351,6 @@ InstallGlobalFunction( ProjectedPredicaton, function ( A, p )
   od;
   Remove(l, Position(l, p));  # removes the variable position p from the variable position list.
   Sort(l);
-  Print("a:", a,"\n");
-  Print("T:", T,"\n");
   return FormattedPredicaton(Predicaton(Automaton("nondet", NumberStatesOfPredicaton(A), a, T, InitialStatesOfPredicaton(A), FinalStatesOfPredicaton(A)), l, BaseOfPredicaton(A)));
 end);
 
