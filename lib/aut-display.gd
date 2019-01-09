@@ -1,6 +1,6 @@
 ####################################################################################################
 ##
-##  This file declares the functions for displaying and drawing Predicatonicata as well as printing the 
+##  This file declares the functions for displaying and drawing Predicaton as well as printing the 
 ##  recognized states in a nice way.
 ##
 ####################################################################################################
