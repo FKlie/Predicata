@@ -44,7 +44,7 @@ SetPackageInfo( rec(
   AvailabilityTest := function()
         return true;
     end,
-  TestFile := "tst/tst.g",
+  TestFile := "tst/testall.g",
   BannerString := Concatenation(
     "\n_____________________________________________________________________________",
     "\n                                                                             ",
