@@ -243,8 +243,8 @@ BindGlobal( "ExpandPredOneStep", function ( A, p )
     Sort(l);
     pos:=Position(l,p);
     for i in [1..AlphabetOfAut(A)] do
-      a[i]:=InsertAt(a[i], 0, pos);  # add 0 corresponding to the position of p
-      b[i]:=InsertAt(b[i], 1, pos);  # add 1 corresponding to the position of p
+      Add(a[i], 0, pos);  # add 0 corresponding to the position of p
+      Add(b[i], 1, pos);  # add 1 corresponding to the position of p
     od;
     Append(a, b);
     T:=Concatenation(TransitionMatrixOfAut(A), TransitionMatrixOfAut(A));  # duplicate the transition matrix

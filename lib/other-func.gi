@@ -15,22 +15,7 @@ BindGlobal( "MaximumOrZero", function ( l )
     return Maximum(l);
   fi;
 end);
-####################################################################################################
-##
-#F  InsertAt(l, e, p)
-##
-##  Inserts into a list l the element e at position p, 
-##  where the position p can be 0 <= p <= Length(l)+1.
-##
-InstallGlobalFunction( InsertAt, function (l, e, p )
-  if not IsList(l) or not IsInt(p) or p < 0 or p > Length(l)+1 then
-    Error("InsertAt failed, the first argument must be of type list, the third argument of type integer.\n");
-  elif p = 0 then
-    return Concatenation([e],l);
-  else
-    return Concatenation(l{[1..p-1]}, [e], l{[p..Length(l)]});
-  fi;
-end);
+
 ####################################################################################################
 ##
 #F  GetAlphabet(N)
@@ -47,8 +32,8 @@ InstallGlobalFunction( GetAlphabet, function ( N )
   p:=1;
   for n in [1..N] do
     for i in [1..Length(a0)] do
-      a0[i]:=InsertAt(a0[i], 0, p);
-      a1[i]:=InsertAt(a1[i], 1, p);
+      Add(a0[i], 0, p);
+      Add(a1[i], 1, p);
     od;
     Append(a0, a1);
     a1:=StructuralCopy(a0);

@@ -4,14 +4,6 @@
 ##
 ####################################################################################################
 ##
-#F  InsertAt(l, e, p )
-##
-##  Inserts into a list l the element e at position p, 
-##  where the position p can be 0 <= p <= Length(l)+1.
-##
-DeclareGlobalFunction( "InsertAt", [IsList, , IsPosInt] );
-####################################################################################################
-##
 #F  GetAlphabet(N)
 ##
 ##  Returns the alphabet of length N, i.e. ({0,1})^N.
