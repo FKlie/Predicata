@@ -1,7 +1,6 @@
 gap> START_TEST("Predicata package: introduction.tst");
 
-gap> SizeScreen([100]);
-[ 100, 40 ]
+gap> SizeScreen([100]);;
 gap> A:=Predicaton("(E x:(E y:(E z:6*x+9*y+20*z=n)))");
 Predicaton: deterministic finite automaton on 2 letters with 17 states, the variable position list\
  [ 1 ] and the following transitions:
