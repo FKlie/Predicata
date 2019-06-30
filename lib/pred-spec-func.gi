@@ -65,7 +65,7 @@ InstallGlobalFunction( EqualPredicaton, function ( l, n )
   if IsValidInputList(l, n) and Length(l) = 2 then
     return PredicatonFromAut(PredicataEqualAut, l, n);
   else
-    Error("EqualPredicaton failed, the arguments must be a list containing positive integers, the first list must be contained in the second list.\n");
+    Error("EqualPredicaton failed, the arguments must be a list containing positive integers, the first list must be contained in the second list");
   fi;
 end);
 ####################################################################################################
@@ -82,7 +82,7 @@ InstallGlobalFunction( EqualNPredicaton, function ( N, l, n )
     A:=FormattedPredicaton(PredicatonFromAut(ListOfWordsToAutomaton(GetAbc(1),[B]), l, l));
     return ExpandedPredicaton(A, n);
   else
-    Error("EqualNPredicaton failed, the first argument must be an integer greater equal 0, the second and third arguments must be a list containing positive integers, the first list must be contained in the second list.\n");
+    Error("EqualNPredicaton failed, the first argument must be an integer greater equal 0, the second and third arguments must be a list containing positive integers, the first list must be contained in the second list");
   fi;
 end);
 ####################################################################################################
@@ -113,7 +113,7 @@ InstallGlobalFunction( AdditionPredicaton, function ( l, n )
   if IsValidInputList(l, n) and Length(l) = 3 then
     return PredicatonFromAut(PredicataAdditionAut, l, n);
   else
-    Error("AdditionPredicaton failed, the arguments must be a list, containing positive integers and the first list must be contained in the second list.\n");
+    Error("AdditionPredicaton failed, the arguments must be a list, containing positive integers and the first list must be contained in the second list");
   fi;
 end);
 ####################################################################################################
@@ -128,7 +128,7 @@ InstallGlobalFunction( AdditionPredicaton3Summands, function ( l, n )
                                  [[1,4,2,4],[4,2,4,4],[4,2,4,4],[2,4,3,4],[4,2,4,4],[2,4,3,4],[2,4,3,4],[4,3,4,4],
                                   [4,1,4,4],[1,4,2,4],[1,4,2,4],[4,2,4,4],[1,4,2,4],[4,2,4,4],[4,2,4,4],[2,4,3,4]], [1], [1]), l, n);
   else
-    Error("AdditionPredicaton3Summands failed, the arguments must be a list, containing positive integers and the first list must be contained in the second list.\n");
+    Error("AdditionPredicaton3Summands failed, the arguments must be a list, containing positive integers and the first list must be contained in the second list");
   fi;
 end);
 ####################################################################################################
@@ -145,7 +145,7 @@ InstallGlobalFunction( AdditionPredicaton4Summands, function ( l, n )
                                   [5,5,1,3,5],[1,3,5,5,5],[1,3,5,5,5],[5,5,3,2,5],[1,3,5,5,5],[5,5,3,2,5],[5,5,3,2,5],[3,2,5,5,5],
                                   [1,3,5,5,5],[5,5,3,2,5],[5,5,3,2,5],[3,2,5,5,5],[5,5,3,2,5],[3,2,5,5,5],[3,2,5,5,5],[5,5,2,4,5]], [1], [1]), l, n);
   else
-    Error("AdditionPredicaton4Summands failed, the arguments must be a list, containing positive integers and the first list must be contained in the second list.\n");
+    Error("AdditionPredicaton4Summands failed, the arguments must be a list, containing positive integers and the first list must be contained in the second list");
   fi;
 end);
 ####################################################################################################
@@ -169,7 +169,7 @@ InstallGlobalFunction( AdditionPredicaton5Summands, function ( l, n )
                                   [3,6,6,4,2,6],[6,2,4,6,6,6],[6,4,3,6,6,6],[3,6,6,4,2,6],[3,6,6,4,2,6],[6,2,4,6,6,6],
                                   [3,6,6,4,2,6],[6,2,4,6,6,6],[6,2,4,6,6,6],[4,6,6,2,5,6]], [1], [1]), l, n);
   else
-    Error("AdditionPredicaton5Summands failed, the arguments must be a list, containing positive integers and the first list must be contained in the second list.\n");
+    Error("AdditionPredicaton5Summands failed, the arguments must be a list, containing positive integers and the first list must be contained in the second list");
   fi;
 end);
 ####################################################################################################
@@ -186,7 +186,7 @@ end);
 InstallGlobalFunction( AdditionPredicatonNSummandsIterative, function ( N, l, n )
   local A, I, i, m, n1;
   if not IsPosInt(N) or not Length(l) = N+1 or not IsValidInputList(l, n) then
-    Error("AdditionPredicatonNSummandsIterative failed, the first argument must be a positive integer, the second and third parameter must be a list, containing positive integers and the first list must be contained in the second list.\n");
+    Error("AdditionPredicatonNSummandsIterative failed, the first argument must be a positive integer, the second and third parameter must be a list, containing positive integers and the first list must be contained in the second list");
   fi;
   if N = 1 then                      # case N = 1: x = y
     return EqualPredicaton(l, n);
@@ -214,7 +214,7 @@ InstallGlobalFunction( AdditionPredicatonNSummandsIterative, function ( N, l, n 
     I:=ProjectedPredicaton(I, m[N-2]);
     return ExpandedPredicaton(I, n);
   else
-    Error("AdditionPredicatonNSummandsIterative, wrong argument for N.\n");
+    Error("AdditionPredicatonNSummandsIterative, wrong argument for N");
   fi;
 end);
 ####################################################################################################
@@ -232,7 +232,7 @@ end);
 InstallGlobalFunction( AdditionPredicatonNSummandsRecursive, function ( N, l, n )
   local A1, A2, N1, N2, l1, l2, m, n1;
   if not IsValidInputList(l, n) or not IsPosInt(N) or not Length(l) = N+1 then
-    Error("AdditionPredicatonNSummandsRecursive failed, the first argument must be a positive integer, the second and third parameter must be a list, containing positive integers and the first list must be contained in the second list.\n");
+    Error("AdditionPredicatonNSummandsRecursive failed, the first argument must be a positive integer, the second and third parameter must be a list, containing positive integers and the first list must be contained in the second list");
   fi;
   if N = 1 then                      # case N = 1: only 1 variable left of the =
     return EqualPredicaton(l, n);
@@ -254,7 +254,7 @@ InstallGlobalFunction( AdditionPredicatonNSummandsRecursive, function ( N, l, n 
     A1:=ProjectedPredicaton(A1, m[1]);
     return A1;
   else
-    Error("AdditionPredicatonNSummandsRecursive, wrong argument for N.\n");
+    Error("AdditionPredicatonNSummandsRecursive, wrong argument for N");
   fi;
 end);
 ####################################################################################################
@@ -272,7 +272,7 @@ end);
 InstallGlobalFunction( AdditionPredicatonNSummandsExplicit, function ( N, l, n )
   local A, Aut, T, i, j, k, s;
   if not IsValidInputList(l, n) or not IsPosInt(N) or not Length(l) = N+1 then
-    Error("AdditionPredicatonNSummandsExplicit failed, the first argument must be a positive integer, the second and third parameter must be a list, containing positive integers and the first list must be contained in the second list.\n");
+    Error("AdditionPredicatonNSummandsExplicit failed, the first argument must be a positive integer, the second and third parameter must be a list, containing positive integers and the first list must be contained in the second list");
   fi;
   A:=GetAbc(N+1);
   if N = 1 then
@@ -338,7 +338,7 @@ InstallGlobalFunction( Times2Predicaton, function ( l , n )
   if IsValidInputList(l,n) and Length(l) = 2 then
     return PredicatonFromAut(Automaton("det", 3, GetAlphabet(2), [[1,3,3],[2,3,3],[3,1,3],[3,2,3]], [1], [1]), l, n );
   else
-    Error("Times2Predicaton failed, the first and second argument must be a list containing postive integers.\n");
+    Error("Times2Predicaton failed, the first and second argument must be a list containing postive integers");
   fi;
 end);
 ####################################################################################################
@@ -352,7 +352,7 @@ InstallGlobalFunction( Times3Predicaton, function ( l , n )
   if IsValidInputList(l,n) and Length(l) = 2 then
     return PredicatonFromAut(Automaton("det", 4, GetAlphabet(2), [[1,4,2,4],[4,3,4,4],[4,1,4,4],[2,4,3,4]] ,[1] ,[1]), l, n );
   else
-    Error("Times3Predicaton failed, the first and second argument must be a list containing postive integers.\n");
+    Error("Times3Predicaton failed, the first and second argument must be a list containing postive integers");
   fi;
 end);
 ####################################################################################################
@@ -366,7 +366,7 @@ InstallGlobalFunction( Times4Predicaton, function ( l , n )
   if IsValidInputList(l,n) and Length(l) = 2 then
     return PredicatonFromAut(Automaton("det", 5, GetAlphabet(2), [[1,2,2,3,2],[4,2,2,5,2],[2,2,1,2,3],[2,2,4,2,5]], [1], [1]), l, n);
   else
-    Error("Times4Predicaton failed, the first and second argument must be a list containing postive integers.\n");
+    Error("Times4Predicaton failed, the first and second argument must be a list containing postive integers");
   fi;
 end);
 ####################################################################################################
@@ -380,7 +380,7 @@ InstallGlobalFunction( Times5Predicaton, function ( l , n )
   if IsValidInputList(l,n) and Length(l) = 2 then
     return PredicatonFromAut(Automaton("det", 6, GetAlphabet(2), [[1,6,6,3,4,6], [6,5,2,6,6,6], [6,3,1,6,6,6], [4,6,6,2,5,6]], [1], [1]), l, n );
   else
-    Error("Times5Predicaton failed, the first and second argument must be a list containing postive integers.\n");
+    Error("Times5Predicaton failed, the first and second argument must be a list containing postive integers");
   fi;
 end);
 ####################################################################################################
@@ -394,7 +394,7 @@ InstallGlobalFunction( Times6Predicaton, function ( l , n )
   if IsValidInputList(l,n) and Length(l) = 2 then
     return PredicatonFromAut(Automaton("det", 7, GetAlphabet(2), [[1,7,7,3,4,7,7], [2,7,7,5,6,7,7], [7,3,1,7,7,4,7], [7,5,2,7,7,6,7]], [1], [1]), l, n );
   else
-    Error("Times6Predicaton failed, the first and second argument must be a list containing postive integers.\n");
+    Error("Times6Predicaton failed, the first and second argument must be a list containing postive integers");
   fi;
 end);
 ####################################################################################################
@@ -408,7 +408,7 @@ InstallGlobalFunction( Times7Predicaton, function ( l , n )
   if IsValidInputList(l,n) and Length(l) = 2 then
     return PredicatonFromAut(Automaton("det", 8, GetAlphabet(2), [[1,8,8,3,4,8,2,8], [8,6,5,8,8,7,8,8], [8,3,1,8,8,4,8,8], [2,8,8,5,6,8,7,8]], [1], [1]), l, n );
   else
-    Error("Times7Predicaton failed, the first and second argument must be a list containing postive integers.\n");
+    Error("Times7Predicaton failed, the first and second argument must be a list containing postive integers");
   fi;
 end);
 ####################################################################################################
@@ -422,7 +422,7 @@ InstallGlobalFunction( Times8Predicaton, function ( l , n )
   if IsValidInputList(l,n) and Length(l) = 2 then
     return PredicatonFromAut(Automaton("det", 9, GetAlphabet(2), [[1,2,2,3,4,2,2,7,2], [5,2,2,6,8,2,2,9,2], [2,2,1,2,2,4,3,2,7], [2,2,5,2,2,8,6,2,9]], [1], [1]), l, n );
   else
-    Error("Times8Predicaton failed, the first and second argument must be a list containing postive integers.\n");
+    Error("Times8Predicaton failed, the first and second argument must be a list containing postive integers");
   fi;
 end);
 ####################################################################################################
@@ -436,7 +436,7 @@ InstallGlobalFunction( Times9Predicaton, function ( l , n )
   if IsValidInputList(l,n) and Length(l) = 2 then
     return PredicatonFromAut(Automaton("det", 10, GetAlphabet(2), [[1,2,2,3,4,5,2,2,2,9],[2,2,8,2,2,2,6,7,10,2],[2,2,1,2,2,2,9,4,3,2],[5,2,2,8,10,6,2,2,2,7]], [1], [1]), l, n );
   else
-    Error("Times9Predicaton failed, the first and second argument must be a list containing postive integers.\n");
+    Error("Times9Predicaton failed, the first and second argument must be a list containing postive integers");
   fi;
 end);
 ####################################################################################################
@@ -449,7 +449,7 @@ end);
 InstallGlobalFunction( TimesNPredicatonRecursive, function ( N, l, n )
   local A, T, I, T1, T2, N1, N2, m, r, d;
   if not IsPosInt(N) or not IsValidInputList(l, n) then
-    Error("TimesNPredicatonRecursive failed, the first argument must be a positive integer, the second and third parameter must be a list, containing positive integers and the first list must be contained in the second list.\n");
+    Error("TimesNPredicatonRecursive failed, the first argument must be a positive integer, the second and third parameter must be a list, containing positive integers and the first list must be contained in the second list");
   fi;
   if N = 1 then
     return EqualPredicaton(l, n );
@@ -507,7 +507,7 @@ end);
 InstallGlobalFunction( TimesNPredicatonExplicit, function ( N, l, n )
   local A, Aut, B, T, i, j, k;
   if not IsPosInt(N) or not IsValidInputList(l, n) then
-    Error("TimesNPredicatonExplicit failed, the first argument must be a positive integer, the second and third parameter must be a list,   containing positive integers and the first list must be contained in the second list.\n");
+    Error("TimesNPredicatonExplicit failed, the first argument must be a positive integer, the second and third parameter must be a list,   containing positive integers and the first list must be contained in the second list");
   fi;
   A:=GetAbc(2);
   T:=[1..4];
@@ -541,7 +541,7 @@ InstallGlobalFunction( TimesNPredicaton, function ( N, l, n )
   if IsPosInt(N) and IsValidInputList(l, n) then
     return TimesNPredicatonExplicit(N, l, n);
   else
-    Error("TimesNPredicaton failed, the first argument must be a positive integer, the second and third parameter must be a list, containing positive integers and the first list must be contained in the second list.\n");
+    Error("TimesNPredicaton failed, the first argument must be a positive integer, the second and third parameter must be a list, containing positive integers and the first list must be contained in the second list");
   fi;
 end);
 ####################################################################################################
@@ -557,7 +557,7 @@ end);
 InstallGlobalFunction( "SumOfProductsPredicaton", function ( l, t, n )
 local A, Aut, N, L, S, Sp, Sn, T, i, j, k, p, p0, q;
   if not (IsValidInputList(l, n) and IsList(t) and Length(l) = Length(t)) then
-    Error("SumOfProductsPredicaton failed, the first and third argument must be a list, containing positive integers and the first list must be contained in the second list, the second argument must be a list, containing positive integers.\n");
+    Error("SumOfProductsPredicaton failed, the first and third argument must be a list, containing positive integers and the first list must be contained in the second list, the second argument must be a list, containing positive integers");
   fi;
   p0:=Positions(t, 0);                # Looking at the different from zero multiplications.
   p:=Difference([1..Length(t)], p0);
@@ -628,7 +628,7 @@ InstallGlobalFunction( TermEqualTermPredicaton, function ( l1, m1, i1, l2, m2, i
   local A, I, l, m, c, p, len, ls1, ls2, s1, s2, lu, u, w, i, j, k;
   #Print("l1: ", l1, " m1: ", m1, " i1: ", i1, "l2: ", l2, " m2: ", m2, " i2: ", i2, " n: ", n, "\n");
   if not (IsList(l1) and IsList(m1) and IsList(i1) and IsList(l1) and IsList(m1) and IsList(i1) and IsList(n) and ForAll(n, IsPosInt)) then
-    Error("TermEqualTermPredicaton failed, the arguments must be lists.\n");
+    Error("TermEqualTermPredicaton failed, the arguments must be lists");
   elif not (Length(l1) = Length(m1) and Length(Positions(l1, "int")) = Length(i1) and Length(Positions(m1, "int")) = Length(i1) and ForAll(i1, i -> IsInt(i) and i >= 0) and IsSubsetSet(n, l1{PositionsProperty(l1, IsPosInt)})) then
     Error("TermEqualTermPredicaton failed, the first argument must be a list containing either variable positions or \"int\", the second argument must contain the multiplication integer or \"int\", and the third argument must contain positive integers.\n");   
   elif not (Length(l2) = Length(m2) and Length(Positions(l2, "int")) = Length(i2) and Length(Positions(m2, "int")) = Length(i2) and ForAll(i2,  i -> IsInt(i) and i >= 0) and IsSubsetSet(n, l2{PositionsProperty(l2, IsPosInt)})) then
@@ -860,7 +860,7 @@ end);
 InstallGlobalFunction( GreaterEqualNPredicaton, function (N, l, n)
   local A, EN, i, m, n1;
   if not IsInt(N) or N < 0 or not Length(l) = 1 or not IsValidInputList(l, n) then
-    Error("GreaterEqualNPredicaton failed, the first argument must be an integer greater equal 0, the second and third arguments must be a list containing positive integers, the first list must be contained in the second list.\n");
+    Error("GreaterEqualNPredicaton failed, the first argument must be an integer greater equal 0, the second and third arguments must be a list containing positive integers, the first list must be contained in the second list");
   fi;
   m:=[1,2]+Maximum(n);
   n1:=Union(l, m);
@@ -910,7 +910,7 @@ end);
 InstallGlobalFunction( GreaterEqualPredicaton, function(l, n) 
   local A, m, n1;
   if not IsValidInputList(l, n) or not Length(l) = 2 then
-    Error("GreaterEqualPredicaton failed, the arguments must be a list containing positive integers and the first list must be contained in the second list.\n");
+    Error("GreaterEqualPredicaton failed, the arguments must be a list containing positive integers and the first list must be contained in the second list");
   fi;
   m:=[1]+Maximum(n);
   n1:=Union(l, m);
@@ -928,7 +928,7 @@ end);
 InstallGlobalFunction( GreaterPredicaton, function(l, n) 
   local A, G, m, n1;
   if not IsValidInputList(l, n) or not Length(l) = 2 then
-    Error("GreaterPredicaton failed, the arguments must be a list containing positive integers and the first list must be contained in the second list.\n");
+    Error("GreaterPredicaton failed, the arguments must be a list containing positive integers and the first list must be contained in the second list");
   fi;
   m:=[1]+Maximum(n);
   n1:=Union(n, m);
@@ -949,7 +949,7 @@ InstallGlobalFunction( SmallerEqualPredicaton, function(l, n)
   if IsValidInputList(l, n) and Length(l) = 2 then
     return NegatedAut(GreaterPredicaton(l, n));
   else
-    Error("GreaterEqualPredicaton failed, the arguments must be a list containing positive integers and the first list must be contained in the second list.\n");
+    Error("GreaterEqualPredicaton failed, the arguments must be a list containing positive integers and the first list must be contained in the second list");
   fi;
 end);
 ####################################################################################################
@@ -962,7 +962,7 @@ InstallGlobalFunction( SmallerPredicaton, function(l, n)
   if IsValidInputList(l, n) and Length(l) = 2 then
     return NegatedAut(GreaterEqualPredicaton(l, n));
   else
-    Error("SmallerPredicaton failed, the arguments must be a list containing positive integers and the first list must be contained in the second list.\n");
+    Error("SmallerPredicaton failed, the arguments must be a list containing positive integers and the first list must be contained in the second list");
   fi;
 end);
 ####################################################################################################
@@ -978,7 +978,7 @@ InstallGlobalFunction( BuchiPredicaton, function(l, n)
     A:=Automaton("det", 3, [ [ 0, 0 ], [ 1, 0 ], [ 0, 1 ], [ 1, 1 ] ], [ [ 1, 2, 3 ], [ 3, 2, 3 ], [ 3, 3, 3], [ 2, 3, 3 ] ], [ 1 ], [ 2 ]);
     return PredicatonFromAut(A, l, n);
   else
-    Error("BuchiPredicaton failed, the arguments must be lists containing positive integers and the first list must be contained in the second list.\n");
+    Error("BuchiPredicaton failed, the arguments must be lists containing positive integers and the first list must be contained in the second list");
   fi;
 end);
 ####################################################################################################
@@ -993,7 +993,7 @@ InstallGlobalFunction( PowerPredicaton, function(l, n)
     A:=Automaton("det", 3, [ [ 0 ], [ 1 ] ], [ [ 1, 2, 3 ], [ 2, 3, 3 ] ], [ 1 ], [ 2 ]);
     return PredicatonFromAut(A, l, n);
   else
-    Error("PowerPredicaton failed, the arguments must be lists containing positive integers and the first list must be contained in the second list.\n");
+    Error("PowerPredicaton failed, the arguments must be lists containing positive integers and the first list must be contained in the second list");
   fi;
 end);
 ##

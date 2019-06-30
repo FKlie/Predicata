@@ -17,50 +17,50 @@ InstallMethod(
   # Testing for correct input 
   # Testing for Automaton from the package "automata" and variable position list being a list.
     if not IsAutomaton(Automaton) or not IsList(VariablePositionList) then
-      Error("Input failed, the first argument must be an Automaton and the second argument must be a list.\n");
+      Error("Input failed, the first argument must be an Automaton and the second argument must be a list");
     fi;
   # Testing the variable position list, it must contain positive integers only.
     a:=StructuralCopy(VariablePositionList);
     if not ForAll(a,i->IsPosInt(i)) then
-      Error("Input failed, variable position list contains a non positive integer.\n");
+      Error("Input failed, variable position list contains a non positive integer");
     fi;
   # Testing uniqueness of the variable position list.
     a:=StructuralCopy(VariablePositionList);
     if Length(a) <> Length(Unique(a)) then
-      Error("Input failed, variable position list must contain unique positive integer only.\n");
+      Error("Input failed, variable position list must contain unique positive integer only");
     fi;
   # Testing the alphabet, each letter must be a list.
     a:=AlphabetOfAutomatonAsList(Automaton);
     if not ForAll(a,i->IsList(i)) then
-      Error("Input failed, alphabet must be a list.\n");
+      Error("Input failed, alphabet must be a list");
     fi;
   # Each letter must be of the same length.
     a:=AlphabetOfAutomatonAsList(Automaton);
     Apply(a,i->Length(i));
     if Length(Unique(a)) <> 1 then 
-      Error("Input failed, each letter in the alphabet must be the same length.\n");
+      Error("Input failed, each letter in the alphabet must be the same length");
     fi;
     if Length(VariablePositionList) <> a[1] then
-      Error("Input failed, variable list must be of the same length as each letter.\n");
+      Error("Input failed, variable list must be of the same length as each letter");
     fi;
   # The alphabet must be all combinations of ({0,1})^n, where n is the size of the variable position list.
     a:=AlphabetOfAutomatonAsList(Automaton);
     if Length(Unique(a)) <> 2^Length(a[1]) then
-      Error("Input failed, alphabet must be unique letters and the length must be equal 2^length of the letters.\n");
+      Error("Input failed, alphabet must be unique letters and the length must be equal 2^length of the letters");
     fi;
     if Length(a) > 1 then
       a:=AlphabetOfAutomatonAsList(Automaton);
       Apply(a,i->Maximum(i));
       if Maximum(a) > 1 then
-        Error(" Input failed, alphabet must be over {0,1}^n.\n");
+        Error(" Input failed, alphabet must be over {0,1}^n");
       fi;
       a:=AlphabetOfAutomatonAsList(Automaton);
       Apply(a,i->Minimum(i));
       if Minimum(a) < 0 then
-        Error(" Input failed, alphabet must be over {0,1}^n.\n");
+        Error(" Input failed, alphabet must be over {0,1}^n");
       fi;
     elif Length(a) = 1 and not a[1] = [] then
-      Error(" Input failed, alphabet must be over {0,1}^0, i.e. the only letter is [].\n");
+      Error(" Input failed, alphabet must be over {0,1}^0, i.e. the only letter is []");
     fi; 
   # Defining new family
     F:=NewFamily("PredicataFam", IsPredicatonObj);

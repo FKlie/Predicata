@@ -13,7 +13,7 @@ InstallGlobalFunction( PredicatonRepresentation, function ( Name, Arity, Aut )
     if AlphabetOfAut(Aut) <> 2^Arity then
       Print("The arity doesn't match with size of the alphabet of the automaton (or the size of the variable position list).\n");
     fi;
-    Error("PredicatonRepresentation failed, the first argument must be a string, the second a positive integer and the third a Predicata/Automaton.\n");
+    Error("PredicatonRepresentation failed, the first argument must be a string, the second a positive integer and the third a Predicata/Automaton");
   fi;
   # checking if input is not an already used string.
   if Length(Name) = 0 then
@@ -102,7 +102,7 @@ InstallGlobalFunction( NameOfPredicatonRepresentation, function (p)
   if IsPredicatonRepresentationObj(p) then
     return ShallowCopy(p!.name);
   else
-    Error("NameOfPredicatonRepresentation failed, the argument must be a PredicatonRepresentation.\n");
+    Error("NameOfPredicatonRepresentation failed, the argument must be a PredicatonRepresentation");
   fi;
 end); 
 ####################################################################################################
@@ -115,7 +115,7 @@ InstallGlobalFunction( ArityOfPredicatonRepresentation, function (p)
   if IsPredicatonRepresentationObj(p) then
     return ShallowCopy(p!.arity);
   else
-    Error("ArityOfPredicatonRepresentation failed, the argument must be a PredicatonRepresentation.\n");
+    Error("ArityOfPredicatonRepresentation failed, the argument must be a PredicatonRepresentation");
   fi;
 end);
 ####################################################################################################
@@ -128,7 +128,7 @@ InstallGlobalFunction( AutOfPredicatonRepresentation, function (p)
   if IsPredicatonRepresentationObj(p) then
     return CopyAut(p!.aut);
   else
-    Error("AutOfPredicatonRepresentation failed, the argument must be a PredicatonRepresentation.\n");
+    Error("AutOfPredicatonRepresentation failed, the argument must be a PredicatonRepresentation");
   fi;
 end);
 ####################################################################################################
@@ -141,7 +141,7 @@ InstallGlobalFunction( CopyPredicatonRepresentation, function (p)
   if IsPredicatonRepresentationObj(p) then
     return PredicatonRepresentation(ShallowCopy(p!.name), ShallowCopy(p!.arity), CopyAut(p!.aut));
   else
-    Error("CopyOfPredicatonRepresentation failed, the argument must be a PredicatonRepresentation.\n");
+    Error("CopyOfPredicatonRepresentation failed, the argument must be a PredicatonRepresentation");
   fi;
 end);
 ####################################################################################################
@@ -184,7 +184,7 @@ InstallGlobalFunction( PredicataRepresentation, function ( args... )
     ArityList:=Permuted(ArityList, p);
     AutList:=Permuted(AutList, p);
   else
-    Error("PredicataRepresentation failed, the optional arguments must be a PredicatonRepresentation.\n");
+    Error("PredicataRepresentation failed, the optional arguments must be a PredicatonRepresentation");
   fi;
   # Defining new family
   F:=NewFamily("PredicataRepresentation", IsPredicataRepresentationObj);
@@ -340,9 +340,9 @@ end);
 InstallGlobalFunction( ElementOfPredicataRepresentation, function ( P, i )
   local p;
   if not IsPredicataRepresentationObj(P) then
-    Error("RemovePredicataRepresentation failed, the first argument must be a PredicataRepresentation.\n");
+    Error("RemovePredicataRepresentation failed, the first argument must be a PredicataRepresentation");
   elif not IsPosInt(i) then
-    Error("RemovePredicataRepresentation failed, the second argument must be a PosInt.\n");
+    Error("RemovePredicataRepresentation failed, the second argument must be a PosInt");
   elif i > Length(P!.namelist) then
     return fail;
   else
@@ -359,7 +359,7 @@ InstallGlobalFunction( NamesOfPredicataRepresentation, function (P)
   if IsPredicataRepresentationObj(P) then
     return ShallowCopy(P!.namelist);
   else
-    Error("NamesOfPredicataRepresentation failed, the argument must be a PredicataRepresentation.\n");
+    Error("NamesOfPredicataRepresentation failed, the argument must be a PredicataRepresentation");
   fi;
 end); 
 ####################################################################################################
@@ -372,7 +372,7 @@ InstallGlobalFunction( AritiesOfPredicataRepresentation, function (P)
   if IsPredicataRepresentationObj(P) then
     return ShallowCopy(P!.aritylist);
   else
-    Error("AritiesOfPredicataRepresentation failed, the argument must be a PredicataRepresentation.\n");
+    Error("AritiesOfPredicataRepresentation failed, the argument must be a PredicataRepresentation");
   fi;
 end);
 ####################################################################################################
@@ -385,7 +385,7 @@ InstallGlobalFunction( AutsOfPredicataRepresentation, function (P)
   if IsPredicataRepresentationObj(P) then
     return StructuralCopy(P!.autlist);
   else
-    Error("AutsOfPredicataRepresentation failed, the argument must be a PredicataRepresentation.\n");
+    Error("AutsOfPredicataRepresentation failed, the argument must be a PredicataRepresentation");
   fi;
 end);
 ####################################################################################################
@@ -404,7 +404,7 @@ InstallGlobalFunction( CopyPredicataRepresentation, function (P)
     Q!.autlist:=StructuralCopy(P!.autlist);
     return Q; 
   else
-    Error("CopyPredicataRepresentation failed, the argument must be a PredicatonRepresentation.\n");
+    Error("CopyPredicataRepresentation failed, the argument must be a PredicatonRepresentation");
   fi;
 end);
 ####################################################################################################

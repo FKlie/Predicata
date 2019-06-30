@@ -13,7 +13,7 @@ InstallGlobalFunction( PredicataTree, function (args...)
   elif Length(args) = 1 then
     r:=args[1];
   else
-    Error("PredicataTree failed, only one optional argument allowed.\n");
+    Error("PredicataTree failed, only one optional argument allowed");
   fi;
   # Defining new family
   F:=NewFamily("PredicataTreeFam", IsPredicataTreeObj);
@@ -82,7 +82,7 @@ InstallGlobalFunction( IsEmptyPredicataTree, function (t)
       return false;
     fi;
   else
-    Error("IsEmptyPredicataTree failed, the argument must be a PredicataTree.\n");
+    Error("IsEmptyPredicataTree failed, the argument must be a PredicataTree");
   fi;
 end); 
 ####################################################################################################
@@ -95,7 +95,7 @@ InstallGlobalFunction( RootOfPredicataTree, function (t)
   if IsPredicataTreeObj(t) and not IsEmptyPredicataTree(t) then
     return t!.currenttree[1];
   else 
-    Error("RootOfPredicataTree failed, the argument must be a PredicataTree.\n");
+    Error("RootOfPredicataTree failed, the argument must be a PredicataTree");
   fi;
 end);
 ####################################################################################################
@@ -108,7 +108,7 @@ InstallGlobalFunction( SetRootOfPredicataTree, function ( t , n )
   if IsPredicataTreeObj(t) then
     t!.currenttree[1]:=n;
   else 
-    Error("SetRootOfPredicataTree failed, the argument must be a PredicataTree.\n");
+    Error("SetRootOfPredicataTree failed, the argument must be a PredicataTree");
   fi;
 end);
 ####################################################################################################
@@ -121,7 +121,7 @@ InstallGlobalFunction( InsertChildToPredicataTree, function ( t )
   if IsPredicataTreeObj(t) then
     Add(t!.currenttree, []);
   else 
-    Error("InsertChildToPredicataTree failed, the argument must be a PredicataTree.\n");
+    Error("InsertChildToPredicataTree failed, the argument must be a PredicataTree");
   fi;
 end);
 ####################################################################################################
@@ -137,7 +137,7 @@ InstallGlobalFunction( ChildOfPredicataTree, function ( t, i )
     t!.currenttree:=t!.currenttree[i+1];
     return t;
   else 
-    Error("ChildOfPredicataTree failed, the first argument must be a PredicataTree and the second a positive integer.\n");
+    Error("ChildOfPredicataTree failed, the first argument must be a PredicataTree and the second a positive integer");
   fi;
 end);
 ####################################################################################################
@@ -159,7 +159,7 @@ InstallGlobalFunction( ReturnedChildOfPredicataTree, function ( t, i )
     T!.free:=StructuralCopy(t!.bounded);
     return T;
   else 
-    Error("ReturnedChildOfPredicataTree failed, the first argument must be a PredicataTree and the second a positive integer.\n");
+    Error("ReturnedChildOfPredicataTree failed, the first argument must be a PredicataTree and the second a positive integer");
   fi;
 end);
 ####################################################################################################
@@ -172,7 +172,7 @@ InstallGlobalFunction( NumberOfChildrenOfPredicataTree, function ( t )
   if IsPredicataTreeObj(t) and not IsEmptyPredicataTree(t) then
     return Length(t!.currenttree)-1;
   else 
-    Error("NumberOfChildrenOfPredicataTree failed, the first argument must be a PredicataTree.\n");
+    Error("NumberOfChildrenOfPredicataTree failed, the first argument must be a PredicataTree");
   fi;
 end);
 ####################################################################################################
@@ -186,7 +186,7 @@ InstallGlobalFunction( ParentOfPredicataTree, function ( t )
     t!.currenttree:=PopPredicataStack(t!.stack);
     return t;
   else 
-    Error("ParentOfPredicataTree failed, the argument must be a PredicataTree with an existing parent.\n");
+    Error("ParentOfPredicataTree failed, the argument must be a PredicataTree with an existing parent");
   fi;
 end);
 ####################################################################################################
@@ -199,7 +199,7 @@ InstallGlobalFunction( PredicataRepresentationOfPredicataTree, function ( t )
   if IsPredicataTreeObj(t) then
     return CopyPredicataRepresentation(t!.predrep);
   else 
-    Error("BoundedVariablesOfPredicataTree failed, the argument must be a PredicataTree.\n");
+    Error("BoundedVariablesOfPredicataTree failed, the argument must be a PredicataTree");
   fi;
 end);
 ####################################################################################################
@@ -212,7 +212,7 @@ InstallGlobalFunction( BoundedVariablesOfPredicataTree, function ( t )
   if IsPredicataTreeObj(t) then
     return ShallowCopy(t!.bounded);
   else 
-    Error("BoundedVariablesOfPredicataTree failed, the argument must be a PredicataTree.\n");
+    Error("BoundedVariablesOfPredicataTree failed, the argument must be a PredicataTree");
   fi;
 end);
 ####################################################################################################
@@ -225,7 +225,7 @@ InstallGlobalFunction( FreeVariablesOfPredicataTree, function ( t )
   if IsPredicataTreeObj(t) then
     return ShallowCopy(t!.free);
   else 
-    Error("BoundedVariablesOfPredicataTree failed, the argument must be a PredicataTree.\n");
+    Error("BoundedVariablesOfPredicataTree failed, the argument must be a PredicataTree");
   fi;
 end);
 ####################################################################################################
@@ -237,7 +237,7 @@ end);
 InstallGlobalFunction( PredicataFormulaFormattedToTree, function ( F )
   local f, P, Pnames, Parities, T, i, counter;
   if not IsPredicataFormulaFormatted(F) then
-    Error("PredicataFormulaFormattedToTree failed, the first argument must be a PredicataFormulaFormatted.\n");
+    Error("PredicataFormulaFormattedToTree failed, the first argument must be a PredicataFormulaFormatted");
   fi;
   f:=F!.stringlist;
   P:=F!.predrep;
@@ -331,7 +331,7 @@ end);
 InstallGlobalFunction( PredicataTreeToPredicatonRecursive, function (T, V)
   local c, c1, c2, root, l, P, Pnames, p, v, n, i;
   if not IsPredicataTree(T) then
-    Error("PredicataTreeToPredicatonRecursive failed, the argument must be a PredicataTree.\n");
+    Error("PredicataTreeToPredicatonRecursive failed, the argument must be a PredicataTree");
   fi;
   c:=[];
   P:=PredicataRepresentationOfPredicataTree(T);
@@ -358,7 +358,7 @@ InstallGlobalFunction( PredicataTreeToPredicatonRecursive, function (T, V)
           if c[i][1] = "var" then
             v[i]:=c[i][2];
           else
-            Error("PredicataTreeToPredicatonRecursive failed, the predicate contains a non-variable.\n");
+            Error("PredicataTreeToPredicatonRecursive failed, the predicate contains a non-variable");
           fi;
         od;
         return ["Pred", PredicatonFromAut(AutOfPredicatonRepresentation(p), Concatenation(v), n )];               
@@ -407,7 +407,7 @@ InstallGlobalFunction( PredicataTreeToPredicatonRecursive, function (T, V)
         return ["Term", Concatenation(c1[2], c2[2]), Concatenation(c1[3], c2[3]), Concatenation(c1[4], c2[4])];   
         #return ["Term", c1[2]+c2[2], Concatenation(c1[3],c2[3]), Concatenation(c1[4],c2[4]), Concatenation(c1[5],c2[5]), Concatenation(c1[6],c2[6])];    
       else
-        Error("PredicataTreeToPredicatonRecursive failed at Addition: requires two variables.\n");
+        Error("PredicataTreeToPredicatonRecursive failed at Addition: requires two variables");
       fi;
     elif root = "*" then                                                      # Symbol *
       if c1[1] = "int" and c2[1] = "var" then                                 # Int * Var
@@ -417,7 +417,7 @@ InstallGlobalFunction( PredicataTreeToPredicatonRecursive, function (T, V)
         return ["Term", c1[2], c2[2], []];
         #return ["Term", 1, ["mult"], c2[2], c1[2], []];
       else
-        Error("PredicataTreeToPredicatonRecursive failed at Multiplication: requires one variable and one integer.\n");
+        Error("PredicataTreeToPredicatonRecursive failed at Multiplication: requires one variable and one integer");
       fi;
     elif root = "=" then                                                      # Creating Predicaton from formula:
       n:=FixedVariablePositions(V[1], V[2]);
@@ -447,7 +447,7 @@ InstallGlobalFunction( PredicataTreeToPredicatonRecursive, function (T, V)
         return ["Pred", TermEqualTermPredicaton(c1[2], c1[3], c1[4], c2[2], c2[3], c2[4], n)];
         #return ["Pred", TermEqualTermPredicaton([c1[2], c1[3], c1[4], c1[5], c1[6]], [c2[2], c2[3], c2[4], c2[5], c2[6]], n)];
       else
-        Error("PredicataTreeToPredicatonRecursive failed at creating predicata from a formula.\n");
+        Error("PredicataTreeToPredicatonRecursive failed at creating predicata from a formula");
       fi;
     elif root = "geq" then                                                    # greater equal
       n:=FixedVariablePositions(V[1], V[2]);
@@ -458,7 +458,7 @@ InstallGlobalFunction( PredicataTreeToPredicatonRecursive, function (T, V)
       elif c1[1] = "var" and c2[1] = "var" then                               # var >= var
         return["Pred", GreaterEqualPredicaton(Concatenation(c1[2], c2[2]),n)];
       else
-        Error("PredicataTreeToPredicatonRecursive failed at greater equal, input must be Var >= Var, Var >= Int or Int >= Var.\n");
+        Error("PredicataTreeToPredicatonRecursive failed at greater equal, input must be Var >= Var, Var >= Int or Int >= Var");
       fi;
     elif root = "gr" then                                                     # greater
       n:=FixedVariablePositions(V[1], V[2]);
@@ -469,7 +469,7 @@ InstallGlobalFunction( PredicataTreeToPredicatonRecursive, function (T, V)
       elif c1[1] = "var" and c2[1] = "var" then                               # var > var
         return["Pred", GreaterPredicaton(Concatenation(c1[2], c2[2]),n)];
       else
-        Error("PredicataTreeToPredicatonRecursive failed at greater, input must be Var > Var, Var > Int or Int > Var.\n");
+        Error("PredicataTreeToPredicatonRecursive failed at greater, input must be Var > Var, Var > Int or Int > Var");
       fi;
     elif root = "leq" then                                                    # less equal
       n:=FixedVariablePositions(V[1], V[2]);
@@ -480,7 +480,7 @@ InstallGlobalFunction( PredicataTreeToPredicatonRecursive, function (T, V)
       elif c1[1] = "var" and c2[1] = "var" then                               # var <= var
         return["Pred", GreaterEqualPredicaton(Concatenation(c2[2], c1[2]),n)];
       else
-        Error("PredicataTreeToPredicatonRecursive failed at less equal, input must be Var <= Var, Var <= Int or Int <= Var.\n");
+        Error("PredicataTreeToPredicatonRecursive failed at less equal, input must be Var <= Var, Var <= Int or Int <= Var");
       fi;
     elif root = "less" then                                                   # less
       n:=FixedVariablePositions(V[1], V[2]);
@@ -491,49 +491,49 @@ InstallGlobalFunction( PredicataTreeToPredicatonRecursive, function (T, V)
       elif c1[1] = "var" and c2[1] = "var" then                               # var < var
         return["Pred", GreaterPredicaton(Concatenation(c2[2], c1[2]),n)];
       else
-        Error("PredicataTreeToPredicatonRecursive failed at less, input must be Var < Var, Var < Int or Int < Var.\n");
+        Error("PredicataTreeToPredicatonRecursive failed at less, input must be Var < Var, Var < Int or Int < Var");
       fi;
     elif root = "and" then                                                    # and
       n:=FixedVariablePositions(V[1], V[2]);
       if c1[1] = "Pred" and c2[1] = "Pred" then
         return ["Pred", IntersectionPredicata(c1[2], c2[2], n)];
       else
-        Error("PredicataTreeToPredicatonRecursive failed at the intersection of predicatas.\n");
+        Error("PredicataTreeToPredicatonRecursive failed at the intersection of predicatas");
       fi;
     elif root = "or" then                                                     # or
       n:=FixedVariablePositions(V[1], V[2]);
       if c1[1] = "Pred" and c2[1] = "Pred" then
         return ["Pred", UnionPredicata( c1[2], c2[2], n)];
       else
-        Error("PredicataTreeToPredicatonRecursive failed at the union of predicatas.\n");
+        Error("PredicataTreeToPredicatonRecursive failed at the union of predicatas");
       fi;
     elif root = "equiv" then                                                  # equiv
       n:=FixedVariablePositions(V[1], V[2]);
       if c1[1] = "Pred" and c2[1] = "Pred" then
         return ["Pred", UnionPredicata( IntersectionPredicata(NegatedAut(c1[2]), NegatedAut(c2[2]), n), IntersectionPredicata(c1[2], c2[2], n), n)];
       else
-        Error("PredicataTreeToPredicatonRecursive failed at the equivalence of predicatas.\n");
+        Error("PredicataTreeToPredicatonRecursive failed at the equivalence of predicatas");
       fi;
     elif root = "implies" then                                                # implies  
       n:=FixedVariablePositions(V[1], V[2]);
       if c1[1] = "Pred" and c2[1] = "Pred" then
         return ["Pred", UnionPredicata( NegatedAut(c1[2]), c2[2], n)];
       else
-        Error("PredicataTreeToPredicatonRecursive failed at the implication of predicatas.\n");
+        Error("PredicataTreeToPredicatonRecursive failed at the implication of predicatas");
       fi;
     elif root = "E" then                                                      # exists
       if c1[1] = "var" and c2[1] = "Pred" then
         Remove(V[1],Position(V[1],V[2][c1[2][1]]));                           # removes the variable, since it gets quanfitied here (projected)
         return ["Pred", ProjectedPredicaton(c2[2], c1[2][1])];
       else 
-        Error("PredicataTreeToPredicatonRecursive failed at reducing an predicatas (i.e. solving an existence quantifier).\n");
+        Error("PredicataTreeToPredicatonRecursive failed at reducing an predicatas (i.e. solving an existence quantifier)");
       fi;  
     elif root = "A" then                                                      # for all
       if c1[1] = "var" and c2[1] = "Pred" then
         Remove(V[1],Position(V[1],V[2][c1[2][1]]));                           # removes the variable, since it gets quanfitied here (projected)
         return ["Pred", NegatedProjectedNegatedPredicaton(c2[2], c1[2][1])];
       else 
-        Error("PredicataTreeToPredicatonRecursive failed at reducing an pradiacatas (i.e. solving an for all quantifier).\n");
+        Error("PredicataTreeToPredicatonRecursive failed at reducing an pradiacatas (i.e. solving an for all quantifier)");
       fi;
     elif root in Pnames then                                                  # root is a string contained in the names of the predicate represenation.
       p:=ElementOfPredicataRepresentation(P, Position(Pnames, root));         # get the position and then the predicate represenation, p_name, p_arity, p_automata
@@ -546,7 +546,7 @@ InstallGlobalFunction( PredicataTreeToPredicatonRecursive, function (T, V)
           v[1]:=c1[2];
           v[2]:=c2[2];
         else
-          Error("PredicataTreeToPredicatonRecursive failed, the predicate contains a non-variable.\n");
+          Error("PredicataTreeToPredicatonRecursive failed, the predicate contains a non-variable");
         fi;
         return ["Pred", PredicatonFromAut(AutOfPredicatonRepresentation(p), Concatenation(v), n )];               
       fi;
@@ -555,7 +555,7 @@ InstallGlobalFunction( PredicataTreeToPredicatonRecursive, function (T, V)
         n:=FixedVariablePositions(V[1], V[2]);
         return["Pred", BuchiPredicaton(Concatenation(c1[2], c2[2]), n)];
       else
-        Error("PredicataTreeToPredicatonRecursive failed at Buchi-automaton: requires two variables.\n");
+        Error("PredicataTreeToPredicatonRecursive failed at Buchi-automaton: requires two variables");
       fi;
     else 
       Error("PredicataTreeToPredicatonRecursive failed due to the invalid symbol:", root, ".\n");
@@ -574,7 +574,7 @@ InstallGlobalFunction( PredicataTreeToPredicatonRecursive, function (T, V)
       if c[1] = "Pred" then
         return ["Pred", NegatedAut(NormalizedLeadingZeroPredicaton(c[2]))];
       else
-        Error("PredicataTreeToPredicatonRecursive failed at negating an Predicata.\n");
+        Error("PredicataTreeToPredicatonRecursive failed at negating an Predicata");
       fi;
     elif root in Pnames then                                                  # root is a string contained in the names of the predicate represenation.
       p:=ElementOfPredicataRepresentation(P, Position(Pnames, root));         # get the position and then the predicate represenation, p_name, p_arity, p_automata
@@ -586,7 +586,7 @@ InstallGlobalFunction( PredicataTreeToPredicatonRecursive, function (T, V)
         if c[1] = "var" then
           v[1]:=c[2];
         else
-          Error("PredicataTreeToPredicatonRecursive failed, the predicate contains a non-variable.\n");
+          Error("PredicataTreeToPredicatonRecursive failed, the predicate contains a non-variable");
         fi;
         return ["Pred", PredicatonFromAut(AutOfPredicatonRepresentation(p), Concatenation(v), n )];               
       fi;
@@ -595,7 +595,7 @@ InstallGlobalFunction( PredicataTreeToPredicatonRecursive, function (T, V)
         n:=FixedVariablePositions(V[1], V[2]);
         return["Pred", PowerPredicaton(c[2], n)];
       else
-        Error("PredicataTreeToPredicatonRecursive failed at (Power of 2) - 1 - automaton: requires one variables.\n");
+        Error("PredicataTreeToPredicatonRecursive failed at (Power of 2) - 1 - automaton: requires one variables");
       fi;        
     else 
       Error("PredicataTreeToPredicatonRecursive failed due to the invalid symbol:", root, ".\n");
@@ -627,7 +627,7 @@ InstallGlobalFunction( PredicataTreeToPredicatonRecursive, function (T, V)
       Error("PredicataTreeToPredicatonRecursive failed at the leaf level: ", String(root), ".\n");
     fi;
   else
-    Error("PredicataTreeToPredicatonRecursive failed, something went completely wrong, no tree case for having children greater equal to 0 was executed.\n");
+    Error("PredicataTreeToPredicatonRecursive failed, something went completely wrong, no tree case for having children greater equal to 0 was executed");
   fi;
 end);
 ####################################################################################################
@@ -648,7 +648,7 @@ InstallGlobalFunction( PredicataTreeToPredicaton, function (T, args...)
     Error("PredicataTreeToPredicaton failed, wrong optional input, the argument must be a string containing \"variables\".\n");  
   fi;
   if not IsPredicataTreeObj(T) then
-    Error("PredicataTreeToPredicaton failed, the argument must be a PredicataTree.\n");
+    Error("PredicataTreeToPredicaton failed, the argument must be a PredicataTree");
   fi;
   bounded:=BoundedVariablesOfPredicataTree(T);
   free:=FreeVariablesOfPredicataTree(T);
@@ -671,7 +671,7 @@ InstallGlobalFunction( PredicataTreeToPredicaton, function (T, args...)
   Append(V, bounded);       # append the bounded variables, this will be the order for the whole recursive computation.
   A:=PredicataTreeToPredicatonRecursive(T, [F, V]);   # tree, [free variables, all variables]
   if not (IsList(A) and Length(A) = 2 and A[1] = "Pred" and IsPredicaton(A[2])) then
-    Error("PredicataTreeToPredicaton failed, something went wrong.\n");
+    Error("PredicataTreeToPredicaton failed, something went wrong");
   fi;
   SetVariableListOfPredicaton(A[2], F);
   return A;

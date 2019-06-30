@@ -68,10 +68,10 @@ InstallGlobalFunction( PredicataFormulaToPredicaton, function (f, args...)
   elif Length(args) = 1 and IsList(args[1]) and ForAll(args[1], i->PredicataIsStringType(i, "variable")) then
     V:=args[1];
   else
-    Error("PredicataFormulaToPredicaton failed, wrong optional input.\n");
+    Error("PredicataFormulaToPredicaton failed, wrong optional input");
   fi;
   if not IsPredicataFormula(f) then
-    Error("PredicataFormulaToPredicaton failed, the first argument must be a PredicataFormula.\n");
+    Error("PredicataFormulaToPredicaton failed, the first argument must be a PredicataFormula");
   fi;
   F:=PredicataFormulaFormatted(f);
   if F = fail then
@@ -104,7 +104,7 @@ InstallGlobalFunction( PredicataFormulaToPredicaton, function (f, args...)
     fi;
     return B; 
   else
-    Error("\n Evaluate formula failed: the output is of type: ", A," and not of type Predicaton. Please check your input.\n");
+    Error("\n Evaluate formula failed: the output is of type: ", A," and not of type Predicaton. Please check your input");
   fi;
 end);
 ####################################################################################################
@@ -122,7 +122,7 @@ InstallGlobalFunction( StringToPredicaton, function (f, args...)
   elif Length(args) = 1 and IsList(args[1]) and ForAll(args[1], i->PredicataIsStringType(i, "variable")) then
     V:=args[1];
   else
-    Error("StringToPredicaton failed, wrong optional input.\n");
+    Error("StringToPredicaton failed, wrong optional input");
   fi;
   if IsString(f) then
     F:=PredicataFormula(f);
@@ -132,7 +132,7 @@ InstallGlobalFunction( StringToPredicaton, function (f, args...)
       return PredicataFormulaToPredicaton(F, V);
     fi;
   else
-    Error("StringToPredicaton failed, the first argument must be a string.\n");
+    Error("StringToPredicaton failed, the first argument must be a string");
   fi;
 end);
 ####################################################################################################
@@ -284,14 +284,14 @@ end);
 InstallGlobalFunction( AndPredicata, function (P1, P2, args...)
   local P, V;
   if not (IsPredicaton(P1) and IsPredicaton(P2)) then
-    Error("AndPredicata failed, the first and the second argument must be Predicata.\n");
+    Error("AndPredicata failed, the first and the second argument must be Predicata");
   fi;
   if Length(args) = 0 then
     V:=Union(VariableListOfPredicaton(P1), VariableListOfPredicaton(P2));
   elif Length(args) = 1 and IsList(args[1]) and ForAll(args[1], i->PredicataIsStringType(i, "variable")) then
     V:=args[1];
   else
-    Error("AndPredicata failed, the optional input must be a list with variable strings.\n");
+    Error("AndPredicata failed, the optional input must be a list with variable strings");
   fi;
   P:=VariableAdjustedPredicata(P1, P2, V);
   if P = fail then 
@@ -310,14 +310,14 @@ end);
 InstallGlobalFunction( OrPredicata, function (P1, P2, args...)
   local P, V;
   if not (IsPredicaton(P1) and IsPredicaton(P2)) then
-    Error("OrPredicata failed, the first and the second argument must be Predicata.\n");
+    Error("OrPredicata failed, the first and the second argument must be Predicata");
   fi;
   if Length(args) = 0 then
     V:=Union(VariableListOfPredicaton(P1), VariableListOfPredicaton(P2));
   elif Length(args) = 1 and IsList(args[1]) and ForAll(args[1], i->PredicataIsStringType(i, "variable")) then
     V:=args[1];
   else
-    Error("OrPredicata failed, the optional input must be a list with variable strings.\n");
+    Error("OrPredicata failed, the optional input must be a list with variable strings");
   fi;
   P:=VariableAdjustedPredicata(P1, P2, V);
   if P = fail then 
@@ -336,14 +336,14 @@ end);
 InstallGlobalFunction( NotPredicaton, function (P, args...)
   local Q, V;
   if not IsPredicaton(P) then
-    Error("NotPredicata failed, the first argument must be a Predicaton.\n");
+    Error("NotPredicata failed, the first argument must be a Predicaton");
   fi;
   if Length(args) = 0 then
     V:=VariableListOfPredicaton(P);
   elif Length(args) = 1 and IsList(args[1]) and ForAll(args[1], i->PredicataIsStringType(i, "variable")) then
     V:=args[1];
   else
-    Error("NotPredicaton failed, the optional input must be a list with variable strings.\n");
+    Error("NotPredicaton failed, the optional input must be a list with variable strings");
   fi;
   Q:=VariableAdjustedPredicaton(P, V);
   if P = fail then 
@@ -362,14 +362,14 @@ end);
 InstallGlobalFunction( ImpliesPredicata, function (P1, P2, args...)
   local P, V;
   if not (IsPredicaton(P1) and IsPredicaton(P2)) then
-    Error("ImpliesPredicata failed, the first and the second argument must be Predicata.\n");
+    Error("ImpliesPredicata failed, the first and the second argument must be Predicata");
   fi;
   if Length(args) = 0 then
     V:=Union(VariableListOfPredicaton(P1), VariableListOfPredicaton(P2));
   elif Length(args) = 1 and IsList(args[1]) and ForAll(args[1], i->PredicataIsStringType(i, "variable")) then
     V:=args[1];
   else
-    Error("ImpliesPredicata failed, the optional input must be a list with variable strings.\n");
+    Error("ImpliesPredicata failed, the optional input must be a list with variable strings");
   fi;
   P:=VariableAdjustedPredicata(P1, P2, V);
   if P = fail then 
@@ -388,14 +388,14 @@ end);
 InstallGlobalFunction( EquivalentPredicata, function (P1, P2, args...)
   local P, V;
   if not (IsPredicaton(P1) and IsPredicaton(P2)) then
-    Error("EquivalentPredicata failed, the first and the second argument must be Predicata.\n");
+    Error("EquivalentPredicata failed, the first and the second argument must be Predicata");
   fi;
   if Length(args) = 0 then
     V:=Union(VariableListOfPredicaton(P1), VariableListOfPredicaton(P2));
   elif Length(args) = 1 and IsList(args[1]) and ForAll(args[1], i->PredicataIsStringType(i, "variable")) then
     V:=args[1];
   else
-    Error("EquivalentPredicata failed, the optional input must be a list with variable strings.\n");
+    Error("EquivalentPredicata failed, the optional input must be a list with variable strings");
   fi;
   P:=VariableAdjustedPredicata(P1, P2, V);
   if P = fail then 
@@ -414,14 +414,14 @@ end);
 InstallGlobalFunction( ExistsPredicaton, function (P, v, args...)
   local p, Q, V;
   if not IsPredicaton(P) then
-    Error("ExistsPredicaton failed, the first argument must be a Predicaton.\n");
+    Error("ExistsPredicaton failed, the first argument must be a Predicaton");
   fi;
   if Length(args) = 0 then
     V:=VariableListOfPredicaton(P);
   elif Length(args) = 1 and IsList(args[1]) and ForAll(args[1], i->PredicataIsStringType(i, "variable")) then
     V:=args[1];
   else
-    Error("ExistsPredicaton failed, the optional input must be a list with variable strings containing the quantified variable.\n");
+    Error("ExistsPredicaton failed, the optional input must be a list with variable strings containing the quantified variable");
   fi;
   if not v in V then
     Print("The quantified variable must exist in the variable list of the Predicaton.\n");
@@ -446,14 +446,14 @@ end);
 InstallGlobalFunction( ForallPredicaton, function (P, v, args...)
   local p, Q, V;
   if not IsPredicaton(P) then
-    Error("ForallPredicaton failed, the first argument must be a Predicaton.\n");
+    Error("ForallPredicaton failed, the first argument must be a Predicaton");
   fi;
   if Length(args) = 0 then
     V:=VariableListOfPredicaton(P);
   elif Length(args) = 1 and IsList(args[1]) and ForAll(args[1], i->PredicataIsStringType(i, "variable")) then
     V:=args[1];
   else
-    Error("ForallPredicaton failed, the optional input must be a list with variable strings containing the quantified variable.\n");
+    Error("ForallPredicaton failed, the optional input must be a list with variable strings containing the quantified variable");
   fi;
   if not v in V then
     Print("The quantified variable must exist in the variable list of the Predicaton.\n");
@@ -586,7 +586,7 @@ InstallGlobalFunction( PresentPredicaton, function (f, args...)
   elif Length(args) = 1 and IsList(args[1]) and ForAll(args[1], i->PredicataIsStringType(i, "variable")) then
     V:=args[1];
   else
-    Error("PresentPredicaton failed, wrong optional input.\n");
+    Error("PresentPredicaton failed, wrong optional input");
   fi;
   if IsString(f) then
     F:=PredicataFormula(f);
@@ -602,7 +602,7 @@ InstallGlobalFunction( PresentPredicaton, function (f, args...)
       fi;
     fi;
   else
-    Error("PresentPredicaton failed, the first argument must be a string.\n");
+    Error("PresentPredicaton failed, the first argument must be a string");
   fi;
 end);
 ####################################################################################################
@@ -694,14 +694,14 @@ end);
 InstallGlobalFunction( FinitelyManyWordsAccepted, function ( A , args...)
   local B;
   if not IsPredicaton(A) and not IsDeterministicAut(A) then
-    Error("FinitelyManySolutionsPred failed, the argument must be a Predicaton with a deterministic Automaton.\n");
+    Error("FinitelyManySolutionsPred failed, the argument must be a Predicaton with a deterministic Automaton");
   fi;
   if Length(args) = 0 or Length(args) = 1 and args[1] = false then
     B:=FormattedPredicaton(A);
   elif Length(args) = 1 and args[1] = true then
     B:=A;
   else
-    Error("FinitelyManySolutionsPred failed, the optional argument must be a boolean.\n");
+    Error("FinitelyManySolutionsPred failed, the optional argument must be a boolean");
   fi;
   return not FindCircleInPredicaton(B, [], InitialStatesOfAut(B)[1], 1, false, false);
 end);  
@@ -714,20 +714,20 @@ end);
 InstallGlobalFunction( LinearSolveOverN, function ( A, b, args... )
   local V, f, l, r, i, j, len;
   if not (IsList(A) and ForAll(A, IsList) and IsList(b) and Length(A) = Length(b) and Length(A) > 0 ) then
-    Error("LinearSolveOverN failed, the first argument must be a list containing list, the second argument must be a list.\n");
+    Error("LinearSolveOverN failed, the first argument must be a list containing list, the second argument must be a list");
   fi;
   if Length(args) = 0 then
     V:=[];
   elif Length(args) = 1 and IsList(args[1]) and ForAll(args[1], i->PredicataIsStringType(i, "variable")) then
     V:=args[1];
   else
-    Error("LinearSolveOverN failed, wrong optional input.\n");
+    Error("LinearSolveOverN failed, wrong optional input");
   fi;
   f:="";
   len:=Length(A[1]);
   for i in [1..Length(A)] do
     if not ForAll(A[i], IsInt) or not Length(A[i]) = len then
-      Error("LinearSolveOverN failed, the first argument must contain integers.\n");
+      Error("LinearSolveOverN failed, the first argument must contain integers");
     fi;
     l:="";
     r:="";
@@ -787,14 +787,14 @@ end);
 InstallGlobalFunction( NullSpaceOverN, function ( A, args... )
   local V;
   if not (IsList(A) and ForAll(A, IsList) and Length(A) > 0) then
-    Error("NullSpaceOverN failed, the first argument must be a list containing list, the second argument must be a list.\n");
+    Error("NullSpaceOverN failed, the first argument must be a list containing list, the second argument must be a list");
   fi;
   if Length(args) = 0 then
     V:=[];
   elif Length(args) = 1 and IsList(args[1]) and ForAll(args[1], i->PredicataIsStringType(i, "variable")) then
     V:=args[1];
   else
-    Error("NullSpaceOverN failed, wrong optional input.\n");
+    Error("NullSpaceOverN failed, wrong optional input");
   fi;
   return LinearSolveOverN(A, ListWithIdenticalEntries(Length(A), 0), V);
 end);
@@ -843,7 +843,7 @@ InstallGlobalFunction( AreEquivalentPredicata, function ( A, B, args... )
   elif Length(args) = 1 and IsBool(args[1]) then
     b:=args[1];
   else
-    Error("AreEquivalentPredicata failed, the optional argument must be a boolean.\n");
+    Error("AreEquivalentPredicata failed, the optional argument must be a boolean");
   fi;
   if b then
     return InterpretedPredicaton(EquivalentPredicata(A, B));
