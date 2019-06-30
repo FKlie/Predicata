@@ -111,7 +111,7 @@ end);
 InstallGlobalFunction( PredicataNormalizedString, function ( f , args...) 
   local B1, B2, B3, P, Pnames, i, s;
   if not IsString(f) then
-    Error("PredicataNormalizedString failed, the first argument must be a string.\n");
+    Error("PredicataNormalizedString failed, the first argument must be a string");
   fi;  
   if Length(args) = 0 then
     P:=PredicataRepresentation();
@@ -139,7 +139,7 @@ InstallGlobalFunction( PredicataNormalizedString, function ( f , args...)
     B2:=args[3];
     B3:=args[4];
   else
-    Error("SplitStringIntoList failed, wrong optional input.\n");
+    Error("SplitStringIntoList failed, wrong optional input");
   fi;
   Pnames:=NamesOfPredicataRepresentation(P);
   if B3 then
@@ -189,14 +189,14 @@ end);
 InstallGlobalFunction( PredicataGrammarVerification, function ( f, args... )
   local B, G, S, I, P, Q, R, Pname, NonTerm, Term, UnitRules, ProductRules, Start, a, b, c, i, j, k, l, n, p, r, s, t, V, v;
   if not IsString(f) then
-    Error("PredicataGrammarVerification failed, the first argument must be a string.\n");
+    Error("PredicataGrammarVerification failed, the first argument must be a string");
   fi;  
   if Length(args) = 0 then
     P:=PredicataRepresentation();
   elif Length(args) = 1 and IsPredicataRepresentation(args[1]) then
     P:=args[1];
   else
-    Error("PredicataGrammarVerification failed, wrong optional input.\n");
+    Error("PredicataGrammarVerification failed, wrong optional input");
   fi;
   # splitting string in a list of strings, while adding whitespace and renaming some symbols.
   S:=PredicataNormalizedString(f, P, false);
@@ -416,7 +416,7 @@ InstallGlobalFunction( BoundedVariablesOfPredicataFormula, function ( f )
   if IsPredicataFormulaObj(f) then
     return ShallowCopy(f!.bounded);
   else 
-    Error("BoundedVariablesOfPredicataFormula failed, the argument must be a PredicataFormula.\n");
+    Error("BoundedVariablesOfPredicataFormula failed, the argument must be a PredicataFormula");
   fi;
 end);
 ####################################################################################################
@@ -429,7 +429,7 @@ InstallGlobalFunction( FreeVariablesOfPredicataFormula, function ( f )
   if IsPredicataFormulaObj(f) then
     return ShallowCopy(f!.free);
   else 
-    Error("FreeVariablesOfPredicataFormula failed, the argument must be a PredicataFormula.\n");
+    Error("FreeVariablesOfPredicataFormula failed, the argument must be a PredicataFormula");
   fi;
 end);
 ####################################################################################################
@@ -487,7 +487,7 @@ end);
 ##
 BindGlobal( "PredicataCheckForAt", function ( l, e, p )
   if not IsList(l) or p < 0 or p > Length(l) + 1 then
-    Error("PredicataCheckForAt failed.\n");
+    Error("PredicataCheckForAt failed");
   elif p = 0 or p = Length(l) + 1 then
     return false;
   elif l[p] = e then
@@ -567,7 +567,7 @@ InstallGlobalFunction( PredicataFormulaFormattedAddedParentheses, function (f)
       while not p = [] do
         i:=p[1];
         if i > Length(f)-3 then
-          Error("PredicataFormulaFormatted failed, invalid formula, quantifier symbol at wrong position.\n");
+          Error("PredicataFormulaFormatted failed, invalid formula, quantifier symbol at wrong position");
         #elif (not PredicataCheckForAt(f,"(",i-1) or not PredicataCheckForAt(f,")",i+4)) and not PredicataIsStringType(f[i+1], "symbol") and f[i+2] = ":" and not PredicataIsStringType(f[i+3], "symbol") then
         #  g:=Concatenation("(",Concatenation(f{[i..i+3]}),")");
         #  f:=f{Concatenation([1..i-1],[i],[i+4..Length(f)])};
@@ -600,7 +600,7 @@ InstallGlobalFunction( PredicataFormulaFormatted, function ( f )
     freevar:=f!.free;
     f:=f!.string;
   else  
-    Error("PredicataFormulaFormatted failed, the argument must be a PredicataFormula.\n");
+    Error("PredicataFormulaFormatted failed, the argument must be a PredicataFormula");
   fi;
   # splits the string into a list of strings, after adding whitespaces and renaming compare symbols and own defined predicates.
   f:=PredicataNormalizedString(f, P, false, true);
@@ -608,7 +608,7 @@ InstallGlobalFunction( PredicataFormulaFormatted, function ( f )
   left:=Positions(f,"[")-1;
   right:=Positions(f,"]");
   if not Length(left) = Length(right) then
-    Error("PredicataFormulaFormatted failed, different amount of square brackets.\n");
+    Error("PredicataFormulaFormatted failed, different amount of square brackets");
   else
     while Length(left) > 0 do
       if left[1] > 0 and right[1] <= Length(f) then
@@ -618,7 +618,7 @@ InstallGlobalFunction( PredicataFormulaFormatted, function ( f )
       left:=Positions(f,"[")-1;
       right:=Positions(f,"]");
       else 
-        Error("PredicataFormulaFormatted failed, wrong placements of square brackets.\n");
+        Error("PredicataFormulaFormatted failed, wrong placements of square brackets");
       fi;
     od;
   fi;

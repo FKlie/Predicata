@@ -12,7 +12,7 @@ InstallGlobalFunction(AutomatonOfPredicaton, function ( A )
   if IsPredicatonObj(A) then
     return CopyAut(A!.aut);
   else
-    Error("AutomatonOfPredicaton failed, the argument must be a Predicaton.\n");
+    Error("AutomatonOfPredicaton failed, the argument must be a Predicaton");
   fi;
 end);
 ####################################################################################################
@@ -25,7 +25,7 @@ InstallGlobalFunction(VariablePositionListOfPredicaton, function ( A )
   if IsPredicatonObj(A) then
     return ShallowCopy(A!.var);
   else
-    Error("VariablePositionListOfPredicaton failed, the argument must be a Predicaton.\n");
+    Error("VariablePositionListOfPredicaton failed, the argument must be a Predicaton");
   fi;
 end);
 ####################################################################################################
@@ -46,10 +46,10 @@ InstallGlobalFunction( SetVariablePositionListOfPredicaton, function ( A, l )
       A!.var:=VariablePositionListOfPredicaton(B);
       A!.varnames:=Permuted(ShallowCopy(A!.varnames), p);
     else
-      Error("SetVariablePositionListOfPredicaton failed, the second argument must be a positive integer list of the same length as the variable position list.\n");
+      Error("SetVariablePositionListOfPredicaton failed, the second argument must be a positive integer list of the same length as the variable position list");
     fi;
   else
-    Error("SetVariablePositionListOfPredicaton failed, the first argument must be a Predicaton.\n");
+    Error("SetVariablePositionListOfPredicaton failed, the first argument must be a Predicaton");
   fi;
 end);
 ####################################################################################################
@@ -62,7 +62,7 @@ InstallGlobalFunction(VariableListOfPredicaton, function ( A )
   if IsPredicatonObj(A) then
     return ShallowCopy(A!.varnames);
   else
-    Error("VariableListOfPredicaton failed, the argument must be a Predicaton.\n");
+    Error("VariableListOfPredicaton failed, the argument must be a Predicaton");
   fi;
 end);
 ####################################################################################################
@@ -76,10 +76,10 @@ InstallGlobalFunction( SetVariableListOfPredicaton, function ( A, V )
     if IsList(V) and ForAll(V, i->PredicataIsStringType(i, "variable")) and Length(A!.var) = Length(V) and Length(Unique(V)) = Length(V) then
       A!.varnames:=ShallowCopy(V);
     else
-      Error("SetVariableListOfPredicaton failed, the second argument must be a string of the same length as the variable position list.\n");
+      Error("SetVariableListOfPredicaton failed, the second argument must be a string of the same length as the variable position list");
     fi;
   else
-    Error("SetVariableListOfPredicaton failed, the first argument must be a Predicaton.\n");
+    Error("SetVariableListOfPredicaton failed, the first argument must be a Predicaton");
   fi;
 end);
 ####################################################################################################
@@ -92,7 +92,7 @@ end);
 InstallGlobalFunction( ProductLZeroPredicaton, function ( A )
   local a, S, T, I, F, p, i;
   if not IsPredicaton(A) then
-    Error("ProductLZeroPredicaton failed, the argument must be a Predicaton.\n");
+    Error("ProductLZeroPredicaton failed, the argument must be a Predicaton");
   fi;
   S:=NumberStatesOfAut(A)+1;
   a:=AlphabetOfAutAsList(A);
@@ -122,7 +122,7 @@ end);
 InstallGlobalFunction( RightQuotientLZeroPredicaton, function ( A )
   local a, S, T, I, F, G, p, i;
   if not IsPredicaton(A) then
-    Error("RightQuotientLZeroPredicaton failed, the argument must be a Predicaton.\n");
+    Error("RightQuotientLZeroPredicaton failed, the argument must be a Predicaton");
   fi;
   S:=NumberStatesOfAut(A);
   a:=AlphabetOfAutAsList(A);
@@ -157,7 +157,7 @@ InstallGlobalFunction( NormalizedLeadingZeroPredicaton, function ( A )
   if IsPredicaton(A) then
     return UnionAut(ProductLZeroPredicaton(A), RightQuotientLZeroPredicaton(A));
   else
-    Error("NormalizedLeadingZeroPredicaton failed, the argument must be a Predicaton.\n");
+    Error("NormalizedLeadingZeroPredicaton failed, the argument must be a Predicaton");
   fi;
 end);
 ####################################################################################################
@@ -169,7 +169,7 @@ end);
 InstallGlobalFunction( SortedAlphabetPredicaton, function ( A )
   local a, newa, T, newT, i;
   if not IsPredicaton(A) then
-    Error("SortedAbcPredicaton failed, the argument must be a Predicaton.\n"); 
+    Error("SortedAbcPredicaton failed, the argument must be a Predicaton"); 
   fi;
   a:=AlphabetOfAutAsList(A);
   newa:=GetAlphabet(Length(VariablePositionListOfPredicaton(A)));
@@ -195,7 +195,7 @@ InstallGlobalFunction( FormattedPredicaton, function ( A )
     return MinimalAut(NormalizedLeadingZeroPredicaton(A));
     #return SortedAlphabetPredicaton(MinimalAut(NormalizedLeadingZeroPredicaton(A)));   #check how much slower
   else
-    Error("FormattedPredicaton failed, the argument must be a Predicaton.\n");
+    Error("FormattedPredicaton failed, the argument must be a Predicaton");
   fi;
 end);
 ####################################################################################################
@@ -232,7 +232,7 @@ end);
 BindGlobal( "ExpandPredOneStep", function ( A, p ) 
   local T, a, b, l, i, pos;
   if not IsPredicaton(A) or not IsInt(p) then
-    Error("ExpandPredOneStep failed, the arguments must be a Predicaton and a positive integer.\n");
+    Error("ExpandPredOneStep failed, the arguments must be a Predicaton and a positive integer");
   elif p in VariablePositionListOfPredicaton(A) then
     return A;
   else
@@ -264,7 +264,7 @@ end);
 InstallGlobalFunction( ExpandedPredicaton, function ( A, n )
   local B, l, i;
   if not IsPredicaton(A) or not IsValidInput(A, n) then
-    Error("ExpandedPredicaton failed, the arguments must be a Predicaton and a new variable position list.\n");
+    Error("ExpandedPredicaton failed, the arguments must be a Predicaton and a new variable position list");
   fi;
   l:=VariablePositionListOfPredicaton(A);
   B:=CopyAut(A);
@@ -282,7 +282,7 @@ end);
 BindGlobal( "ProjectedPredCombinedList", function ( l1, l2 )
   local l, m, i;
   if not IsList(l1) or not IsList(l2) then
-    Error("CombineList failed, the arguments must be both a list.\n");
+    Error("CombineList failed, the arguments must be both a list");
   fi;
   m:= Length(l1);
   l:=[];
@@ -304,7 +304,7 @@ end);
 InstallGlobalFunction( ProjectedPredicaton, function ( A, p )
   local B, T, a, l, i, length, pos;
   if not IsPredicaton(A) or not p in VariablePositionListOfPredicaton(A) then
-    Error("ProjectedPredicaton failed, the arguments must be a Predicaton and positive integer in the variable position list.\n");
+    Error("ProjectedPredicaton failed, the arguments must be a Predicaton and positive integer in the variable position list");
   fi;
   l:=VariablePositionListOfPredicaton(A);
   Sort(l);
@@ -343,7 +343,7 @@ InstallGlobalFunction( NegatedProjectedNegatedPredicaton, function ( A, p )
   if IsPredicaton(A) and p in VariablePositionListOfPredicaton(A) then
     return FormattedPredicaton(NegatedAut(FormattedPredicaton(ProjectedPredicaton(NegatedAut(FormattedPredicaton(A)),p))));
   else
-    Error("NegatedProjectedNegatedPredicaton failed, the arguments must be a Predicaton and positive integer in the variable position list.\n");
+    Error("NegatedProjectedNegatedPredicaton failed, the arguments must be a Predicaton and positive integer in the variable position list");
   fi;
 end);
 ####################################################################################################
@@ -356,9 +356,9 @@ end);
 InstallGlobalFunction( IntersectionPredicata, function ( A, B, args... )
   local A1, B1, n, n1;
   if not IsPredicaton(A) then
-    Error("IntersectionPredicata failed, the first argument must be a Predicaton.\n");
+    Error("IntersectionPredicata failed, the first argument must be a Predicaton");
   elif not IsPredicaton(B) then
-    Error("IntersectionPredicata failed, the second argument must be a Predicaton.\n");
+    Error("IntersectionPredicata failed, the second argument must be a Predicaton");
   fi;
   n1:=Union(VariablePositionListOfPredicaton(A), VariablePositionListOfPredicaton(B)); # working only with the neccessary variable positions
   if Length(args) = 0 then
@@ -366,7 +366,7 @@ InstallGlobalFunction( IntersectionPredicata, function ( A, B, args... )
   elif Length(args) = 1 and IsList(args[1]) and IsValidInput(A, args[1]) and IsValidInput(B, args[1]) then
     n:=args[1];
   else
-    Error("IntersectionPredicata failed, the optional argument must be a list of integers.\n");
+    Error("IntersectionPredicata failed, the optional argument must be a list of integers");
   fi;
   A1:=ExpandedPredicaton(A, n1);                  # expands to the equal variable position list
   B1:=ExpandedPredicaton(B, n1);                  # sorting the alphabet list should happen in ExpandedPred
@@ -387,9 +387,9 @@ end);
 InstallGlobalFunction( UnionPredicata, function ( A, B, args... )
   local A1, B1, n, n1;
   if not IsPredicaton(A) then
-    Error("UnionPredicata failed, the first argument must be a Predicaton.\n");
+    Error("UnionPredicata failed, the first argument must be a Predicaton");
   elif not IsPredicaton(B) then
-    Error("UnionPredicata failed, the second argument must be a Predicaton.\n");
+    Error("UnionPredicata failed, the second argument must be a Predicaton");
   fi;
   n1:=Union(VariablePositionListOfPredicaton(A), VariablePositionListOfPredicaton(B)); # working only with the neccessary variable positions
   if Length(args) = 0 then
@@ -397,7 +397,7 @@ InstallGlobalFunction( UnionPredicata, function ( A, B, args... )
   elif Length(args) = 1 and IsList(args[1]) and IsValidInput(A, args[1]) and IsValidInput(B, args[1]) then
     n:=args[1];
   else
-    Error("UnionPredicata failed, the optional argument must be a list of integers.\n");
+    Error("UnionPredicata failed, the optional argument must be a list of integers");
   fi;
   A1:=ExpandedPredicaton(A, n1);                  # expands to the equal variable position list
   B1:=ExpandedPredicaton(B, n1);                  # sorting the alphabet list should happen in ExpandedPred
@@ -425,7 +425,7 @@ end);
 InstallGlobalFunction( PermutedAlphabetPredicaton, function ( A, l )
   local a, newa, p, i;
   if not IsAutomaton(A) or not IsList(l) or not ForAll(l, i->IsPosInt(i)) then
-    Error("PermutedAlphabetPredicaton failed, the first argument must be a Automaton and the second argument must be a list containing positive integers.\n");
+    Error("PermutedAlphabetPredicaton failed, the first argument must be a Automaton and the second argument must be a list containing positive integers");
   fi;
   p:=SortingPerm(l);              # Sorts the list and returns a list that can be applied to a permutation
   if p = () then
@@ -452,7 +452,7 @@ end);
 InstallGlobalFunction( PredicatonFromAut, function ( A, l, n )
   local B;
   if not IsAutomaton(A) or not ForAll(n, i -> IsPosInt(i)) or not IsSubsetSet(n, l) then
-    Error("PredicatonFromAut failed, the first argument must be a Automaton and the second and third argument must be a list containing positive integers.\n");
+    Error("PredicatonFromAut failed, the first argument must be a Automaton and the second and third argument must be a list containing positive integers");
   fi;
   B:=PermutedAlphabetPredicaton(A, l);
   return ExpandedPredicaton(B, n);

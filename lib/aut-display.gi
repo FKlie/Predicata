@@ -30,7 +30,7 @@ InstallGlobalFunction ( AutToString, function( A, args... )
     A:=SortedAlphabetPredicaton(A);
     intro:="Predicaton: ";
   else
-    Error("AutToString failed, input must be an Automaton or a Predicaton.\n");
+    Error("AutToString failed, input must be an Automaton or a Predicaton");
   fi;
   a:=AlphabetOfAutAsList(A);
   t:=TransitionMatrixOfAut(A);
@@ -213,7 +213,7 @@ InstallGlobalFunction ( RenameAlphabet, function ( Abc )
   local a, S, s, i;
   S:=[];
   if not (IsList(Abc) and IsList(Abc[1])) then
-    Error("RenameAbc failed, input must be a nested list.\n");
+    Error("RenameAbc failed, input must be a nested list");
   fi;
   for a in Abc do
     s:="(";
@@ -234,14 +234,14 @@ end);
 InstallGlobalFunction ( DrawPredicaton, function (A, name...)
   local a, B;
   if not name = [] and not IsString(name[1]) then 
-    Error("DrawPredicaton failed, file name must be a string.\n");
+    Error("DrawPredicaton failed, file name must be a string");
   fi;
   if IsAutomaton(A) then
     B:=A;
   elif IsPredicaton(A) then
     B:=A!.aut;
   else
-    Error("DrawPredicaton failed, input must be an Automaton or a Predicaton.\n");
+    Error("DrawPredicaton failed, input must be an Automaton or a Predicaton");
   fi;
   #Drawing with smaller letter lists: DISABLED
   #a:=AlphabetOfAutAsList(B);
@@ -312,12 +312,12 @@ InstallGlobalFunction( IsAcceptedWordByPredicaton, function ( A, L )
   elif IsPredicaton(A) and IsList(L) and ForAll(L, IsList) then
     for i in [1..Length(L)] do
       if not ForAll(L[i], i -> i >=0 and i <= 1) then
-        Error("IsRecognizedByPred failed, the second argument must be a list containing lists which represent a binary number.\n");
+        Error("IsRecognizedByPred failed, the second argument must be a list containing lists which represent a binary number");
       fi;
     od;
     return IsRecognizedByAut(A, MakePairPredicaton(L));
   else
-    Error("IsRecognizedByPred failed, the first argument must be a Predicaton, the second argument must be a list containing natural numbers.\n");
+    Error("IsRecognizedByPred failed, the first argument must be a Predicaton, the second argument must be a list containing natural numbers");
   fi;
 end);
 ####################################################################################################
@@ -343,7 +343,7 @@ InstallGlobalFunction( AcceptedWordsByPredicaton, function ( A, args... )
     N:=args[1];
     b:=false;
   else  
-    Error("AcceptedWordsByPred failed, the optional argument must either an positive integer or a list containing integers.\n");
+    Error("AcceptedWordsByPred failed, the optional argument must either an positive integer or a list containing integers");
   fi;
   if IsPredicaton(A) and VariablePositionListOfPredicaton(A) = [] and AlphabetOfAut(A) = 1 and NumberStatesOfAut(A) = 1 then
     if Length(FinalStatesOfAut(A)) = 1 then
@@ -365,7 +365,7 @@ InstallGlobalFunction( AcceptedWordsByPredicaton, function ( A, args... )
     od;
     return L;
   else  
-    Error("AcceptedWordsByPred failed, the argument must be a Predicaton.\n");
+    Error("AcceptedWordsByPred failed, the argument must be a Predicaton");
   fi;
 end);
 ####################################################################################################
@@ -397,7 +397,7 @@ InstallGlobalFunction( DisplayAcceptedWordsByPredicaton, function (A, args...)
     N:=ListWithIdenticalEntries(l, args[1]);
     t:=false;
   else  
-    Error("DisplayAcceptedWordsByPred failed, the optional argument must either an positive integer or a list containing integers.\n");
+    Error("DisplayAcceptedWordsByPred failed, the optional argument must either an positive integer or a list containing integers");
   fi; 
   if Length(args) >= 2 then
     if IsBool(args[2]) then
@@ -405,7 +405,7 @@ InstallGlobalFunction( DisplayAcceptedWordsByPredicaton, function (A, args...)
     elif Length(args) > 2 then
       Print("Well, there are only two optional parameters.\n");
     else 
-      Error("DisplayAcceptedWordsByPred failed, the second optional argument must be a boolean.\n");
+      Error("DisplayAcceptedWordsByPred failed, the second optional argument must be a boolean");
     fi;
   fi;
   if IsPredicaton(A) and VariablePositionListOfPredicaton(A) = [] and AlphabetOfAut(A) = 1 and NumberStatesOfAut(A) = 1 then
@@ -585,7 +585,7 @@ InstallGlobalFunction(  DisplayAcceptedWordsByPredicatonInNxN, function (A, args
     elif Length(args) = 1 and IsList(args[1]) and Length(args[1]) = 2 and ForAll(args[1], IsPosInt) then
       N:=args[1];
     else  
-      Error("DisplayPredInNxN failed, the optional argument must be list of length two containing positive integer.\n");
+      Error("DisplayPredInNxN failed, the optional argument must be list of length two containing positive integer");
     fi;
     Print(" This function draws in N_0 x N_0. Please make sure to add your x-variable as an optional parameter in PredicataFormulaToPredicaton, otherwise it may be flipped.\n\n     | ");
     Print("\n");

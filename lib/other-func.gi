@@ -24,7 +24,7 @@ end);
 ##
 InstallGlobalFunction( InsertAt, function (l, e, p )
   if not IsList(l) or not IsInt(p) or p < 0 or p > Length(l)+1 then
-    Error("InsertAt failed, the first argument must be of type list, the third argument of type integer.\n");
+    Error("InsertAt failed, the first argument must be of type list, the third argument of type integer");
   elif p = 0 then
     return Concatenation([e],l);
   else
@@ -40,7 +40,7 @@ end);
 InstallGlobalFunction( GetAlphabet, function ( N )
   local a0, a1, n, i, p;
   if not IsInt(N) or N < 0 then
-    Error("GetAlphabet failed, input must be of type integer greater equal 0.\n");
+    Error("GetAlphabet failed, input must be of type integer greater equal 0");
   fi;
   a0:=[[]];
   a1:=[[]];
@@ -67,7 +67,7 @@ end);
 InstallGlobalFunction( DecToBin, function ( D )
   local i, B;
   if not IsInt(D) or D < 0 then
-    Error("DecToBin failed, the argument must be of type integer greater equal than 0.\n");
+    Error("DecToBin failed, the argument must be of type integer greater equal than 0");
   fi;
   B:=[];
   if D = 0 then
@@ -90,7 +90,7 @@ end);
 InstallGlobalFunction( BinToDec, function ( B )
   local i, D;
   if not IsList(B) or (not B=[] and (Maximum(B) > 1 or Minimum(B) < 0)) then
-    Error("BinToDec failed, the argument must be of type list containing 0s and 1s.\n");
+    Error("BinToDec failed, the argument must be of type list containing 0s and 1s");
   fi;
   D:=0;
   for i in [1..Length(B)] do
@@ -152,7 +152,7 @@ InstallGlobalFunction( IsEmptyPredicataStack, function ( Stack )
       return false;
     fi;
   else 
-    Error("predicataIsEmpty failed, the argument must be of type stack.\n");
+    Error("predicataIsEmpty failed, the argument must be of type stack");
   fi;
 end);
 ####################################################################################################
@@ -163,7 +163,7 @@ InstallGlobalFunction( PushPredicataStack,  function ( Stack, element )
   if IsPredicataStackObj(Stack) then
     Add(Stack!.list, element);
   else
-    Error("predicataPush failed, the first argument must be of type stack.\n");
+    Error("predicataPush failed, the first argument must be of type stack");
   fi;
 end);
 ####################################################################################################
@@ -174,7 +174,7 @@ InstallGlobalFunction( PopPredicataStack, function ( Stack )
   if IsPredicataStackObj(Stack) and not IsEmptyPredicataStack(Stack) then
     return Remove(Stack!.list,Length(Stack!.list));
   else
-    Error("predicataPop failed, the argument must be of type stack.\n");
+    Error("predicataPop failed, the argument must be of type stack");
   fi;
 end);
 ####################################################################################################
@@ -185,7 +185,7 @@ InstallGlobalFunction( TopPredicataStack, function ( Stack )
   if IsPredicataStackObj(Stack) then
     return Stack!.list[Length(Stack!.list)];
   else 
-    Error("predicataTop failed, the argument must be of type stack.\n");
+    Error("predicataTop failed, the argument must be of type stack");
   fi;
 end);
 ####################################################################################################
