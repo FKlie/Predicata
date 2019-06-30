@@ -23,23 +23,10 @@ end);
 ##  Returns the alphabet of length N, i.e. ({0,1})^N.
 ##
 InstallGlobalFunction( GetAlphabet, function ( N )
-  local a0, a1, n, i, p;
   if not IsInt(N) or N < 0 then
     Error("GetAlphabet failed, input must be of type integer greater equal 0.\n");
   fi;
-  a0:=[[]];
-  a1:=[[]];
-  p:=1;
-  for n in [1..N] do
-    for i in [1..Length(a0)] do
-      Add(a0[i], 0, p);
-      Add(a1[i], 1, p);
-    od;
-    Append(a0, a1);
-    a1:=StructuralCopy(a0);
-    p:=p+1;
-  od;
-  return a0;
+  return Cartesian(ListWithIdenticalEntries(N, [0,1]));
 end);
 ####################################################################################################
 ##
