@@ -37,19 +37,10 @@ end);
 ##        D = B[1] * 2^0 + B[2] * 2^1 + ...
 ##
 InstallGlobalFunction( DecToBin, function ( D )
-  local i, B;
   if not IsInt(D) or D < 0 then
     Error("DecToBin failed, the argument must be of type integer greater equal than 0.\n");
   fi;
-  B:=[];
-  if D = 0 then
-    return [0];
-  fi;
-  while D > 0 do
-    Add(B,RemInt(D,2));
-    D:=BestQuoInt(D,2);
-  od;
-  return B;
+  return CoefficientsQadic(D, 2);
 end);
 ####################################################################################################
 ##
