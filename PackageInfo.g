@@ -3,6 +3,7 @@ SetPackageInfo( rec(
   Subtitle := "Deciding Presburger Arithmetic Using Automata Theory",
   Version := "1.0",
   Date := "01/10/2018",
+  License := "GPL-3.0-or-later",
   Persons := [
     rec( 
       LastName      := "Kliemann",
@@ -40,10 +41,7 @@ SetPackageInfo( rec(
       SuggestedOtherPackages := [ [ "GAPDoc", ">= 1.2" ] ],
       ExternalConditions := [ ]
   ),
-  Autoload := false,
-  AvailabilityTest := function()
-        return true;
-    end,
+  AvailabilityTest := ReturnTrue,
   TestFile := "tst/testall.g",
   BannerString := Concatenation(
     "\n_____________________________________________________________________________",
@@ -62,6 +60,5 @@ SetPackageInfo( rec(
     "\n_____________________________________________________________________________",
     "\n\n"
   ),
-  Autoload := false,
-  Keywords := [ "Predicata", "Presburger arithmetic", "Automata theory" ]
+  Keywords := [ "Predicata", "Presburger arithmetic", "Automata theory" ],
 ));
