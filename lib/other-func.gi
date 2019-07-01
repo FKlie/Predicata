@@ -15,22 +15,7 @@ BindGlobal( "MaximumOrZero", function ( l )
     return Maximum(l);
   fi;
 end);
-####################################################################################################
-##
-#F  InsertAt(l, e, p)
-##
-##  Inserts into a list l the element e at position p, 
-##  where the position p can be 0 <= p <= Length(l)+1.
-##
-InstallGlobalFunction( InsertAt, function (l, e, p )
-  if not IsList(l) or not IsInt(p) or p < 0 or p > Length(l)+1 then
-    Error("InsertAt failed, the first argument must be of type list, the third argument of type integer.\n");
-  elif p = 0 then
-    return Concatenation([e],l);
-  else
-    return Concatenation(l{[1..p-1]}, [e], l{[p..Length(l)]});
-  fi;
-end);
+
 ####################################################################################################
 ##
 #F  GetAlphabet(N)
@@ -38,23 +23,10 @@ end);
 ##  Returns the alphabet of length N, i.e. ({0,1})^N.
 ##
 InstallGlobalFunction( GetAlphabet, function ( N )
-  local a0, a1, n, i, p;
   if not IsInt(N) or N < 0 then
     Error("GetAlphabet failed, input must be of type integer greater equal 0.\n");
   fi;
-  a0:=[[]];
-  a1:=[[]];
-  p:=1;
-  for n in [1..N] do
-    for i in [1..Length(a0)] do
-      a0[i]:=InsertAt(a0[i], 0, p);
-      a1[i]:=InsertAt(a1[i], 1, p);
-    od;
-    Append(a0, a1);
-    a1:=StructuralCopy(a0);
-    p:=p+1;
-  od;
-  return a0;
+  return Cartesian(ListWithIdenticalEntries(N, [0,1]));
 end);
 ####################################################################################################
 ##
@@ -65,19 +37,10 @@ end);
 ##        D = B[1] * 2^0 + B[2] * 2^1 + ...
 ##
 InstallGlobalFunction( DecToBin, function ( D )
-  local i, B;
   if not IsInt(D) or D < 0 then
     Error("DecToBin failed, the argument must be of type integer greater equal than 0.\n");
   fi;
-  B:=[];
-  if D = 0 then
-    return [0];
-  fi;
-  while D > 0 do
-    Add(B,RemInt(D,2));
-    D:=BestQuoInt(D,2);
-  od;
-  return B;
+  return CoefficientsQadic(D, 2);
 end);
 ####################################################################################################
 ##

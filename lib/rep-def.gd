@@ -12,7 +12,9 @@ DeclareCategoryCollections( "IsPredicatonRepresentationObj" );
 ##
 #R  IsPredicatonRepresentationRep
 ##
-DeclareRepresentation( "IsPredicatonRepresentationRep", IsComponentObjectRep, ["name", "arity", "aut"] );
+DeclareRepresentation( "IsPredicatonRepresentationRep",
+    IsComponentObjectRep and IsPredicatonRepresentationObj,
+    ["name", "arity", "aut"] );
 ####################################################################################################
 ##
 #F  PredicatonRepresentation(Name, Arity, Aut)
@@ -63,7 +65,9 @@ DeclareCategoryCollections( "IsPredicataRepresentationObj" );
 ##
 #R  IsPredicataRepresentationRep
 ##
-DeclareRepresentation( "IsPredicataRepresentationRep", IsComponentObjectRep, ["lowercasenamelist", "namelist", "aritylist", "autlist"] );
+DeclareRepresentation( "IsPredicataRepresentationRep",
+    IsComponentObjectRep and IsPredicataRepresentationObj,
+    ["lowercasenamelist", "namelist", "aritylist", "autlist"] );
 ####################################################################################################
 ##
 #F  PredicataRepresentation(args...)

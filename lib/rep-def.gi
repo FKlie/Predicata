@@ -38,7 +38,7 @@ InstallGlobalFunction( PredicatonRepresentation, function ( Name, Arity, Aut )
   # Defining new family
   F:=NewFamily("PredicatonRepresentation", IsPredicatonRepresentationObj);
   predrepel:=rec(name:=Name, arity:=Arity, aut:=Aut);
-  A:=Objectify(NewType(F, IsPredicatonRepresentationObj and IsPredicatonRepresentationRep and IsAttributeStoringRep), predrepel);
+  A:=Objectify(NewType(F, IsPredicatonRepresentationRep and IsAttributeStoringRep), predrepel);
   # Return the PredicatonRepresentation.
   return A;
 end);
@@ -58,7 +58,7 @@ end);
 InstallMethod ( DisplayString,
   "Returns the PredicataRepresentation nicely formatted.",
   true,
-  [IsPredicatonRepresentationObj and IsPredicatonRepresentationRep], 0,
+  [IsPredicatonRepresentationRep], 0,
   function( p )
     return Concatenation("Predicaton represented with the name: ", String(p!.name), ", the arity: ", String(p!.arity), " and the following automaton:\n", AutToString(p!.aut));
 end);
@@ -69,7 +69,7 @@ end);
 InstallMethod( ViewString,
   "Returns the most important informations about the PredicatonRepresentation.",
   true,
-  [IsPredicatonRepresentationObj and IsPredicatonRepresentationRep], 0,
+  [IsPredicatonRepresentationRep], 0,
   function( p )
     local S;
     S:=Concatenation("< Predicaton represented with the name \"", String(p!.name), "\", the arity ", String(p!.arity));
@@ -88,7 +88,7 @@ end);
 InstallMethod( String,
   "Returns the PredicatonRepresentation as string.",
   true,
-  [IsPredicatonRepresentationObj and IsPredicatonRepresentationRep], 0,
+  [IsPredicatonRepresentationRep], 0,
   function( p )
     return Concatenation("PredicatonRepresentation(\"", String(p!.name), "\", ", String(p!.arity), ", ", "Automaton(\"", String(p!.aut!.type), "\", ", String(p!.aut!.states), ", ", String(AlphabetOfAutomatonAsList(p!.aut)), ", ", String(p!.aut!.transitions), ", ", String(p!.aut!.initial), ", ", String(p!.aut!.accepting), "))");
 end);
@@ -189,7 +189,7 @@ InstallGlobalFunction( PredicataRepresentation, function ( args... )
   # Defining new family
   F:=NewFamily("PredicataRepresentation", IsPredicataRepresentationObj);
   predrep:=rec(lowercasenamelist:=LowercaseNameList, namelist:=NameList, aritylist:=ArityList, autlist:=AutList);
-  A:=Objectify(NewType(F, IsPredicataRepresentationObj and IsPredicataRepresentationRep and IsAttributeStoringRep), predrep);
+  A:=Objectify(NewType(F, IsPredicataRepresentationRep and IsAttributeStoringRep), predrep);
   # Return the PredicataRepresentation.
   return A;
 end);
@@ -200,7 +200,7 @@ end);
 InstallMethod ( DisplayString,
   "Returns the PredicataRepresentation nicely formatted.",
   true,
-  [IsPredicataRepresentationObj and IsPredicataRepresentationRep], 0,
+  [IsPredicataRepresentationRep], 0,
   function( P )
     local i, S;
     S:="Predicata representation containing the following PredicatonRepresentations:\n";
@@ -216,7 +216,7 @@ end);
 InstallMethod( ViewString,
   "Returns the most important informations about the PredicataRepresentation.",
   true,
-  [IsPredicataRepresentationObj and IsPredicataRepresentationRep], 0,
+  [IsPredicataRepresentationRep], 0,
   function( P )
     return Concatenation("< PredicataRepresentation containing the following predicates: ", String(ShallowCopy(P!.namelist)),". >");
 end);
@@ -227,7 +227,7 @@ end);
 InstallMethod( String,
    "Returns the PredicataRepresentation as string.", 
   true,
-  [IsPredicataRepresentationObj and IsPredicataRepresentationRep], 0,
+  [IsPredicataRepresentationRep], 0,
   function( P )
     local e, i, S;
     S:="PredicataRepresentation(";
@@ -263,7 +263,7 @@ end);
 InstallOtherMethod ( Add, 
         "Adds a Predicata Representation.",
         true,
-        [IsPredicataRepresentationObj and IsPredicataRepresentationRep, IsPredicatonRepresentationObj and IsPredicatonRepresentationRep], 0,
+        [IsPredicataRepresentationRep, IsPredicatonRepresentationRep], 0,
         function( P, p )
   local Name, name, i;
   Name:=ShallowCopy(p!.name);
@@ -296,7 +296,7 @@ end);
 InstallOtherMethod ( Add, 
         "Adds a Predicata Representation.",
         true,
-        [IsPredicataRepresentationObj and IsPredicataRepresentationRep, IsString, IsInt, IsPredicatonObj and IsPredicatonRep], 0,
+        [IsPredicataRepresentationRep, IsString, IsInt, IsPredicatonObj and IsPredicatonRep], 0,
         function( P, name, arity, Predicata )
   local p;
   p:=PredicatonRepresentation(name, arity, Predicata);
@@ -314,7 +314,7 @@ end);
 InstallOtherMethod ( Remove, 
         "Removes a Predicata Representation.",
         true,
-        [IsPredicataRepresentationObj and IsPredicataRepresentationRep, IsPosInt], 0,
+        [IsPredicataRepresentationRep, IsPosInt], 0,
         function( P, i )
   local n, p;
   if i > Length(P!.namelist) then
